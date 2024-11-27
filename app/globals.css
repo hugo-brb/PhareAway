@@ -3,19 +3,38 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #eef2fc;
+  --text: #030711;
+  --primary: #6480dd;
+  --secondary: #d74242;
+  --accent: #e18d66;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #eef2fc;
+    --text: #030711;
+    --primary: #6480dd;
+    --secondary: #d74242;
+    --accent: #e18d66;
   }
 }
 
 body {
-  color: var(--foreground);
+  color: var(--text);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--recursive);
+  font-weight: 600;
+}
+
+.land {
+  background-image: url('/images/landscape.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-clip: border-box;
+}
+
+.cita-author:hover .author {
+  opacity: 1;
+  animation-duration: 500ms;
 }

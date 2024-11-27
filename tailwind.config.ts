@@ -12,6 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
       },
+      fontFamily: {
+        ouroboros: ['var(--font-ouroboros)'],
+        recursive: ['var(--font-recursive)'],
+      },
     },
   },
   plugins: [],
