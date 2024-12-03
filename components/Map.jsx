@@ -3,21 +3,28 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const Map = () => {
-  const mapContainer = useRef(null);
+    const mapContainer = useRef(null);
 
-  useEffect(() => {
-    mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY;
+    useEffect(() => {
+        mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY;
 
-    const map = new mapboxgl.Map({
-      container: mapContainer.current,
-      style: 'mapbox://styles/barbiehu/cm3yhh52400k901sig86t058b',
-      center: [-0.6867931, 45.7461798],
-      zoom: 5.7,
-      pitch: 45,
-    });
+        // Coordonnées sous forme de LngLat pour définir les limites
+        const bounds = [
+            [-1.6855971, 43.3917938], // Southwest coordinates
+            [6.8601348, 51.4408039]   // Northeast coordinates
+        ];
 
-    return () => map.remove();
-  }, []);
+        const map = new mapboxgl.Map({
+            container: mapContainer.current,
+            style: 'mapbox://styles/barbiehu/cm3yhh52400k901sig86t058b',
+            maxBounds: bounds, // Limites pour empêcher le déplacement en dehors de la zone
+            maxZoom: 10, // Zoom minimum par défaut (sera ajusté par fitBounds)
+            dragRotate: false, // Désactive la rotation
+            pitchWithRotate: false, // Désactive l'inclinaison avec la rotation
+        });
+        // Nettoyage de la carte à la destruction du composant
+        return () => map.remove();
+    }, []);
 
   return <div ref={mapContainer} className=' w-[100vw] h-[100vh] overflow-y-hidden' />;
 };
