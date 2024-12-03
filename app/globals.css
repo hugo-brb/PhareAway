@@ -24,7 +24,25 @@ body {
   color: var(--text);
   background: var(--background);
   font-family: var(--recursive);
-  font-weight: 600;
+  font-weight: 600; 
+}
+
+.scrollbarhidden::-webkit-scrollbar {
+  width: 0px;
+}
+
+.scrollbar::-webkit-scrollbar {
+  width: 2px; /* width of the entire scrollbar */
+}
+
+.scrollbar::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 20px;
+  border: 3px solid var(--primary);
 }
 
 .land {

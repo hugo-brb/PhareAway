@@ -16,7 +16,7 @@ export default function Login(){
                     <input type="submit" value="C'est Phareti !" className=" hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg" />
                     <div className=" flex items-center gap-2">
                         <label htmlFor="signup">Vous n'avez toujours pas de compte ?!</label>
-                        <a href="/Signup" className=" text-[--primary] font-bold">Inscrivez-vous</a>
+                        <a href="/Rgpd" className=" text-[--primary] font-bold">Inscrivez-vous</a>
                     </div>
                 </form>
             </section>

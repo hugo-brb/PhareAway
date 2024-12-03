@@ -11,7 +11,9 @@ export default function LandingPage() {
         <Link href="/Login">
           <button className=" w-44 py-2 px-4 text-xl font-bold rounded-3xl hover:ring-2 ring-[--primary] duration-300 ease-in-out">Se connecter</button>
         </Link>
-        <button className=" w-44 py-2 px-4 text-xl font-bold rounded-3xl hover:ring-2 ring-[--primary] duration-300 ease-in-out">S'inscrire</button>
+        <Link href="/Rgpd">
+          <button className=" w-44 py-2 px-4 text-xl font-bold rounded-3xl hover:ring-2 ring-[--primary] duration-300 ease-in-out">S'inscrire</button>
+        </Link>
     </div>
 
   
