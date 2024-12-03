@@ -19,7 +19,7 @@ const Map = () => {
     return () => map.remove();
   }, []);
 
-  return <div ref={mapContainer} style={{ width: '100vw', height: '100vh' }} />;
+  return <div ref={mapContainer} className=' w-[100vw] h-[100vh] overflow-y-hidden' />;
 };
 
 export default Map;
