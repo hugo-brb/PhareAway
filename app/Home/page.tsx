@@ -10,20 +10,30 @@ import Event from '@/components/popover/Event';
 import Store from '@/components/popover/Store';
 import Pictures from '@/components/popover/Pictures';
 import Account from '@/components/popover/Account';
+import TopNav from '@/components/topNav';
 
 const Map = dynamic(() => import('../../components/Map'), { ssr: false });
 
 export default function Home() {
     const [active, setActive] = useState("home");
-
+    const [center, setCenter] = useState<[number, number]>([-2.0478342,48.646292]); // Coordonnées initiales (New York)
     const handleClickActive = (a: string) => {
         setActive(a);
     };
+    // Fonction pour changer le centre de la carte
+    const updateCenter = (newCenter: [number, number]) => {
+        setCenter(newCenter);
+    }
 
     return (
         <>
             <Menu active={active} handleClickActive={handleClickActive} />
-            <Map />
+            <TopNav onCenterChange={(newCenter: [number, number]) => setCenter(newCenter)} />
+            <Map
+                zoom={2}
+                bounds={[[-1.6855971, 43.3917938],[6.8601348, 51.4408039]]}
+                center={center}
+            />
             {active === "calendar" && <Event />}
             {active === "coin" && <Store />}
             {active === "picture" && <Pictures />}
