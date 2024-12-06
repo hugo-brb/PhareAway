@@ -31,7 +31,7 @@ export default function Home() {
             <TopNav onCenterChange={(newCenter: [number, number]) => setCenter(newCenter)} />
             <Map
                 zoom={2}
-                bounds={[[-1.6855971, 43.3917938],[6.8601348, 51.4408039]]}
+                bounds={[[-5.1535428,42.5314237],[7.3190333,51.0605319]]}
                 center={center}
             />
             {active === "calendar" && <Event />}

@@ -20,17 +20,17 @@ const Map: React.FC<MapComponentProps> = ({ center, bounds, zoom }) => {
                 style: 'mapbox://styles/barbiehu/cm3yhh52400k901sig86t058b',
                 center: center,
                 zoom: zoom,
+                maxZoom: 10,
                 maxBounds: bounds,
                 dragRotate: false,
                 pitchWithRotate: false,
             });
         }
-        // Cleanup function to remove the map on component unmount
         return () => {
             mapInstance.current?.remove();
             mapInstance.current = null;
         };
-    }, []); // Empty dependency array ensures this runs only once
+    }, []);
 
     useEffect(() => {
         if (mapInstance.current) {
