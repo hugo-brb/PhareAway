@@ -1,13 +1,44 @@
 'use client'
 
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
 import { useState } from "react"
 
 export default function Rgpd(){
     const [flipped, setFlipped] = useState(false);
+    const [email, setEmail] = useState(false);
+    const [name, setName] = useState(false);
+    const [age, setAge] = useState(false);
+    const [accept, setAccept] = useState(false);
+    const [errorMessage, setErrorMessage] = useState("");
+    
+    const handleEmail = () => {
+        setEmail(prev => !prev);
+    };
+
+    const handleName = () => {
+        setName(prev => !prev);
+    };
+
+    const handleAge = () => {
+        setAge(prev => !prev);
+    };
+
+    const handleAccept = () => {
+        setAccept(prev => !prev);
+    };
 
     const handleFlipped = () => {
         setFlipped(prev => !prev);
     };
+
+    const verif = () => {
+        if(email && name && age && accept){
+            redirect("/Signup");
+        }else{
+            setErrorMessage("Toutes les conditions doivent être validées pour pouvoir continuer l'inscription...");
+        }
+    }
 
     return <>
         <main className=" land flex justify-center items-center w-[100vw] h-[100vh] font-bold">
@@ -26,7 +57,7 @@ export default function Rgpd(){
                             <label
                             className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-700 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-[--primary]"
                             >
-                            <input className="peer sr-only" id="AcceptConditions" type="checkbox" />
+                            <input className="peer sr-only" id="AcceptConditions" type="checkbox" onClick={handleEmail} />
                             <span
                                 className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-700 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"
                             ></span>
@@ -37,7 +68,7 @@ export default function Rgpd(){
                             <label
                             className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-700 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-[--primary]"
                             >
-                            <input className="peer sr-only" id="AcceptConditions" type="checkbox" />
+                            <input className="peer sr-only" id="AcceptConditions" type="checkbox" onClick={handleName} />
                             <span
                                 className="absolute inset-y-0 start-0 m-1 size-6 rounded-full bg-gray-700 ring-[6px] ring-inset ring-white transition-all peer-checked:start-8 peer-checked:w-2 peer-checked:bg-white peer-checked:ring-transparent"
                             ></span>
@@ -51,7 +82,7 @@ export default function Rgpd(){
                         <div className=" flex items-center gap-2">
                             <div className="flex items-center space-x-3">
                                 <label className="group flex items-center cursor-pointer">
-                                    <input className="hidden peer" type="checkbox" />
+                                    <input className="hidden peer" type="checkbox" onClick={handleAge} />
 
                                     <span
                                     className="relative w-5 h-5 flex justify-center items-center bg-gray-100 border-2 border-gray-400 rounded-md shadow-md transition-all duration-500 peer-checked:border-[--primary] peer-checked:bg-[--primary] peer-hover:scale-105"
@@ -85,7 +116,7 @@ export default function Rgpd(){
                         <div className=" flex items-center gap-2">
                         <div className="flex items-center space-x-3">
                                 <label className="group flex items-center cursor-pointer">
-                                    <input className="hidden peer" type="checkbox" />
+                                    <input className="hidden peer" type="checkbox" onClick={handleAccept} />
 
                                     <span
                                     className="relative w-5 h-5 flex justify-center items-center bg-gray-100 border-2 border-gray-400 rounded-md shadow-md transition-all duration-500 peer-checked:border-[--primary] peer-checked:bg-[--primary] peer-hover:scale-105"
@@ -117,13 +148,18 @@ export default function Rgpd(){
                             </div>
                         </div>
                     </div>
+                    {errorMessage && (
+                        <div className="text-red-600 text-sm font-semibold">
+                            {errorMessage}
+                        </div>
+                    )}
                     <div className=" flex flex-col gap-1">
-                        <input type="submit" value="Continuer vers l'inscription &#10140;" className=" hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg" />
+                        <input onClick={verif} type="button" value="Continuer vers l'inscription &#10140;" className=" hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg" />
                         <p className=" text-[--accent] text-sm">* Toutes les conditions doivent-être validées pour pouvoir continuer l'inscritption...</p>
                     </div>
                     <div className=" flex justify-center items-center gap-2">
                         <label htmlFor="login">Vous avez déjà un compte !</label>
-                        <a href="/Login" className=" text-[--primary] font-bold">Connectez-vous ♥</a>
+                        <Link href="/Login" className=" text-[--primary] font-bold cursor-pointer">Connectez-vous ♥</Link>
                     </div>
                 </form>)}
                 {flipped && (

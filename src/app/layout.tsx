@@ -14,6 +14,12 @@ const Recursive = localFont({
   weight: "100 900",
 });
 
+const Gravitas = localFont({
+  src: "./fonts/Gravitas.woff2",
+  variable: "--font-gravitas",
+  weight: "100 900",
+});
+
 export const metadata: Metadata = {
   title: "PhareAway",
   description: "PhareAway est une application ludique mettant en valeur les phares de France.",
@@ -27,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${Ouraboros.variable} ${Recursive.variable} antialiased`}
+        className={`${Ouraboros.variable} ${Recursive.variable} ${Gravitas.variable} antialiased`}
       >
         {children}
       </body>
