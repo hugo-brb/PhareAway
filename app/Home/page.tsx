@@ -16,7 +16,7 @@ const Map = dynamic(() => import('../../components/Map'), { ssr: false });
 
 export default function Home() {
     const [active, setActive] = useState("home");
-    const [center, setCenter] = useState<[number, number]>([-2.0478342,48.646292]); // Coordonnées initiales (New York)
+    const [center, setCenter] = useState<[number, number]>([-1.6282904,49.6299822]); // Coordonnées initiales
     const handleClickActive = (a: string) => {
         setActive(a);
     };

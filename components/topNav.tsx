@@ -8,9 +8,10 @@ type NavbarProps = {
     return (
         <aside className="flex flex-row gap-4 justify-betweenabsolute, top-2 right-1/2 translate-x-1/2 bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-6 py-4 absolute z-50"
         >
-            <button onClick={() => onCenterChange([-74.006, 40.7128])}>New York</button>
-            <button onClick={() => onCenterChange([-0.1276, 51.5074])}>Londres</button>
-            <button onClick={() => onCenterChange([139.6917, 35.6895])}>Tokyo</button>
+            <button onClick={() => onCenterChange([-1.6282904,49.6299822])}>Cherbourg</button>
+            <button onClick={() => onCenterChange([-1.6427344,47.2382032])}>Nantes</button>
+            <button onClick={() => onCenterChange([-0.586012,44.8637178])}>Bordeaux</button>
+            <button onClick={() => onCenterChange([4.2604586,43.8321256])}>Nimes</button>
         </aside>
     );
 };
