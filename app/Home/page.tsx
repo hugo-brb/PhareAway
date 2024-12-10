@@ -28,7 +28,7 @@ export default function Home() {
     return (
         <>
             <Menu active={active} handleClickActive={handleClickActive} />
-            <TopNav onCenterChange={(newCenter: [number, number]) => setCenter(newCenter)} />
+            <TopNav onCenterChange={(newCenter: [number, number]) => setCenter(newCenter)} isMap={active} />
             <Map
                 zoom={2}
                 bounds={[[-5.1535428,42.5314237],[7.3190333,51.0605319]]}
