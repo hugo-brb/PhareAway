@@ -43,7 +43,7 @@ export default function Rgpd(){
     return <>
         <main className=" land flex justify-center items-center w-[100vw] h-[100vh] font-bold">
             <section className="flex flex-col gap-7 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
-                <h1 className=" font-ouroboros text-4xl self-center">Vos Pharedonnées !</h1>
+                <h1 className=" font-ouroboros text-4xl self-center">Vos données !</h1>
                 {!flipped && (<form action="/Signup" method="post" className=" flex flex-col gap-3 max-h-[90vh]">
                     <p onClick={handleFlipped} className=" text-[--primary] cursor-pointer flex items-center gap-2 underline underline-offset-2">En savoir plus sur l'utilisation de vos données
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" className=" fill-[--primary] size-4 -rotate-45"><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
@@ -64,7 +64,7 @@ export default function Rgpd(){
                             </label>
                         </div>
                         <div className=" flex justify-between items-center w-full">
-                            <label htmlFor="useName" className=" max-w-[25vw]">Permettre de collecter votre Nom et prénom pour créer votre compte.</label>
+                            <label htmlFor="useName" className=" max-w-[25vw]">Permettre de collecter vos nom et prénom pour créer votre compte.</label>
                             <label
                             className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-700 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-[--primary]"
                             >
@@ -108,7 +108,7 @@ export default function Rgpd(){
                                     <span
                                     className="ml-3 group-hover:text-[--primary] transition-colors duration-300"
                                     >
-                                    Je cerfie avoir plus de 15ans et être un veritable pharaddict.
+                                    Je certifie avoir plus de 15ans et être un veritable pharaddict.
                                     </span>
                                 </label>
                             </div>
@@ -155,7 +155,7 @@ export default function Rgpd(){
                     )}
                     <div className=" flex flex-col gap-1">
                         <input onClick={verif} type="button" value="Continuer vers l'inscription &#10140;" className=" hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg" />
-                        <p className=" text-[--accent] text-sm">* Toutes les conditions doivent-être validées pour pouvoir continuer l'inscritption...</p>
+                        <p className=" text-[--accent] text-sm">* Toutes les conditions doivent-être validées pour pouvoir continuer l'inscritption.</p>
                     </div>
                     <div className=" flex justify-center items-center gap-2">
                         <label htmlFor="login">Vous avez déjà un compte !</label>

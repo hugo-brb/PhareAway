@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import SessionWrapper from "@/lib/SessionWrapper";
 
 const Ouraboros = localFont({
   src: "./fonts/Ouroboros.woff2",
@@ -31,6 +32,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <SessionWrapper>
     <html lang="fr">
       <body
         className={`${Ouraboros.variable} ${Recursive.variable} ${Gravitas.variable} antialiased`}
@@ -38,5 +40,6 @@ export default function RootLayout({
         {children}
       </body>
     </html>
+    </SessionWrapper>
   );
 }

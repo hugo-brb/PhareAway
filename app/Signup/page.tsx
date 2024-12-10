@@ -32,7 +32,7 @@ export default function Signup(){
                         <input id="mdp" name="mdp" className=" py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]" type="password" placeholder="Jaimelesphares38" />
                     </div>
                     <div className=" flex flex-col gap-1">
-                        <label htmlFor="mdpVerif" className=" ml-2 text-base font-bold">Encore...</label>
+                        <label htmlFor="mdpVerif" className=" ml-2 text-base font-bold">Confirmer votre mot de passe</label>
                         <input id="mdpVerif" name="mdpVerif" className=" py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]" type="password" placeholder="Jaimelesphares38" />
                     </div>
                     <input type="submit" value="Commencer mon aventure ⛵" className=" hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg" />
