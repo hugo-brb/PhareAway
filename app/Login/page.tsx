@@ -1,9 +1,16 @@
 'use client'
 
 import Link from 'next/link'
-import {signIn} from 'next-auth/react'
+import { redirect } from 'next/navigation'
+import {signIn, useSession} from 'next-auth/react'
 
 export default function Login() {
+
+  const {data: session} = useSession()
+
+  if(session){
+    redirect('/Home')
+  }else{
   return (
     <main className="land flex justify-center items-center w-[100vw] h-[100vh]">
       <section className="flex flex-col gap-12 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
@@ -43,9 +50,17 @@ export default function Login() {
             C'est Pharti !
           </button>
           </div>
-          <hr className=' border-[--text]' />
+
+          <div className="flex items-center gap-2">
+            <label htmlFor="signup">Vous n'avez toujours pas de compte ?!</label>
+            <Link href="/Rgpd" className="text-[--primary] font-bold">
+              Inscrivez-vous
+            </Link>
+          </div>
+        </form>
+        <hr className=' border-[--text]' />
           <div className=' flex justify-center items-center w-full h-fit'>
-            <button className="gsi-material-button">
+            <button onClick={()=> signIn('google')} className="gsi-material-button">
               <div className="gsi-material-button-state"></div>
               <div className="gsi-material-button-content-wrapper">
                 <div className="gsi-material-button-icon">
@@ -62,15 +77,7 @@ export default function Login() {
               </div>
             </button>
           </div>
-          
-          <div className="flex items-center gap-2">
-            <label htmlFor="signup">Vous n'avez toujours pas de compte ?!</label>
-            <Link href="/Rgpd" className="text-[--primary] font-bold">
-              Inscrivez-vous
-            </Link>
-          </div>
-        </form>
       </section>
     </main>
   );
-}
+}}

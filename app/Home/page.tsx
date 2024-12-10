@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 import Menu from '@/components/Menu';
 import Coin from '@/components/Coin';
@@ -15,6 +17,12 @@ import TopNav from '@/components/topNav';
 const Map = dynamic(() => import('../../components/Map'), { ssr: false });
 
 export default function Home() {
+    const { data: session } = useSession();
+
+    if (!session) {
+        redirect('/Login');
+    }else{
+    
     const [active, setActive] = useState("home");
     const [center, setCenter] = useState<[number, number]>([-1.6282904,49.6299822]); // Coordonnées initiales
     const handleClickActive = (a: string) => {
@@ -28,7 +36,7 @@ export default function Home() {
     return (
         <>
             <Menu active={active} handleClickActive={handleClickActive} />
-            <TopNav onCenterChange={(newCenter: [number, number]) => setCenter(newCenter)} isMap={active} />
+            {active === "home" && <TopNav onCenterChange={(newCenter: [number, number]) => setCenter(newCenter)} />}
             <Map
                 zoom={2}
                 bounds={[[-5.1535428,42.5314237],[7.3190333,51.0605319]]}
@@ -42,4 +50,4 @@ export default function Home() {
             <Image src="/images/soupex.png" width={75} height={75} alt='Logo Soupex' className=' absolute z-50 bottom-3 right-3' />
         </>
     );
-}
+}}
