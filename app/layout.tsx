@@ -23,7 +23,8 @@ const Gravitas = localFont({
 
 export const metadata: Metadata = {
   title: "PhareAway",
-  description: "PhareAway est une application ludique mettant en valeur les phares de France.",
+  description:
+    "PhareAway est une application ludique mettant en valeur les phares de France.",
 };
 
 export default function RootLayout({
@@ -33,13 +34,13 @@ export default function RootLayout({
 }>) {
   return (
     <SessionWrapper>
-    <html lang="fr">
-      <body
-        className={`${Ouraboros.variable} ${Recursive.variable} ${Gravitas.variable} antialiased`}
-      >
-        {children}
-      </body>
-    </html>
+      <html lang="fr">
+        <body
+          className={`${Ouraboros.variable} ${Recursive.variable} ${Gravitas.variable} antialiased`}
+        >
+          {children}
+        </body>
+      </html>
     </SessionWrapper>
   );
 }

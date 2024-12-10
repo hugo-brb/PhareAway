@@ -9,7 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.46.2",
+    "@auth/supabase-adapter": "^1.7.4",
+    "@supabase/supabase-js": "^2.47.3",
     "bcrypt": "^5.1.1",
     "mapbox-gl": "^3.8.0",
     "next": "15.0.3",
