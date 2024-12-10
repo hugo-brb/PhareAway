@@ -12,7 +12,7 @@ import Pictures from '@/components/popover/Pictures';
 import Account from '@/components/popover/Account';
 import TopNav from '@/components/topNav';
 
-const Map = dynamic(() => import('../../components/Map'), { ssr: false });
+const Map = dynamic(() => import('../../../components/Map'), { ssr: false });
 
 export default function Home() {
     const [active, setActive] = useState("home");
