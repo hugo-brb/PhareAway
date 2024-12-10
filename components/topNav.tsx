@@ -2,12 +2,11 @@ import React from 'react';
 
 type NavbarProps = {
     onCenterChange: (center: [number, number]) => void;
-    isMap: string;
 };
   
-  const Navbar: React.FC<NavbarProps> = ({ onCenterChange, isMap }) => {
+  const Navbar: React.FC<NavbarProps> = ({ onCenterChange}) => {
     return (
-        <aside className={`${isMap == "home" ? "flex flex-row" : "hidden"} gap-4 justify-between absolute top-2 right-1/2 translate-x-1/2 bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-6 py-4 z-50`}
+        <aside className="flex flex-row gap-4 justify-between absolute top-2 right-1/2 translate-x-1/2 bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-6 py-4 z-50"
         >
             <button onClick={() => onCenterChange([-1.6282904,49.6299822])}>Cherbourg</button>
             <button onClick={() => onCenterChange([-1.6427344,47.2382032])}>Nantes</button>
