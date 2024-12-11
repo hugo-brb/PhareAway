@@ -1,7 +1,9 @@
+import OneEvent from "@/components/OneEvent";
+
 export default function Event() {
     return <>
     <main className=" absolute top-0 z-40 flex  w-[100vw] h-[100vh]">
-        <section className=" flex flex-col self-center gap-12 w-fit h-fit max-w-[70vw] max-h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+        <section className=" flex flex-col self-center gap-12 min-w-[80%] w-fit h-fit max-w-[70vw] max-h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
             <div id="recherche" className="flex flex-row items-center self-center">
                 <button className="flex flex-row items-center gap-2 bg-[--primary] px-4 py-2 rounded-lg mr-8" >
                     <svg
@@ -25,117 +27,13 @@ export default function Event() {
                 </div>
             </div>
             <div id="eventListe" className="flex flex-col gap-6 max-w-[80%] self-center">
-            <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-                <div className="flex flex-row gap-9 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
-                    <img className="w-24 h-24" src="icones/logoSimple.svg" alt="img_evenement" />
-                    <span className="text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam. 
-                    </span>
-                    <span className="border-l-2 pl-10 border-black text-wrap text-center">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                        Integer nec odio. Praesent libero. Sed cursus ante dapibus diam.
-                    </span>
-                </div>
-           </div>
+                <OneEvent image={"icones/logoSimple.svg"} desc={""} informations={[1, "Event Description", new Date()]} ></OneEvent>
+                <OneEvent image={"icones/logoSimple.svg"} desc={""} informations={[1, "Event Description", new Date()]} ></OneEvent>
+                <OneEvent image={"icones/logoSimple.svg"} desc={""} informations={[1, "Event Description", new Date()]} ></OneEvent>
+                <OneEvent image={"icones/logoSimple.svg"} desc={""} informations={[1, "Event Description", new Date()]} ></OneEvent>
+                <OneEvent image={"icones/logoSimple.svg"} desc={""} informations={[1, "Event Description", new Date()]} ></OneEvent>
+                <OneEvent image={"icones/logoSimple.svg"} desc={""} informations={[1, "Event Description", new Date()]} ></OneEvent>
+            </div>
         </section>
     </main>
     </>
