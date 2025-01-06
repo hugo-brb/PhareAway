@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
@@ -17,6 +17,12 @@ import { createClient } from "@supabase/supabase-js";
 
 const Map = dynamic(() => import("../../components/Map"), { ssr: false });
 
+// Initialisation de Supabase
+const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL || '',
+    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY || ''
+  );
+
 export default function Home() {
   const { data: session } = useSession();
 
@@ -27,6 +33,38 @@ export default function Home() {
     const [center, setCenter] = useState<[number, number]>([
       -1.6282904, 49.6299822,
     ]); // Coordonnées initiales
+    const [markers, setMarkers] = useState<
+    { longitude: number; latitude: number; popupText: string }[]
+  >([]);
+
+  // Charger les données de Supabase
+  useEffect(() => {
+    const fetchMarkers = async () => {
+      const { data, error } = await supabase
+        .from("pharesData")
+        .select("XYcoord, nom");
+
+      if (error) {
+        console.error("Erreur de chargement des données Supabase:", error);
+        return;
+      }
+
+      // Formatage des données pour Mapbox
+      const formattedMarkers = data.map((item: any) => ({
+
+        longitude: item.XYcoord.split(" ")[0],
+        latitude: item.XYcoord.split(" ")[1],
+        popupText: `<h3>${item.nom}</h3>`,
+      }));
+
+      setMarkers(formattedMarkers);
+    };
+
+    fetchMarkers();
+  }, []);
+
+    
+
     const handleClickActive = (a: string) => {
       setActive(a);
     };
@@ -52,6 +90,7 @@ export default function Home() {
             [7.3190333, 51.0605319],
           ]}
           center={center}
+          markers={markers}
         />
         {active === "calendar" && <Event />}
         {active === "coin" && <Store />}
