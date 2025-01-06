@@ -2,6 +2,7 @@ import OneEvent from "@/components/OneEvent";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
+  handleClickActive: (a: string) => void;
 }
 
 export default function Event({ handleClickActive }: MenuProps) {
@@ -98,5 +99,6 @@ export default function Event({ handleClickActive }: MenuProps) {
         </section>
       </main>
     </>
+  );
   );
 }
