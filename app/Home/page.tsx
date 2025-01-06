@@ -35,7 +35,7 @@ export default function Home() {
   );
   const supabaseData = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
+    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
   );
 
   const [active, setActive] = useState("home");
@@ -160,7 +160,9 @@ export default function Home() {
       />
       {active === "calendar" && <Event handleClickActive={handleClickActive} />}
       {active === "coin" && <Store handleClickActive={handleClickActive} />}
-      {active === "picture" && <Pictures handleClickActive={handleClickActive} />}
+      {active === "picture" && (
+        <Pictures handleClickActive={handleClickActive} />
+      )}
       {active === "account" && (
         <Account
           active={active}
