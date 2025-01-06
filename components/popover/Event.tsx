@@ -37,5 +37,4 @@ export default function Event() {
         </section>
       </main>
     </>
-  );
 }
