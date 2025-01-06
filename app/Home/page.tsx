@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
+import YourAccount from "@/components/YourAccount";
 import Event from "@/components/popover/Event";
 import Store from "@/components/popover/Store";
 import Pictures from "@/components/popover/Pictures";
@@ -15,7 +16,8 @@ import Account from "@/components/popover/Account";
 import TopNav from "@/components/topNav";
 import { createClient } from "@supabase/supabase-js";
 
-const Map = dynamic(() => import("../../components/Map"), { ssr: false });
+// Dynamically import the Map component without server-side rendering (SSR)
+const Map = dynamic(() => import("../../components/Map"), { ssr: true });
 
 // Initialisation de Supabase
 const supabase = createClient(
@@ -26,6 +28,7 @@ const supabase = createClient(
 export default function Home() {
   const { data: session } = useSession();
 
+  // Redirect to login if the session is not available
   if (!session) {
     redirect("/Login");
   } else {
@@ -33,38 +36,6 @@ export default function Home() {
     const [center, setCenter] = useState<[number, number]>([
       -1.6282904, 49.6299822,
     ]); // Coordonnées initiales
-    const [markers, setMarkers] = useState<
-    { longitude: number; latitude: number; popupText: string }[]
-  >([]);
-
-  // Charger les données de Supabase
-  useEffect(() => {
-    const fetchMarkers = async () => {
-      const { data, error } = await supabase
-        .from("pharesData")
-        .select("XYcoord, nom");
-
-      if (error) {
-        console.error("Erreur de chargement des données Supabase:", error);
-        return;
-      }
-
-      // Formatage des données pour Mapbox
-      const formattedMarkers = data.map((item: any) => ({
-
-        longitude: item.XYcoord.split(" ")[0],
-        latitude: item.XYcoord.split(" ")[1],
-        popupText: `<h3>${item.nom}</h3>`,
-      }));
-
-      setMarkers(formattedMarkers);
-    };
-
-    fetchMarkers();
-  }, []);
-
-    
-
     const handleClickActive = (a: string) => {
       setActive(a);
     };
@@ -90,7 +61,6 @@ export default function Home() {
             [7.3190333, 51.0605319],
           ]}
           center={center}
-          markers={markers}
         />
         {active === "calendar" && <Event />}
         {active === "coin" && <Store />}
