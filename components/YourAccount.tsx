@@ -7,19 +7,19 @@ interface MenuProps {
 
 export default function Coin({ nom }: MenuProps) {
   return (
-    <>
-      <Link
-        href="/"
-        className="flex items-center outline-none gap-2 bg-white bg-opacity-60 rounded-xl backdrop-blur-md px-3 py-1 absolute top-3 left-3 z-50 cursor-pointer hover:drop-shadow-2xl duration-300"
-      >
-        <Image
-          src="/icones/logoSimple.svg"
-          width={50}
-          height={50}
-          alt="Logo PhareAway"
-        />
-        <p>{nom}</p>
-      </Link>
-    </>
+    <Link
+      href="/"
+      className="flex items-center outline-none gap-2 bg-transparent bg-clip-padding hover:bg-white hover:bg-opacity-60 rounded-r-xl hover:backdrop-blur-md pl-0 pr-3 py-0 absolute top-3 left-7 z-40 cursor-pointer hover:drop-shadow-2xl duration-300 group"
+    >
+      <Image
+        src="/icones/logoSimple.png"
+        width={70}
+        height={70}
+        alt="Logo PhareAway"
+      />
+      <p className="opacity-0 translate-x-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-x-0">
+        Retour à l'accueil
+      </p>
+    </Link>
   );
 }
