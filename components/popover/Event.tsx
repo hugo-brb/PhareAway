@@ -35,6 +35,6 @@ export default function Event() {
                 <OneEvent image={"icones/logoSimple.svg"} desc={""} informations={[1, "Event Description", new Date()]} ></OneEvent>
             </div>
         </section>
-    </main>
+      </main>
     </>
 }
