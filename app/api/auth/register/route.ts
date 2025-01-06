@@ -4,9 +4,12 @@ import { createClient } from "@supabase/supabase-js";
 
 export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json();
+    const { nom, prenom, email, password } = await request.json();
     //validate email and password
     console.log(email, password);
+
+    //Create complete name
+    const completeName = `${prenom} ${nom}`;
 
     const hashedPassword = await hash(password, 10);
     // Initialize Supabase client
@@ -16,8 +19,8 @@ export async function POST(request: Request) {
       { db: { schema: "next_auth" } }
     );
     const response = await supabaseAuth
-        .from("users")
-        .insert({ email: email, password: hashedPassword });
+      .from("users")
+      .insert({ name: completeName, email: email, password: hashedPassword });
   } catch (e) {
     console.log(e);
   }
