@@ -49,14 +49,11 @@ export default function Home() {
     const nameParts = session?.user?.name?.split(" ");
     return nameParts ? nameParts[0] : "François";
   };
-
   const nom = () => {
     const nameParts = session?.user?.name?.split(" ");
     return nameParts ? nameParts[1].toUpperCase() : "SOLEIL";
   };
-
   const email = () => session?.user?.email ?? "";
-
   const pseudo = () => {
     const firstChar = prenom().charAt(0).toLowerCase();
     const lastName = nom();
@@ -68,9 +65,7 @@ export default function Home() {
       return firstChar + lastName.slice(0, 6).toLowerCase();
     }
   };
-
   const imgProfil = () => session?.user?.image ?? "/images/profile.png";
-
   // Function to fetch typeAuth from Supabase
   const fetchTypeAuth = async () => {
     const userName = session?.user?.name;
@@ -99,7 +94,6 @@ export default function Home() {
       return null;
     }
   };
-
   useEffect(() => {
     const resolveTypeAuth = async () => {
       const type = await fetchTypeAuth();
@@ -108,24 +102,21 @@ export default function Home() {
 
     resolveTypeAuth();
   }, [session?.user?.name]); // Effect depends on session's user name
-
   const handleClickActive = (a: string) => {
     setActive(a);
   };
-
   const updateCenter = (newCenter: [number, number]) => {
     setCenter(newCenter);
   };
-
   const [markers, setMarkers] = useState<
     { longitude: number; latitude: number; popupText: string }[]
-  >([]);
+  >( []);
   // Charger les données de Supabase
   useEffect(() => {
     const fetchMarkers = async () => {
       const { data, error } = await supabaseData
         .from("pharesData")
-        .select("XYcoord, nom");
+        .select("XYcoord, nom, url");
       if (error) {
         console.error("Erreur de chargement des données Supabase:", error);
         return;
@@ -135,7 +126,12 @@ export default function Home() {
       const formattedMarkers = data.map((item: any) => ({
         longitude: item.XYcoord.split(" ")[0],
         latitude: item.XYcoord.split(" ")[1],
-        popupText: `<h3>${item.nom}</h3>`,
+        popupText: `
+        <div class="flex flex-col items-center">
+                <h3 class="text-xl">${item.nom}</h3>
+                <img src="/images/phares/${item.nom}.jpg" alt="Phare ${item.nom}" width="200" height="200" />
+                <a href="${item.url}" target="_blank" class="text-cyan-700" >Lien vers le site du phare</a>
+        </div>`,
       }));
 
       setMarkers(formattedMarkers);
