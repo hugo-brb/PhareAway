@@ -158,9 +158,9 @@ export default function Home() {
         center={center}
         markers={markers}
       />
-      {active === "calendar" && <Event />}
-      {active === "coin" && <Store />}
-      {active === "picture" && <Pictures />}
+      {active === "calendar" && <Event handleClickActive={handleClickActive} />}
+      {active === "coin" && <Store handleClickActive={handleClickActive} />}
+      {active === "picture" && <Pictures handleClickActive={handleClickActive} />}
       {active === "account" && (
         <Account
           active={active}
