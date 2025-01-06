@@ -3,12 +3,13 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 type MapComponentProps = {
-    center: [number, number];
-    zoom: number;
-    bounds: [[number, number], [number, number]];
+    center: [number, number]; // Coordonnées du centre de la carte
+    zoom: number; //zoom de base
+    bounds: [[number, number], [number, number]]; // limite d'affichage de la carte
+    markers: { longitude: number; latitude: number; popupText?: string }[]; // Liste des marqueurs à afficher
 };
 
-const Map: React.FC<MapComponentProps> = ({ center, bounds, zoom }) => {
+const Map: React.FC<MapComponentProps> = ({ center, bounds, zoom, markers }) => {
     const mapContainer = useRef<HTMLDivElement | null>(null);
     const mapInstance = useRef<mapboxgl.Map | null>(null);
 
@@ -37,6 +38,31 @@ const Map: React.FC<MapComponentProps> = ({ center, bounds, zoom }) => {
             mapInstance.current.flyTo({ center });
         }
     }, [center]); // Update map center when `center` changes
+
+    useEffect(() => {
+        if (mapInstance.current) {
+            // Supprimer les anciens marqueurs avant d'ajouter les nouveaux
+            const map = mapInstance.current;
+            const markersOnMap: mapboxgl.Marker[] = [];
+
+            // Ajouter les marqueurs
+            markers.forEach(({ longitude, latitude, popupText }) => {
+                const marker = new mapboxgl.Marker()
+                    .setLngLat([longitude, latitude])
+                    .setPopup(
+                        new mapboxgl.Popup().setHTML(popupText || '')
+                    ) // Ajouter un popup facultatif
+                    .addTo(map);
+
+                markersOnMap.push(marker);
+            });
+
+            // Nettoyage : supprimer les marqueurs lorsque le composant est démonté
+            return () => {
+                markersOnMap.forEach(marker => marker.remove());
+            };
+        }
+    }, [markers]); // Réagir lorsque les marqueurs changent
 
     return <div ref={mapContainer} className='w-[100vw] h-[100vh] overflow-y-hidden' />;
 };
