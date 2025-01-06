@@ -33,6 +33,10 @@ export default function Home() {
     process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
     { db: { schema: "next_auth" } }
   );
+  const supabaseData = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
+  );
 
   const [active, setActive] = useState("home");
   const [center, setCenter] = useState<[number, number]>([
@@ -119,21 +123,24 @@ export default function Home() {
   // Charger les données de Supabase
   useEffect(() => {
     const fetchMarkers = async () => {
-      const { data, error } = await supabaseAuth
+      const { data, error } = await supabaseData
         .from("pharesData")
         .select("XYcoord, nom");
       if (error) {
         console.error("Erreur de chargement des données Supabase:", error);
         return;
       }
+
       // Formatage des données pour Mapbox
       const formattedMarkers = data.map((item: any) => ({
         longitude: item.XYcoord.split(" ")[0],
         latitude: item.XYcoord.split(" ")[1],
         popupText: `<h3>${item.nom}</h3>`,
       }));
+
       setMarkers(formattedMarkers);
     };
+
     fetchMarkers();
   }, []);
 
