@@ -2,7 +2,7 @@ export default function Pictures() {
     return <>
     <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
         <section className=" flex flex-col items-center self-center gap-12 w-fit h-fit max-h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-            <h1 className=" font-ouroboros self-center text-center text-7xl">Importer une image</h1> 
+            <h1 className=" font-gravitas self-center text-center text-5xl">Importer une image</h1> 
             <div>
                 <label className="w-fit h-fit flex flex-col gap-5 cursor-pointer justify-center items-center border-2 border-dashed p-6 rounded-xl drop-shadow-2xl " htmlFor="pict">
                     <div className="flex justify-center items-center">

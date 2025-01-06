@@ -1,87 +1,185 @@
-'use client'
-
-import Image from "next/image"
+import { useState } from "react";
 import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { createClient } from "@supabase/supabase-js";
+import Image from "next/image";
 
 interface MenuProps {
-    active: string;
-    handleClickActive: (a: string) => void;
+  active: string;
+  handleClickActive: (a: string) => void;
+  prenom: string;
+  nom: string;
+  pseudo: string;
+  email: string;
+  imgProfile: string;
+  typeAuth: string;
 }
 
-export default function Account({ active, handleClickActive }: MenuProps) {
-    const { data: session, status } = useSession();
+export default function Account({
+  active,
+  handleClickActive,
+  prenom,
+  nom,
+  pseudo,
+  email,
+  imgProfile,
+  typeAuth,
+}: MenuProps) {
+  const { data: session, status } = useSession();
+  const [isModifiable, setIsModifiable] = useState(false);
 
-    const handleSignOut = async () => {
-        // Déconnexion de l'utilisateur
-        await signOut({
-        redirect: false, // Ne redirige pas automatiquement
-        });
+  // États locaux pour suivre les valeurs des champs
+  const [updatedNom, setUpdatedNom] = useState(nom);
+  const [updatedPrenom, setUpdatedPrenom] = useState(prenom);
+  const [updatedPseudo, setUpdatedPseudo] = useState(pseudo);
 
-        // Redirection après la déconnexion
-        redirect('/')// Ou redirigez vers une autre page de votre choix
-    };
+  // Initialize Supabase client
+  const supabaseAuth = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
+    { db: { schema: "next_auth" } }
+  );
 
-    if (status === "loading") {
-        return <div>Chargement...</div>;
+  const handleIsModif = async () => {
+    if (isModifiable) {
+      // Mise à jour dans la base de données via Supabase
+      const { error } = await supabaseAuth
+        .from("users")
+        .update({
+          name: `${updatedPrenom} ${updatedNom}`, // Vous pouvez personnaliser cela selon vos besoins
+          image: imgProfile, // Garde l'image du profil actuelle
+        })
+        .eq("email", session?.user?.email); // Assurez-vous que c'est le bon utilisateur
+
+      if (error) {
+        console.error("Erreur lors de la mise à jour:", error);
+        alert("Une erreur est survenue lors de la mise à jour.");
+      }
+      window.location.reload(); // Recharge la page pour afficher les nouvelles valeurs
     }
 
+    setIsModifiable((prev) => !prev); // Alterner entre modification et validation
+  };
 
-    return <>
-    <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-        <section className=" flex flex-col self-center gap-12 w-fit h-fit max-h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-            <div className=" flex justify-center items-center gap-32">
-                <Image src="/images/profile.jpg" alt="Profile picture" width={200} height={100} className=" rounded-full"></Image>
-                <div className=" flex flex-col gap-2">
-                    <h1 className=" font-extrabold text-5xl">François Soleil</h1>
-                    <h2 className=" text-lg">phareaway@lighthouse.fr</h2>
-                    <div className=" flex justify-around">
-                        <div onClick={() => handleClickActive('coin')} className=" flex items-center gap-2 border border-[--text] rounded-full mt-7 py-1 px-4 cursor-pointer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className="fill-[--accent] size-5">
-                                <path d="M512 80c0 18-14.3 34.6-38.4 48c-29.1 16.1-72.5 27.5-122.3 30.9c-3.7-1.8-7.4-3.5-11.3-5C300.6 137.4 248.2 128 192 128c-8.3 0-16.4 .2-24.5 .6l-1.1-.6C142.3 114.6 128 98 128 80c0-44.2 86-80 192-80S512 35.8 512 80zM160.7 161.1c10.2-.7 20.7-1.1 31.3-1.1c62.2 0 117.4 12.3 152.5 31.4C369.3 204.9 384 221.7 384 240c0 4-.7 7.9-2.1 11.7c-4.6 13.2-17 25.3-35 35.5c0 0 0 0 0 0c-.1 .1-.3 .1-.4 .2c0 0 0 0 0 0s0 0 0 0c-.3 .2-.6 .3-.9 .5c-35 19.4-90.8 32-153.6 32c-59.6 0-112.9-11.3-148.2-29.1c-1.9-.9-3.7-1.9-5.5-2.9C14.3 274.6 0 258 0 240c0-34.8 53.4-64.5 128-75.4c10.5-1.5 21.4-2.7 32.7-3.5zM416 240c0-21.9-10.6-39.9-24.1-53.4c28.3-4.4 54.2-11.4 76.2-20.5c16.3-6.8 31.5-15.2 43.9-25.5l0 35.4c0 19.3-16.5 37.1-43.8 50.9c-14.6 7.4-32.4 13.7-52.4 18.5c.1-1.8 .2-3.5 .2-5.3zm-32 96c0 18-14.3 34.6-38.4 48c-1.8 1-3.6 1.9-5.5 2.9C304.9 404.7 251.6 416 192 416c-62.8 0-118.6-12.6-153.6-32C14.3 370.6 0 354 0 336l0-35.4c12.5 10.3 27.6 18.7 43.9 25.5C83.4 342.6 135.8 352 192 352s108.6-9.4 148.1-25.9c7.8-3.2 15.3-6.9 22.4-10.9c6.1-3.4 11.8-7.2 17.2-11.2c1.5-1.1 2.9-2.3 4.3-3.4l0 3.4 0 5.7 0 26.3zm32 0l0-32 0-25.9c19-4.2 36.5-9.5 52.1-16c16.3-6.8 31.5-15.2 43.9-25.5l0 35.4c0 10.5-5 21-14.9 30.9c-16.3 16.3-45 29.7-81.3 38.4c.1-1.7 .2-3.5 .2-5.3zM192 448c56.2 0 108.6-9.4 148.1-25.9c16.3-6.8 31.5-15.2 43.9-25.5l0 35.4c0 44.2-86 80-192 80S0 476.2 0 432l0-35.4c12.5 10.3 27.6 18.7 43.9 25.5C83.4 438.6 135.8 448 192 448z"/>
-                            </svg>
-                            <p>1000</p>
-                        </div>
-                        <div onClick={() => handleClickActive('home')} className=" flex items-center gap-2 border border-[--text] rounded-full mt-7 py-1 px-4 cursor-pointer">
-                            <Image src="/images/lighthouse.png" width={30} height={30} alt="icon de phare"></Image>
-                            <p>2/256</p>
-                        </div>
-                    </div>
-                </div>
-                <div onClick={handleSignOut} className=" cursor-pointer">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" className=" size-12">
-                        <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"/>
-                    </svg>
-                </div>
+  const handleSignOut = async () => {
+    // Déconnexion de l'utilisateur
+    await signOut({
+      redirect: false, // Ne redirige pas automatiquement
+    });
+
+    // Redirection après la déconnexion
+    redirect("/");
+  };
+
+  if (status === "loading") {
+    return <div>Chargement...</div>;
+  }
+
+  return (
+    <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
+      <section className="flex flex-col self-center gap-12 w-fit h-fit max-h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+        <div className="flex justify-center items-center gap-32">
+          <Image
+            src={imgProfile}
+            alt="Profile picture"
+            width={200}
+            height={200}
+            className="rounded-full"
+          ></Image>
+          <div className="flex flex-col gap-2">
+            <h1 className="font-extrabold text-5xl">
+              {updatedPrenom} {updatedNom}
+            </h1>
+            <h2 className="text-lg">{email}</h2>
+            <div className=" flex justify-start items-center gap-7">
+              <div className=" flex justify-center items-center gap-2 px-4 py-2 rounded-2xl cursor-pointer duration-300 hover:ring-1 ring-[--primary]">
+                <Image
+                  src="/images/lighthouse.png"
+                  alt="Lighthouse"
+                  width={25}
+                  height={25}
+                />
+                <span>1/135</span>
+              </div>
             </div>
-            <hr className=" w-[60vw] border-[--text]" />
-            <div className=" flex flex-col gap-12 pl-7 mx-auto px-7 py-12">
-                <div className=" flex gap-12">
-                    <div className=" flex flex-col gap-1">
-                        <h3 className=" font-bold text-xl">Nom</h3>
-                        <input type="text" defaultValue="Soleil" className=" py-2 px-4 w-fit rounded-full bg-white bg-opacity-45" disabled />
-                    </div>
-                    <div className=" flex flex-col gap-1">
-                        <h3 className=" font-bold text-xl">Prénom</h3>
-                        <input type="text" defaultValue="François" className=" py-2 px-4 w-fit rounded-full bg-white bg-opacity-45" disabled />
-                    </div>
-                </div>
-                <div className=" flex flex-col gap-1">
-                    <h3 className=" font-bold text-xl">Nom d'utilisateur</h3>
-                    <input type="text" defaultValue="Pharaon" className=" py-2 px-4 w-full rounded-full bg-white bg-opacity-45" disabled />
-                </div>
-                <div className=" flex flex-col gap-1">
-                    <h3 className=" font-bold text-xl">Email</h3>
-                    <input type="mail" defaultValue="phareaway@lighthouse.fr" className=" py-2 px-4 w-full rounded-full bg-white bg-opacity-45" disabled />
-                </div>
-                <div className=" flex flex-col gap-1">
-                    <h3 className=" font-bold text-xl">Mot de passe</h3>
-                    <input type="password" defaultValue="Jaimelesphares38" className=" py-2 px-4 w-full rounded-full bg-white bg-opacity-45" disabled />
-                </div>
-                <button className=" w-[15vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold mx-auto py-2 px-6 rounded-2xl">Modifier</button>
+          </div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            onClick={handleSignOut}
+            className=" fill-[--text] size-12 cursor-pointer"
+          >
+            <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
+          </svg>
+        </div>
+        <hr className="w-[60vw] border-[--text]" />
+        <div className="flex flex-col gap-12 pl-7 mx-auto px-7 py-12">
+          <div className="flex gap-12">
+            <div className="flex flex-col gap-1">
+              <h3 className="font-bold text-xl">Nom</h3>
+              <input
+                type="text"
+                value={updatedNom}
+                onChange={(e) => setUpdatedNom(e.target.value)} // Met à jour l'état local
+                className="py-2 px-4 w-fit rounded-full bg-white bg-opacity-45"
+                disabled={!isModifiable}
+              />
             </div>
-            
-        </section>
+            <div className="flex flex-col gap-1">
+              <h3 className="font-bold text-xl">Prénom</h3>
+              <input
+                type="text"
+                value={updatedPrenom}
+                onChange={(e) => setUpdatedPrenom(e.target.value)} // Met à jour l'état local
+                className="py-2 px-4 w-fit rounded-full bg-white bg-opacity-45"
+                disabled={!isModifiable}
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <h3 className="font-bold text-xl">Nom d'utilisateur</h3>
+            <input
+              type="text"
+              value={updatedPseudo}
+              onChange={(e) => setUpdatedPseudo(e.target.value)} // Met à jour l'état local
+              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              disabled={!isModifiable}
+            />
+          </div>
+          <div
+            className={` ${
+              typeAuth === "oauth" ? "hidden" : "flex flex-col"
+            } gap-1`}
+          >
+            <h3 className="font-bold text-xl">Email</h3>
+            <input
+              type="mail"
+              value={session?.user?.email ?? "phareaway@lighthouse.fr"}
+              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              disabled={!isModifiable}
+            />
+          </div>
+          <div
+            className={` ${
+              typeAuth === "oauth" ? "hidden" : "flex flex-col"
+            } gap-1`}
+          >
+            <h3 className="font-bold text-xl">Mot de passe</h3>
+            <input
+              type="password"
+              value="Jaimelesphares38"
+              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              disabled={!isModifiable}
+            />
+          </div>
+          <button
+            onClick={handleIsModif}
+            className="w-[15vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold mx-auto py-2 px-6 rounded-2xl"
+          >
+            {isModifiable ? "Valider" : "Modifier"}
+          </button>
+        </div>
+      </section>
     </main>
-    </>
+  );
 }
