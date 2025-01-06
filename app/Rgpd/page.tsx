@@ -43,6 +43,9 @@ export default function Rgpd(){
     return <>
         <main className=" land flex justify-center items-center w-[100vw] h-[100vh] font-bold">
             <section className="flex flex-col gap-7 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
+                <Link href='/' className='absolute top-5 left-5' >
+                <img src="/icones/arrow-back.svg" alt="arrow-back" width={24} height={24} />
+                </Link>
                 <h1 className=" font-ouroboros text-4xl self-center">Vos données !</h1>
                 {!flipped && (<form action="/Signup" method="post" className=" flex flex-col gap-3 max-h-[90vh]">
                     <p onClick={handleFlipped} className=" text-[--primary] cursor-pointer flex items-center gap-2 underline underline-offset-2">En savoir plus sur l'utilisation de vos données
