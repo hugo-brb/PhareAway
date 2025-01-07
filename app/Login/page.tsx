@@ -4,6 +4,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { FormEvent } from "react";
+import Image from "next/image";
 
 export default function Login() {
   const { data: session } = useSession();
@@ -23,6 +24,13 @@ export default function Login() {
     };
     return (
       <main className="land flex justify-center items-center w-[100vw] h-[100vh]">
+        <Image
+          src="/icones/logoBaniere.png"
+          alt="Logo"
+          width={150}
+          height={150}
+          className=" absolute top-2 left-2"
+        />
         <section className="flex flex-col gap-12 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
           <Link href="/" className="absolute top-5 left-5">
             <img
