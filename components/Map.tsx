@@ -60,7 +60,7 @@ const Map: React.FC<MapComponentProps> = ({ center, bounds, zoom, markers, handl
                 divElement.classList.add('flex', 'flex-col', 'gap-6', 'items-center');
                 divElement.innerHTML = `<p>ID ${id}</p>`;
                 divElement.innerHTML +=`<h3 class="text-xl">${popupText}</h3>`;
-                divElement.innerHTML +=`<img src="/images/phares/${popupText}.jpg" alt="Phare ${popupText}" width="200" height="200" />`;
+                divElement.innerHTML +=`<img src="https://nereoll.github.io/imagesPhare/phares/${id}.jpg" alt="Phare ${popupText}" width="200" height="200" />`;
                 divElement.innerHTML +=`<a href="${lien}" target="_blank" class="text-cyan-700">Lien vers le site du phare</a>`;
                 divElement.appendChild(enigmeBtn);
 
