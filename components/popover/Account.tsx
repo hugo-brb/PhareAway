@@ -85,7 +85,7 @@ export default function Account({
                   width={25}
                   height={25}
                 />
-                <span>{player.getNbPhareFinished()} / 135</span>
+                <span>{player.getNbPhareFinished()} / 5</span>
               </div>
             </div>
           </div>
@@ -109,7 +109,9 @@ export default function Account({
                 type="text"
                 value={player.getNom()}
                 onChange={(e) => player.setNom(e.target.value)}
-                className="py-2 px-4 w-fit rounded-full bg-white bg-opacity-45"
+                className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                  isModifiable ? "ring-2 ring-blue-500" : ""
+                }`}
                 disabled={!isModifiable}
               />
             </div>
@@ -119,7 +121,9 @@ export default function Account({
                 type="text"
                 value={player.getPrenom()}
                 onChange={(e) => player.setPrenom(e.target.value)}
-                className="py-2 px-4 w-fit rounded-full bg-white bg-opacity-45"
+                className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                  isModifiable ? "ring-2 ring-blue-500" : ""
+                }`}
                 disabled={!isModifiable}
               />
             </div>
@@ -130,7 +134,9 @@ export default function Account({
               type="text"
               value={player.getPseudo()}
               onChange={(e) => player.setPseudo(e.target.value)}
-              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                isModifiable ? "ring-2 ring-blue-500" : ""
+              }`}
               disabled={!isModifiable}
             />
           </div>
@@ -144,7 +150,9 @@ export default function Account({
               type="mail"
               value={player.getMail()}
               onChange={(e) => player.setMail(e.target.value)}
-              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                isModifiable ? "ring-2 ring-blue-500" : ""
+              }`}
               disabled={!isModifiable}
             />
           </div>
@@ -157,7 +165,9 @@ export default function Account({
             <input
               type="password"
               value="Jaimelesphares"
-              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                isModifiable ? "ring-2 ring-blue-500" : ""
+              }`}
               disabled={!isModifiable}
             />
           </div>
@@ -170,7 +180,9 @@ export default function Account({
             </button>
             <button
               onClick={player.deletePlayer}
-              className="w-fit hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic mx-auto py-2 px-6 rounded-2xl"
+              className={`w-fit hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic mx-auto py-2 px-6 rounded-2xl ${
+                isModifiable ? "opacity-20 pointer-events-none" : ""
+              }`}
             >
               Supprimer le compte
             </button>
