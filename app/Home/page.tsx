@@ -10,6 +10,7 @@ import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
 import YourAccount from "@/components/BackHome";
 import Event from "@/components/popover/Event";
+import Enigme from "@/components/popover/Enigme";
 import Store from "@/components/popover/Store";
 import Pictures from "@/components/popover/Pictures";
 import Account from "@/components/popover/Account";
@@ -109,7 +110,7 @@ export default function Home() {
     setCenter(newCenter);
   };
   const [markers, setMarkers] = useState<
-    { longitude: number; latitude: number; popupText: string }[]
+    {id:number; longitude: number; latitude: number; popupText: string }[]
   >( []);
   // Charger les données de Supabase
   useEffect(() => {
@@ -122,18 +123,15 @@ export default function Home() {
         return;
       }
 
-      // Formatage des données pour Mapbox
-      const formattedMarkers = data.map((item: any) => ({
-        longitude: item.XYcoord.split(" ")[0],
-        latitude: item.XYcoord.split(" ")[1],
-        popupText: `
-        <div class="flex flex-col items-center">
-                <h3 class="text-xl">${item.nom}</h3>
-                <img src="/images/phares/${item.nom}.jpg" alt="Phare ${item.nom}" width="200" height="200" />
-                <a href="${item.url}" target="_blank" class="text-cyan-700" >Lien vers le site du phare</a>
-        </div>`,
-        icone: "/icones/lightHouseIcon.svg",
-      }));
+    // Formatage des données pour Mapbox
+    const formattedMarkers = data.map((item: any, index: number) => ({
+      id: index, // Identifiant unique
+      longitude: item.XYcoord.split(" ")[0],
+      latitude: item.XYcoord.split(" ")[1],
+      popupText: item.nom,
+      icone: "/icones/lightHouseIcon.svg",
+      lien: item.url,
+    }));
 
       setMarkers(formattedMarkers);
     };
@@ -154,24 +152,28 @@ export default function Home() {
         ]}
         center={center}
         markers={markers}
+        handleClickActive={handleClickActive}
       />
-      {active === "calendar" && <Event handleClickActive={handleClickActive} />}
-      {active === "coin" && <Store handleClickActive={handleClickActive} />}
-      {active === "picture" && (
-        <Pictures handleClickActive={handleClickActive} />
-      )}
-      {active === "account" && (
-        <Account
-          active={active}
-          handleClickActive={handleClickActive}
-          nom={nom()}
-          prenom={prenom()}
-          pseudo={pseudo()}
-          email={email()}
-          imgProfile={imgProfil()}
-          typeAuth={typeAuthResolved ?? "unknown"} // Default to "unknown" if not resolved
-        />
-      )}
+        {active === "calendar" && <Event handleClickActive={handleClickActive} />}
+        {active === "coin" && <Store handleClickActive={handleClickActive} />}
+        {active === "picture" && (
+            <Pictures handleClickActive={handleClickActive} />
+        )}
+        {active === "enigme" && (
+            <Enigme handleClickActive={handleClickActive} />
+        )}
+        {active === "account" && (
+            <Account
+            active={active}
+            handleClickActive={handleClickActive}
+            nom={nom()}
+            prenom={prenom()}
+            pseudo={pseudo()}
+            email={email()}
+            imgProfile={imgProfil()}
+            typeAuth={typeAuthResolved ?? "unknown"} // Default to "unknown" if not resolved
+            />
+        )}
       <YourAccount nom={session.user?.name ?? ""} />
       <Coin active={active} handleClickActive={handleClickActive} />
       <Image
