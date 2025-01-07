@@ -1,4 +1,11 @@
 import React, { Component } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { getHash } from "next/dist/server/image-optimizer";
+
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 interface Image {
   id: number;
@@ -20,7 +27,7 @@ enum ExtensionType {
 
 interface ExtensionInterface {
   product: Product;
-  owneed: boolean;
+  owned: boolean;
   type: ExtensionType;
 }
 
@@ -45,18 +52,60 @@ class Extension extends Component<ExtensionProps, ExtensionState> {
           url: "",
         },
       },
-      owneed: false,
+      owned: false,
       type: ExtensionType.DLC,
     };
   }
 
-  create = (product: Product, owneed: boolean, type: ExtensionType) => {};
+  async create(product: Product, owned: boolean, type: ExtensionType) {
+    try {
+      await supabaseData.from("Extension").insert({
+        product: product,
+        owned: owned,
+        type: type,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  read = (id: number) => {};
+  async read(id: number) {
+    try {
+      const { data, error } = await supabaseData
+        .from("Extension")
+        .select()
+        .eq("id", id);
+      if (error) {
+        throw error;
+      }
+      const initExtension = {
+        id: data?.[0]?.id,
+        owned: data?.[0]?.owned,
+        type: data?.[0]?.type,
+      };
+      return initExtension;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  update = (product: Product, owneed: boolean, type: ExtensionType) => {};
+  async update(product: Product, owned: boolean, type: ExtensionType) {
+    try {
+      await supabaseData
+        .from("Extension")
+        .update({ product: product, owned: owned, type: type });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  deleteentrée = (id: number) => {};
+  async deleteentrée(id: number) {
+    try {
+      await supabaseData.from("Extension").delete().eq("id", id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   // Méthode pour supprimer un player
   delete(): void {
@@ -71,7 +120,7 @@ class Extension extends Component<ExtensionProps, ExtensionState> {
           url: "",
         },
       },
-      owneed: false,
+      owned: false,
       type: ExtensionType.DLC,
     });
   }

@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 // Interface pour User
 interface User {
@@ -35,13 +41,54 @@ class Asso extends Component<AssoProps, AssoState> {
     };
   }
 
-  create = (user: User, url: "") => {};
+  async create(user: User, url: "") {
+    try {
+      await supabaseData.from("Asso").insert({
+        user: user,
+        url: url,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  read = (id: number) => {};
+  async read(id: number) {
+    try {
+      const { data, error } = await supabaseData
+        .from("Asso")
+        .select()
+        .eq("id", id);
+      if (error) {
+        throw error;
+      }
+      const initAsso = {
+        user: data?.[0].user,
+        url: data?.[0].url,
+      };
+      return initAsso;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  update = (user: User, url: "") => {};
+  async update(user: User, url: "") {
+    try {
+      await supabaseData.from("Asso").update({
+        user: user,
+        url: url,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  deleteentrée = (id: number) => {};
+  async deleteentree(id: number) {
+    try {
+      await supabaseData.from("Asso").delete().eq("id", id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   // Méthode pour supprimer un utilisateur
   delete(): void {

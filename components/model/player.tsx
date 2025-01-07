@@ -1,4 +1,15 @@
 import React, { Component } from "react";
+import { createClient } from "@supabase/supabase-js";
+
+const supabaseAuth = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
+  { db: { schema: "next_auth" } }
+);
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 // Interface pour User
 interface User {
@@ -11,7 +22,7 @@ interface User {
 // Interface pour Asso
 interface PlayerInterface {
   user: User;
-  becoins: number;
+  beacoins: number;
   current_wolrd: number;
   nb_completed_lh: number;
 }
@@ -33,29 +44,76 @@ class Player extends Component<PlayerProps, PlayerState> {
         name: "",
         password: "",
       },
-      becoins: 0,
+      beacoins: 0,
       current_wolrd: 0,
       nb_completed_lh: 0,
     };
   }
 
-  create = (
+  async create(
     user: User,
-    becoins: number,
-    current_wolrd: number,
+    beacoins: number,
+    current_world: number,
     nb_completed_lh: number
-  ) => {};
+  ) {
+    try {
+      await supabaseData.from("players").insert({
+        user: user,
+        beacoins: beacoins,
+        current_world: current_world,
+        nb_completed_lh: nb_completed_lh,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  read = (id: number) => {};
+  async read(id: number) {
+    try {
+      const { data, error } = await supabaseData
+        .from("players")
+        .select()
+        .eq("id", id);
+      if (error) {
+        throw error;
+      }
+      const initPlayer = {
+        user: data[0]?.user,
+        name: data[0]?.name,
+        current_world: data[0]?.current_world,
+        nb_completed_lh: data[0]?.nb_completed_lh,
+      };
+      return initPlayer;
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  update = (
+  async update(
     user: User,
-    becoins: number,
-    current_wolrd: number,
+    beacoins: number,
+    current_world: number,
     nb_completed_lh: number
-  ) => {};
+  ) {
+    try {
+      await supabaseData.from("players").update({
+        user: user,
+        beacoins: beacoins,
+        current_world: current_world,
+        nb_completed_lh: nb_completed_lh,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
-  deleteentrée = (id: number) => {};
+  async deleteentre(id: number) {
+    try {
+      await supabaseData.from("").delete().eq("id", id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   // Méthode pour supprimer un player
   delete(): void {
@@ -66,7 +124,7 @@ class Player extends Component<PlayerProps, PlayerState> {
         name: "",
         password: "",
       },
-      becoins: 0,
+      beacoins: 0,
       current_wolrd: 0,
       nb_completed_lh: 0,
     });
