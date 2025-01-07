@@ -31,9 +31,7 @@ class Image extends Component<ImageProps, ImageState> {
 
   async create(id: number, name: string, url: string) {
     try {
-      const reponce = await supabaseData
-        .from("Image")
-        .insert({ id: id, name: name, url: url });
+      await supabaseData.from("Image").insert({ id: id, name: name, url: url });
     } catch (e) {
       console.log(e);
     }
@@ -59,19 +57,17 @@ class Image extends Component<ImageProps, ImageState> {
     }
   }
 
-  async pdate(id: number, name: string, url: string) {
+  async update(id: number, name: string, url: string) {
     try {
-      const reponce = await supabaseData
-        .from("Image")
-        .update({ id: id, name: name, url: url });
+      await supabaseData.from("Image").update({ id: id, name: name, url: url });
     } catch (e) {
       console.log(e);
     }
   }
 
-  async deleteentrée(id: number) {
+  async deleteentre(id: number) {
     try {
-      const reponce = await supabaseData.from("Image").delete().eq("id", id);
+      await supabaseData.from("Image").delete().eq("id", id);
     } catch (e) {
       console.log(e);
     }
