@@ -40,6 +40,7 @@ export async function POST(request: Request) {
       email: email,
       password: hashedPassword,
       pseudo: pseudoFinale,
+      isOAuth: false,
     });
   } catch (e) {
     console.log(e);

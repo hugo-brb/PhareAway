@@ -1,37 +1,28 @@
 import { useState } from "react";
-import { signOut, useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
 import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
+import type { UsePlayer } from "@/components/model/player";
 
 interface MenuProps {
   active: string;
   handleClickActive: (a: string) => void;
-  prenom: string;
-  nom: string;
-  pseudo: string;
-  email: string;
-  imgProfile: string;
-  typeAuth: string;
+  player: UsePlayer;
 }
 
 export default function Account({
   active,
   handleClickActive,
-  prenom,
-  nom,
-  pseudo,
-  email,
-  imgProfile,
-  typeAuth,
+  player,
 }: MenuProps) {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
 
   // États locaux pour suivre les valeurs des champs
-  const [updatedNom, setUpdatedNom] = useState(nom);
-  const [updatedPrenom, setUpdatedPrenom] = useState(prenom);
-  const [updatedPseudo, setUpdatedPseudo] = useState(pseudo);
+  const [updatedNom, setUpdatedNom] = useState(player.getNom());
+  const [updatedPrenom, setUpdatedPrenom] = useState(player.getPrenom());
+  const [updatedPseudo, setUpdatedPseudo] = useState(player.getPseudo());
 
   // Initialize Supabase client
   const supabaseAuth = createClient(
@@ -42,20 +33,6 @@ export default function Account({
 
   const handleIsModif = async () => {
     if (isModifiable) {
-      // Mise à jour dans la base de données via Supabase
-      const { error } = await supabaseAuth
-        .from("users")
-        .update({
-          name: `${updatedPrenom} ${updatedNom}`, // Vous pouvez personnaliser cela selon vos besoins
-          image: imgProfile, // Garde l'image du profil actuelle
-        })
-        .eq("email", session?.user?.email); // Assurez-vous que c'est le bon utilisateur
-
-      if (error) {
-        console.error("Erreur lors de la mise à jour:", error);
-        alert("Une erreur est survenue lors de la mise à jour.");
-      }
-      window.location.reload(); // Recharge la page pour afficher les nouvelles valeurs
     }
 
     setIsModifiable((prev) => !prev); // Alterner entre modification et validation
@@ -91,7 +68,7 @@ export default function Account({
         </button>
         <div className="flex justify-center items-center gap-32">
           <Image
-            src={imgProfile}
+            src={session?.user?.image ?? "/images/profile.png"}
             alt="Profile picture"
             width={200}
             height={200}
@@ -101,7 +78,7 @@ export default function Account({
             <h1 className="font-extrabold text-5xl">
               {updatedPrenom} {updatedNom}
             </h1>
-            <h2 className="text-lg">{email}</h2>
+            <h2 className="text-lg">{player.getMail()}</h2>
             <div className=" flex justify-start items-center gap-7">
               <div className=" flex justify-center items-center gap-2 px-4 py-2 rounded-2xl cursor-pointer duration-300 hover:ring-1 ring-[--primary]">
                 <Image
@@ -159,7 +136,7 @@ export default function Account({
           </div>
           <div
             className={` ${
-              typeAuth === "oauth" ? "hidden" : "flex flex-col"
+              player.getIsOAuth() === true ? "hidden" : "flex flex-col"
             } gap-1`}
           >
             <h3 className="font-bold text-xl">Email</h3>
@@ -172,7 +149,7 @@ export default function Account({
           </div>
           <div
             className={` ${
-              typeAuth === "oauth" ? "hidden" : "flex flex-col"
+              player.getIsOAuth() === true ? "hidden" : "flex flex-col"
             } gap-1`}
           >
             <h3 className="font-bold text-xl">Mot de passe</h3>
