@@ -37,89 +37,39 @@ export default function Coin({ handleClickActive }: MenuProps) {
                     <p className=" opacity-50">10€</p>
                   </div>
                 </div>
-                <div className=" flex ml-7 justify-around">
-                  <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
-                    <Image
-                      src="/images/BeaCoin.png"
-                      width={100}
-                      height={100}
-                      alt="Beacoin"
-                    />
-                    <div className=" flex flex-col justify-center items-center">
-                      <p>10 Beacoins</p>
-                      <p className=" opacity-50">10€</p>
-                    </div>
-                  </div>
 
-                  <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
-                    <Image
-                      src="/images/BeaCoin.png"
-                      width={100}
-                      height={100}
-                      alt="Beacoin"
-                    />
-                    <div className=" flex flex-col justify-center items-center">
-                      <p>100 Beacoins</p>
-                      <p className=" opacity-50">20€</p>
-                    </div>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
-                    <Image
-                      src="/images/BeaCoin.png"
-                      width={100}
-                      height={100}
-                      alt="Beacoin"
-                    />
-                    <div className=" flex flex-col justify-center items-center">
-                      <p>100 Beacoins</p>
-                      <p className=" opacity-50">20€</p>
-                    </div>
-                  </div>
-
-                  <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
-                    <Image
-                      src="/images/BeaCoin.png"
-                      width={100}
-                      height={100}
-                      alt="Beacoin"
-                    />
-                    <div className=" flex flex-col justify-center items-center">
-                      <p>1.000 Beacoins</p>
-                      <p className=" opacity-50">50€</p>
-                    </div>
-                  </div>
-                  <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
-                    <Image
-                      src="/images/BeaCoin.png"
-                      width={100}
-                      height={100}
-                      alt="Beacoin"
-                    />
-                    <div className=" flex flex-col justify-center items-center">
-                      <p>1.000 Beacoins</p>
-                      <p className=" opacity-50">50€</p>
-                    </div>
-                  </div>
-
-                  <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
-                    <Image
-                      src="/images/BeaCoin.png"
-                      width={100}
-                      height={100}
-                      alt="Beacoin"
-                    />
-                    <div className=" flex flex-col justify-center items-center">
-                      <p>10.000 Beacoins</p>
-                      <p className=" opacity-50">100€</p>
-                    </div>
-                  </div>
-                </div>
                 <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
                   <Image
-                    src="/images/BeaCoin.png"
+                    src="/images/BeaCoin2.png"
                     width={100}
                     height={100}
-                    alt="Beacoin"
+                    alt="Beacoin2"
+                  />
+                  <div className=" flex flex-col justify-center items-center">
+                    <p>100 Beacoins</p>
+                    <p className=" opacity-50">20€</p>
+                  </div>
+                </div>
+
+                <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
+                  <Image
+                    src="/images/BeaCoin3.png"
+                    width={100}
+                    height={100}
+                    alt="Beacoin3"
+                  />
+                  <div className=" flex flex-col justify-center items-center">
+                    <p>1000 Beacoins</p>
+                    <p className=" opacity-50">50€</p>
+                  </div>
+                </div>
+
+                <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
+                  <Image
+                    src="/images/BeaCoin4.png"
+                    width={100}
+                    height={100}
+                    alt="Beacoin4"
                   />
                   <div className=" flex flex-col justify-center items-center">
                     <p>10.000 Beacoins</p>

@@ -1,134 +1,273 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 
+// Au début du fichier player.tsx
+export type UsePlayer = {
+  playerData: PlayerData;
+  getPrenom: () => string;
+  getNom: () => string;
+  getMail: () => string;
+  getPseudo: () => string;
+  getIsOAuth: () => boolean;
+  getBeacoins: () => number;
+  getNbPhareFinished: () => number;
+  getDlcUnlocked: () => number;
+  getIsAsso: () => boolean;
+  getIsAdmin: () => boolean;
+  setPrenom: (prenom: string) => Promise<void>;
+  setNom: (nom: string) => Promise<void>;
+  setMail: (mail: string) => Promise<void>;
+  setPseudo: (pseudo: string) => Promise<void>;
+  setBeacoins: (beacoins: number) => Promise<void>;
+  setNbPhareFinished: (nbPhareFinished: number) => Promise<void>;
+  setDlcUnlocked: (DlcUnlocked: number) => Promise<void>;
+  deletePlayer: () => Promise<void>;
+  updatePlayerInfo: (updates: Partial<PlayerData>) => Promise<void>;
+};
+
+// Configuration Supabase
 const supabaseAuth = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
   { db: { schema: "next_auth" } }
 );
+
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
-// Interface pour User
-interface User {
-  id: number;
-  mail: string;
-  name: string;
-  password: string;
-}
-
-// Interface pour Asso
-interface PlayerInterface {
-  user: User;
+interface PlayerData {
+  user: {
+    id: number;
+    mail: string;
+    name: string;
+    pseudo: string;
+    isOAuth: boolean;
+  };
   beacoins: number;
-  current_wolrd: number;
-  nb_completed_lh: number;
+  nbPhareFinished: number;
+  DlcUnlocked: number;
+  isAsso: boolean;
+  isAdmin: boolean;
 }
 
-// Définition des props et state
-interface PlayerProps {}
+export function usePlayer(email: string) {
+  const [playerData, setPlayerData] = useState<PlayerData>({
+    user: {
+      id: -1,
+      mail: "",
+      name: "Test Test",
+      pseudo: "",
+      isOAuth: true,
+    },
+    beacoins: 0,
+    nbPhareFinished: 0,
+    DlcUnlocked: 0,
+    isAsso: false,
+    isAdmin: false,
+  });
 
-interface PlayerState extends PlayerInterface {}
+  useEffect(() => {
+    const fetchPlayerData = async () => {
+      try {
+        if (email) {
+          const requestAuth = await supabaseAuth
+            .from("users")
+            .select()
+            .eq("email", email);
 
-class Player extends Component<PlayerProps, PlayerState> {
-  constructor(props: PlayerProps) {
-    super(props);
+          if (requestAuth.data && requestAuth.data.length > 0) {
+            const userId = requestAuth.data[0].id;
+            const requestData = await supabaseData
+              .from("users")
+              .select()
+              .eq("id", userId);
 
-    // Initialisation de l'état
-    this.state = {
-      user: {
-        id: -1,
-        mail: "",
-        name: "",
-        password: "",
-      },
-      beacoins: 0,
-      current_wolrd: 0,
-      nb_completed_lh: 0,
-    };
-  }
-
-  async create(
-    user: User,
-    beacoins: number,
-    current_world: number,
-    nb_completed_lh: number
-  ) {
-    try {
-      await supabaseData.from("players").insert({
-        user: user,
-        beacoins: beacoins,
-        current_world: current_world,
-        nb_completed_lh: nb_completed_lh,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async read(id: number) {
-    try {
-      const { data, error } = await supabaseData
-        .from("players")
-        .select()
-        .eq("id", id);
-      if (error) {
-        throw error;
+            setPlayerData({
+              user: {
+                id: userId,
+                mail: email,
+                name: requestAuth.data[0].name || "",
+                pseudo: requestAuth.data[0].pseudo || "",
+                isOAuth: requestAuth.data[0].isOAuth || true,
+              },
+              beacoins: requestData.data?.[0]?.beacoins || 0,
+              nbPhareFinished: requestData.data?.[0]?.nbPhareFinished || 0,
+              DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || 0,
+              isAsso: requestData.data?.[0]?.isAsso || false,
+              isAdmin: requestData.data?.[0]?.isAdmin || false,
+            });
+          }
+        }
+      } catch (e) {
+        console.error("Erreur lors de la récupération des données :", e);
       }
-      const initPlayer = {
-        user: data[0]?.user,
-        name: data[0]?.name,
-        current_world: data[0]?.current_world,
-        nb_completed_lh: data[0]?.nb_completed_lh,
-      };
-      return initPlayer;
-    } catch (e) {
-      console.log(e);
-    }
-  }
+    };
 
-  async update(
-    user: User,
-    beacoins: number,
-    current_world: number,
-    nb_completed_lh: number
-  ) {
-    try {
-      await supabaseData.from("players").update({
-        user: user,
-        beacoins: beacoins,
-        current_world: current_world,
-        nb_completed_lh: nb_completed_lh,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
+    fetchPlayerData();
+  }, [email]);
 
-  async deleteentre(id: number) {
-    try {
-      await supabaseData.from("").delete().eq("id", id);
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  // Getters
+  const methods = {
+    getPrenom: () => playerData.user.name.split(" ")[0],
+    getNom: () => playerData.user.name.split(" ")[1]?.toUpperCase() || "",
+    getMail: () => playerData.user.mail,
+    getPseudo: () => playerData.user.pseudo,
+    getIsOAuth: () => playerData.user.isOAuth,
+    getBeacoins: () => playerData.beacoins,
+    getNbPhareFinished: () => playerData.nbPhareFinished,
+    getDlcUnlocked: () => playerData.DlcUnlocked,
+    getIsAsso: () => playerData.isAsso,
+    getIsAdmin: () => playerData.isAdmin,
 
-  // Méthode pour supprimer un player
-  delete(): void {
-    this.setState({
-      user: {
-        id: -1,
-        mail: "",
-        name: "",
-        password: "",
-      },
-      beacoins: 0,
-      current_wolrd: 0,
-      nb_completed_lh: 0,
-    });
-  }
+    // Setters pour les informations de base
+    setPrenom: async (prenom: string) => {
+      const newName = `${prenom} ${playerData.user.name.split(" ")[1]}`;
+      await supabaseAuth
+        .from("users")
+        .update({ name: newName })
+        .eq("id", playerData.user.id);
+      setPlayerData((prev) => ({
+        ...prev,
+        user: { ...prev.user, name: newName },
+      }));
+    },
+
+    setNom: async (nom: string) => {
+      const newName = `${playerData.user.name.split(" ")[0]} ${nom}`;
+      await supabaseAuth
+        .from("users")
+        .update({ name: newName })
+        .eq("id", playerData.user.id);
+      setPlayerData((prev) => ({
+        ...prev,
+        user: { ...prev.user, name: newName },
+      }));
+    },
+
+    setMail: async (mail: string) => {
+      await supabaseAuth
+        .from("users")
+        .update({ email: mail })
+        .eq("id", playerData.user.id);
+      setPlayerData((prev) => ({
+        ...prev,
+        user: { ...prev.user, mail },
+      }));
+    },
+
+    setPseudo: async (pseudo: string) => {
+      await supabaseAuth
+        .from("users")
+        .update({ pseudo })
+        .eq("id", playerData.user.id);
+      setPlayerData((prev) => ({
+        ...prev,
+        user: { ...prev.user, pseudo },
+      }));
+    },
+
+    // Setters pour les statistiques du joueur
+    setBeacoins: async (beacoins: number) => {
+      await supabaseData
+        .from("users")
+        .update({ beacoins })
+        .eq("id", playerData.user.id);
+      setPlayerData((prev) => ({
+        ...prev,
+        beacoins,
+      }));
+    },
+
+    setNbPhareFinished: async (nbPhareFinished: number) => {
+      await supabaseData
+        .from("users")
+        .update({ nbPhareFinished })
+        .eq("id", playerData.user.id);
+      setPlayerData((prev) => ({
+        ...prev,
+        nbPhareFinished,
+      }));
+    },
+
+    setDlcUnlocked: async (DlcUnlocked: number) => {
+      await supabaseData
+        .from("users")
+        .update({ DlcUnlocked })
+        .eq("id", playerData.user.id);
+      setPlayerData((prev) => ({
+        ...prev,
+        DlcUnlocked,
+      }));
+    },
+
+    // Méthodes de gestion du compte
+    deletePlayer: async () => {
+      try {
+        await supabaseAuth.from("users").delete().eq("id", playerData.user.id);
+
+        // Réinitialiser l'état local après la suppression
+        setPlayerData({
+          user: {
+            id: -1,
+            mail: "",
+            name: "",
+            pseudo: "",
+            isOAuth: true,
+          },
+          beacoins: 0,
+          nbPhareFinished: 0,
+          DlcUnlocked: 0,
+          isAsso: false,
+          isAdmin: false,
+        });
+      } catch (e) {
+        console.error("Erreur lors de la suppression :", e);
+        throw e;
+      }
+    },
+
+    // Méthode pour mettre à jour plusieurs champs à la fois
+    updatePlayerInfo: async (updates: Partial<PlayerData>) => {
+      try {
+        // Mise à jour des champs dans la table auth
+        if (updates.user) {
+          await supabaseAuth
+            .from("users")
+            .update({
+              name: updates.user.name,
+              email: updates.user.mail,
+              pseudo: updates.user.pseudo,
+            })
+            .eq("id", playerData.user.id);
+        }
+
+        // Mise à jour des champs dans la table data
+        const dataUpdates = {
+          beacoins: updates.beacoins,
+          nbPhareFinished: updates.nbPhareFinished,
+          DlcUnlocked: updates.DlcUnlocked,
+          isAsso: updates.isAsso,
+          isAdmin: updates.isAdmin,
+        };
+
+        await supabaseData
+          .from("users")
+          .update(dataUpdates)
+          .eq("id", playerData.user.id);
+
+        // Mise à jour de l'état local
+        setPlayerData((prev) => ({
+          ...prev,
+          ...updates,
+        }));
+      } catch (e) {
+        console.error("Erreur lors de la mise à jour :", e);
+        throw e;
+      }
+    },
+  };
+
+  return { playerData, ...methods };
 }
-
-export default Player;
