@@ -1,8 +1,9 @@
-interface MenuProps {
+interface EnigmeProps {
     handleClickActive: (a: string) => void;
+    enigme1: Array<string>;
   }
   
-  export default function Enigme({ handleClickActive }: MenuProps) {
+  export default function Enigme({ handleClickActive }: EnigmeProps) {
     return (
       <>
         <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
@@ -18,7 +19,10 @@ interface MenuProps {
                 height={24}
               />
             </button>
-            
+            <div className="rounded-3xl absolute top-1/2 -translate-y-1/2 left-[10%] w-[40vw] h-[40vw] bg-cover bg-center" style={{ backgroundImage: "url('https://nereoll.github.io/imagesPhare/phares/1.jpg')" }}>
+            <button className="absolute top-[20vw] left-[20vw] w-[2vw] h-[2vw] hover:border-red-700 border-2 rounded-lg" onClick={() => handleClickActive("enigme")}>
+            </button>
+            </div>
 
           </section>
         </main>
