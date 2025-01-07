@@ -47,8 +47,8 @@ export default function Home() {
     setCenter(newCenter);
   };
   const [markers, setMarkers] = useState<
-    {id:number; longitude: number; latitude: number; popupText: string }[]
-  >( []);
+    { id: number; longitude: number; latitude: number; popupText: string }[]
+  >([]);
   // Charger les données de Supabase
   useEffect(() => {
     const fetchMarkers = async () => {
@@ -60,15 +60,15 @@ export default function Home() {
         return;
       }
 
-    // Formatage des données pour Mapbox
-    const formattedMarkers = data.map((item: any, index: number) => ({
-      id: index, // Identifiant unique
-      longitude: item.XYcoord.split(" ")[0],
-      latitude: item.XYcoord.split(" ")[1],
-      popupText: item.nom,
-      icone: "/icones/lightHouseIcon.svg",
-      lien: item.url,
-    }));
+      // Formatage des données pour Mapbox
+      const formattedMarkers = data.map((item: any, index: number) => ({
+        id: index, // Identifiant unique
+        longitude: item.XYcoord.split(" ")[0],
+        latitude: item.XYcoord.split(" ")[1],
+        popupText: item.nom,
+        icone: "/icones/lightHouseIcon.svg",
+        lien: item.url,
+      }));
 
       setMarkers(formattedMarkers);
     };
@@ -90,26 +90,19 @@ export default function Home() {
         markers={markers}
         handleClickActive={handleClickActive}
       />
-        {active === "calendar" && <Event handleClickActive={handleClickActive} />}
-        {active === "coin" && <Store handleClickActive={handleClickActive} />}
-        {active === "picture" && (
-            <Pictures handleClickActive={handleClickActive} />
-        )}
-        {active === "enigme" && (
-            <Enigme handleClickActive={handleClickActive} />
-        )}
-        {active === "account" && (
-            <Account
-            active={active}
-            handleClickActive={handleClickActive}
-            nom={nom()}
-            prenom={prenom()}
-            pseudo={pseudo()}
-            email={email()}
-            imgProfile={imgProfil()}
-            typeAuth={typeAuthResolved ?? "unknown"} // Default to "unknown" if not resolved
-            />
-        )}
+      {active === "calendar" && <Event handleClickActive={handleClickActive} />}
+      {active === "coin" && <Store handleClickActive={handleClickActive} />}
+      {active === "picture" && (
+        <Pictures handleClickActive={handleClickActive} />
+      )}
+      {active === "enigme" && <Enigme handleClickActive={handleClickActive} />}
+      {active === "account" && (
+        <Account
+          active={active}
+          handleClickActive={handleClickActive}
+          player={player} // Default to "unknown" if not resolved
+        />
+      )}
       <YourAccount nom={session.user?.name ?? ""} />
       <Coin active={active} handleClickActive={handleClickActive} />
       <Image
