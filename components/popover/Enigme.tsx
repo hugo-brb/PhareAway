@@ -18,7 +18,10 @@ interface MenuProps {
                 height={24}
               />
             </button>
-            
+            <div className="rounded-3xl absolute top-1/2 -translate-y-1/2 left-[10%] w-[40vw] h-[40vw] bg-cover bg-center" style={{ backgroundImage: "url('/images/phareTest.png')" }}>
+                <button className="absolute top-1/4 left-1/3 w-[2vw] h-[2vw] border-red-700 border-2 rounded-lg" onClick={() => handleClickActive("enigme")}>
+            </button>
+            </div>
 
           </section>
         </main>
