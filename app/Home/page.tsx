@@ -10,6 +10,7 @@ import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
 import YourAccount from "@/components/BackHome";
 import Event from "@/components/popover/Event";
+import AddEvent from "@/components/popover/AddEvent";
 import Enigme from "@/components/popover/Enigme";
 import Store from "@/components/popover/Store";
 import Pictures from "@/components/popover/Pictures";
@@ -90,7 +91,12 @@ export default function Home() {
         markers={markers}
         handleClickActive={handleClickActive}
       />
-      {active === "calendar" && <Event handleClickActive={handleClickActive} />}
+      {active === "calendar" && (
+        <Event handleClickActive={handleClickActive} player={player} />
+      )}
+      {active === "addEvent" && player.getIsAsso() && (
+        <AddEvent handleClickActive={handleClickActive} />
+      )}
       {active === "coin" && <Store handleClickActive={handleClickActive} />}
       {active === "picture" && (
         <Pictures handleClickActive={handleClickActive} />
@@ -104,7 +110,11 @@ export default function Home() {
         />
       )}
       <YourAccount nom={session.user?.name ?? ""} />
-      <Coin active={active} handleClickActive={handleClickActive} />
+      <Coin
+        active={active}
+        handleClickActive={handleClickActive}
+        player={player}
+      />
       <Image
         src="/images/soupex.png"
         width={75}

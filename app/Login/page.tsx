@@ -48,13 +48,13 @@ export default function Login() {
           >
             <div className="flex flex-col gap-1">
               <label htmlFor="email" className="ml-2 text-base font-bold">
-                Identifiant
+                Email
               </label>
               <input
                 id="email"
                 name="email"
                 className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
-                type="text"
+                type="email"
                 placeholder="phareaway@lighthouse.fr"
                 required
               />
