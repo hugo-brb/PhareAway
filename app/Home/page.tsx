@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
-import YourAccount from "@/components/YourAccount";
+import YourAccount from "@/components/BackHome";
 import Event from "@/components/popover/Event";
 import Store from "@/components/popover/Store";
 import Pictures from "@/components/popover/Pictures";
@@ -133,6 +133,7 @@ export default function Home() {
                 <img src="/images/phares/${item.nom}.jpg" alt="Phare ${item.nom}" width="200" height="200" />
                 <a href="${item.url}" target="_blank" class="text-cyan-700" >Lien vers le site du phare</a>
         </div>`,
+        icone: "/icones/lightHouseIcon.svg",
       }));
 
       setMarkers(formattedMarkers);
@@ -143,7 +144,7 @@ export default function Home() {
 
   return (
     <>
-      <YourAccount nom={session.user?.name ?? ""} />
+      
       <Menu active={active} handleClickActive={handleClickActive} />
       {active === "home" && <TopNav onCenterChange={updateCenter} />}
       <Map
@@ -172,6 +173,7 @@ export default function Home() {
           typeAuth={typeAuthResolved ?? "unknown"} // Default to "unknown" if not resolved
         />
       )}
+      <YourAccount nom={session.user?.name ?? ""} />
       <Coin active={active} handleClickActive={handleClickActive} />
       <Image
         src="/images/soupex.png"
