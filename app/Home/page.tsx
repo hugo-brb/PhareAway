@@ -33,6 +33,7 @@ export default function Home() {
     process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
     { db: { schema: "next_auth" } }
   );
+  // Initialize Supabase client for data
   const supabaseData = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
@@ -110,7 +111,7 @@ export default function Home() {
   };
   const [markers, setMarkers] = useState<
     { longitude: number; latitude: number; popupText: string }[]
-  >( []);
+  >([]);
   // Charger les données de Supabase
   useEffect(() => {
     const fetchMarkers = async () => {
