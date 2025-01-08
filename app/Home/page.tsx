@@ -24,6 +24,7 @@ const Map = dynamic(() => import("../../components/Map"), { ssr: true });
 export default function Home() {
   const { data: session } = useSession();
   const [active, setActive] = useState("home");
+  const [activeID, setActiveID] = useState(64);
   const [center, setCenter] = useState<[number, number]>([
     -1.6282904, 49.6299822,
   ]); // Initial map center
@@ -40,15 +41,18 @@ export default function Home() {
     process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
   );
 
-  const handleClickActive = (a: string) => {
-    setActive(a);
-  };
-  const updateCenter = (newCenter: [number, number]) => {
-    setCenter(newCenter);
-  };
-  const [markers, setMarkers] = useState<
-    { id: number; longitude: number; latitude: number; popupText: string }[]
-  >([]);
+    const handleClickActive = (a: string) => {
+        setActive(a);
+    };
+    const handleClickActiveId = (id: number) => {
+        setActiveID(id);
+    };
+    const updateCenter = (newCenter: [number, number]) => {
+        setCenter(newCenter);
+    };
+    const [markers, setMarkers] = useState<
+        { id: number; longitude: number; latitude: number; popupText: string }[]
+    >([]);
   // Charger les données de Supabase
   useEffect(() => {
     const fetchMarkers = async () => {
@@ -89,13 +93,18 @@ export default function Home() {
         center={center}
         markers={markers}
         handleClickActive={handleClickActive}
+        handleClickActiveId={handleClickActiveId}
+
       />
       {active === "calendar" && <Event handleClickActive={handleClickActive} />}
       {active === "coin" && <Store handleClickActive={handleClickActive} />}
       {active === "picture" && (
         <Pictures handleClickActive={handleClickActive} />
       )}
-      {active === "enigme" && <Enigme handleClickActive={handleClickActive} />}
+      {active === "enigme" &&
+        <Enigme 
+            handleClickActive={handleClickActive}
+            id={activeID} />}
       {active === "account" && (
         <Account
           active={active}
