@@ -18,7 +18,7 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
+    <div className="flex flex-col gap-2 py-6 px-6 bg-slate-600 bg-opacity-20 border-2 border-black">
       <h1 className="text-2xl font-bold underline underline-offset-2 mb-4">
         {event.getName()}
       </h1>
@@ -28,8 +28,8 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
             className="self-center"
             src={image.getUrl()}
             alt="Image de l'event"
-            width={200}
-            height={200}
+            width={96}
+            height={96}
           />
         ) : (
           <Image
@@ -39,18 +39,18 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
             height={200}
           ></Image>
         )}
-        <div className="border-l-2 border-[--text]"></div>
-        <p className="max-w-[30vw] text-center self-center">
+        <p className="max-w-[20vw] text-center self-center">
           {event.getDescription()}
         </p>
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <p className="text-lg font-bold">Date : {event.getDate()}</p>
-        <p className="text-lg font-bold">Durée : {event.getDuration()}h</p>
-        <p className="text-lg font-bold">Prix : {event.getPrice()}€</p>
-        <p className="text-lg font-bold">
-          Phare : {phare.getName() || "Chargement..."}
-        </p>
+        <div className="border-l border-[--text]"></div>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-lg font-bold">Date : {event.getDate()}</p>
+          <p className="text-lg font-bold">Durée : {event.getDuration()}h</p>
+          <p className="text-lg font-bold">Prix : {event.getPrice()}€</p>
+          <p className="text-lg font-bold">
+            Phare : {phare.getName() || "Chargement..."}
+          </p>
+        </div>
       </div>
     </div>
   );
