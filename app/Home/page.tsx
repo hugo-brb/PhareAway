@@ -9,8 +9,8 @@ import { redirect } from "next/navigation";
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
 import YourAccount from "@/components/BackHome";
-import Event from "@/components/popover/Event";
 import AddEvent from "@/components/popover/AddEvent";
+import Events from "@/components/popover/Events";
 import Enigme from "@/components/popover/Enigme";
 import Store from "@/components/popover/Store";
 import Pictures from "@/components/popover/Pictures";
@@ -25,6 +25,7 @@ const Map = dynamic(() => import("../../components/Map"), { ssr: true });
 export default function Home() {
   const { data: session } = useSession();
   const [active, setActive] = useState("home");
+  const [activeID, setActiveID] = useState(64);
   const [center, setCenter] = useState<[number, number]>([
     -1.6282904, 49.6299822,
   ]); // Initial map center
@@ -43,6 +44,9 @@ export default function Home() {
 
   const handleClickActive = (a: string) => {
     setActive(a);
+  };
+  const handleClickActiveId = (id: number) => {
+    setActiveID(id);
   };
   const updateCenter = (newCenter: [number, number]) => {
     setCenter(newCenter);
@@ -90,9 +94,10 @@ export default function Home() {
         center={center}
         markers={markers}
         handleClickActive={handleClickActive}
+        handleClickActiveId={handleClickActiveId}
       />
       {active === "calendar" && (
-        <Event handleClickActive={handleClickActive} player={player} />
+        <Events handleClickActive={handleClickActive} player={player} />
       )}
       {active === "addEvent" && player.getIsAsso() && (
         <AddEvent handleClickActive={handleClickActive} />
@@ -101,7 +106,9 @@ export default function Home() {
       {active === "picture" && (
         <Pictures handleClickActive={handleClickActive} />
       )}
-      {active === "enigme" && <Enigme handleClickActive={handleClickActive} />}
+      {active === "enigme" && (
+        <Enigme handleClickActive={handleClickActive} id={activeID} />
+      )}
       {active === "account" && (
         <Account
           active={active}

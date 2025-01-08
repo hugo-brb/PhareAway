@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
 
-// Au début du fichier player.tsx
 export type UsePlayer = {
   playerData: PlayerData;
   getPrenom: () => string;

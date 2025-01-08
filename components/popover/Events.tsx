@@ -1,12 +1,18 @@
 import OneEvent from "@/components/OneEvent";
+import { createClient } from "@supabase/supabase-js";
 import { UsePlayer } from "../model/player";
+
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
   player: UsePlayer;
 }
 
-export default function Event({ handleClickActive, player }: MenuProps) {
+export default function Events({ handleClickActive, player }: MenuProps) {
   return (
     <>
       <main className=" absolute top-0 z-40 flex  w-[100vw] h-[100vh]">
@@ -74,36 +80,7 @@ export default function Event({ handleClickActive, player }: MenuProps) {
             id="eventListe"
             className="flex flex-col gap-6 max-w-[80%] self-center"
           >
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
+            <OneEvent id_Event={1} />
           </div>
         </section>
       </main>
