@@ -74,36 +74,7 @@ export default function Event({ handleClickActive, player }: MenuProps) {
             id="eventListe"
             className="flex flex-col gap-6 max-w-[80%] self-center"
           >
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
-            <OneEvent
-              image={"icones/logoSimple.svg"}
-              desc={""}
-              informations={[1, "Event Description", new Date()]}
-            ></OneEvent>
+            <OneEvent id_Event={1}></OneEvent>
           </div>
         </section>
       </main>

@@ -1,142 +1,79 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { useImage, UseImage } from "./Image";
+
+export type UseLighthouse = {
+  lighthouseData: LighthouseData;
+  getId: () => number;
+  getName: () => string;
+  getDescription: () => string;
+  getCoordinates: () => string;
+  getUrl: () => string;
+  getImage: () => UseImage;
+};
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
-// Définition du type pour l'image
-interface Image {
-  id: number;
-  name: string;
-  url: string;
-}
-
-// Définition du type pour les données de Lighthouse
 interface LighthouseData {
   id: number;
   name: string;
   description: string;
-  coordinates: string[]; // Tableau de chaînes de caractères pour les coordonnées
+  coordinates: string;
   url: string;
-  image: Image;
+  image: number;
 }
 
-// Définition des props et state
-interface LighthouseProps {}
+export function useLighthouse(id: number) {
+  const [lighthouseData, setLighthouseData] = useState<LighthouseData>({
+    id: -1,
+    name: "",
+    description: "",
+    coordinates: "",
+    url: "",
+    image: 0,
+  });
 
-interface LighthouseState extends LighthouseData {}
-
-class Lighthouse extends Component<LighthouseProps, LighthouseState> {
-  constructor(props: LighthouseProps) {
-    super(props);
-
-    // Initialisation de l'état
-    this.state = {
-      id: -1,
-      name: "",
-      description: "",
-      coordinates: [],
-      url: "",
-      image: {
-        id: -1,
-        name: "",
-        url: "",
-      },
-    };
-  }
-
-  async create(
-    id: number,
-    name: string,
-    description: string,
-    coordinates: string[],
-    url: string,
-    image: Image
-  ) {
-    try {
-      await supabaseData.from("Lighthouse").insert({
-        id: id,
-        name: name,
-        description: description,
-        coordinates: coordinates,
-        url: url,
-        image: image,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async read(id: number) {
-    try {
-      const { data, error } = await supabaseData
-        .from("Lighthouse")
-        .select()
-        .eq("id", id);
-      if (error) {
-        throw error;
+  useEffect(() => {
+    const fetchLighthouseData = async () => {
+      try {
+        if (id >= 1) {
+          const request = await supabaseData
+            .from("Lighthouse")
+            .select()
+            .eq("id", id)
+            .single();
+          console.log("Requete Lighthouse : ", request);
+          if (request.data && request.data.length > 0) {
+            setLighthouseData({
+              id: id,
+              name: request.data[0].name || "",
+              description: request.data[0].description || "",
+              coordinates: request.data[0].description || "",
+              url: request.data[0].url || "",
+              image: request.data[0].id_image || 0,
+            });
+          }
+        }
+      } catch (e) {
+        console.error("Erreur lors de la récupération des données");
       }
-      const initLighthouse = {
-        id: data?.[0]?.id,
-        name: data?.[0]?.name,
-        description: data?.[0]?.description,
-        coordonates: data?.[0]?.coordonates,
-        url: data?.[0]?.url,
-        image: data?.[0]?.image,
-      };
-      return initLighthouse;
-    } catch (e) {
-      console.log(e);
-    }
-  }
+    };
+    fetchLighthouseData();
+  }, [id]);
 
-  async update(
-    id: number,
-    name: string,
-    description: string,
-    coordinates: string[],
-    url: string,
-    image: Image
-  ) {
-    try {
-      await supabaseData.from("Lighthouse").update({
-        id: id,
-        name: name,
-        description: description,
-        coordinates: coordinates,
-        url: url,
-        image: image,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async deleteentrée(id: number) {
-    try {
-      await supabaseData.from("Lighthouse").delete().eq("id", id);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  // Méthode pour supprimer le lighthouse
-  delete = () => {
-    this.setState({
-      id: -1,
-      name: "",
-      description: "",
-      coordinates: [],
-      url: "",
-      image: {
-        id: -1,
-        name: "",
-        url: "",
-      },
-    });
+  //methodes
+  const methods = {
+    getId: () => lighthouseData.id,
+    getName: () => lighthouseData.name,
+    getDescription: () => lighthouseData.description,
+    getCoordinates: () => lighthouseData.coordinates,
+    getUrl: () => lighthouseData.url,
+    getImage: () => {
+      return useImage(lighthouseData.image);
+    },
   };
+  return { lighthouseData, ...methods };
 }
-
-export default Lighthouse;

@@ -1,198 +1,234 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { useLighthouse, UseLighthouse } from "./lighthouse";
+import { useImage, UseImage } from "./Image";
+
+export type UseEvent = {
+  eventData: EventData;
+  getName: () => string;
+  getCoordinates: () => string;
+  getUrl: () => string;
+  getDate: () => string;
+  getDuration: () => number;
+  getPrice: () => number;
+  getDescription: () => string;
+  getLighthouse: () => UseLighthouse;
+  getImage: () => UseImage;
+  setName: (name: string) => Promise<void>;
+  setCoordinates: (coordinates: string) => Promise<void>;
+  setUrl: (url: string) => Promise<void>;
+  setDate: (date: string) => Promise<void>;
+  setDuration: (duration: number) => Promise<void>;
+  setPrice: (price: number) => Promise<void>;
+  setDescription: (description: string) => Promise<void>;
+  setLighthouse: (lighthouse: UseLighthouse) => Promise<void>;
+  setImage: (image: UseImage) => Promise<void>;
+  delete: () => Promise<void>;
+};
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
-interface Image {
+interface EventData {
   id: number;
   name: string;
-  url: string;
-}
-
-interface LighthouseData {
-  id: number;
-  name: string;
-  description: string;
-  coordinates: string[]; // Tableau de chaînes de caractères pour les coordonnées
-  url: string;
-  image: Image;
-}
-
-interface EventInterface {
-  id: number;
-  name: string;
-  description: string;
-  adress: string;
+  coordinates: string;
   url: string;
   date: string;
-  duration: string;
+  duration: number;
   price: number;
-  image: Image;
-  lightHouse: LighthouseData;
+  description: string;
+  id_lh: number;
+  id_image: number;
 }
 
-// Définition des props et state
-interface EventProps {}
+export function useEvent(id: number) {
+  const [eventData, setEventData] = useState<EventData>({
+    id: -1,
+    name: "",
+    coordinates: "",
+    url: "",
+    date: "",
+    duration: 0,
+    price: 0,
+    description: "",
+    id_lh: 0,
+    id_image: 0,
+  });
 
-interface EventState extends EventInterface {}
+  useEffect(() => {
+    const fetchEventData = async () => {
+      try {
+        if (id >= 1) {
+          const request = await supabaseData
+            .from("Event")
+            .select()
+            .eq("id", id);
 
-class Event extends Component<EventProps, EventState> {
-  constructor(props: EventProps) {
-    super(props);
+          console.log("Requete Event : ", request);
 
-    // Initialisation de l'état
-    this.state = {
-      id: -1,
-      name: "",
-      description: "",
-      adress: "",
-      url: "",
-      date: "",
-      duration: "",
-      price: 0,
-      image: {
-        id: -1,
-        name: "",
-        url: "",
-      },
-      lightHouse: {
-        id: -1,
-        name: "",
-        description: "",
-        coordinates: [],
-        url: "",
-        image: {
-          id: -1,
-          name: "",
-          url: "",
-        },
-      },
-    };
-  }
-
-  async create(
-    id: number,
-    name: string,
-    description: string,
-    adress: string,
-    url: string,
-    date: string,
-    duration: string,
-    price: number,
-    image: Image
-  ) {
-    try {
-      await supabaseData.from("Event").insert({
-        id: id,
-        name: name,
-        description: description,
-        adress: adress,
-        url: url,
-        date: date,
-        duration: duration,
-        price: price,
-        image: image,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async read(id: number) {
-    try {
-      const { data, error } = await supabaseData
-        .from("Event")
-        .select()
-        .eq("id", id);
-      if (error) {
-        throw error;
+          if (request.data && request.data.length > 0) {
+            setEventData({
+              id: id,
+              name: request.data[0].name || "",
+              coordinates: request.data[0].coordinates || "",
+              url: request.data[0].url || "",
+              date: request.data[0].date || "",
+              duration: request.data[0].duration || 0,
+              price: request.data[0].price || 0,
+              description: request.data[0].description || "",
+              id_lh: request.data[0].id_lh || 0,
+              id_image: request.data[0].id_image || 0,
+            });
+          }
+        }
+      } catch (e) {
+        console.error("Erreur lors de la récupération des données");
       }
-      const initEvent = {
-        id: data?.[0]?.id,
-        name: data?.[0]?.name,
-        description: data?.[0]?.description,
-        adress: data?.[0]?.adress,
-        url: data?.[0]?.url,
-        date: data?.[0]?.date,
-        duration: data?.[0]?.durartion,
-        price: data?.[0]?.price,
-        image: data?.[0]?.image,
-      };
-      return initEvent;
-    } catch (e) {
-      console.log(e);
-    }
-  }
+    };
+    fetchEventData();
+  }, [id, useLighthouse, useImage]);
 
-  async update(
-    id: number,
-    name: string,
-    description: string,
-    adress: string,
-    url: string,
-    date: string,
-    duration: string,
-    price: number,
-    image: Image
-  ) {
-    try {
-      await supabaseData.from("Event").update({
-        id: id,
+  //methodes
+  const methods = {
+    //Getters
+    getId: () => eventData.id,
+    getName: () => eventData.name,
+    getCoordinates: () => eventData.coordinates,
+    getUrl: () => eventData.url,
+    getDate: () => eventData.date,
+    getDuration: () => eventData.duration,
+    getPrice: () => eventData.price,
+    getDescription: () => eventData.description,
+    getLighthouse: () => {
+      const lighthouse = useLighthouse(eventData.id_lh);
+      return lighthouse;
+    },
+    getImage: () => {
+      const image = useImage(eventData.id_image);
+      return image;
+    },
+
+    //Setters
+    setName: async (name: string) => {
+      await supabaseData
+        .from("Event")
+        .update({ name: name })
+        .eq("id", eventData.id)
+        .single();
+      setEventData((prev) => ({
+        ...prev,
         name: name,
-        description: description,
-        adress: adress,
+      }));
+    },
+
+    setCoordinates: async (coordinates: string) => {
+      await supabaseData
+        .from("Event")
+        .update({ coordinates: coordinates })
+        .eq("id", eventData.id);
+      setEventData((prev) => ({
+        ...prev,
+        coordinates: coordinates,
+      }));
+    },
+
+    setUrl: async (url: string) => {
+      await supabaseData
+        .from("Event")
+        .update({ url: url })
+        .eq("id", eventData.id);
+      setEventData((prev) => ({
+        ...prev,
         url: url,
+      }));
+    },
+
+    setDate: async (date: string) => {
+      await supabaseData
+        .from("Event")
+        .update({ date: date })
+        .eq("id", eventData.id);
+      setEventData((prev) => ({
+        ...prev,
         date: date,
+      }));
+    },
+
+    setDuration: async (duration: number) => {
+      await supabaseData
+        .from("Event")
+        .update({ duration: duration })
+        .eq("id", eventData.id);
+      setEventData((prev) => ({
+        ...prev,
         duration: duration,
+      }));
+    },
+
+    setPrice: async (price: number) => {
+      await supabaseData
+        .from("Event")
+        .update({ price: price })
+        .eq("id", eventData.id);
+      setEventData((prev) => ({
+        ...prev,
         price: price,
+      }));
+    },
+
+    setDescription: async (description: string) => {
+      await supabaseData
+        .from("Event")
+        .update({ description: description })
+        .eq("id", eventData.id);
+      setEventData((prev) => ({
+        ...prev,
+        description: description,
+      }));
+    },
+
+    setLighthouse: async (lighthouse: UseLighthouse) => {
+      await supabaseData
+        .from("Event")
+        .update({ id_lighthouse: lighthouse.getId() })
+        .eq("id", eventData.id);
+      setEventData((prev) => ({
+        ...prev,
+        lighthouse: lighthouse,
+      }));
+    },
+
+    setImage: async (image: UseImage) => {
+      await supabaseData
+        .from("Event")
+        .update({ id_image: image.getId() })
+        .eq("id", eventData.id);
+      setEventData((prev) => ({
+        ...prev,
         image: image,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
+      }));
+    },
 
-  async deleteentre(id: number) {
-    try {
-      await supabaseData.from("Event").delete().eq("id", id);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  // Méthode pour supprimer l'event
-  delete = () => {
-    this.setState({
-      id: -1,
-      name: "",
-      description: "",
-      adress: "",
-      url: "",
-      date: "",
-      duration: "",
-      price: 0,
-      image: {
+    //Delete
+    delete: async () => {
+      await supabaseData.from("Event").delete().eq("id", eventData.id);
+      setEventData({
         id: -1,
         name: "",
+        coordinates: "",
         url: "",
-      },
-      lightHouse: {
-        id: -1,
-        name: "",
+        date: "",
+        duration: 0,
+        price: 0,
         description: "",
-        coordinates: [],
-        url: "",
-        image: {
-          id: -1,
-          name: "",
-          url: "",
-        },
-      },
-    });
+        id_lh: 0,
+        id_image: 0,
+      });
+    },
   };
-}
 
-export default Event;
+  return { eventData, ...methods };
+}

@@ -7,7 +7,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "lh3.googleusercontent.com",
       },
-    ], 
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      },
+    ],
   },
 };
 

@@ -1,86 +1,63 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+
+export type UseImage = {
+  imageData: ImageData;
+  getId: () => number;
+  getName: () => string;
+  getUrl: () => string;
+};
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
-interface ImageInterface {
+interface ImageData {
   id: number;
   name: string;
   url: string;
 }
 
-// Définition des props et state
-interface ImageProps {}
+export function useImage(id: number) {
+  const [imageData, setImageData] = useState<ImageData>({
+    id: -1,
+    name: "",
+    url: "",
+  });
 
-interface ImageState extends ImageInterface {}
+  useEffect(() => {
+    const fetchImageData = async () => {
+      try {
+        if (id >= 1) {
+          const request = await supabaseData
+            .from("Image")
+            .select()
+            .eq("id", id)
+            .single();
 
-class Image extends Component<ImageProps, ImageState> {
-  constructor(props: ImageProps) {
-    super(props);
-
-    // Initialisation de l'état
-    this.state = {
-      id: -1,
-      name: "",
-      url: "",
-    };
-  }
-
-  async create(id: number, name: string, url: string) {
-    try {
-      await supabaseData.from("Image").insert({ id: id, name: name, url: url });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async read(id: number) {
-    try {
-      const { data, error } = await supabaseData
-        .from("Image")
-        .select()
-        .eq("id", id);
-      if (error) {
-        throw error;
+          console.log("Requete Image : ", request);
+          if (request.data && request.data.length > 0) {
+            setImageData({
+              id: id,
+              name: request.data[0].name || "",
+              url: request.data[0].url || "",
+            });
+          }
+        }
+      } catch (e) {
+        console.error("Erreur lors de la récupération des données");
       }
-      const initimage = {
-        id: data?.[0]?.id,
-        name: data?.[0]?.name,
-        url: data?.[0]?.url,
-      };
-      return initimage;
-    } catch (e) {
-      console.log(e);
-    }
-  }
+    };
+    fetchImageData();
+  }, [id]);
 
-  async update(id: number, name: string, url: string) {
-    try {
-      await supabaseData.from("Image").update({ id: id, name: name, url: url });
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  //methodes
+  const methods = {
+    getId: () => imageData.id,
+    getName: () => imageData.name,
+    getUrl: () => imageData.url,
+  };
 
-  async deleteentre(id: number) {
-    try {
-      await supabaseData.from("Image").delete().eq("id", id);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  // Méthode pour supprimer un utilisateur
-  delete(): void {
-    this.setState({
-      id: -1,
-      name: "",
-      url: "",
-    });
-  }
+  return { imageData, ...methods };
 }
-
-export default Image;
