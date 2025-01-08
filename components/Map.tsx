@@ -34,7 +34,7 @@ const Map: React.FC<MapComponentProps> = ({
     if (!mapInstance.current && mapContainer.current) {
       mapInstance.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/barbiehu/cm3yhh52400k901sig86t058b",
+        style: "mapbox://styles/barbiehu/cm5nzmenf00d401pk6xlhb7di",
         center: center,
         zoom: zoom,
         maxZoom: 10,
@@ -44,16 +44,16 @@ const Map: React.FC<MapComponentProps> = ({
       });
     }
     return () => {
-        mapInstance.current?.remove();
-        mapInstance.current = null;
+      mapInstance.current?.remove();
+      mapInstance.current = null;
     };
-    }, []);
+  }, []);
 
-    useEffect(() => {
-        if (mapInstance.current) {
-            mapInstance.current.flyTo({ center });
-        }
-    }, [center]); // Update map center when `center` changes
+  useEffect(() => {
+    if (mapInstance.current) {
+      mapInstance.current.flyTo({ center });
+    }
+  }, [center]); // Update map center when `center` changes
 
   useEffect(() => {
     if (mapInstance.current) {
@@ -69,19 +69,19 @@ const Map: React.FC<MapComponentProps> = ({
         markerElement.style.height = "30px"; // Définir la hauteur du marqueur
         markerElement.style.backgroundSize = "cover"; // Assurer que l'image couvre tout l'élément
 
-        const divElement = document.createElement('div');
-        const enigmeBtn = document.createElement('button');
-        enigmeBtn.innerHTML=  `<button class="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg">C'est Phar'ti<button>`;
-        divElement.classList.add('flex', 'flex-col', 'gap-6', 'items-center');
+        const divElement = document.createElement("div");
+        const enigmeBtn = document.createElement("button");
+        enigmeBtn.innerHTML = `<button class="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg">C'est Phar'ti<button>`;
+        divElement.classList.add("flex", "flex-col", "gap-6", "items-center");
         divElement.innerHTML = `<p>ID ${id}</p>`;
-        divElement.innerHTML +=`<h3 class="text-xl">${popupText}</h3>`;
-        divElement.innerHTML +=`<img src="https://nereoll.github.io/imagesPhare/phares/${id}.png" alt="Phare ${popupText}" width="200" height="200" />`;
-        divElement.innerHTML +=`<a href="${lien}" target="_blank" class="text-cyan-700">Lien vers le site du phare</a>`;
+        divElement.innerHTML += `<h3 class="text-xl">${popupText}</h3>`;
+        divElement.innerHTML += `<img src="https://nereoll.github.io/imagesPhare/phares/${id}.png" alt="Phare ${popupText}" width="200" height="200" />`;
+        divElement.innerHTML += `<a href="${lien}" target="_blank" class="text-cyan-700">Lien vers le site du phare</a>`;
         divElement.appendChild(enigmeBtn);
 
-        enigmeBtn.addEventListener('click', (e) => {
-            handleClickActive("enigme");
-            handleClickActiveId(id);
+        enigmeBtn.addEventListener("click", (e) => {
+          handleClickActive("enigme");
+          handleClickActiveId(id);
         });
 
         const marker = new mapboxgl.Marker(markerElement)
