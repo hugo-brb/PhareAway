@@ -33,9 +33,8 @@ export function useImage(id: number) {
           const request = await supabaseData
             .from("Image")
             .select()
-            .eq("id", id);
-
-          console.log("Requete Image : ", request);
+            .eq("id", id)
+            .single();
 
           console.log("Requete Image : ", request);
           if (request.data && request.data.length > 0) {

@@ -9,7 +9,7 @@ export type UseLighthouse = {
   getDescription: () => string;
   getCoordinates: () => string;
   getUrl: () => string;
-  getIdImage: () => number;
+  getImage: () => UseImage;
 };
 
 const supabaseData = createClient(
@@ -33,7 +33,7 @@ export function useLighthouse(id: number) {
     description: "",
     coordinates: "",
     url: "",
-    image: -1,
+    image: 0,
   });
 
   useEffect(() => {
@@ -43,10 +43,9 @@ export function useLighthouse(id: number) {
           const request = await supabaseData
             .from("Lighthouse")
             .select()
-            .eq("id", id);
-
+            .eq("id", id)
+            .single();
           console.log("Requete Lighthouse : ", request);
-
           if (request.data && request.data.length > 0) {
             setLighthouseData({
               id: id,
@@ -54,8 +53,7 @@ export function useLighthouse(id: number) {
               description: request.data[0].description || "",
               coordinates: request.data[0].description || "",
               url: request.data[0].url || "",
-              //image: useImage(request.data[0].id_image) || useImage(-1),
-              image: request.data[0].id_image || -1,
+              image: request.data[0].id_image || 0,
             });
           }
         }
@@ -73,7 +71,9 @@ export function useLighthouse(id: number) {
     getDescription: () => lighthouseData.description,
     getCoordinates: () => lighthouseData.coordinates,
     getUrl: () => lighthouseData.url,
-    getImage: () => lighthouseData.image,
+    getImage: () => {
+      return useImage(lighthouseData.image);
+    },
   };
   return { lighthouseData, ...methods };
 }

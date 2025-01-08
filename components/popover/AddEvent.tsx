@@ -18,6 +18,10 @@ export default function Event({ handleClickActive }: MenuProps) {
               height={24}
             />
           </button>
+          <h1>Ajouter un évenement</h1>
+          <form method="POST">
+            <input type="text" />
+          </form>
         </section>
       </main>
     </>

@@ -3,7 +3,28 @@ import { createClient } from "@supabase/supabase-js";
 import { useLighthouse, UseLighthouse } from "./lighthouse";
 import { useImage, UseImage } from "./Image";
 
-export type UseEvent = {};
+export type UseEvent = {
+  eventData: EventData;
+  getName: () => string;
+  getCoordinates: () => string;
+  getUrl: () => string;
+  getDate: () => string;
+  getDuration: () => number;
+  getPrice: () => number;
+  getDescription: () => string;
+  getLighthouse: () => UseLighthouse;
+  getImage: () => UseImage;
+  setName: (name: string) => Promise<void>;
+  setCoordinates: (coordinates: string) => Promise<void>;
+  setUrl: (url: string) => Promise<void>;
+  setDate: (date: string) => Promise<void>;
+  setDuration: (duration: number) => Promise<void>;
+  setPrice: (price: number) => Promise<void>;
+  setDescription: (description: string) => Promise<void>;
+  setLighthouse: (lighthouse: UseLighthouse) => Promise<void>;
+  setImage: (image: UseImage) => Promise<void>;
+  delete: () => Promise<void>;
+};
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -19,8 +40,8 @@ interface EventData {
   duration: number;
   price: number;
   description: string;
-  id_Lighthouse: number;
-  id_Image: number;
+  id_lh: number;
+  id_image: number;
 }
 
 export function useEvent(id: number) {
@@ -33,8 +54,8 @@ export function useEvent(id: number) {
     duration: 0,
     price: 0,
     description: "",
-    id_Lighthouse: -1,
-    id_Image: -1,
+    id_lh: 0,
+    id_image: 0,
   });
 
   useEffect(() => {
@@ -54,12 +75,12 @@ export function useEvent(id: number) {
               name: request.data[0].name || "",
               coordinates: request.data[0].coordinates || "",
               url: request.data[0].url || "",
-              date: request.data[0].date || new Date(),
+              date: request.data[0].date || "",
               duration: request.data[0].duration || 0,
               price: request.data[0].price || 0,
               description: request.data[0].description || "",
-              id_Lighthouse: request.data[0].id_lh || -1,
-              id_Image: request.data[0].id_image || -1,
+              id_lh: request.data[0].id_lh || 0,
+              id_image: request.data[0].id_image || 0,
             });
           }
         }
@@ -68,7 +89,7 @@ export function useEvent(id: number) {
       }
     };
     fetchEventData();
-  }, [id]);
+  }, [id, useLighthouse, useImage]);
 
   //methodes
   const methods = {
@@ -81,15 +102,16 @@ export function useEvent(id: number) {
     getDuration: () => eventData.duration,
     getPrice: () => eventData.price,
     getDescription: () => eventData.description,
-    getIdLighthouse: () => eventData.id_Lighthouse,
-    getIdImage: () => eventData.id_Image,
+    getLighthouse: () => useLighthouse(eventData.id_lh),
+    getImage: () => useImage(eventData.id_image),
 
     //Setters
     setName: async (name: string) => {
       await supabaseData
         .from("Event")
         .update({ name: name })
-        .eq("id", eventData.id);
+        .eq("id", eventData.id)
+        .single();
       setEventData((prev) => ({
         ...prev,
         name: name,
@@ -196,8 +218,8 @@ export function useEvent(id: number) {
         duration: 0,
         price: 0,
         description: "",
-        id_Lighthouse: -1,
-        id_Image: -1,
+        id_lh: 0,
+        id_image: 0,
       });
     },
   };
