@@ -16,13 +16,8 @@ export default function Account({
   handleClickActive,
   player,
 }: MenuProps) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
-
-  // États locaux pour suivre les valeurs des champs
-  const [updatedNom, setUpdatedNom] = useState(player.getNom());
-  const [updatedPrenom, setUpdatedPrenom] = useState(player.getPrenom());
-  const [updatedPseudo, setUpdatedPseudo] = useState(player.getPseudo());
 
   // Initialize Supabase client
   const supabaseAuth = createClient(
@@ -56,7 +51,9 @@ export default function Account({
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
       <section className="flex flex-col self-center gap-12 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
         <button
-          className="absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90"
+          className={`absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90 ${
+            isModifiable ? "opacity-20" : ""
+          }`}
           onClick={() => handleClickActive("home")}
         >
           <img
@@ -76,7 +73,8 @@ export default function Account({
           ></Image>
           <div className="flex flex-col gap-2">
             <h1 className="font-extrabold text-5xl">
-              {updatedPrenom} {updatedNom}
+              {player.getNom() !== "" ? player.getNom() : ""}{" "}
+              {player.getPrenom()}
             </h1>
             <h2 className="text-lg">{player.getMail()}</h2>
             <div className=" flex justify-start items-center gap-7">
@@ -87,7 +85,7 @@ export default function Account({
                   width={25}
                   height={25}
                 />
-                <span>1/135</span>
+                <span>{player.getNbPhareFinished()} / 5</span>
               </div>
             </div>
           </div>
@@ -95,7 +93,9 @@ export default function Account({
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
             onClick={handleSignOut}
-            className=" fill-[--text] size-12 cursor-pointer"
+            className={`fill-[--text] size-12 cursor-pointer ${
+              isModifiable ? "opacity-20" : ""
+            }`}
           >
             <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
           </svg>
@@ -107,9 +107,11 @@ export default function Account({
               <h3 className="font-bold text-xl">Nom</h3>
               <input
                 type="text"
-                value={updatedNom}
-                onChange={(e) => setUpdatedNom(e.target.value)} // Met à jour l'état local
-                className="py-2 px-4 w-fit rounded-full bg-white bg-opacity-45"
+                value={player.getNom()}
+                onChange={(e) => player.setNom(e.target.value)}
+                className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                  isModifiable ? "ring-2 ring-blue-500" : ""
+                }`}
                 disabled={!isModifiable}
               />
             </div>
@@ -117,9 +119,11 @@ export default function Account({
               <h3 className="font-bold text-xl">Prénom</h3>
               <input
                 type="text"
-                value={updatedPrenom}
-                onChange={(e) => setUpdatedPrenom(e.target.value)} // Met à jour l'état local
-                className="py-2 px-4 w-fit rounded-full bg-white bg-opacity-45"
+                value={player.getPrenom()}
+                onChange={(e) => player.setPrenom(e.target.value)}
+                className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                  isModifiable ? "ring-2 ring-blue-500" : ""
+                }`}
                 disabled={!isModifiable}
               />
             </div>
@@ -128,9 +132,11 @@ export default function Account({
             <h3 className="font-bold text-xl">Nom d'utilisateur</h3>
             <input
               type="text"
-              value={updatedPseudo}
-              onChange={(e) => setUpdatedPseudo(e.target.value)} // Met à jour l'état local
-              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              value={player.getPseudo()}
+              onChange={(e) => player.setPseudo(e.target.value)}
+              className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                isModifiable ? "ring-2 ring-blue-500" : ""
+              }`}
               disabled={!isModifiable}
             />
           </div>
@@ -142,8 +148,11 @@ export default function Account({
             <h3 className="font-bold text-xl">Email</h3>
             <input
               type="mail"
-              value={session?.user?.email ?? "phareaway@lighthouse.fr"}
-              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              value={player.getMail()}
+              onChange={(e) => player.setMail(e.target.value)}
+              className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                isModifiable ? "ring-2 ring-blue-500" : ""
+              }`}
               disabled={!isModifiable}
             />
           </div>
@@ -155,17 +164,29 @@ export default function Account({
             <h3 className="font-bold text-xl">Mot de passe</h3>
             <input
               type="password"
-              value="Jaimelesphares38"
-              className="py-2 px-4 w-full rounded-full bg-white bg-opacity-45"
+              value="Jaimelesphares"
+              className={`py-2 px-4 w-fit rounded-full bg-white bg-opacity-45 ${
+                isModifiable ? "ring-2 ring-blue-500" : ""
+              }`}
               disabled={!isModifiable}
             />
           </div>
-          <button
-            onClick={handleIsModif}
-            className="w-[15vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold mx-auto py-2 px-6 rounded-2xl"
-          >
-            {isModifiable ? "Valider" : "Modifier"}
-          </button>
+          <div className="flex flex-col justify-center items-center gap-3">
+            <button
+              onClick={handleIsModif}
+              className="w-[15vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold mx-auto py-2 px-6 rounded-2xl"
+            >
+              {isModifiable ? "Valider" : "Modifier"}
+            </button>
+            <button
+              onClick={player.deletePlayer}
+              className={`w-fit hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic mx-auto py-2 px-6 rounded-2xl ${
+                isModifiable ? "opacity-20 pointer-events-none" : ""
+              }`}
+            >
+              Supprimer le compte
+            </button>
+          </div>
         </div>
       </section>
     </main>
