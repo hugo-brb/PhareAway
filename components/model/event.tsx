@@ -102,14 +102,8 @@ export function useEvent(id: number) {
     getDuration: () => eventData.duration,
     getPrice: () => eventData.price,
     getDescription: () => eventData.description,
-    getLighthouse: () => {
-      const lighthouse = useLighthouse(eventData.id_lh);
-      return lighthouse;
-    },
-    getImage: () => {
-      const image = useImage(eventData.id_image);
-      return image;
-    },
+    getLighthouse: () => useLighthouse(eventData.id_lh),
+    getImage: () => useImage(eventData.id_image),
 
     //Setters
     setName: async (name: string) => {
