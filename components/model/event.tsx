@@ -12,8 +12,8 @@ export type UseEvent = {
   getDuration: () => number;
   getPrice: () => number;
   getDescription: () => string;
-  getLighthouse: () => UseLighthouse;
-  getImage: () => UseImage;
+  getLighthouse: () => string;
+  getImage: () => string;
   setName: (name: string) => Promise<void>;
   setCoordinates: (coordinates: string) => Promise<void>;
   setUrl: (url: string) => Promise<void>;
@@ -102,8 +102,8 @@ export function useEvent(id: number) {
     getDuration: () => eventData.duration,
     getPrice: () => eventData.price,
     getDescription: () => eventData.description,
-    getLighthouse: () => useLighthouse(eventData.id_lh),
-    getImage: () => useImage(eventData.id_image),
+    getLighthouse: () => eventData.id_lh,
+    getImage: () => eventData.id_image,
 
     //Setters
     setName: async (name: string) => {
