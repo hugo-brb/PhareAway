@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { signOut } from "next-auth/react";
 
 export type UsePlayer = {
   playerData: PlayerData;
@@ -205,21 +206,8 @@ export function usePlayer(email: string) {
     deletePlayer: async () => {
       try {
         await supabaseAuth.from("users").delete().eq("id", playerData.user.id);
-
-        // Réinitialiser l'état local après la suppression
-        setPlayerData({
-          user: {
-            id: -1,
-            mail: "",
-            name: "",
-            pseudo: "",
-            isOAuth: true,
-          },
-          beacoins: 0,
-          nbPhareFinished: 0,
-          DlcUnlocked: 0,
-          isAsso: false,
-          isAdmin: false,
+        await signOut({
+          redirect: false,
         });
       } catch (e) {
         console.error("Erreur lors de la suppression :", e);

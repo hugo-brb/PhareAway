@@ -1,5 +1,6 @@
 import OneEvent from "@/components/OneEvent";
 import { createClient } from "@supabase/supabase-js";
+import { UsePlayer } from "../model/player";
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -8,9 +9,10 @@ const supabaseData = createClient(
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
+  player: UsePlayer;
 }
 
-export default function Events({ handleClickActive }: MenuProps) {
+export default function Events({ handleClickActive, player }: MenuProps) {
   return (
     <>
       <main className=" absolute top-0 z-40 flex  w-[100vw] h-[100vh]">
@@ -66,6 +68,14 @@ export default function Events({ handleClickActive }: MenuProps) {
               </button>
             </div>
           </div>
+          {player.getIsAsso() && (
+            <button
+              onClick={() => handleClickActive("addEvent")}
+              className=" bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-lg font-bold"
+            >
+              + Ajouter un événement
+            </button>
+          )}
           <div
             id="eventListe"
             className="flex flex-col gap-6 max-w-[80%] self-center"

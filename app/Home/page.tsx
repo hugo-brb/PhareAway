@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
 import YourAccount from "@/components/BackHome";
+import AddEvent from "@/components/popover/AddEvent";
 import Events from "@/components/popover/Events";
 import Enigme from "@/components/popover/Enigme";
 import Store from "@/components/popover/Store";
@@ -24,6 +25,7 @@ const Map = dynamic(() => import("../../components/Map"), { ssr: true });
 export default function Home() {
   const { data: session } = useSession();
   const [active, setActive] = useState("home");
+  const [activeID, setActiveID] = useState(64);
   const [center, setCenter] = useState<[number, number]>([
     -1.6282904, 49.6299822,
   ]); // Initial map center
@@ -42,6 +44,9 @@ export default function Home() {
 
   const handleClickActive = (a: string) => {
     setActive(a);
+  };
+  const handleClickActiveId = (id: number) => {
+    setActiveID(id);
   };
   const updateCenter = (newCenter: [number, number]) => {
     setCenter(newCenter);
@@ -89,15 +94,21 @@ export default function Home() {
         center={center}
         markers={markers}
         handleClickActive={handleClickActive}
+        handleClickActiveId={handleClickActiveId}
       />
       {active === "calendar" && (
-        <Events handleClickActive={handleClickActive} />
+        <Events handleClickActive={handleClickActive} player={player} />
+      )}
+      {active === "addEvent" && player.getIsAsso() && (
+        <AddEvent handleClickActive={handleClickActive} />
       )}
       {active === "coin" && <Store handleClickActive={handleClickActive} />}
       {active === "picture" && (
         <Pictures handleClickActive={handleClickActive} />
       )}
-      {active === "enigme" && <Enigme handleClickActive={handleClickActive} />}
+      {active === "enigme" && (
+        <Enigme handleClickActive={handleClickActive} id={activeID} />
+      )}
       {active === "account" && (
         <Account
           active={active}
@@ -106,7 +117,11 @@ export default function Home() {
         />
       )}
       <YourAccount nom={session.user?.name ?? ""} />
-      <Coin active={active} handleClickActive={handleClickActive} />
+      <Coin
+        active={active}
+        handleClickActive={handleClickActive}
+        player={player}
+      />
       <Image
         src="/images/soupex.png"
         width={75}

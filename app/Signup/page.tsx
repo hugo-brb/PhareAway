@@ -153,7 +153,7 @@ export default function Signup() {
               />
             </div>
             {errors.length > 0 && (
-              <div className="text-[--accent] mb-4">
+              <div className="text-red-600 mb-4">
                 <ul>
                   {errors.map((error, index) => (
                     <li key={index}>{error}</li>
