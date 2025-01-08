@@ -30,9 +30,9 @@ export default function Events({ handleClickActive, player }: MenuProps) {
           </button>
           <div
             id="recherche"
-            className="flex flex-row items-center self-center"
+            className="flex flex-row items-center self-center gap-4"
           >
-            <button className="flex flex-row items-center gap-2 bg-[--primary] px-4 py-2 rounded-lg mr-8">
+            <button className=" flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base">
               <svg
                 className="w-3 h-3"
                 width="211"
@@ -56,7 +56,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             <div className="relative">
               <input
                 type="search"
-                className="w-96 h-10 px-3 border-slate-700 border-2 rounded-lg"
+                className="w-96 h-10 px-3 ring-[--primary] ring-2 focus:ring-[--text] focus:outline-none rounded-lg"
                 placeholder="Search..."
               />
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 flex justify-center items-center">

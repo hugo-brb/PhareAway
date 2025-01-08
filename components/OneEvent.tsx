@@ -32,7 +32,12 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
             height={200}
           />
         ) : (
-          <p>Chargement de l'image...</p>
+          <Image
+            src="/icones/logoBaniere.png"
+            alt="Default logo event"
+            width={200}
+            height={200}
+          ></Image>
         )}
         <div className="border-l-2 border-[--text]"></div>
         <p className="max-w-[30vw] text-center self-center">
