@@ -9,7 +9,7 @@ import { redirect } from "next/navigation";
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
 import YourAccount from "@/components/BackHome";
-import Event from "@/components/popover/Event";
+import Events from "@/components/popover/Events";
 import Enigme from "@/components/popover/Enigme";
 import Store from "@/components/popover/Store";
 import Pictures from "@/components/popover/Pictures";
@@ -90,7 +90,9 @@ export default function Home() {
         markers={markers}
         handleClickActive={handleClickActive}
       />
-      {active === "calendar" && <Event handleClickActive={handleClickActive} />}
+      {active === "calendar" && (
+        <Events handleClickActive={handleClickActive} />
+      )}
       {active === "coin" && <Store handleClickActive={handleClickActive} />}
       {active === "picture" && (
         <Pictures handleClickActive={handleClickActive} />
