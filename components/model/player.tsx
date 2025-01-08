@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
+import { hash } from "bcrypt";
 
 export type UsePlayer = {
   playerData: PlayerData;
@@ -21,6 +22,7 @@ export type UsePlayer = {
   setBeacoins: (beacoins: number) => Promise<void>;
   setNbPhareFinished: (nbPhareFinished: number) => Promise<void>;
   setDlcUnlocked: (DlcUnlocked: number) => Promise<void>;
+  setPassword: (password: string) => Promise<void>;
   deletePlayer: () => Promise<void>;
   updatePlayerInfo: (updates: Partial<PlayerData>) => Promise<void>;
 };
@@ -75,28 +77,27 @@ export function usePlayer(email: string) {
           const requestAuth = await supabaseAuth
             .from("users")
             .select()
-            .eq("email", email);
-
-          if (requestAuth.data && requestAuth.data.length > 0) {
-            const userId = requestAuth.data[0].id;
+            .eq("email", email)
+            .single();
+          if (requestAuth.data) {
+            const userId = requestAuth.data.id;
             const requestData = await supabaseData
               .from("users")
               .select()
               .eq("id", userId);
-
             setPlayerData({
               user: {
                 id: userId,
                 mail: email,
-                name: requestAuth.data[0].name || "",
-                pseudo: requestAuth.data[0].pseudo || "",
-                isOAuth: requestAuth.data[0].isOAuth || true,
+                name: requestAuth?.data?.name || "",
+                pseudo: requestAuth?.data?.pseudo || "",
+                isOAuth: requestAuth?.data?.isOAuth,
               },
               beacoins: requestData.data?.[0]?.beacoins || 0,
               nbPhareFinished: requestData.data?.[0]?.nbPhareFinished || 0,
               DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || 0,
-              isAsso: requestData.data?.[0]?.isAsso || false,
-              isAdmin: requestData.data?.[0]?.isAdmin || false,
+              isAsso: requestData.data?.[0]?.isAsso,
+              isAdmin: requestData.data?.[0]?.isAdmin,
             });
           }
         }
@@ -167,6 +168,18 @@ export function usePlayer(email: string) {
         user: { ...prev.user, pseudo },
       }));
     },
+
+    /* setPassword: async (password: string) => {
+      const passwordCrypted = await hash(password, 10);
+      await supabaseAuth
+        .from("users")
+        .update({ password: passwordCrypted })
+        .eq("id", playerData.user.id);
+      setPlayerData((prev) => ({
+        ...prev,
+        user: { ...prev.user, passwordCrypted },
+      })); 
+    },*/
 
     // Setters pour les statistiques du joueur
     setBeacoins: async (beacoins: number) => {

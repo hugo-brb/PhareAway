@@ -10,53 +10,134 @@ const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
+// Fonction utilitaire pour convertir HH:mm en minutes
+const convertTimeToMinutes = (time: string): number => {
+  const [hours, minutes] = time.split(":").map(Number);
+  if (minutes <= 30) {
+    return hours;
+  } else {
+    return hours + 1;
+  }
+};
+
 export default function Event({ handleClickActive }: MenuProps) {
   const [errors, setErrors] = useState<string[]>([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-
-    const name = formData.get("name")?.toString();
-    const description = formData.get("description")?.toString();
-    const date = formData.get("date")?.toString();
-    const url = formData.get("url")?.toString();
-    const phare = formData.get("phare")?.toString();
-    const duration = formData.get("duration")?.toString();
-    const price = formData.get("price")?.toString();
-
+    setIsSubmitting(true);
     const newErrors: string[] = [];
 
-    // Validation des champs
-    if (!name) newErrors.push("Le nom de l'évenement est obligatoire.");
-    if (!description) newErrors.push("La description est obligatoire.");
-    if (!date) newErrors.push("La date est obligatoire.");
-    if (!phare) newErrors.push("Le phare est obligatoire.");
-    if (!duration) newErrors.push("La durée est obligatoire.");
-    if (!price) newErrors.push("Le prix est obligatoire.");
+    try {
+      const formData = new FormData(e.currentTarget);
 
-    setErrors(newErrors);
+      const name = formData.get("name")?.toString().trim();
+      const description = formData.get("description")?.toString().trim();
+      const date = formData.get("date")?.toString();
+      const url = formData.get("url")?.toString().trim();
+      const phare = formData.get("phare")?.toString().trim();
+      const duration = formData.get("duration")?.toString();
+      const price = formData.get("price")?.toString();
 
-    if (newErrors.length === 0) {
-      const isPhare = await supabaseData
+      // Log des données avant validation
+      console.log("Données du formulaire:", {
+        name,
+        description,
+        date,
+        url,
+        phare,
+        duration,
+        price,
+      });
+
+      // Validation des champs
+      if (!name) newErrors.push("Le nom de l'évenement est obligatoire.");
+      if (!description) newErrors.push("La description est obligatoire.");
+      if (!date) newErrors.push("La date est obligatoire.");
+      if (!phare) newErrors.push("Le phare est obligatoire.");
+      if (!duration) newErrors.push("La durée est obligatoire.");
+      if (!price) newErrors.push("Le prix est obligatoire.");
+
+      if (newErrors.length > 0) {
+        setErrors(newErrors);
+        return;
+      }
+
+      // Recherche du phare
+      const { data: lighthouse, error: lighthouseError } = await supabaseData
         .from("Lighthouse")
         .select("id")
-        .like("name", `%${phare}%`);
+        .ilike("name", `%${phare}%`)
+        .single();
 
-      if (isPhare.data && isPhare.data.length === 0) {
-        const request = await supabaseData.from("Event").insert({
-          name: name,
-          url: url,
-          date: date,
-          duration: duration,
-          price: price,
-          description: description,
-          id_lh: isPhare.data[0].id,
-        });
-      } else {
+      console.log("Résultat recherche phare:", { lighthouse, lighthouseError });
+
+      if (lighthouseError) {
+        newErrors.push(
+          `Erreur lors de la recherche du phare: ${lighthouseError.message}`
+        );
+        setErrors(newErrors);
+        return;
+      }
+
+      if (!lighthouse?.id) {
         newErrors.push("Le phare n'existe pas.");
         setErrors(newErrors);
+        return;
       }
+
+      // Conversion de la durée en minutes
+      const durationInMinutes = convertTimeToMinutes(duration || "00:00");
+
+      // Préparation des données pour l'insertion
+      const eventData = {
+        name,
+        url: url || null,
+        date,
+        duration: durationInMinutes,
+        price: parseFloat(price || "0"),
+        description,
+        id_lh: lighthouse.id,
+      };
+
+      console.log("Données à insérer:", eventData);
+
+      // Insertion de l'événement
+      const { data: insertData, error: insertError } = await supabaseData
+        .from("Event")
+        .insert([eventData])
+        .select()
+        .single();
+
+      console.log("Résultat insertion:", { insertData, insertError });
+
+      if (insertError) {
+        console.error("Détails de l'erreur d'insertion:", {
+          code: insertError.code,
+          message: insertError.message,
+          details: insertError.details,
+          hint: insertError.hint,
+        });
+        newErrors.push(
+          `Erreur lors de la création de l'événement: ${insertError.message}`
+        );
+        setErrors(newErrors);
+        return;
+      }
+
+      // Succès
+      handleClickActive("calendar");
+    } catch (error) {
+      console.error("Erreur complète:", error);
+      if (error instanceof Error) {
+        newErrors.push(`Une erreur est survenue: ${error.message}`);
+      } else {
+        newErrors.push("Une erreur inattendue s'est produite.");
+      }
+      setErrors(newErrors);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -80,7 +161,6 @@ export default function Event({ handleClickActive }: MenuProps) {
           </h1>
           <form
             onSubmit={handleSubmit}
-            method="POST"
             className="flex flex-col gap-5 justify-center items-center"
           >
             <div className="flex flex-col gap-2 w-2/4">
@@ -165,7 +245,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               </div>
             </div>
             {errors.length > 0 && (
-              <div className="text-red-600 mb-4">
+              <div className="text-red-600">
                 <ul>
                   {errors.map((error, index) => (
                     <li key={index}>{error}</li>
@@ -175,8 +255,11 @@ export default function Event({ handleClickActive }: MenuProps) {
             )}
             <input
               type="submit"
-              value="Créer l'événement"
-              className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg"
+              value={
+                isSubmitting ? "Création en cours..." : "Créer l'événement"
+              }
+              disabled={isSubmitting}
+              className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
             />
           </form>
         </section>

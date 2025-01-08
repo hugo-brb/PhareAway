@@ -2,7 +2,6 @@ import OneEvent from "@/components/OneEvent";
 import { createClient } from "@supabase/supabase-js";
 import { UsePlayer } from "../model/player";
 import { useEffect, useState } from "react";
-import { count } from "console";
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -25,7 +24,8 @@ export default function Events({ handleClickActive, player }: MenuProps) {
       const { data, error } = await supabaseData
         .from("Event")
         .select("id")
-        .gte("date", currentDate);
+        .gte("date", currentDate)
+        .order("date", { ascending: true });
 
       if (error) {
         console.error("Erreur lors de la récupération des événements:", error);
@@ -64,22 +64,11 @@ export default function Events({ handleClickActive, player }: MenuProps) {
           >
             <button className=" flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base">
               <svg
-                className="w-3 h-3"
-                width="211"
-                height="361"
-                viewBox="0 0 211 361"
-                fill="none"
+                className=" size-3 fill-[--text]"
                 xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
               >
-                <rect width="211" height="47" fill="#D9D9D9" />
-                <path
-                  d="M129 150V291C129 329.66 97.6599 361 59 361V361V150H129Z"
-                  fill="#D9D9D9"
-                />
-                <path
-                  d="M59.5646 150L0 47H211L129.225 150H59.5646Z"
-                  fill="#D9D9D9"
-                />
+                <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320 448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z" />
               </svg>
               <span>Trier</span>
             </button>
@@ -87,7 +76,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               <input
                 type="search"
                 className="w-96 h-10 px-3 ring-[--primary] ring-2 focus:ring-[--text] focus:outline-none rounded-lg"
-                placeholder="Search..."
+                placeholder="Rechercher..."
               />
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 flex justify-center items-center">
                 <img
@@ -101,9 +90,16 @@ export default function Events({ handleClickActive, player }: MenuProps) {
           {player.getIsAsso() && (
             <button
               onClick={() => handleClickActive("addEvent")}
-              className=" bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-lg font-bold"
+              className=" flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-lg font-bold"
             >
-              + Ajouter un événement
+              <svg
+                className=" size-5 fill-[--text]"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 448 512"
+              >
+                <path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" />
+              </svg>{" "}
+              Ajouter un événement
             </button>
           )}
           <div
