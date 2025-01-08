@@ -15,6 +15,7 @@ type MapComponentProps = {
     lien?: string;
   }[]; // Liste des marqueurs à afficher
   handleClickActive: (a: string) => void;
+  handleClickActiveId: (id: number) => void;
 };
 
 const Map: React.FC<MapComponentProps> = ({
@@ -23,6 +24,7 @@ const Map: React.FC<MapComponentProps> = ({
   zoom,
   markers,
   handleClickActive,
+  handleClickActiveId,
 }) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<mapboxgl.Map | null>(null);
@@ -42,16 +44,16 @@ const Map: React.FC<MapComponentProps> = ({
       });
     }
     return () => {
-      mapInstance.current?.remove();
-      mapInstance.current = null;
+        mapInstance.current?.remove();
+        mapInstance.current = null;
     };
-  }, []);
+    }, []);
 
-  useEffect(() => {
-    if (mapInstance.current) {
-      mapInstance.current.flyTo({ center });
-    }
-  }, [center]); // Update map center when `center` changes
+    useEffect(() => {
+        if (mapInstance.current) {
+            mapInstance.current.flyTo({ center });
+        }
+    }, [center]); // Update map center when `center` changes
 
   useEffect(() => {
     if (mapInstance.current) {
@@ -67,19 +69,20 @@ const Map: React.FC<MapComponentProps> = ({
         markerElement.style.height = "30px"; // Définir la hauteur du marqueur
         markerElement.style.backgroundSize = "cover"; // Assurer que l'image couvre tout l'élément
 
-                const divElement = document.createElement('div');
-                const enigmeBtn = document.createElement('button');
-                enigmeBtn.innerHTML=  `<button class="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg">C'est Phar'ti<button>`;
-                divElement.classList.add('flex', 'flex-col', 'gap-6', 'items-center');
-                divElement.innerHTML = `<p>ID ${id}</p>`;
-                divElement.innerHTML +=`<h3 class="text-xl">${popupText}</h3>`;
-                divElement.innerHTML +=`<img src="https://nereoll.github.io/imagesPhare/phares/${id}.jpg" alt="Phare ${popupText}" width="200" height="200" />`;
-                divElement.innerHTML +=`<a href="${lien}" target="_blank" class="text-cyan-700">Lien vers le site du phare</a>`;
-                divElement.appendChild(enigmeBtn);
+        const divElement = document.createElement('div');
+        const enigmeBtn = document.createElement('button');
+        enigmeBtn.innerHTML=  `<button class="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg">C'est Phar'ti<button>`;
+        divElement.classList.add('flex', 'flex-col', 'gap-6', 'items-center');
+        divElement.innerHTML = `<p>ID ${id}</p>`;
+        divElement.innerHTML +=`<h3 class="text-xl">${popupText}</h3>`;
+        divElement.innerHTML +=`<img src="https://nereoll.github.io/imagesPhare/phares/${id}.png" alt="Phare ${popupText}" width="200" height="200" />`;
+        divElement.innerHTML +=`<a href="${lien}" target="_blank" class="text-cyan-700">Lien vers le site du phare</a>`;
+        divElement.appendChild(enigmeBtn);
 
-                enigmeBtn.addEventListener('click', (e) => {
-                    handleClickActive("enigme");
-                });
+        enigmeBtn.addEventListener('click', (e) => {
+            handleClickActive("enigme");
+            handleClickActiveId(id);
+        });
 
         const marker = new mapboxgl.Marker(markerElement)
           .setLngLat([longitude, latitude])
