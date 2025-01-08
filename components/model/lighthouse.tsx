@@ -46,14 +46,14 @@ export function useLighthouse(id: number) {
             .eq("id", id)
             .single();
           console.log("Requete Lighthouse : ", request);
-          if (request.data && request.data.length > 0) {
+          if (request.data) {
             setLighthouseData({
               id: id,
-              name: request.data[0].name || "",
-              description: request.data[0].description || "",
-              coordinates: request.data[0].description || "",
-              url: request.data[0].url || "",
-              image: request.data[0].id_image || 0,
+              name: request.data.name || "",
+              description: request.data.description || "",
+              coordinates: request.data.description || "",
+              url: request.data.url || "",
+              image: request.data.id_image || 0,
             });
           }
         }

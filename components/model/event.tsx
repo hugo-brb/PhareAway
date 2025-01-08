@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { useLighthouse, UseLighthouse } from "./lighthouse";
 import { useImage, UseImage } from "./Image";
@@ -12,8 +12,8 @@ export type UseEvent = {
   getDuration: () => number;
   getPrice: () => number;
   getDescription: () => string;
-  getLighthouse: () => UseLighthouse;
-  getImage: () => UseImage;
+  getLighthouse: () => number;
+  getImage: () => number;
   setName: (name: string) => Promise<void>;
   setCoordinates: (coordinates: string) => Promise<void>;
   setUrl: (url: string) => Promise<void>;
@@ -102,8 +102,8 @@ export function useEvent(id: number) {
     getDuration: () => eventData.duration,
     getPrice: () => eventData.price,
     getDescription: () => eventData.description,
-    getLighthouse: () => useLighthouse(eventData.id_lh),
-    getImage: () => useImage(eventData.id_image),
+    getLighthouse: () => eventData.id_lh,
+    getImage: () => eventData.id_image,
 
     //Setters
     setName: async (name: string) => {
