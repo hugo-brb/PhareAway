@@ -21,6 +21,10 @@ export default function Pictures({ handleClickActive }: MenuProps) {
           <h1 className=" font-gravitas self-center mt-4 text-7xl">
             Importer une image
           </h1>
+          <p>
+            Partagez une image de phare et gagnez des BeaCoins en
+            récompense.📸✨
+          </p>
           <div className=" my-auto">
             <label
               className="w-fit h-fit flex flex-col gap-5 cursor-pointer justify-center items-center border-2 border-dashed p-6 rounded-xl drop-shadow-2xl "
