@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Image from "next/image";
 import { useEvent } from "@/components/model/event";
 import { useLighthouse } from "./model/lighthouse";
@@ -10,8 +10,8 @@ interface OnEventProp {
 
 const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
   const event = useEvent(id_Event);
-  const image = useImage(2);
-  const phare = useLighthouse(1);
+  const image = useImage(event.getImage());
+  const phare = useLighthouse(event.getLighthouse());
 
   if (!event) {
     return <p>Chargement de l'événement...</p>;
