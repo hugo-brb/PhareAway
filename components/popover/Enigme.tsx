@@ -25,6 +25,7 @@ export default function Enigme({ handleClickActive, id }: EnigmeProps) {
               backgroundImage: `url("https://nereoll.github.io/imagesPhare/phares/${id}.png")`,
             }}
           >
+            {/*}
             <button
               className="absolute left-[23.5vw] top-[17vw] w-[8vw] h-[13vw] hover:border-red-700 border-2 rounded-lg"
               onClick={() => handleClickActive("enigme")}
@@ -43,6 +44,28 @@ export default function Enigme({ handleClickActive, id }: EnigmeProps) {
             ></button>
             <button
               className="absolute left-[13vw] top-[30.5vw] w-[1.5vw] h-[3vw] hover:border-red-700 border-2 rounded-lg"
+              onClick={() => handleClickActive("enigme")}
+            ></button>
+            {*/}
+
+            <button
+              className="absolute left-[11.5vw] top-[8.5vw] w-[4vw] h-[24vw] hover:border-red-700 border-2 rounded-lg"
+              onClick={() => handleClickActive("enigme")}
+            ></button>
+            <button
+              className="absolute left-[12vw] top-[3vw] w-[3vw] h-[5vw] hover:border-red-700 border-2 rounded-lg"
+              onClick={() => handleClickActive("enigme")}
+            ></button>
+            <button
+              className="absolute left-[0vw] top-[28vw] w-[10vw] h-[11vw] hover:border-red-700 border-2 rounded-lg"
+              onClick={() => handleClickActive("enigme")}
+            ></button>
+            <button
+              className="absolute left-[25vw] top-[33vw] w-[7vw] h-[7vw] hover:border-red-700 border-2 rounded-lg"
+              onClick={() => handleClickActive("enigme")}
+            ></button>
+            <button
+              className="absolute left-[11vw] top-[32.8vw] w-[5vw] h-[3vw] hover:border-red-700 border-2 rounded-lg"
               onClick={() => handleClickActive("enigme")}
             ></button>
           </div>
