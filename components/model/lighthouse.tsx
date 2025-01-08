@@ -45,7 +45,6 @@ export function useLighthouse(id: number) {
             .select()
             .eq("id", id)
             .single();
-          console.log("Requete Lighthouse : ", request);
           if (request.data) {
             setLighthouseData({
               id: id,

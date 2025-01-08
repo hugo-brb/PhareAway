@@ -77,7 +77,7 @@ export default function Login() {
                 type="submit"
                 className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg"
               >
-                C'est Pharti !
+                C'est Phar'ti !
               </button>
             </div>
 
