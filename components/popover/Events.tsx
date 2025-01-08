@@ -1,6 +1,8 @@
 import OneEvent from "@/components/OneEvent";
 import { createClient } from "@supabase/supabase-js";
 import { UsePlayer } from "../model/player";
+import { useEffect, useState } from "react";
+import { count } from "console";
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -13,6 +15,34 @@ interface MenuProps {
 }
 
 export default function Events({ handleClickActive, player }: MenuProps) {
+  const currentDate = new Date().toISOString();
+  // State pour stocker les événements
+  const [events, setEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchEvents = async () => {
+      const { data, error } = await supabaseData
+        .from("Event")
+        .select("id")
+        .gte("date", currentDate);
+
+      if (error) {
+        console.error("Erreur lors de la récupération des événements:", error);
+      } else {
+        setEvents(data); // Stocke les événements récupérés dans l'état
+      }
+
+      setLoading(false); // Fin du chargement
+      console.log(" info ", data);
+    };
+
+    fetchEvents(); // Appel de la fonction pour récupérer les événements
+  }, []); // L'effet est exécuté une seule fois lorsque le composant est monté
+
+  if (loading) {
+    return <div>Chargement des événements...</div>;
+  }
   return (
     <>
       <main className=" absolute top-0 z-40 flex  w-[100vw] h-[100vh]">
@@ -80,7 +110,9 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             id="eventListe"
             className="flex flex-col gap-6 max-w-[80%] self-center"
           >
-            <OneEvent id_Event={1} />
+            {events.map((event) => (
+              <OneEvent key={event.id} id_Event={event.id} />
+            ))}
           </div>
         </section>
       </main>
