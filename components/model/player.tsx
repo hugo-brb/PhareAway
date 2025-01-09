@@ -22,7 +22,7 @@ export type UsePlayer = {
   setBeacoins: (beacoins: number) => Promise<void>;
   setNbPhareFinished: (nbPhareFinished: number) => Promise<void>;
   setDlcUnlocked: (DlcUnlocked: number) => Promise<void>;
-  setPassword: (password: string) => Promise<void>;
+  // setPassword: (password: string) => Promise<void>;
   deletePlayer: () => Promise<void>;
   updatePlayerInfo: (updates: Partial<PlayerData>) => Promise<void>;
 };
@@ -93,7 +93,7 @@ export function usePlayer(email: string) {
                 pseudo: requestAuth?.data?.pseudo || "",
                 isOAuth: requestAuth?.data?.isOAuth,
               },
-              beacoins: requestData.data?.[0]?.beacoins || 0,
+              beacoins: requestData.data?.[0]?.becoins ?? 0,
               nbPhareFinished: requestData.data?.[0]?.nbPhareFinished || 0,
               DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || 0,
               isAsso: requestData.data?.[0]?.isAsso,
@@ -182,14 +182,14 @@ export function usePlayer(email: string) {
     },*/
 
     // Setters pour les statistiques du joueur
-    setBeacoins: async (beacoins: number) => {
+    setBeacoins: async (addbeacoins: number) => {
       await supabaseData
         .from("users")
-        .update({ beacoins })
+        .update({ becoins: playerData.beacoins + 50 })
         .eq("id", playerData.user.id);
       setPlayerData((prev) => ({
         ...prev,
-        beacoins,
+        beacoins: playerData.beacoins + 50,
       }));
     },
 

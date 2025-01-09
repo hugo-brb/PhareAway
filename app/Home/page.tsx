@@ -104,7 +104,7 @@ export default function Home() {
       )}
       {active === "coin" && <Store handleClickActive={handleClickActive} />}
       {active === "picture" && (
-        <Pictures handleClickActive={handleClickActive} />
+        <Pictures handleClickActive={handleClickActive} player={player} />
       )}
       {active === "enigme" && (
         <Enigme handleClickActive={handleClickActive} id={activeID} />
@@ -113,7 +113,7 @@ export default function Home() {
         <Account
           active={active}
           handleClickActive={handleClickActive}
-          player={player} // Default to "unknown" if not resolved
+          player={player}
         />
       )}
       <YourAccount nom={session.user?.name ?? ""} />

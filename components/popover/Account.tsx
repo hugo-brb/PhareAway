@@ -1,7 +1,6 @@
 import { useState, FormEvent } from "react";
 import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import type { UsePlayer } from "@/components/model/player";
 
@@ -18,13 +17,6 @@ export default function Account({
 }: MenuProps) {
   const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
-
-  // Initialize Supabase client
-  const supabaseAuth = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
-    { db: { schema: "next_auth" } }
-  );
 
   const handleIsModif = async () => {
     if (isModifiable) {
