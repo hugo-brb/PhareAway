@@ -81,7 +81,8 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               />
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 flex justify-center items-center">
                 <Image
-                  className="w-6 h-6"
+                  width={24}
+                  height={24}
                   src="/icones/loop.svg"
                   alt="Search Icon"
                 />
