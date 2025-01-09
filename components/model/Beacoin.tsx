@@ -1,120 +1,69 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { SupabaseAdapter } from "@auth/supabase-adapter";
+import { useImage, UseImage } from "./Image";
+
+export type UseLighthouse = {
+  beacoinData: BeacoinData;
+  getId: () => number;
+  getName: () => string;
+  getPrice: () => number;
+  getNumber: () => number;
+};
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
-interface Image {
-  id: number;
-  name: string;
-  url: string;
-}
-
-interface Product {
+interface BeacoinData {
   id: number;
   name: string;
   price: number;
-  image: Image;
-}
-
-interface BeacoinInterface {
-  product: Product;
   number: number;
 }
 
-// Définition des props et state
-interface BeacoinProps {}
+export function useBeacoin(id: number) {
+  const [beacoinData, setBeacoinData] = useState<BeacoinData>({
+    id: -1,
+    name: "",
+    price: 0,
+    number: 0,
+  });
 
-interface BeacoinState extends BeacoinInterface {}
+  useEffect(() => {
+    const fetchBeacoinData = async () => {
+      try {
+        if (id >= 1) {
+          const request = await supabaseData
+            .from("Beacoin")
+            .select()
+            .eq("id", id)
+            .single();
 
-class Beacoin extends Component<BeacoinProps, BeacoinState> {
-  constructor(props: BeacoinProps) {
-    super(props);
-
-    // Initialisation de l'état
-    this.state = {
-      product: {
-        id: -1,
-        name: "Beacoin",
-        price: 0,
-        image: {
-          id: -1,
-          name: "",
-          url: "",
-        },
-      },
-      number: 0,
-    };
-  }
-
-  async create(id: number, name: string, price: number, number: number) {
-    try {
-      await supabaseData
-        .from("Beacoin")
-        .insert({ id: id, name: name, price: price, number: number });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async read(id: number) {
-    try {
-      const { data, error } = await supabaseData
-        .from("Image")
-        .select()
-        .eq("id", id);
-      if (error) {
-        throw error;
+          console.log("Requete Image : ", request);
+          if (request.data) {
+            setBeacoinData({
+              id: id,
+              name: request.data.name || "",
+              price: request.data.price || 0,
+              number: request.data.number || 0,
+            });
+          }
+        }
+      } catch (e) {
+        console.error("Erreur lors de la récupération des données");
       }
-      const initBecoin = {
-        id: data?.[0]?.id,
-        name: data?.[0]?.name,
-        price: data?.[0]?.price,
-        number: data?.[0]?.number,
-      };
-      return initBecoin;
-    } catch (e) {
-      console.log(e);
-    }
-  }
+    };
+    fetchBeacoinData();
+  }, [id]);
 
-  async update(id: number, name: string, price: number, number: number) {
-    try {
-      await supabaseData
-        .from("Becoin")
-        .update({ id: id, name: name, price: price, number: number });
-    } catch (e) {
-      console.log(e);
-    }
-  }
+  //methodes
+  const methods = {
+    getId: () => beacoinData.id,
+    getName: () => beacoinData.name,
+    getPrice: () => beacoinData.price,
+    getNumber: () => beacoinData.number,
+  };
 
-  async deleteentrée(id: number) {
-    try {
-      await supabaseData.from("Becoin").delete().eq("id", id);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  // Méthode pour supprimer un utilisateur
-  delete(): void {
-    this.setState({
-      product: {
-        id: -1,
-        name: "Beacoin",
-        price: 0,
-        image: {
-          id: -1,
-          name: "",
-          url: "",
-        },
-      },
-      number: 0,
-    });
-  }
+  return { beacoinData, ...methods };
 }
-
-export default Beacoin;

@@ -1,129 +1,88 @@
-import React, { Component } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { getHash } from "next/dist/server/image-optimizer";
+import { useImage, UseImage } from "./Image";
+
+export type UseExtention = {
+  ExtentionData: ExtentionData;
+  getId: () => number;
+  getName: () => string;
+  getPrice: () => number;
+  getOwned: () => boolean;
+  getType: () => string;
+  getImage: () => UseImage;
+};
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
-interface Image {
-  id: number;
-  name: string;
-  url: string;
-}
-
-interface Product {
+interface ExtentionData {
   id: number;
   name: string;
   price: number;
-  image: Image;
-}
-
-enum ExtensionType {
-  DLC = "DLC",
-  Skin = "Skin",
-}
-
-interface ExtensionInterface {
-  product: Product;
   owned: boolean;
-  type: ExtensionType;
+  type: string;
+  id_image: number;
 }
 
-// Définition des props et state
-interface ExtensionProps {}
+export function UseExtention(id: number) {
+  const [extentionData, setExtentionData] = useState<ExtentionData>({
+    id: -1,
+    name: "",
+    price: 0,
+    owned: false,
+    type: "",
+    id_image: 0,
+  });
 
-interface ExtensionState extends ExtensionInterface {}
-
-class Extension extends Component<ExtensionProps, ExtensionState> {
-  constructor(props: ExtensionProps) {
-    super(props);
-
-    // Initialisation de l'état
-    this.state = {
-      product: {
-        id: -1,
-        name: "",
-        price: 0,
-        image: {
-          id: -1,
-          name: "",
-          url: "",
-        },
-      },
-      owned: false,
-      type: ExtensionType.DLC,
-    };
-  }
-
-  async create(product: Product, owned: boolean, type: ExtensionType) {
-    try {
-      await supabaseData.from("Extension").insert({
-        product: product,
-        owned: owned,
-        type: type,
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async read(id: number) {
-    try {
-      const { data, error } = await supabaseData
-        .from("Extension")
-        .select()
-        .eq("id", id);
-      if (error) {
-        throw error;
+  useEffect(() => {
+    const fetchExtentionData = async () => {
+      try {
+        if (id >= 1) {
+          const request = await supabaseData
+            .from("Extention")
+            .select()
+            .eq("id", id)
+            .single();
+          if (request.data) {
+            setExtentionData({
+              id: id,
+              name: request.data.name || "",
+              price: request.data.price || 0,
+              owned: request.data.owned || false,
+              type: request.data.type || "",
+              id_image: request.data.id_image || 0,
+            });
+          }
+        }
+      } catch (e) {
+        console.error("Erreur lors de la récupération des données");
       }
-      const initExtension = {
-        id: data?.[0]?.id,
-        owned: data?.[0]?.owned,
-        type: data?.[0]?.type,
-      };
-      return initExtension;
-    } catch (e) {
-      console.log(e);
-    }
-  }
+    };
+    fetchExtentionData();
+  }, [id]);
 
-  async update(product: Product, owned: boolean, type: ExtensionType) {
-    try {
-      await supabaseData
-        .from("Extension")
-        .update({ product: product, owned: owned, type: type });
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  async deleteentrée(id: number) {
-    try {
-      await supabaseData.from("Extension").delete().eq("id", id);
-    } catch (e) {
-      console.log(e);
-    }
-  }
-
-  // Méthode pour supprimer un player
-  delete(): void {
-    this.setState({
-      product: {
-        id: -1,
-        name: "",
-        price: 0,
-        image: {
-          id: -1,
-          name: "",
-          url: "",
-        },
-      },
-      owned: false,
-      type: ExtensionType.DLC,
-    });
-  }
+  //methodes
+  const methods = {
+    getId: () => {
+      return extentionData.id;
+    },
+    getName: () => {
+      return extentionData.name;
+    },
+    getPrice: () => {
+      return extentionData.price;
+    },
+    getOwned: () => {
+      return extentionData.owned;
+    },
+    getType: () => {
+      return extentionData.type;
+    },
+    getImage: () => {
+      return useImage(extentionData.id_image);
+    },
+  };
+  return { extentionData, ...methods };
 }
-
-export default Extension;

@@ -37,11 +37,11 @@ export function useImage(id: number) {
             .single();
 
           console.log("Requete Image : ", request);
-          if (request.data && request.data.length > 0) {
+          if (request.data) {
             setImageData({
               id: id,
-              name: request.data[0].name || "",
-              url: request.data[0].url || "",
+              name: request.data.name || "",
+              url: request.data.url || "",
             });
           }
         }
