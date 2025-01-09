@@ -14,7 +14,7 @@ export default function Coin({ handleClickActive }: MenuProps) {
             className="absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90"
             onClick={() => handleClickActive("home")}
           >
-            <img
+            <Image
               src="/icones/xmark-solid.svg"
               alt="arrow-back"
               width={24}

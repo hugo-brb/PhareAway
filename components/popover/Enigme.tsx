@@ -1,5 +1,6 @@
-import { useEnigme, UseEnigme } from "@/components/model/EnigmeInterface";
+import { useEnigme } from "@/components/model/EnigmeInterface";
 import { useState } from 'react';
+import Image from 'next/image';
 import SmallEnigme from "@/components/popover/JohnPork";
 
 
@@ -32,7 +33,7 @@ interface EnigmeProps {
               className="absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90"
               onClick={() => handleClickActive("home")}
             >
-              <img
+              <Image
                 src="/icones/xmark-solid.svg"
                 alt="arrow-back"
                 width={24}

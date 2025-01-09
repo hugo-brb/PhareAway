@@ -47,7 +47,7 @@ const Map: React.FC<MapComponentProps> = ({
       mapInstance.current?.remove();
       mapInstance.current = null;
     };
-  }, []);
+  }, [bounds, center, zoom]);
 
   useEffect(() => {
     if (mapInstance.current) {
@@ -79,7 +79,7 @@ const Map: React.FC<MapComponentProps> = ({
         divElement.innerHTML += `<a href="${lien}" target="_blank" class="text-cyan-700">Lien vers le site du phare</a>`;
         divElement.appendChild(enigmeBtn);
 
-        enigmeBtn.addEventListener("click", (e) => {
+        enigmeBtn.addEventListener("click", () => {
           handleClickActive("enigme");
           handleClickActiveId(id);
         });
@@ -97,7 +97,7 @@ const Map: React.FC<MapComponentProps> = ({
         markersOnMap.forEach((marker) => marker.remove());
       };
     }
-  }, [markers]); // Réagir lorsque les marqueurs changent
+  }, [markers, handleClickActive, handleClickActiveId]);
 
   return (
     <div ref={mapContainer} className="w-[100vw] h-[100vh] overflow-y-hidden" />

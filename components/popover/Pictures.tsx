@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { createClient } from "@supabase/supabase-js";
+import Image from "next/image";
 import { UsePlayer } from "../model/player";
 import axios from "axios";
-import EXIF from "exif-js";
+//import EXIF from "exif-js";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -17,11 +17,6 @@ interface VisionResponse {
     }>;
   }>;
 }
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
 
 export default function Pictures({ handleClickActive, player }: MenuProps) {
   const [loading, setLoading] = useState(false);
@@ -57,7 +52,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
     }
   };
 
-  const validateExifData = (file: File): Promise<void> => {
+  /* const validateExifData = (file: File): Promise<void> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = function () {
@@ -81,7 +76,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
       reader.onerror = () => reject(new Error("Erreur de lecture du fichier."));
       reader.readAsDataURL(file);
     });
-  };
+  }; */
 
   const convertToBase64 = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -122,7 +117,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           className="absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90"
           onClick={() => handleClickActive("home")}
         >
-          <img
+          <Image
             src="/icones/xmark-solid.svg"
             alt="arrow-back"
             width={24}

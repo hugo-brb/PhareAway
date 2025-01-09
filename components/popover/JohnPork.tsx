@@ -1,5 +1,5 @@
 import React from 'react';
-import { text } from 'stream/consumers';
+import Image from 'next/image';
 
 interface SmallEnigmeProps {
     handleClickPopup: (a: string) => void,
@@ -21,7 +21,7 @@ export default function SmallEnigme({ handleClickPopup, codeLock, coordX, coordY
                 className="absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90"
                 onClick={() => handleClickPopup("0")} //fonction permettant de fermer la fenetre et revenir à l'état de base de l'élément parent
                 >
-                <img
+                <Image
                     src="/icones/xmark-solid.svg"
                     alt="arrow-back"
                     width={24}

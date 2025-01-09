@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
-import { hash } from "bcrypt";
 
 export type UsePlayer = {
   playerData: PlayerData;
@@ -185,11 +184,11 @@ export function usePlayer(email: string) {
     setBeacoins: async (addbeacoins: number) => {
       await supabaseData
         .from("users")
-        .update({ becoins: playerData.beacoins + 50 })
+        .update({ becoins: playerData.beacoins + addbeacoins })
         .eq("id", playerData.user.id);
       setPlayerData((prev) => ({
         ...prev,
-        beacoins: playerData.beacoins + 50,
+        beacoins: playerData.beacoins + addbeacoins,
       }));
     },
 

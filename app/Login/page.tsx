@@ -33,7 +33,7 @@ export default function Login() {
         />
         <section className="flex flex-col gap-12 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
           <Link href="/" className="absolute top-5 left-5">
-            <img
+            <Image
               src="/icones/arrow-back.svg"
               alt="arrow-back"
               width={24}
@@ -77,13 +77,13 @@ export default function Login() {
                 type="submit"
                 className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg"
               >
-                C'est Phar'ti !
+                C&apos;est Phar&apos;ti !
               </button>
             </div>
 
             <div className="flex items-center gap-2">
               <label htmlFor="signup">
-                Vous n'avez toujours pas de compte ?!
+                Vous n&apos;avez toujours pas de compte ?!
               </label>
               <Link href="/Rgpd" className="text-[--primary] font-bold">
                 Inscrivez-vous

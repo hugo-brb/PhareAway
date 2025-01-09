@@ -1,11 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-interface MenuProps {
-  nom: string;
-}
-
-export default function Coin({ nom }: MenuProps) {
+export default function Coin() {
   return (
     <Link
       href="/"

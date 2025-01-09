@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import "@/lib/StyleCreditCard.css";
 
 export default function Payment() {
@@ -10,7 +11,7 @@ export default function Payment() {
             href="/Home"
             className=" duration-300 hover:scale-110 w-full h-full flex justify-center items-center"
           >
-            <img
+            <Image
               src="/icones/arrow-back.svg"
               alt="arrow-back"
               width={24}
@@ -193,7 +194,7 @@ export default function Payment() {
               </div>
               <div className="input_container">
                 <label htmlFor="password_field" className="input_label">
-                  Date d'expiration / CVV
+                  Date d&apos;expiration / CVV
                 </label>
                 <div className="split">
                   <input

@@ -1,4 +1,5 @@
 import { FormEvent, useState } from "react";
+import Image from "next/image";
 import { createClient } from "@supabase/supabase-js";
 
 interface MenuProps {
@@ -149,7 +150,7 @@ export default function Event({ handleClickActive }: MenuProps) {
             className="absolute top-5 left-5 duration-300 ease-in-out hover:scale-110"
             onClick={() => handleClickActive("calendar")}
           >
-            <img
+            <Image
               src="/icones/arrow-back.svg"
               alt="arrow-back"
               width={24}
@@ -165,7 +166,7 @@ export default function Event({ handleClickActive }: MenuProps) {
           >
             <div className="flex flex-col gap-2 w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
-                Nom de l'événement
+                Nom de l&apos;événement
               </label>
               <input
                 type="text"
@@ -188,7 +189,7 @@ export default function Event({ handleClickActive }: MenuProps) {
 
             <div className="flex flex-col gap-2 w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
-                Date de l'évenement
+                Date de l&apos;évenement
               </label>
               <input
                 name="date"
@@ -199,7 +200,7 @@ export default function Event({ handleClickActive }: MenuProps) {
 
             <div className="flex flex-col gap-2 w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
-                Lien vers le site de l'évenement/billeterie
+                Lien vers le site de l&apos;évenement/billeterie
               </label>
               <input
                 name="url"
@@ -211,7 +212,7 @@ export default function Event({ handleClickActive }: MenuProps) {
 
             <div className="flex flex-col gap-2 w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
-                Phare concerné par l'évenement
+                Phare concerné par l&apos;évenement
               </label>
               <input
                 name="phare"
@@ -224,7 +225,7 @@ export default function Event({ handleClickActive }: MenuProps) {
             <div className=" flex items-center gap-2 w-2/4">
               <div className="flex flex-col gap-2 w-2/4">
                 <label htmlFor="name" className="text-lg font-bold">
-                  Durée de l'évenement
+                  Durée de l&apos;évenement
                 </label>
                 <input
                   name="duration"
@@ -234,7 +235,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               </div>
               <div className="flex flex-col gap-2 w-2/4">
                 <label htmlFor="name" className="text-lg font-bold">
-                  Prix de l'inscription
+                  Prix de l&apos;inscription
                 </label>
                 <input
                   name="price"
