@@ -80,7 +80,7 @@ export function UseExtention(id: number) {
     getType: () => {
       return extentionData.type;
     },
-    getImage: () => {
+    useGetImage: () => {
       return useImage(extentionData.id_image);
     },
   };
