@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
+import { UseImage, useImage } from "./Image";
 
 export type UseLighthouse = {
   beacoinData: BeacoinData;

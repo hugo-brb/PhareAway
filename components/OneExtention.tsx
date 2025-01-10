@@ -21,9 +21,9 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention }) => {
       " " +
       extention.getType() +
       " " +
-      extention.getImage()
+      extention.useGetImage()
   );
-  const image = extention.getImage();
+  const image = extention.useGetImage();
   if (!extention) {
     return <p>Chargement de l'événement...</p>;
   }
