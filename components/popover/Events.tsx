@@ -35,7 +35,6 @@ export default function Events({ handleClickActive, player }: MenuProps) {
       }
 
       setLoading(false); // Fin du chargement
-      console.log(" info ", data);
     };
 
     fetchEvents(); // Appel de la fonction pour récupérer les événements
