@@ -9,10 +9,7 @@ interface MenuProps {
   player: UsePlayer;
 }
 
-export default function Account({
-  handleClickActive,
-  player,
-}: MenuProps) {
+export default function Account({ handleClickActive, player }: MenuProps) {
   const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
 
@@ -76,6 +73,14 @@ export default function Account({
             width={24}
             height={24}
           />
+        </button>
+        <button
+          className={`absolute top-5 right-5 transform ${
+            isModifiable ? "opacity-20" : ""
+          }`}
+          onClick={() => handleClickActive("about")}
+        >
+          <Image src="/icones/info.svg" alt="info" width={24} height={24} />
         </button>
         <div className="flex justify-center items-center gap-32">
           <Image

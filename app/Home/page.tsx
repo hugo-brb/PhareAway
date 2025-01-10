@@ -16,6 +16,9 @@ import Store from "@/components/popover/Store";
 import Pictures from "@/components/popover/Pictures";
 import Account from "@/components/popover/Account";
 import TopNav from "@/components/topNav";
+import About from "@/components/popover/About";
+import CGU from "@/components/popover/CGU";
+import Contact from "@/components/popover/Contact";
 import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 
@@ -110,6 +113,11 @@ export default function Home() {
       )}
       {active === "account" && (
         <Account handleClickActive={handleClickActive} player={player} />
+      )}
+      {active === "about" && <About handleClickActive={handleClickActive} />}
+      {active === "cgu" && <CGU handleClickActive={handleClickActive} />}
+      {active === "contact" && (
+        <Contact handleClickActive={handleClickActive} player={player} />
       )}
       <YourAccount />
       <Coin handleClickActive={handleClickActive} player={player} />
