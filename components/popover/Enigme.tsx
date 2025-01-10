@@ -1,22 +1,39 @@
 import { useEnigme, UseEnigme } from "@/components/model/EnigmeInterface";
+import { useLighthouse, UseLighthouse } from "@/components/model/lighthouse";
 import { useState } from "react";
 import SmallEnigme from "@/components/popover/JohnPork";
+import Image from "next/image";
 
 interface EnigmeProps {
   handleClickActive: (a: string) => void;
   id: number;
 }
-export default function Enigme({ handleClickActive, id }: EnigmeProps) {
+
+export default function Enigme({
+  handleClickActive: parentHandleClickActive,
+  id,
+}: EnigmeProps) {
   const enigme1 = useEnigme(id, 1); //recupere les données de la premiere enigme du phare id
   const enigme2 = useEnigme(id, 2); //recupere les données de la deuxieme enigme du phare id
-  const enigme3 = useEnigme(id, 3); //recupere les données de la troisieme enigme du phare i
+  const enigme3 = useEnigme(id, 3); //recupere les données de la troisieme enigme du phare id
   const enigme4 = useEnigme(id, 4); //recupere les données de la quatrieme enigme du phare id
-  const enigme5 = useEnigme(id, 5); //recupere les données de la quatrieme enigme du phare id
-
+  const enigme5 = useEnigme(id, 5); //recupere les données de la cinquième enigme du phare id
+  const lighthouse = useLighthouse(id); //recupere les données du phare id
   const [popup, setPopup] = useState("0");
 
   const handleClickPopup = (a: string) => {
     setPopup(a);
+  };
+
+  const [activeButtons, setActiveButtons] = useState({
+    hint: false,
+  });
+
+  const handleClickActiveButton = (button: keyof typeof activeButtons) => {
+    setActiveButtons((prev) => ({
+      ...prev,
+      [button]: !prev[button], // Alterne l'état du bouton correspondant
+    }));
   };
 
   return (
@@ -24,14 +41,37 @@ export default function Enigme({ handleClickActive, id }: EnigmeProps) {
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
         <section className=" flex flex-col items-center self-center gap-12 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
           <button
-            className="absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90"
-            onClick={() => handleClickActive("home")}
+            className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
+            onClick={() => parentHandleClickActive("home")}
           >
-            <img
+            <Image
               src="/icones/xmark-solid.svg"
               alt="arrow-back"
               width={24}
               height={24}
+            />
+          </button>
+
+          <h1 className="text-3xl font-bold">
+            Enigmes : {lighthouse.getName() ?? "Phare inconnu"}
+          </h1>
+
+          <button
+            className={`absolute ${
+              activeButtons.hint ? "pointer-events-none" : ""
+            }`}
+            style={{ top: "15vw", right: "5vw" }}
+            onClick={() => handleClickActiveButton("hint")}
+          >
+            <Image
+              src={
+                activeButtons.hint
+                  ? "/images/hintOn.png"
+                  : "/images/hintOff.png"
+              }
+              alt="hint"
+              width={300}
+              height={150}
             />
           </button>
 
@@ -113,7 +153,11 @@ export default function Enigme({ handleClickActive, id }: EnigmeProps) {
                 width: `${enigme1.getlenghtX()}vw`,
                 height: `${enigme1.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg`}
+              className={`absolute rounded-lg ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
               onClick={() => handleClickPopup("1")}
             ></button>
             <button
@@ -123,7 +167,11 @@ export default function Enigme({ handleClickActive, id }: EnigmeProps) {
                 width: `${enigme2.getlenghtX()}vw`,
                 height: `${enigme2.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg`}
+              className={`absolute rounded-lg ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
               onClick={() => handleClickPopup("2")}
             ></button>
             <button
@@ -133,7 +181,11 @@ export default function Enigme({ handleClickActive, id }: EnigmeProps) {
                 width: `${enigme3.getlenghtX()}vw`,
                 height: `${enigme3.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg`}
+              className={`absolute rounded-lg ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
               onClick={() => handleClickPopup("3")}
             ></button>
             <button
@@ -143,7 +195,11 @@ export default function Enigme({ handleClickActive, id }: EnigmeProps) {
                 width: `${enigme4.getlenghtX()}vw`,
                 height: `${enigme4.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg`}
+              className={`absolute rounded-lg ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
               onClick={() => handleClickPopup("4")}
             ></button>
             <button
@@ -153,7 +209,11 @@ export default function Enigme({ handleClickActive, id }: EnigmeProps) {
                 width: `${enigme5.getlenghtX()}vw`,
                 height: `${enigme5.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg`}
+              className={`absolute rounded-lg ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-red-500 transform transition-all duration-300 bg-red-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
               onClick={() => handleClickPopup("5")}
             ></button>
           </div>
