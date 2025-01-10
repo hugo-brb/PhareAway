@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -13,7 +14,7 @@ export default function Coin({ handleClickActive }: MenuProps) {
             className="absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90"
             onClick={() => handleClickActive("home")}
           >
-            <img
+            <Image
               src="/icones/xmark-solid.svg"
               alt="arrow-back"
               width={24}
@@ -25,7 +26,10 @@ export default function Coin({ handleClickActive }: MenuProps) {
             <h2 className=" text-[--primary] text-lg px-5 py-2">Beacoins</h2>
             <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl w-[70vw] py-5">
               <div className=" flex ml-7 justify-around">
-                <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
+                <Link
+                  href="/Payment"
+                  className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
+                >
                   <Image
                     src="/images/BeaCoin.png"
                     width={100}
@@ -36,9 +40,12 @@ export default function Coin({ handleClickActive }: MenuProps) {
                     <p>10 Beacoins</p>
                     <p className=" opacity-50">10€</p>
                   </div>
-                </div>
+                </Link>
 
-                <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
+                <Link
+                  href="/Payment"
+                  className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
+                >
                   <Image
                     src="/images/BeaCoin2.png"
                     width={100}
@@ -49,9 +56,12 @@ export default function Coin({ handleClickActive }: MenuProps) {
                     <p>100 Beacoins</p>
                     <p className=" opacity-50">20€</p>
                   </div>
-                </div>
+                </Link>
 
-                <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
+                <Link
+                  href="/Payment"
+                  className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
+                >
                   <Image
                     src="/images/BeaCoin3.png"
                     width={100}
@@ -62,9 +72,12 @@ export default function Coin({ handleClickActive }: MenuProps) {
                     <p>1000 Beacoins</p>
                     <p className=" opacity-50">50€</p>
                   </div>
-                </div>
+                </Link>
 
-                <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
+                <Link
+                  href="/Payment"
+                  className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
+                >
                   <Image
                     src="/images/BeaCoin4.png"
                     width={100}
@@ -75,7 +88,7 @@ export default function Coin({ handleClickActive }: MenuProps) {
                     <p>10.000 Beacoins</p>
                     <p className=" opacity-50">100€</p>
                   </div>
-                </div>
+                </Link>
               </div>
             </div>
           </div>

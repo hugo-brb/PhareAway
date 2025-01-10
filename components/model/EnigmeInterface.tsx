@@ -1,22 +1,21 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { get } from "http";
 
 export type UseEnigme = {
-    EnigmeData: EnigmeData;
-    getidPhare: () => number;
-    getidEnigme: () => number;
-    getcodeLock: () => number;
-    getcoordX: () => number;
-    getcoordY: () => number;
-    getlenghtX: () => number;
-    getlenghtY: () => number;
-    getname: () => string;
-    getpositionLock: () => number;
-    getquestion: () => string;
-    gettext1: () => string;
-    getanswer: () => string;
-    gettext2: () => string;
+  EnigmeData: EnigmeData;
+  getidPhare: () => number;
+  getidEnigme: () => number;
+  getcodeLock: () => number;
+  getcoordX: () => number;
+  getcoordY: () => number;
+  getlenghtX: () => number;
+  getlenghtY: () => number;
+  getname: () => string;
+  getpositionLock: () => number;
+  getquestion: () => string;
+  gettext1: () => string;
+  getanswer: () => string;
+  gettext2: () => string;
 };
 
 const supabaseData = createClient(
@@ -27,16 +26,16 @@ const supabaseData = createClient(
 interface EnigmeData {
   idPhare: number;
   idEnigme: number;
-  codeLock: number,
-  coordX: number,
-  coordY: number,
-  lenghtX: number,
-  lenghtY: number,
-  name: string,
-  question: string,
-  text1: string,
-  answer: string,
-  text2: string
+  codeLock: number;
+  coordX: number;
+  coordY: number;
+  lenghtX: number;
+  lenghtY: number;
+  name: string;
+  question: string;
+  text1: string;
+  answer: string;
+  text2: string;
 }
 
 export function useEnigme(idPhare: number, idEnigme: number) {
@@ -52,7 +51,7 @@ export function useEnigme(idPhare: number, idEnigme: number) {
     question: "",
     text1: "",
     answer: "",
-    text2: ""
+    text2: "",
   });
 
   useEffect(() => {
@@ -68,25 +67,24 @@ export function useEnigme(idPhare: number, idEnigme: number) {
           if (request.data) {
             //console.log("Requete Enigme : ", request.data);
             setEnigmeData({
-                idPhare: idPhare,
-                idEnigme: idEnigme,
-                codeLock: request.data.codeLock,
-                coordX: request.data.coordX,
-                coordY: request.data.coordY,
-                lenghtX: request.data.lenghtX,
-                lenghtY: request.data.lenghtY,
-                name: request.data.name,
-                question: request.data.question,
-                text1: request.data.text1,
-                answer: request.data.answer,
-                text2: request.data.text2
+              idPhare: idPhare,
+              idEnigme: idEnigme,
+              codeLock: request.data.codeLock,
+              coordX: request.data.coordX,
+              coordY: request.data.coordY,
+              lenghtX: request.data.lenghtX,
+              lenghtY: request.data.lenghtY,
+              name: request.data.name,
+              question: request.data.question,
+              text1: request.data.text1,
+              answer: request.data.answer,
+              text2: request.data.text2,
             });
-
           }
         }
       } catch (e) {
         console.log("on entre dans l'erreur");
-        console.error("Erreur lors de la récupération des données");
+        console.error("Erreur lors de la récupération des données", e);
       }
     };
     fetchEnigmeData();
@@ -105,7 +103,7 @@ export function useEnigme(idPhare: number, idEnigme: number) {
     getquestion: () => EnigmeData.question,
     gettext1: () => EnigmeData.text1,
     getanswer: () => EnigmeData.answer,
-    gettext2: () => EnigmeData.text2
+    gettext2: () => EnigmeData.text2,
   };
 
   return { EnigmeData, ...methods };
