@@ -60,7 +60,7 @@ export default function Enigme({
             className={`absolute ${
               activeButtons.hint ? "pointer-events-none" : ""
             }`}
-            style={{ top: "15vw", right: "5vw" }}
+            style={{ top: "14vw", right: "5vw" }}
             onClick={() => handleClickActiveButton("hint")}
           >
             <Image
