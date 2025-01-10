@@ -8,6 +8,7 @@ export type UseLighthouse = {
   getName: () => string;
   getPrice: () => number;
   getNumber: () => number;
+  getImage: () => UseImage;
 };
 
 const supabaseData = createClient(
@@ -20,6 +21,7 @@ interface BeacoinData {
   name: string;
   price: number;
   number: number;
+  id_image: number;
 }
 
 export function useBeacoin(id: number) {
@@ -28,6 +30,7 @@ export function useBeacoin(id: number) {
     name: "",
     price: 0,
     number: 0,
+    id_image: 0,
   });
 
   useEffect(() => {
@@ -47,6 +50,7 @@ export function useBeacoin(id: number) {
               name: request.data.name || "",
               price: request.data.price || 0,
               number: request.data.number || 0,
+              id_image: request.data.id_image || 0,
             });
           }
         }
@@ -63,6 +67,7 @@ export function useBeacoin(id: number) {
     getName: () => beacoinData.name,
     getPrice: () => beacoinData.price,
     getNumber: () => beacoinData.number,
+    getImage: () => useImage(beacoinData.id_image),
   };
 
   return { beacoinData, ...methods };

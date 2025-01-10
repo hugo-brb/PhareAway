@@ -36,7 +36,6 @@ export function useImage(id: number) {
             .eq("id", id)
             .single();
 
-          console.log("Requete Image : ", request);
           if (request.data) {
             setImageData({
               id: id,
