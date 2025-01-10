@@ -21,6 +21,11 @@ import { usePlayer } from "@/components/model/player";
 
 // Dynamically import the Map component without server-side rendering (SSR)
 const Map = dynamic(() => import("../../components/Map"), { ssr: true });
+// Initialize Supabase client for data
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 export default function Home() {
   const { data: session } = useSession();
@@ -35,12 +40,6 @@ export default function Home() {
   if (!session) {
     redirect("/Login");
   }
-
-  // Initialize Supabase client for data
-  const supabaseData = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-  );
 
   const handleClickActive = (a: string) => {
     setActive(a);
@@ -104,24 +103,16 @@ export default function Home() {
       )}
       {active === "coin" && <Store handleClickActive={handleClickActive} />}
       {active === "picture" && (
-        <Pictures handleClickActive={handleClickActive} />
+        <Pictures handleClickActive={handleClickActive} player={player} />
       )}
       {active === "enigme" && (
         <Enigme handleClickActive={handleClickActive} id={activeID} />
       )}
       {active === "account" && (
-        <Account
-          active={active}
-          handleClickActive={handleClickActive}
-          player={player} // Default to "unknown" if not resolved
-        />
+        <Account handleClickActive={handleClickActive} player={player} />
       )}
-      <YourAccount nom={session.user?.name ?? ""} />
-      <Coin
-        active={active}
-        handleClickActive={handleClickActive}
-        player={player}
-      />
+      <YourAccount />
+      <Coin handleClickActive={handleClickActive} player={player} />
       <Image
         src="/images/soupex.png"
         width={75}

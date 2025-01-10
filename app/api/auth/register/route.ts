@@ -35,7 +35,7 @@ export async function POST(request: Request) {
       { db: { schema: "next_auth" } }
     );
 
-    const response = await supabaseAuth.from("users").insert({
+    await supabaseAuth.from("users").insert({
       name: completeName,
       email: email,
       password: hashedPassword,

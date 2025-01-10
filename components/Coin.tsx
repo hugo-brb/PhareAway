@@ -2,12 +2,11 @@ import Image from "next/image";
 import type { UsePlayer } from "@/components/model/player";
 
 interface MenuProps {
-  active: string;
   handleClickActive: (a: string) => void;
   player: UsePlayer;
 }
 
-export default function Coin({ active, handleClickActive, player }: MenuProps) {
+export default function Coin({ handleClickActive, player }: MenuProps) {
   return (
     <>
       <div

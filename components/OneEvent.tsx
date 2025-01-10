@@ -14,7 +14,7 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
   const phare = useLighthouse(event.getLighthouse());
 
   if (!event) {
-    return <p>Chargement de l'événement...</p>;
+    return <p>Chargement de l&apos;événement...</p>;
   }
 
   return (

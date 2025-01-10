@@ -2,6 +2,7 @@ import OneEvent from "@/components/OneEvent";
 import { createClient } from "@supabase/supabase-js";
 import { UsePlayer } from "../model/player";
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -38,7 +39,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
     };
 
     fetchEvents(); // Appel de la fonction pour récupérer les événements
-  }, []); // L'effet est exécuté une seule fois lorsque le composant est monté
+  }, [currentDate]); // L'effet est exécuté une seule fois lorsque le composant est monté
 
   if (loading) {
     return <div>Chargement des événements...</div>;
@@ -51,7 +52,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             className="absolute top-5 left-5 transform transition-transform duration-300 hover:-rotate-90"
             onClick={() => handleClickActive("home")}
           >
-            <img
+            <Image
               src="/icones/xmark-solid.svg"
               alt="arrow-back"
               width={24}
@@ -79,8 +80,9 @@ export default function Events({ handleClickActive, player }: MenuProps) {
                 placeholder="Rechercher..."
               />
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 flex justify-center items-center">
-                <img
-                  className="w-6 h-6"
+                <Image
+                  width={24}
+                  height={24}
                   src="/icones/loop.svg"
                   alt="Search Icon"
                 />
