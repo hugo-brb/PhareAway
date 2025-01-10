@@ -55,7 +55,7 @@ export default function Rgpd() {
         />
         <section className="flex flex-col gap-7 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
           <Link href="/" className="absolute top-5 left-5">
-            <img
+            <Image
               src="/icones/arrow-back.svg"
               alt="arrow-back"
               width={24}
@@ -75,7 +75,7 @@ export default function Rgpd() {
                 onClick={handleFlipped}
                 className=" text-[--primary] cursor-pointer flex items-center gap-2 underline underline-offset-2"
               >
-                En savoir plus sur l'utilisation de vos données
+                En savoir plus sur l&apos;utilisation de vos données
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 448 512"
@@ -90,8 +90,8 @@ export default function Rgpd() {
               <div className=" flex flex-col gap-5">
                 <div className=" flex justify-between items-center w-full">
                   <label htmlFor="useMail" className=" max-w-[25vw]">
-                    Permettre l'utilisation de votre adresse mail pour créer et
-                    vérifier votre compte.
+                    Permettre l&apos;utilisation de votre adresse mail pour
+                    créer et vérifier votre compte.
                   </label>
                   <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-700 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-[--primary]">
                     <input
@@ -203,7 +203,7 @@ export default function Rgpd() {
                 />
                 <p className=" text-[--accent] text-sm">
                   * Toutes les conditions doivent-être validées pour pouvoir
-                  continuer l'inscritption.
+                  continuer l&apos;inscritption.
                 </p>
               </div>
               <div className=" flex justify-center items-center gap-2">

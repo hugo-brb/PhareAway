@@ -1,30 +1,20 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import { createClient } from "@supabase/supabase-js";
 import Image from "next/image";
 import type { UsePlayer } from "@/components/model/player";
 
 interface MenuProps {
-  active: string;
   handleClickActive: (a: string) => void;
   player: UsePlayer;
 }
 
 export default function Account({
-  active,
   handleClickActive,
   player,
 }: MenuProps) {
   const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
-
-  // Initialize Supabase client
-  const supabaseAuth = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
-    { db: { schema: "next_auth" } }
-  );
 
   const handleIsModif = async () => {
     if (isModifiable) {
@@ -40,9 +30,9 @@ export default function Account({
       const mailInput = (
         document.querySelector('input[name="mail"]') as HTMLInputElement
       ).value;
-      const passwordInput = (
+      /* const passwordInput = (
         document.querySelector('input[name="password"]') as HTMLInputElement
-      ).value;
+      ).value; */
       player.setNom(nomInput);
       player.setPrenom(prenomInput);
       player.setPseudo(pseudoInput);
@@ -80,7 +70,7 @@ export default function Account({
           }`}
           onClick={() => handleClickActive("home")}
         >
-          <img
+          <Image
             src="/icones/xmark-solid.svg"
             alt="arrow-back"
             width={24}
@@ -134,8 +124,8 @@ export default function Account({
                 name="nom"
                 value={player.getNom()}
                 onChange={(e) => player.setNom(e.target.value)}
-                className={`py-2 px-4 w-[15vw] rounded-full bg-white bg-opacity-45 ${
-                  isModifiable ? "ring-2 ring-blue-500" : ""
+                className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                  isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
                 }`}
                 disabled={!isModifiable}
               />
@@ -147,22 +137,22 @@ export default function Account({
                 type="text"
                 value={player.getPrenom()}
                 onChange={(e) => player.setPrenom(e.target.value)}
-                className={`py-2 px-4 w-[15vw] rounded-full bg-white bg-opacity-45 ${
-                  isModifiable ? "ring-2 ring-blue-500" : ""
+                className={`py-2 px-4 w-[15vw] text-slate-400	rounded-full bg-white bg-opacity-45 ${
+                  isModifiable ? "text-slate-900 ring-2 ring-blue-500" : ""
                 }`}
                 disabled={!isModifiable}
               />
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <h3 className="font-bold text-xl">Nom d'utilisateur</h3>
+            <h3 className="font-bold text-xl">Nom d&apos;utilisateur</h3>
             <input
               name="pseudo"
               type="text"
               value={player.getPseudo()}
               onChange={(e) => player.setPseudo(e.target.value)}
-              className={`py-2 px-4 w-[33vw] rounded-full bg-white bg-opacity-45 ${
-                isModifiable ? "ring-2 ring-blue-500" : ""
+              className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
               }`}
               disabled={!isModifiable}
             />

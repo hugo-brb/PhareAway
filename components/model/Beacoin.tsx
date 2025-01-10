@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { useImage, UseImage } from "./Image";
 
 export type UseLighthouse = {
   beacoinData: BeacoinData;
@@ -55,7 +54,7 @@ export function useBeacoin(id: number) {
           }
         }
       } catch (e) {
-        console.error("Erreur lors de la récupération des données");
+        console.error("Erreur lors de la récupération des données", e);
       }
     };
     fetchBeacoinData();

@@ -1,7 +1,5 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
-import { useLighthouse, UseLighthouse } from "./lighthouse";
-import { useImage, UseImage } from "./Image";
 
 export type UseEvent = {
   eventData: EventData;
@@ -72,11 +70,11 @@ export function useEvent(id: number) {
           }
         }
       } catch (e) {
-        console.error("Erreur lors de la récupération des données");
+        console.error("Erreur lors de la récupération des données", e);
       }
     };
     fetchEventData();
-  }, [id, useLighthouse, useImage]);
+  }, [id]);
 
   //methodes
   const methods = {

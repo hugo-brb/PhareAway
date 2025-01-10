@@ -19,8 +19,19 @@ import TopNav from "@/components/topNav";
 import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 
+interface itemProps {
+  XYcoord: string;
+  nom: string;
+  url: string;
+}
+
 // Dynamically import the Map component without server-side rendering (SSR)
-const Map = dynamic(() => import("../../components/Map"), { ssr: true });
+const Map = dynamic(() => import("../../components/Map"), { ssr: false });
+// Initialize Supabase client for data
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 export default function Home() {
   const { data: session } = useSession();
@@ -35,12 +46,6 @@ export default function Home() {
   if (!session) {
     redirect("/Login");
   }
-
-  // Initialize Supabase client for data
-  const supabaseData = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-  );
 
   const handleClickActive = (a: string) => {
     setActive(a);
@@ -66,10 +71,10 @@ export default function Home() {
       }
 
       // Formatage des données pour Mapbox
-      const formattedMarkers = data.map((item: any, index: number) => ({
+      const formattedMarkers = data.map((item: itemProps, index: number) => ({
         id: index, // Identifiant unique
-        longitude: item.XYcoord.split(" ")[0],
-        latitude: item.XYcoord.split(" ")[1],
+        longitude: parseFloat(item.XYcoord.split(" ")[0]),
+        latitude: parseFloat(item.XYcoord.split(" ")[1]),
         popupText: item.nom,
         icone: "/icones/lightHouseIcon.svg",
         lien: item.url,
@@ -104,24 +109,16 @@ export default function Home() {
       )}
       {active === "coin" && <Store handleClickActive={handleClickActive} />}
       {active === "picture" && (
-        <Pictures handleClickActive={handleClickActive} />
+        <Pictures handleClickActive={handleClickActive} player={player} />
       )}
       {active === "enigme" && (
         <Enigme handleClickActive={handleClickActive} id={activeID} />
       )}
       {active === "account" && (
-        <Account
-          active={active}
-          handleClickActive={handleClickActive}
-          player={player} // Default to "unknown" if not resolved
-        />
+        <Account handleClickActive={handleClickActive} player={player} />
       )}
-      <YourAccount nom={session.user?.name ?? ""} />
-      <Coin
-        active={active}
-        handleClickActive={handleClickActive}
-        player={player}
-      />
+      <YourAccount />
+      <Coin handleClickActive={handleClickActive} player={player} />
       <Image
         src="/images/soupex.png"
         width={75}

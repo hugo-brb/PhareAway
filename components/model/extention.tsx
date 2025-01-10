@@ -57,7 +57,7 @@ export function useExtention(id: number) {
           }
         }
       } catch (e) {
-        console.error("Erreur lors de la récupération des données");
+        console.error("Erreur lors de la récupération des données", e);
       }
     };
     fetchExtentionData();
@@ -80,7 +80,7 @@ export function useExtention(id: number) {
     getType: () => {
       return extentionData.type;
     },
-    getImage: () => {
+    useGetImage: () => {
       return useImage(extentionData.id_image);
     },
   };

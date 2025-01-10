@@ -45,7 +45,7 @@ export function useImage(id: number) {
           }
         }
       } catch (e) {
-        console.error("Erreur lors de la récupération des données");
+        console.error("Erreur lors de la récupération des données", e);
       }
     };
     fetchImageData();

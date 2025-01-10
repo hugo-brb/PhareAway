@@ -106,7 +106,7 @@ export default function Signup() {
             </div>
             <div className="flex flex-col gap-1 ">
               <label htmlFor="user" className="ml-2 text-base font-bold">
-                Nom d'utilisateur
+                Nom d&apos;utilisateur
               </label>
               <input
                 id="user"
