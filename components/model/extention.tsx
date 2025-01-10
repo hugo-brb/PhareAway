@@ -26,7 +26,7 @@ interface ExtentionData {
   id_image: number;
 }
 
-export function UseExtention(id: number) {
+export function useExtention(id: number) {
   const [extentionData, setExtentionData] = useState<ExtentionData>({
     id: -1,
     name: "",
@@ -41,7 +41,7 @@ export function UseExtention(id: number) {
       try {
         if (id >= 1) {
           const request = await supabaseData
-            .from("Extention")
+            .from("Extension")
             .select()
             .eq("id", id)
             .single();
@@ -80,7 +80,7 @@ export function UseExtention(id: number) {
     getType: () => {
       return extentionData.type;
     },
-    getImage: () => {
+    useGetImage: () => {
       return useImage(extentionData.id_image);
     },
   };

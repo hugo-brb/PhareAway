@@ -21,9 +21,10 @@ interface AssoInterface {
 }
 
 // Définition des props et state
+/* eslint-disable @typescript-eslint/no-empty-interface */
 interface AssoProps {}
-
 interface AssoState extends AssoInterface {}
+/* eslint-enable @typescript-eslint/no-empty-interface */
 
 class Asso extends Component<AssoProps, AssoState> {
   constructor(props: AssoProps) {

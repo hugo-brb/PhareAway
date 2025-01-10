@@ -1,11 +1,56 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import OneBeacoin from "@/components/OneBeacoin";
+import OneExtention from "@/components/OneExtention";
+
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
 }
 
 export default function Coin({ handleClickActive }: MenuProps) {
+  // State pour stocker les événements
+  const [extentions, setExtentions] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchExtentions = async () => {
+      const { data, error } = await supabaseData.from("Extension").select("id");
+
+      if (error) {
+        console.error("Erreur lors de la récupération des extentions:", error);
+      } else {
+        setExtentions(data); // Stocke les événements récupérés dans l'état
+      }
+      console.log(" info ", data);
+    };
+
+    fetchExtentions(); // Appel de la fonction pour récupérer les événements
+  }, []); // L'effet est exécuté une seule fois lorsque le composant est monté
+
+  // State pour stocker les événements
+  const [beacoins, setBeacoins] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchBeacoins = async () => {
+      const { data, error } = await supabaseData.from("Beacoin").select("id");
+
+      if (error) {
+        console.error("Erreur lors de la récupération des beacoins:", error);
+      } else {
+        setBeacoins(data); // Stocke les événements récupérés dans l'état
+      }
+      console.log(" info ", data);
+    };
+
+    fetchBeacoins(); // Appel de la fonction pour récupérer les événements
+  }, []); // L'effet est exécuté une seule fois lorsque le composant est monté
+
   return (
     <>
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
@@ -26,69 +71,9 @@ export default function Coin({ handleClickActive }: MenuProps) {
             <h2 className=" text-[--primary] text-lg px-5 py-2">Beacoins</h2>
             <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl w-[70vw] py-5">
               <div className=" flex ml-7 justify-around">
-                <Link
-                  href="/Payment"
-                  className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
-                >
-                  <Image
-                    src="/images/BeaCoin.png"
-                    width={100}
-                    height={100}
-                    alt="Beacoin"
-                  />
-                  <div className=" flex flex-col justify-center items-center">
-                    <p>10 Beacoins</p>
-                    <p className=" opacity-50">10€</p>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/Payment"
-                  className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
-                >
-                  <Image
-                    src="/images/BeaCoin2.png"
-                    width={100}
-                    height={100}
-                    alt="Beacoin2"
-                  />
-                  <div className=" flex flex-col justify-center items-center">
-                    <p>100 Beacoins</p>
-                    <p className=" opacity-50">20€</p>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/Payment"
-                  className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
-                >
-                  <Image
-                    src="/images/BeaCoin3.png"
-                    width={100}
-                    height={100}
-                    alt="Beacoin3"
-                  />
-                  <div className=" flex flex-col justify-center items-center">
-                    <p>1000 Beacoins</p>
-                    <p className=" opacity-50">50€</p>
-                  </div>
-                </Link>
-
-                <Link
-                  href="/Payment"
-                  className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
-                >
-                  <Image
-                    src="/images/BeaCoin4.png"
-                    width={100}
-                    height={100}
-                    alt="Beacoin4"
-                  />
-                  <div className=" flex flex-col justify-center items-center">
-                    <p>10.000 Beacoins</p>
-                    <p className=" opacity-50">100€</p>
-                  </div>
-                </Link>
+                {beacoins.map((beacoin) => (
+                  <OneBeacoin key={beacoin.id} id_beacoin={beacoin.id} />
+                ))}
               </div>
             </div>
           </div>
@@ -96,32 +81,13 @@ export default function Coin({ handleClickActive }: MenuProps) {
           <div className=" flex flex-col">
             <h2 className=" text-[--primary] text-lg px-5 py-2">Extensions</h2>
             <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl w-[70vw] py-5">
-              <div className=" flex ml-7 justify-center gap-24">
-                <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
-                  <Image
-                    src="/images/Corse.png"
-                    width={100}
-                    height={100}
-                    alt="Corse"
+              <div className=" flex flex-wrap ml-7 justify-center gap-24">
+                {extentions.map((extention) => (
+                  <OneExtention
+                    key={extention.id}
+                    id_extention={extention.id}
                   />
-                  <div className=" flex flex-col justify-center items-center">
-                    <p>Corse</p>
-                    <p className=" opacity-50">100 Beacoins</p>
-                  </div>
-                </div>
-
-                <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer">
-                  <Image
-                    src="/images/Dom.png"
-                    width={100}
-                    height={100}
-                    alt="Dom-Tom"
-                  />
-                  <div className=" flex flex-col justify-center items-center">
-                    <p>Dom-Tom</p>
-                    <p className=" opacity-50">1.000 Beacoins</p>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
           </div>

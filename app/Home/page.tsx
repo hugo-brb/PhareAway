@@ -22,8 +22,16 @@ import Contact from "@/components/popover/Contact";
 import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 
+interface itemProps {
+  XYcoord: string;
+  nom: string;
+  url: string;
+}
+
 // Dynamically import the Map component without server-side rendering (SSR)
-const Map = dynamic(() => import("../../components/Map"), { ssr: true });
+const Map = React.memo(
+  dynamic(() => import("../../components/Map"), { ssr: false })
+);
 // Initialize Supabase client for data
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -68,10 +76,10 @@ export default function Home() {
       }
 
       // Formatage des données pour Mapbox
-      const formattedMarkers = data.map((item: any, index: number) => ({
+      const formattedMarkers = data.map((item: itemProps, index: number) => ({
         id: index, // Identifiant unique
-        longitude: item.XYcoord.split(" ")[0],
-        latitude: item.XYcoord.split(" ")[1],
+        longitude: parseFloat(item.XYcoord.split(" ")[0]),
+        latitude: parseFloat(item.XYcoord.split(" ")[1]),
         popupText: item.nom,
         icone: "/icones/lightHouseIcon.svg",
         lien: item.url,
