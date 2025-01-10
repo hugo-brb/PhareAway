@@ -47,7 +47,7 @@ const Map: React.FC<MapComponentProps> = ({
       mapInstance.current?.remove();
       mapInstance.current = null;
     };
-  }, [bounds, center, zoom]);
+  }, []);
 
   useEffect(() => {
     if (mapInstance.current) {
