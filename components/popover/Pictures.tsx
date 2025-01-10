@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { UsePlayer } from "../model/player";
 import axios from "axios";
-//import EXIF from "exif-js";
+// import EXIF from "exif-js";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -32,7 +32,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
     setLoading(true);
 
     try {
-      //await validateExifData(file);
+      // await validateExifData(file);
       const base64Image = await convertToBase64(file);
       const isLighthouse = await analyzeImageWithVisionAPI(base64Image);
 
@@ -56,18 +56,20 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = function () {
-        const image = new Image();
+        const image = document.createElement("img");
         image.onload = function () {
-          EXIF.getData(image as any, function (this: any) {
-            const make = EXIF.getTag(this, "Make");
-            const model = EXIF.getTag(this, "Model");
+          image.onload = function () {
+            EXIF.getData(image as any, function (this: any) {
+              const make = EXIF.getTag(this, "Make");
+              const model = EXIF.getTag(this, "Model");
 
-            if (make || model) {
-              resolve();
-            } else {
-              reject(new Error("Les métadonnées EXIF sont insuffisantes."));
-            }
-          });
+              if (make || model) {
+                resolve();
+              } else {
+                reject(new Error("Les métadonnées EXIF sont insuffisantes."));
+              }
+            });
+          };
         };
         image.onerror = () =>
           reject(new Error("Impossible de charger l'image pour analyse EXIF."));
