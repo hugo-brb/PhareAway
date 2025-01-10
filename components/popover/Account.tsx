@@ -124,8 +124,8 @@ export default function Account({
                 name="nom"
                 value={player.getNom()}
                 onChange={(e) => player.setNom(e.target.value)}
-                className={`py-2 px-4 w-[15vw] rounded-full bg-white bg-opacity-45 ${
-                  isModifiable ? "ring-2 ring-blue-500" : ""
+                className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                  isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
                 }`}
                 disabled={!isModifiable}
               />
@@ -137,8 +137,8 @@ export default function Account({
                 type="text"
                 value={player.getPrenom()}
                 onChange={(e) => player.setPrenom(e.target.value)}
-                className={`py-2 px-4 w-[15vw] rounded-full bg-white bg-opacity-45 ${
-                  isModifiable ? "ring-2 ring-blue-500" : ""
+                className={`py-2 px-4 w-[15vw] text-slate-400	rounded-full bg-white bg-opacity-45 ${
+                  isModifiable ? "text-slate-900 ring-2 ring-blue-500" : ""
                 }`}
                 disabled={!isModifiable}
               />
@@ -151,8 +151,8 @@ export default function Account({
               type="text"
               value={player.getPseudo()}
               onChange={(e) => player.setPseudo(e.target.value)}
-              className={`py-2 px-4 w-[33vw] rounded-full bg-white bg-opacity-45 ${
-                isModifiable ? "ring-2 ring-blue-500" : ""
+              className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
               }`}
               disabled={!isModifiable}
             />
