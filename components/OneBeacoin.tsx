@@ -21,12 +21,23 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
         href="/Payment"
         className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
       >
-        <Image
-          src={image.getUrl()}
-          width={100}
-          height={100}
-          alt={beacoin.getName()}
-        />
+        {image.getUrl() !== "" ? (
+          <Image
+            className="self-center rounded-lg"
+            src={image.getUrl()}
+            width={100}
+            height={100}
+            alt={beacoin.getName()}
+          />
+        ) : (
+          <Image
+            className="self-center rounded-lg"
+            src="/icones/logoBaniere.png"
+            alt="Default logo"
+            width={100}
+            height={100}
+          />
+        )}
         <div className=" flex flex-col justify-center items-center">
           <p>{beacoin.getNumber()} beacoins </p>
           <p className=" opacity-50">{beacoin.getPrice()} €</p>
