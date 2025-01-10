@@ -26,7 +26,9 @@ interface itemProps {
 }
 
 // Dynamically import the Map component without server-side rendering (SSR)
-const Map = dynamic(() => import("../../components/Map"), { ssr: false });
+const Map = React.memo(
+  dynamic(() => import("../../components/Map"), { ssr: false })
+);
 // Initialize Supabase client for data
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,

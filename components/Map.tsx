@@ -47,8 +47,8 @@ const Map: React.FC<MapComponentProps> = ({
       mapInstance.current?.remove();
       mapInstance.current = null;
     };
-  }, [bounds, center, zoom]);
-/* fonction de déplacement sur la carte avec flyto*/
+  }, []);
+
   useEffect(() => {
     if (mapInstance.current) {
       mapInstance.current.flyTo({ center });
