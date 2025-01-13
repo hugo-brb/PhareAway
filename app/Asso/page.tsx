@@ -20,7 +20,7 @@ export default function Asso() {
     }
 
     try {
-      const response = await fetch("/api/mail", {
+      const response = await fetch("/api/mailAsso", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,9 +33,7 @@ export default function Asso() {
         setFormData({
           email: "",
         });
-        window.alert(
-          "Votre message a été envoyé avec succès !\nJe vous répondrai dans les plus brefs délais."
-        );
+        window.alert("Votre message a été envoyé avec succès !");
         setIsSend(true);
       } else {
         console.error("Erreur lors de l'envoi.");
@@ -50,7 +48,7 @@ export default function Asso() {
     <>
       {!isSend ? (
         <main className="land flex justify-center items-center w-[100vw] h-[100vh] max-h-[100vh]">
-          <section className="flex flex-col gap-7 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
+          <section className="flex flex-col max-w-[95vw] max-h-[95vh] gap-7 bg-white bg-opacity-80 rounded-lg px-10 md:px-20 py-12 backdrop-blur-md overflow-y-scroll scrollbarhidden">
             <Link
               href="/Signup"
               className="absolute top-5 left-5 hover:scale-110 duration-300"
@@ -63,7 +61,7 @@ export default function Asso() {
               />
             </Link>
             <h1 className="font-ouroboros text-4xl self-center">Association</h1>
-            <p className="text-lg text-center max-w-[45vw]">
+            <p className="text-lg text-center md:max-w-[45vw]">
               Merci de bien vouloir nous communiquer votre adresse e-mail afin
               que nos équipes puissent vous recontacter et vérifier votre statut
               d&apos;association.
@@ -76,7 +74,7 @@ export default function Asso() {
                 type="email"
                 name="email"
                 id="email"
-                className=" w-[30vw] py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
+                className=" md:w-[30vw] py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                 placeholder="phareaway@asso.fr"
                 onChange={(e) => setFormData({ email: e.target.value })}
               />
@@ -90,7 +88,7 @@ export default function Asso() {
         </main>
       ) : (
         <main className="land flex justify-center items-center w-[100vw] h-[100vh] max-h-[100vh]">
-          <section className="flex flex-col gap-7 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
+          <section className="flex flex-col max-w-[95vw] max-h-[95vh] gap-7 bg-white bg-opacity-80 rounded-lg px-10 md:px-20 py-12 backdrop-blur-md overflow-y-scroll scrollbarhidden">
             <Link
               href="/Login"
               className="absolute top-5 left-5 hover:scale-110 duration-300"
@@ -103,7 +101,7 @@ export default function Asso() {
               />
             </Link>
             <h1 className="font-ouroboros text-4xl self-center">Association</h1>
-            <p className="text-lg text-center max-w-[45vw]">
+            <p className="text-lg text-center md:max-w-[45vw]">
               Merci de bien vouloir créer un compte client en utilisant la même
               adresse e-mail. Votre compte sera converti en compte association
               une fois la vérification de votre statut finalisée.

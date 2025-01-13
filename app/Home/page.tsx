@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
-import YourAccount from "@/components/BackHome";
+import BackHome from "@/components/BackHome";
 import AddEvent from "@/components/popover/AddEvent";
 import Events from "@/components/popover/Events";
 import Enigme from "@/components/popover/Enigme";
@@ -23,9 +23,10 @@ import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 
 interface itemProps {
-  coordinates: string;
-  name: string;
-  url: string;
+    id:number;
+    coordinates: string;
+    name: string;
+    url: string;
 }
 
 // Dynamically import the Map component without server-side rendering (SSR)
@@ -69,15 +70,15 @@ export default function Home() {
     const fetchMarkers = async () => {
       const { data, error } = await supabaseData
         .from("Lighthouse")
-        .select("coordinates, name, url");
+        .select("coordinates, name, url, id");
       if (error) {
         console.error("Erreur de chargement des données Supabase:", error);
         return;
       }
 
       // Formatage des données pour Mapbox
-      const formattedMarkers = data.map((item: itemProps, index: number) => ({
-        id: index, // Identifiant unique
+      const formattedMarkers = data.map((item: itemProps) => ({
+        id:item.id,
         longitude: parseFloat(item.coordinates.split(" ")[0]),
         latitude: parseFloat(item.coordinates.split(" ")[1]),
         popupText: item.name,
@@ -127,14 +128,14 @@ export default function Home() {
       {active === "contact" && (
         <Contact handleClickActive={handleClickActive} player={player} />
       )}
-      <YourAccount />
+      <BackHome />
       <Coin handleClickActive={handleClickActive} player={player} />
       <Image
         src="/images/soupex.png"
         width={75}
         height={75}
         alt="Logo Soupex"
-        className="absolute z-50 bottom-3 right-3"
+        className="hidden md:block absolute z-50 bottom-3 right-3 "
       />
     </>
   );

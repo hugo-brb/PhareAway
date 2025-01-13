@@ -1,6 +1,6 @@
 import Image from "next/image";
 import type { UsePlayer } from "@/components/model/player";
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -8,26 +8,50 @@ interface MenuProps {
 }
 
 export default function Contact({ handleClickActive, player }: MenuProps) {
-  const [message, setMessage] = useState("");
-  const [subject] = useState("Demande d'assistance");
+  const [formData, setFormData] = useState({
+    nom: player.getNom(),
+    prenom: player.getPrenom(),
+    pseudo: player.getPseudo(),
+    email: player.getMail(),
+    message: "",
+  });
 
-  const generateMailtoLink = () => {
-    const emailBody = `Nom: ${player.getNom()}\nPrénom: ${player.getPrenom()}\nUtilisateur: ${player.getPseudo()}\nMessage:\n${message}`;
-    const mailtoLink = `mailto:hugobarbieri38@gmail.com?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(emailBody)}`;
-    return mailtoLink;
-  };
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-  const handleSubmit = () => {
-    // Crée un lien mailto avec les informations de l'utilisateur
-    const mailtoLink = generateMailtoLink();
+    // Vérifier que le champ email est valide
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+      window.alert("Veuillez entrer une adresse e-mail valide.");
+      return;
+    }
 
-    // Ouvre le lien mailto pour envoyer l'email
-    window.location.href = mailtoLink;
+    try {
+      const response = await fetch("/api/mailAccount", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
-    // Réinitialiser le message après l'envoi
-    setMessage("");
+      if (response.ok) {
+        console.log("Message envoyé !");
+        setFormData({
+          nom: "",
+          prenom: "",
+          pseudo: "",
+          email: "",
+          message: "",
+        });
+        window.alert("Votre message a été envoyé avec succès !");
+      } else {
+        console.error("Erreur lors de l'envoi.");
+        window.alert("Une erreur est survenue lors de l'envoi du message.");
+      }
+    } catch (error) {
+      console.error("Erreur:", error);
+      window.alert("Une erreur est survenue lors de l'envoi du message.");
+    }
   };
 
   return (
@@ -63,77 +87,82 @@ export default function Contact({ handleClickActive, player }: MenuProps) {
             améliorer votre expérience !
           </h2>
 
-          <div className="flex gap-12">
-            <div className="flex flex-col gap-1">
-              <h3 className="font-bold text-xl text-slate-600">Nom</h3>
+          <form onSubmit={handleSubmit} className="flex flex-col gap-7">
+            <div className="flex gap-12">
+              <div className="flex flex-col gap-1">
+                <h3 className="font-bold text-xl text-slate-600">Nom</h3>
+                <input
+                  type="text"
+                  name="nom"
+                  value={player.getNom()}
+                  className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
+                  disabled
+                />
+              </div>
+
+              <div className="flex flex-col gap-1">
+                <h3 className="font-bold text-xl text-slate-600">Prénom</h3>
+                <input
+                  name="prenom"
+                  type="text"
+                  value={player.getPrenom()}
+                  className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 `}
+                  disabled
+                />
+              </div>
+            </div>
+            <div
+              className={` ${
+                player.getPseudo() === "" ? "hidden" : "flex flex-col gap-1"
+              }`}
+            >
+              <h3 className="font-bold text-xl text-slate-600">
+                Nom d&apos;utilisateur
+              </h3>
               <input
+                name="pseudo"
                 type="text"
-                name="nom"
-                value={player.getNom()}
-                onChange={(e) => player.setNom(e.target.value)}
-                className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
+                value={player.getPseudo()}
+                className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
                 disabled
               />
             </div>
-
             <div className="flex flex-col gap-1">
-              <h3 className="font-bold text-xl text-slate-600">Prénom</h3>
+              <h3 className="font-bold text-xl text-slate-600">
+                Adresse email
+              </h3>
               <input
-                name="prenom"
-                type="text"
-                value={player.getPrenom()}
-                onChange={(e) => player.setPrenom(e.target.value)}
-                className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 `}
+                name="email"
+                type="email"
+                value={player.getMail()}
+                className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
                 disabled
               />
             </div>
-          </div>
-          <div className="flex flex-col gap-1">
-            <h3 className="font-bold text-xl text-slate-600">
-              Nom d&apos;utilisateur
-            </h3>
-            <input
-              name="pseudo"
-              type="text"
-              value={player.getPseudo()}
-              onChange={(e) => player.setPseudo(e.target.value)}
-              className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
-              disabled
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <h3 className="font-bold text-xl text-slate-600">Adresse email</h3>
-            <input
-              name="pseudo"
-              type="text"
-              value={player.getMail()}
-              onChange={(e) => player.setPseudo(e.target.value)}
-              className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
-              disabled
-            />
-          </div>
-          <div className="flex flex-col gap-1">
-            <h3 className="font-bold text-xl">Message</h3>
-            <textarea
-              placeholder="Écrivez votre message"
-              name="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className={`py-3 pb-24 px-4 w-[33vw] rounded-3xl bg-white bg-opacity-45 ring-2 ring-slate-400`}
-            />
-          </div>
+            <div className="flex flex-col gap-1">
+              <h3 className="font-bold text-xl">Message</h3>
+              <textarea
+                placeholder="Écrivez votre message"
+                name="message"
+                value={formData.message}
+                onChange={(e) =>
+                  setFormData({ ...formData, message: e.target.value })
+                }
+                className={`py-3 pb-24 px-4 w-[33vw] rounded-3xl bg-white bg-opacity-45 ring-2 ring-slate-400`}
+              />
+            </div>
 
-          <button
-            onClick={handleSubmit}
-            className={`${
-              message
-                ? "bg-[--primary] text-[--background] hover:bg-opacity-90"
-                : "bg-gray-300 text-gray-500 cursor-not-allowed"
-            } border-2 duration-300 cursor-pointer text-xl font-bold mx-auto py-2 px-6 rounded-2xl`}
-            disabled={!message}
-          >
-            Valider
-          </button>
+            <button
+              type="submit"
+              className={`${
+                formData.message
+                  ? "bg-[--primary] text-[--background] hover:bg-opacity-90"
+                  : "bg-gray-300 text-gray-500 cursor-not-allowed"
+              } border-2 duration-300 cursor-pointer text-xl font-bold mx-auto py-2 px-6 rounded-2xl`}
+            >
+              Valider
+            </button>
+          </form>
         </div>
       </section>
     </main>
