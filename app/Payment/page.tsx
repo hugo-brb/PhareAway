@@ -6,7 +6,7 @@ export default function Payment() {
   return (
     <>
       <div className=" land h-[100vh] w-[100vw] flex justify-center items-center bg-black bg-opacity-50 absolute top-0 z-40">
-        <div className="absolute w-fit h-fit top-10 left-10 bg-white bg-opacity-60 rounded-3xl backdrop-blur-md">
+        <div className="absolute w-fit h-fit top-10 left-3 md:left-10 bg-white bg-opacity-60 rounded-3xl backdrop-blur-md">
           <Link
             href="/Home"
             className=" duration-300 hover:scale-110 w-full h-full flex justify-center items-center"

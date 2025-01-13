@@ -6,9 +6,9 @@ interface MenuProps {
 export default function About({ handleClickActive }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-      <section className="flex flex-col self-center gap-7 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+      <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
         <button
-          className={`absolute top-5 left-5 transform transition-all hover:left-4`}
+          className={`absolute top-5 left-5 transform transition-all hover:left-4 hover:pr-[1vw]`}
           onClick={() => handleClickActive("account")}
         >
           <Image
@@ -36,7 +36,7 @@ export default function About({ handleClickActive }: MenuProps) {
             width={150}
             height={150}
           />
-          <h2 className="text-xl px-16 pt-8">
+          <h2 className="text-xl md:px-16 pt-4 md:pt-8">
             Chez Soupex Software, nous croyons fermement que le patrimoine doit
             être une richesse partagée par tous. À travers notre projet dédié
             aux phares du patrimoine national français, nous visons à rendre ces
@@ -48,7 +48,7 @@ export default function About({ handleClickActive }: MenuProps) {
             simplement curieux, nous mettons à votre disposition des ressources
             pour explorer ces joyaux culturels, où que vous soyez.
           </h2>
-          <h2 className="text-xl px-16 pt-8">
+          <h2 className="text-xl md:px-16 pt-8">
             Les phares, témoins intemporels de l&apos;ingéniosité et de
             l&apos;histoire maritime française, sont un patrimoine précieux qui
             mérite d&apos;être préservé. Soupex Software s&apos;engage à
@@ -61,7 +61,7 @@ export default function About({ handleClickActive }: MenuProps) {
             pour les générations futures tout en célébrant l&apos;ingéniosité de
             nos ancêtres.
           </h2>
-          <h2 className="text-xl px-16 pt-8">
+          <h2 className="text-xl md:px-16 pt-8">
             Visiter un phare, c&apos;est bien plus qu&apos;une simple sortie ;
             c&apos;est une aventure qui rassemble toutes les générations. Avec
             Soupex Software, nous transformons chaque visite en une expérience
@@ -74,7 +74,7 @@ export default function About({ handleClickActive }: MenuProps) {
             chargés d&apos;histoire créent des souvenirs inoubliables.
           </h2>
 
-          <div className="pt-14 self-start pl-16">
+          <div className="pt-14 self-start md:pl-16">
             <h2>© phareaway.fun 2025. Tous droits réservés. </h2>
             <h2> 2 Place Doyen Gosse, 38000 Grenoble</h2>
             <h2>04.76.28.45.09</h2>
@@ -82,7 +82,7 @@ export default function About({ handleClickActive }: MenuProps) {
         </div>
         <div className="flex flex-row gap-10 ">
           <button
-            className="w-[28vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer font-bold mx-auto py-2 px-2 rounded-2xl"
+            className="md:w-[28vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer font-bold mx-auto py-4 px-4 md:py-2 md:px-2 rounded-2xl"
             onClick={() => handleClickActive("contact")}
           >
             Nous Contacter

@@ -3,24 +3,18 @@ import Image from "next/image";
 interface MenuProps {
   handleClickActive: (a: string) => void;
 }
-export default function CGU({ handleClickActive }: MenuProps) {
+
+export default function CGUAcceuil({ handleClickActive }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-      <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+      <section className="flex flex-col self-center gap-7 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
         <button
-          className={`absolute top-5 left-5 transform transition-all hover:left-4 hover:pr-[1vw]`}
+          className={`absolute top-5 left-5 transform transition-all hover:left-4`}
           onClick={() => handleClickActive("account")}
-        >
-          <Image
-            src="/icones/arrow-back.svg"
-            alt="arrow-back"
-            width={24}
-            height={24}
-          />
-        </button>
+        ></button>
         <button
           className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
-          onClick={() => handleClickActive("home")}
+          onClick={() => handleClickActive("close")}
         >
           <Image
             src="/icones/xmark-solid.svg"
@@ -29,8 +23,8 @@ export default function CGU({ handleClickActive }: MenuProps) {
             height={24}
           />
         </button>
-        <div className="flex flex-col items-center gap-7 md:px-16">
-          <h1 className="text-3xl text-center font-extrabold mt-4 md:mt-0">
+        <div className="flex flex-col items-center gap-8 px-16">
+          <h1 className="text-3xl font-extrabold">
             Conditions générales d&apos;utilisation
           </h1>
           <h2>En vigueur au 24/01/2025</h2>
@@ -62,9 +56,9 @@ export default function CGU({ handleClickActive }: MenuProps) {
           </h1>
           <h2>
             L&apos;édition et la direction de la publication du site
-            phareaway.fun est assurée par Hugo BARBIERI, domicilié 2 Place Doyen
-            Gosse, 38000 Grenoble . Numéro de téléphone est 0476284509 Adresse
-            e-mail infos.phareaway@gmail.com.
+            phareaway.fun est assurée par Hugo BARBIERI, domicilié 32 rue Marcel
+            Paul. Numéro de téléphone est 0627355061 Adresse e-mail
+            hugobarbieri38@gmail.com.
           </h2>
           <h2>
             L&apos;hébergeur du site phareaway.fun est la société OVH, dont le

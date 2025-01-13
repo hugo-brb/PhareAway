@@ -145,8 +145,8 @@ export default function Event({ handleClickActive }: MenuProps) {
   return (
     <>
       <main className=" absolute top-0 z-40 flex  w-[100vw] h-[100vh]">
-        <section className=" flex flex-col self-center gap-12 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-        <button
+        <section className=" flex flex-col self-center gap-7 md:gap-12 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+          <button
             className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
             onClick={() => handleClickActive("home")}
           >
@@ -157,14 +157,14 @@ export default function Event({ handleClickActive }: MenuProps) {
               height={24}
             />
           </button>
-          <h1 className="font-gravitas self-center text-4xl w-full h-fit text-center">
+          <h1 className="font-gravitas self-center text-4xl w-full h-fit text-center mt-4 md:mt-0">
             Ajouter un évenement
           </h1>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-5 justify-center items-center"
           >
-            <div className="flex flex-col gap-2 w-2/4">
+            <div className="flex flex-col gap-2 w-[75vw] md:w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
                 Nom de l&apos;événement
               </label>
@@ -176,7 +176,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               />
             </div>
 
-            <div className="flex flex-col gap-2 w-2/4">
+            <div className="flex flex-col gap-2 w-[75vw] md:w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
                 Description
               </label>
@@ -187,7 +187,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               />
             </div>
 
-            <div className="flex flex-col gap-2 w-2/4">
+            <div className="flex flex-col gap-2 w-[75vw] md:w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
                 Date de l&apos;évenement
               </label>
@@ -198,7 +198,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               />
             </div>
 
-            <div className="flex flex-col gap-2 w-2/4">
+            <div className="flex flex-col gap-2 w-[75vw] md:w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
                 Lien vers le site de l&apos;évenement/billeterie
               </label>
@@ -210,7 +210,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               />
             </div>
 
-            <div className="flex flex-col gap-2 w-2/4">
+            <div className="flex flex-col gap-2 w-[75vw] md:w-2/4">
               <label htmlFor="name" className="text-lg font-bold">
                 Phare concerné par l&apos;évenement
               </label>
@@ -222,8 +222,8 @@ export default function Event({ handleClickActive }: MenuProps) {
               />
             </div>
 
-            <div className=" flex items-center gap-2 w-2/4">
-              <div className="flex flex-col gap-2 w-2/4">
+            <div className=" flex flex-col md:flex-row items-center gap-2 md:w-2/4">
+              <div className="flex flex-col gap-2 w-[75vw] md:w-2/4">
                 <label htmlFor="name" className="text-lg font-bold">
                   Durée de l&apos;évenement
                 </label>
@@ -233,7 +233,7 @@ export default function Event({ handleClickActive }: MenuProps) {
                   className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                 />
               </div>
-              <div className="flex flex-col gap-2 w-2/4">
+              <div className="flex flex-col gap-2 w-[75vw] md:w-2/4">
                 <label htmlFor="name" className="text-lg font-bold">
                   Prix de l&apos;inscription
                 </label>
