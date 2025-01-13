@@ -10,7 +10,12 @@ const supabase =createClient(
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [results, setResults] = useState([]);
+  interface Event {
+    id: number;
+    name: string;
+  }
+  
+  const [results, setResults] = useState<Event[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {

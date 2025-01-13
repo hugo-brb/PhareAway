@@ -4,8 +4,8 @@ import { UsePlayer } from "../model/player";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
-import React from 'react';
-import SearchBar from './SearchBar';
+import React from "react";
+import SearchBar from "./SearchBar";
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -77,6 +77,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             id="recherche"
             className="flex mt-5 md:mt-0 items-center self-center gap-4"
           >
+            {/*Bouton trier */}
             <button className=" flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base">
               <svg
                 className=" size-3 fill-[--text]"
@@ -87,6 +88,8 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               </svg>
               <span>Trier</span>
             </button>
+            {/*Fin Bouton trier */}
+            {/* Search Bar */}
             <div className="relative">
               <input
                 type="search"
@@ -102,6 +105,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
                 />
               </button>
             </div>
+            {/* Fin Search Bar */}
           </div>
           {player.getIsAsso() && (
             <button
