@@ -31,7 +31,7 @@ export default function Login() {
           height={150}
           className=" absolute top-2 left-2"
         />
-        <section className="flex flex-col gap-12 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
+        <section className="flex flex-col max-w-[95vw] max-h-[95vh] gap-7 md:gap-12 bg-white bg-opacity-80 rounded-lg px-12 md:px-20 py-12 backdrop-blur-md">
           <Link href="/" className="absolute top-5 left-5">
             <Image
               src="/icones/arrow-back.svg"
@@ -53,7 +53,7 @@ export default function Login() {
               <input
                 id="email"
                 name="email"
-                className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
+                className="py-2 px-6 rounded-lg text-base md:text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                 type="email"
                 placeholder="phareaway@lighthouse.fr"
                 required
@@ -66,7 +66,7 @@ export default function Login() {
               <input
                 id="password"
                 name="password"
-                className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
+                className="py-2 px-6 rounded-lg text-base md:text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                 type="password"
                 placeholder="Monsupermotdepasse38"
                 required
@@ -81,7 +81,7 @@ export default function Login() {
               </button>
             </div>
 
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 md:text-base text-xs">
               <label htmlFor="signup">
                 Vous n&apos;avez toujours pas de compte ?!
               </label>

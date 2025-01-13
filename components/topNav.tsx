@@ -6,7 +6,7 @@ type NavbarProps = {
 
 const Navbar: React.FC<NavbarProps> = ({ onCenterChange }) => {
   return (
-    <aside className="flex flex-row gap-4 justify-between absolute top-3 right-1/2 translate-x-1/2 bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-6 py-4 z-50">
+    <aside className="hidden md:flex flex-row gap-4 justify-between absolute top-3 right-1/2 translate-x-1/2 bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-6 py-4 z-50">
       <button onClick={() => onCenterChange([-1.6282904, 49.6299822])}>
         Cherbourg
       </button>

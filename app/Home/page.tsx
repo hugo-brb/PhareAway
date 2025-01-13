@@ -8,7 +8,7 @@ import { redirect } from "next/navigation";
 
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
-import YourAccount from "@/components/BackHome";
+import BackHome from "@/components/BackHome";
 import AddEvent from "@/components/popover/AddEvent";
 import Events from "@/components/popover/Events";
 import Enigme from "@/components/popover/Enigme";
@@ -127,14 +127,14 @@ export default function Home() {
       {active === "contact" && (
         <Contact handleClickActive={handleClickActive} player={player} />
       )}
-      <YourAccount />
+      <BackHome />
       <Coin handleClickActive={handleClickActive} player={player} />
       <Image
         src="/images/soupex.png"
         width={75}
         height={75}
         alt="Logo Soupex"
-        className="absolute z-50 bottom-3 right-3"
+        className="hidden md:block absolute z-50 bottom-3 right-3 "
       />
     </>
   );
