@@ -49,7 +49,7 @@ export default function SmallEnigme({
           handleClickAnswer={handleClickAnswer}
           name={name}
           sol={false}
-          text3="Dommage Bozo ! Pas de code pour toi mon grand gourmant..."
+          text3="Dommage Bozo ! Pas de code pour toi mon grand gourmand..."
         />
       )}
       <div className="flex flex-col items-center justify-between h-full">
