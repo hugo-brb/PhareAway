@@ -76,8 +76,8 @@ export default function About({ handleClickActive }: MenuProps) {
 
           <div className="pt-14 self-start pl-16">
             <h2>© phareaway.fun 2025. Tous droits réservés. </h2>
-            <h2> 32 rue Marcel Paul 38000 Grenoble</h2>
-            <h2>06 27 35 50 61</h2>
+            <h2> 2 Place Doyen Gosse, 38000 Grenoble</h2>
+            <h2>04.76.28.45.09</h2>
           </div>
         </div>
         <div className="flex flex-row gap-10 ">

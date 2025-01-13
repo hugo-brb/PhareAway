@@ -56,7 +56,7 @@ export default function Enigme({
             />
           </button>
 
-          <h1 className="text-3xl font-bold">
+          <h1 className="absolute top-5 text-3xl font-bold">
             Enigmes : {lighthouse.getName() ?? "Phare inconnu"}
           </h1>
 
