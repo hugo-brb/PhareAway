@@ -1,11 +1,14 @@
-/* From Uiverse.io by zanina-yassine */ 
+/* From Uiverse.io by zanina-yassine */
 .modal {
   width: fit-content;
   height: fit-content;
-  background: #FFFFFF;
-  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01), 0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09), 0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
+  background: #ffffff;
+  box-shadow: 0px 187px 75px rgba(0, 0, 0, 0.01),
+    0px 105px 63px rgba(0, 0, 0, 0.05), 0px 47px 47px rgba(0, 0, 0, 0.09),
+    0px 12px 26px rgba(0, 0, 0, 0.1), 0px 0px 0px rgba(0, 0, 0, 0.1);
   border-radius: 26px;
   max-width: 450px;
+  margin: 10px;
 }
 
 .form {
@@ -25,7 +28,7 @@
 
 .payment--options button {
   height: 55px;
-  background: #F2F2F2;
+  background: #f2f2f2;
   border-radius: 11px;
   padding: 0;
   border: 0;
@@ -45,7 +48,7 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   gap: 10px;
-  color: #8B8E98;
+  color: #8b8e98;
   margin: 0 10px;
 }
 
@@ -93,7 +96,7 @@
 
 .input_label {
   font-size: 10px;
-  color: #8B8E98;
+  color: #8b8e98;
   font-weight: 600;
 }
 
@@ -103,7 +106,7 @@
   padding: 0 0 0 16px;
   border-radius: 9px;
   outline: none;
-  background-color: #F2F2F2;
+  background-color: #f2f2f2;
   border: 1px solid #e5e5e500;
   transition: all 0.3s cubic-bezier(0.15, 0.83, 0.66, 1);
 }
@@ -121,7 +124,7 @@
   margin: 0;
 }
 
-.input_field[type=number] {
+.input_field[type="number"] {
   appearance: textfield;
   -moz-appearance: textfield;
 }
