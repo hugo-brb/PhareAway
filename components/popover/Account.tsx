@@ -2,6 +2,7 @@ import { useState } from "react";
 import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { FormEvent } from "react";
 import type { UsePlayer } from "@/components/model/player";
 
 interface MenuProps {
@@ -9,57 +10,39 @@ interface MenuProps {
   player: UsePlayer;
 }
 
-export default function Account({
-  handleClickActive,
-  player,
-}: MenuProps) {
+export default function Account({ handleClickActive, player }: MenuProps) {
   const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
 
-  const handleIsModif = async () => {
+  // États locaux pour les champs modifiables
+  const [nom, setNom] = useState(player.getNom());
+  const [prenom, setPrenom] = useState(player.getPrenom());
+  const [pseudo, setPseudo] = useState(player.getPseudo());
+  const [mail, setMail] = useState(player.getMail());
+
+  const handleIsModif = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     if (isModifiable) {
-      const nomInput = (
-        document.querySelector('input[name="nom"]') as HTMLInputElement
-      ).value;
-      const prenomInput = (
-        document.querySelector('input[name="prenom"]') as HTMLInputElement
-      ).value;
-      const pseudoInput = (
-        document.querySelector('input[name="pseudo"]') as HTMLInputElement
-      ).value;
-      const mailInput = (
-        document.querySelector('input[name="mail"]') as HTMLInputElement
-      ).value;
-      /* const passwordInput = (
-        document.querySelector('input[name="password"]') as HTMLInputElement
-      ).value; */
-      player.setNom(nomInput);
-      player.setPrenom(prenomInput);
-      player.setPseudo(pseudoInput);
-      if (player.getIsOAuth() === false) {
-        player.setMail(mailInput);
-        // player.setPassword(passwordInput);
+      player.setNom(nom);
+      player.setPrenom(prenom);
+      player.setPseudo(pseudo);
+      if (!player.getIsOAuth()) {
+        player.setMail(mail);
       }
     }
 
-    setIsModifiable((prev) => !prev); // Alterner entre modification et validation
+    setIsModifiable((prev) => !prev);
   };
 
   const handleSignOut = async () => {
-    // Déconnexion de l'utilisateur
-    await signOut({
-      redirect: false, // Ne redirige pas automatiquement
-    });
-
-    // Redirection après la déconnexion
+    await signOut({ redirect: false });
     redirect("/");
   };
 
   if (status === "loading") {
     return <div>Chargement...</div>;
   }
-
-  console.log(player.getIsOAuth());
 
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
@@ -84,15 +67,14 @@ export default function Account({
             width={200}
             height={200}
             className="rounded-full"
-          ></Image>
+          />
           <div className="flex flex-col gap-2">
             <h1 className="font-extrabold text-5xl">
-              {player.getNom() !== "" ? player.getNom() : ""}{" "}
-              {player.getPrenom()}
+              {nom} {prenom}
             </h1>
-            <h2 className="text-lg">{player.getMail()}</h2>
-            <div className=" flex justify-start items-center gap-7">
-              <div className=" flex justify-center items-center gap-2 px-4 py-2 rounded-2xl cursor-pointer duration-300 hover:ring-1 ring-[--primary]">
+            <h2 className="text-lg">{mail}</h2>
+            <div className="flex justify-start items-center gap-7">
+              <div className="flex justify-center items-center gap-2 px-4 py-2 rounded-2xl cursor-pointer duration-300 hover:ring-1 ring-[--primary]">
                 <Image
                   src="/images/lighthouse.png"
                   alt="Lighthouse"
@@ -115,15 +97,18 @@ export default function Account({
           </svg>
         </div>
         <hr className="w-[60vw] border-[--text] self-center" />
-        <div className="flex flex-col gap-7 pl-7 mx-auto px-7 w-full justify-center items-center">
+        <form
+          onSubmit={handleIsModif}
+          className="flex flex-col gap-7 pl-7 mx-auto px-7 w-full justify-center items-center"
+        >
           <div className="flex gap-12 justify-start">
             <div className="flex flex-col gap-1">
               <h3 className="font-bold text-xl">Nom</h3>
               <input
                 type="text"
                 name="nom"
-                value={player.getNom()}
-                onChange={(e) => player.setNom(e.target.value)}
+                value={nom}
+                onChange={(e) => setNom(e.target.value)}
                 className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
                   isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
                 }`}
@@ -135,9 +120,9 @@ export default function Account({
               <input
                 name="prenom"
                 type="text"
-                value={player.getPrenom()}
-                onChange={(e) => player.setPrenom(e.target.value)}
-                className={`py-2 px-4 w-[15vw] text-slate-400	rounded-full bg-white bg-opacity-45 ${
+                value={prenom}
+                onChange={(e) => setPrenom(e.target.value)}
+                className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
                   isModifiable ? "text-slate-900 ring-2 ring-blue-500" : ""
                 }`}
                 disabled={!isModifiable}
@@ -149,8 +134,8 @@ export default function Account({
             <input
               name="pseudo"
               type="text"
-              value={player.getPseudo()}
-              onChange={(e) => player.setPseudo(e.target.value)}
+              value={pseudo}
+              onChange={(e) => setPseudo(e.target.value)}
               className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
                 isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
               }`}
@@ -166,24 +151,8 @@ export default function Account({
             <input
               name="mail"
               type="mail"
-              value={player.getMail()}
-              onChange={(e) => player.setMail(e.target.value)}
-              className={`py-2 px-4 w-[33vw] rounded-full bg-white bg-opacity-45 ${
-                isModifiable ? "ring-2 ring-blue-500" : ""
-              }`}
-              disabled={!isModifiable}
-            />
-          </div>
-          <div
-            className={` ${
-              player.getIsOAuth() === true ? "hidden" : "flex flex-col"
-            } gap-1`}
-          >
-            <h3 className="font-bold text-xl">Mot de passe</h3>
-            <input
-              name="password"
-              type="password"
-              value="Jaimelesphares"
+              value={mail}
+              onChange={(e) => setMail(e.target.value)}
               className={`py-2 px-4 w-[33vw] rounded-full bg-white bg-opacity-45 ${
                 isModifiable ? "ring-2 ring-blue-500" : ""
               }`}
@@ -192,13 +161,14 @@ export default function Account({
           </div>
           <div className="flex flex-col justify-center items-center gap-3">
             <button
-              onClick={handleIsModif}
+              type="submit"
               className="w-[15vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold mx-auto py-2 px-6 rounded-2xl"
             >
               {isModifiable ? "Valider" : "Modifier"}
             </button>
+
             <button
-              onClick={player.deletePlayer}
+              onClick={() => player.deletePlayer()}
               className={`w-fit hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic mx-auto py-2 px-6 rounded-2xl ${
                 isModifiable ? "opacity-20 pointer-events-none" : ""
               }`}
@@ -206,7 +176,7 @@ export default function Account({
               Supprimer le compte
             </button>
           </div>
-        </div>
+        </form>
       </section>
     </main>
   );
