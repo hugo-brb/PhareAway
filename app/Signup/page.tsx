@@ -65,7 +65,7 @@ export default function Signup() {
           height={150}
           className="absolute top-2 left-2"
         />
-        <section className="flex flex-col gap-7 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
+        <section className="flex flex-col max-w-[95vw] max-h-[95vh] gap-7 bg-white bg-opacity-80 rounded-lg px-10 md:px-20 py-12 backdrop-blur-md overflow-y-scroll scrollbarhidden">
           <Link
             href="/Rgpd"
             className="absolute top-5 left-5 hover:scale-110 duration-300"
@@ -77,34 +77,34 @@ export default function Signup() {
               height={24}
             />
           </Link>
-          <h1 className="font-ouroboros text-4xl self-center">
+          <h1 className="font-ouroboros text-3xl md:text-4xl self-center">
             Rejoignez-nous !
           </h1>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col gap-3 max-h-[90vh]"
           >
-            <div className="flex justify-between items-center gap-2">
+            <div className="flex flex-col md:flex-row md:justify-between justify-center md:items-center gap-2">
               <div className="flex flex-col gap-1 ">
-                <label htmlFor="nom" className="ml-2 text-base font-bold">
+                <label htmlFor="nom" className="md:ml-2 text-base font-bold">
                   Nom
                 </label>
                 <input
                   id="nom"
                   name="nom"
-                  className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
+                  className=" py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                   type="text"
                   placeholder="Soleil"
                 />
               </div>
               <div className="flex flex-col gap-1 ">
-                <label htmlFor="prenom" className="ml-2 text-base font-bold">
+                <label htmlFor="prenom" className="md:ml-2 text-base font-bold">
                   Prénom
                 </label>
                 <input
                   id="prenom"
                   name="prenom"
-                  className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
+                  className=" w-full py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                   type="text"
                   placeholder="François"
                 />
@@ -170,15 +170,15 @@ export default function Signup() {
             <input
               type="submit"
               value="Commencer mon aventure ⛵"
-              className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg"
+              className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg md:text-xl font-bold py-2 px-6 rounded-lg"
             />
-            <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-center items-center gap-2 text-xs md:text-base">
               <label htmlFor="login">Vous avez déjà un compte !</label>
               <Link href="/Login" className="text-[--primary] font-bold">
                 Connectez-vous ♥
               </Link>
             </div>
-            <div className="flex justify-center items-center gap-2">
+            <div className="flex justify-center items-center gap-2 md:mb-0 mb-4">
               <Link href="/Asso" className="text-[--primary] font-bold">
                 Je suis une association
               </Link>

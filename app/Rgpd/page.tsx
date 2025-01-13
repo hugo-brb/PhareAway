@@ -53,7 +53,7 @@ export default function Rgpd() {
           height={150}
           className=" absolute top-2 left-2"
         />
-        <section className="flex flex-col gap-7 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
+        <section className="flex flex-col max-w-[95vw] max-h-[95vh] gap-7 bg-white bg-opacity-80 rounded-lg px-5 md:px-20 py-12 backdrop-blur-md overflow-y-scroll scrollbarhidden">
           <h1 className=" font-ouroboros text-4xl self-center">
             Vos données !
           </h1>
@@ -70,7 +70,7 @@ export default function Rgpd() {
               <form
                 action="/Signup"
                 method="post"
-                className=" flex flex-col gap-3 max-h-[90vh]"
+                className=" flex flex-col gap-3 max-h-[90vh] mb-4"
               >
                 <p
                   onClick={handleFlipped}
@@ -90,7 +90,10 @@ export default function Rgpd() {
 
                 <div className=" flex flex-col gap-5">
                   <div className=" flex justify-between items-center w-full">
-                    <label htmlFor="useMail" className=" max-w-[25vw]">
+                    <label
+                      htmlFor="useMail"
+                      className=" max-w-[65vw] md:max-w-[25vw]"
+                    >
                       Permettre l&apos;utilisation de votre adresse mail pour
                       créer et vérifier votre compte.
                     </label>
@@ -105,7 +108,10 @@ export default function Rgpd() {
                     </label>
                   </div>
                   <div className=" flex justify-between items-center w-full">
-                    <label htmlFor="useName" className=" max-w-[25vw]">
+                    <label
+                      htmlFor="useName"
+                      className=" max-w-[65vw] md:max-w-[25vw]"
+                    >
                       Permettre de collecter vos nom et prénom pour créer votre
                       compte.
                     </label>
@@ -150,7 +156,7 @@ export default function Rgpd() {
                           </svg>
                         </span>
 
-                        <span className="ml-3 group-hover:text-[--primary] transition-colors duration-300">
+                        <span className="ml-3 md:max-w-full max-w-[70vw] group-hover:text-[--primary] transition-colors duration-300">
                           Je certifie avoir plus de 15ans et être un veritable
                           pharaddict.
                         </span>
@@ -183,7 +189,7 @@ export default function Rgpd() {
                           </svg>
                         </span>
 
-                        <span className="ml-3 group-hover:text-[--primary] transition-colors duration-300">
+                        <span className="ml-3 md:max-w-full max-w-[70vw] group-hover:text-[--primary] transition-colors duration-300">
                           Je valide mes choix !
                         </span>
                       </label>
@@ -200,14 +206,14 @@ export default function Rgpd() {
                     onClick={verif}
                     type="button"
                     value="Continuer vers l'inscription &#10140;"
-                    className=" hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg"
+                    className=" hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer md:text-xl font-bold py-2 px-6 rounded-lg"
                   />
                   <p className=" text-[--accent] text-sm">
                     * Toutes les conditions doivent-être validées pour pouvoir
                     continuer l&apos;inscritption.
                   </p>
                 </div>
-                <div className=" flex justify-center items-center gap-2">
+                <div className=" flex justify-center items-center gap-2 md:text-base text-sm">
                   <label htmlFor="login">Vous avez déjà un compte !</label>
                   <Link
                     href="/Login"
@@ -221,7 +227,7 @@ export default function Rgpd() {
           )}
           {flipped && (
             <>
-              <p className=" max-w-[45vw]">
+              <p className=" max-w-[95vw] md:max-w-[45vw] text-sm md:text-base">
                 PhareAway est une application innovante et ludique qui vous
                 invite à explorer les phares de France tout en découvrant leur
                 histoire fascinante à travers des mini escape games captivants.
@@ -240,6 +246,9 @@ export default function Rgpd() {
                 utilisateurs âgés de 15 ans et plus. Nous sommes engagés à
                 protéger vos informations et à respecter votre vie privée pour
                 une expérience de jeu en toute sérénité.
+                <br />
+                <br />
+                Pour plus d’informations, n’hésitez pas à consulter la liste de traitement de vos données <a href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing" target="_blank" className="text-[--primary]">ici</a>.
               </p>
               <button
                 onClick={handleFlipped}
