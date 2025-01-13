@@ -187,13 +187,15 @@ export default function Account({ handleClickActive, player }: MenuProps) {
               />
             </div>
           )}
-
-          <div className="flex gap-5 justify-center items-center pt-3">
+        </form>
+        <div className="flex flex-col gap-6 mt-7">
+          {/* Annuler / Modifier */}
+          <div className="flex justify-center gap-4">
             {isModifiable && (
               <button
                 type="button"
                 onClick={handleCancel}
-                className="w-[20vw] hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic mx-auto py-2 px-2 rounded-2xl"
+                className="w-[20vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl italic py-2 px-4 rounded-2xl"
               >
                 Annuler
               </button>
@@ -201,47 +203,49 @@ export default function Account({ handleClickActive, player }: MenuProps) {
             <button
               type="button"
               onClick={handleToggleEdit}
-              className="w-[20vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold mx-auto py-2 px-2 rounded-2xl"
+              className="w-[20vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-4 rounded-2xl"
             >
               {isModifiable ? "Valider" : "Modifier"}
             </button>
           </div>
-        </form>
-        <div className="flex flex-col gap-4 mt-7">
-          <div className="flex flex-row w-full items-center justify-center gap-7">
+
+          {/* Supprimer */}
+          <div className="flex justify-center">
             <button
               onClick={() => setIsDeleteConfirmVisible(true)}
-              className={`w-[20vw] hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic mx-auto py-2 px-2 rounded-2xl ${
+              className={`w-[20vw] hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic py-2 px-4 rounded-2xl ${
                 isModifiable ? "opacity-20 pointer-events-none" : ""
               }`}
             >
               Supprimer le compte
             </button>
-
-            {/* Affichage conditionnel de ConfirmDelete */}
             {isDeleteConfirmVisible && (
               <ConfirmDelete
                 handleClickActive={() => setIsDeleteConfirmVisible(false)}
                 player={player}
               />
             )}
+          </div>
+
+          {/* À propos / CGU */}
+          <div className="flex justify-center gap-10 pt-20">
             <button
-              className={`w-fit min-w-[10vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg font-bold py-2 px-2 rounded-2xl ${
+              className={`w-[30vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg font-bold py-2 px-4 rounded-2xl ${
                 isModifiable ? "opacity-20 pointer-events-none" : ""
               }`}
               onClick={() => handleClickActive("about")}
             >
               À propos
             </button>
+            <button
+              className={`w-[30vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg font-bold py-2 px-4 rounded-2xl ${
+                isModifiable ? "opacity-20 pointer-events-none" : ""
+              }`}
+              onClick={() => handleClickActive("cgu")}
+            >
+              Voir nos Conditions générales d’utilisation
+            </button>
           </div>
-          <button
-            className={`w-fit min-w-[10vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg font-bold mx-auto py-2 px-2 rounded-2xl ${
-              isModifiable ? "opacity-20 pointer-events-none" : ""
-            }`}
-            onClick={() => handleClickActive("cgu")}
-          >
-            Voir nos Conditions générales d’utilisation
-          </button>
         </div>
       </section>
     </main>
