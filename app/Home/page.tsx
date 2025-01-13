@@ -23,9 +23,10 @@ import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 
 interface itemProps {
-  coordinates: string;
-  name: string;
-  url: string;
+    id:number;
+    coordinates: string;
+    name: string;
+    url: string;
 }
 
 // Dynamically import the Map component without server-side rendering (SSR)
@@ -69,15 +70,15 @@ export default function Home() {
     const fetchMarkers = async () => {
       const { data, error } = await supabaseData
         .from("Lighthouse")
-        .select("coordinates, name, url");
+        .select("coordinates, name, url, id");
       if (error) {
         console.error("Erreur de chargement des données Supabase:", error);
         return;
       }
 
       // Formatage des données pour Mapbox
-      const formattedMarkers = data.map((item: itemProps, index: number) => ({
-        id: index, // Identifiant unique
+      const formattedMarkers = data.map((item: itemProps) => ({
+        id:item.id,
         longitude: parseFloat(item.coordinates.split(" ")[0]),
         latitude: parseFloat(item.coordinates.split(" ")[1]),
         popupText: item.name,
