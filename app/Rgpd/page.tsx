@@ -246,6 +246,9 @@ export default function Rgpd() {
                 utilisateurs âgés de 15 ans et plus. Nous sommes engagés à
                 protéger vos informations et à respecter votre vie privée pour
                 une expérience de jeu en toute sérénité.
+                <br />
+                <br />
+                Pour plus d’informations, n’hésitez pas à consulter la liste de traitement de vos données <a href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing" target="_blank" className="text-[--primary]">ici</a>.
               </p>
               <button
                 onClick={handleFlipped}
