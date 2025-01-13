@@ -4,6 +4,9 @@ import { UsePlayer } from "../model/player";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 
+import React from 'react';
+import SearchBar from './SearchBar';
+
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
@@ -58,6 +61,12 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               height={24}
             />
           </button>
+
+          <div id="TODO SearchBar a mettre au propre">
+            <h1>Barre de recherche avec Supabase</h1>
+            <SearchBar />
+          </div>
+
           <div
             id="recherche"
             className="flex flex-row items-center self-center gap-4"
