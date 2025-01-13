@@ -27,7 +27,7 @@ interface EventData {
   duration: number;
   price: number;
   description: string;
-  id_lh: number;
+  id_lighthouse: number;
   id_image: number;
 }
 
@@ -40,7 +40,7 @@ export function useEvent(id: number) {
     duration: 0,
     price: 0,
     description: "",
-    id_lh: 0,
+    id_lighthouse: 0,
     id_image: 0,
   });
 
@@ -64,7 +64,7 @@ export function useEvent(id: number) {
               duration: request.data[0].duration || 0,
               price: request.data[0].price || 0,
               description: request.data[0].description || "",
-              id_lh: request.data[0].id_lh || 0,
+              id_lighthouse: request.data[0].id_lighthouse || 0,
               id_image: request.data[0].id_image || 0,
             });
           }
@@ -86,7 +86,7 @@ export function useEvent(id: number) {
     getDuration: () => eventData.duration,
     getPrice: () => eventData.price,
     getDescription: () => eventData.description,
-    getLighthouse: () => eventData.id_lh,
+    getLighthouse: () => eventData.id_lighthouse,
     getImage: () => eventData.id_image,
 
     //Delete
@@ -100,7 +100,7 @@ export function useEvent(id: number) {
         duration: 0,
         price: 0,
         description: "",
-        id_lh: 0,
+        id_lighthouse: 0,
         id_image: 0,
       });
     },

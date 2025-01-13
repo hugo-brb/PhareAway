@@ -242,7 +242,7 @@ export default function Rgpd() {
                 une expérience de jeu en toute sérénité.
                 <br />
                 <br />
-                Pour plus d’information n’hésitez pas à consulter la liste de traitement de vos données <a href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing" className="text-[--primary]">ici</a>.
+                Pour plus d’informations, n’hésitez pas à consulter la liste de traitement de vos données <a href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing" target="_blank" className="text-[--primary]">ici</a>.
               </p>
               <button
                 onClick={handleFlipped}
