@@ -6,7 +6,7 @@ interface MenuProps {
 export default function CGU({ handleClickActive }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-      <section className="flex flex-col self-center gap-7 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+      <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
         <button
           className={`absolute top-5 left-5 transform transition-all hover:left-4 hover:pr-[1vw]`}
           onClick={() => handleClickActive("account")}
@@ -29,8 +29,8 @@ export default function CGU({ handleClickActive }: MenuProps) {
             height={24}
           />
         </button>
-        <div className="flex flex-col items-center gap-8 px-16">
-          <h1 className="text-3xl font-extrabold">
+        <div className="flex flex-col items-center gap-7 md:px-16">
+          <h1 className="text-3xl text-center font-extrabold mt-4 md:mt-0">
             Conditions générales d&apos;utilisation
           </h1>
           <h2>En vigueur au 24/01/2025</h2>
