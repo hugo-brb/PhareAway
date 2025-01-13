@@ -1,7 +1,8 @@
-import React from "react";
+import React, { use } from "react";
 import Image from "next/image";
 import { useState } from "react";
 import AnswerPop from "@/components/popover/Answer";
+import { usePlayer, UsePlayer } from "../model/player";
 
 interface SmallEnigmeProps {
   handleClickPopup: (a: string) => void;
@@ -14,6 +15,8 @@ interface SmallEnigmeProps {
   text1: string;
   answer: string;
   text2: string;
+  player: string;
+  lh: number;
 }
 
 export default function SmallEnigme({
@@ -25,11 +28,15 @@ export default function SmallEnigme({
   text1,
   answer,
   text2,
+  player,
+  lh,
 }: SmallEnigmeProps) {
   const [popupA, setPopupA] = useState("0");
   const handleClickAnswer = (a: string) => {
     setPopupA(a);
   };
+
+  const useP = usePlayer(player);
 
   return (
     <section
@@ -95,11 +102,16 @@ export default function SmallEnigme({
           onClick={() => {
             const input = document.querySelector("input") as HTMLInputElement;
             if (input.value === answer) {
+              if (id === "5") {
+                const phareEnded: number[] = useP.getPhareended();
+                if (!phareEnded.includes(lh)) {
+                  phareEnded.push(lh);
+                  useP.setPhareended(phareEnded);
+                }
+              }
               handleClickAnswer("Vrai");
-              console.log("Vrai");
             } else {
               handleClickAnswer("Faux");
-              console.log("Faux");
             }
           }}
         >

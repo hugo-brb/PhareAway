@@ -9,7 +9,6 @@ export type UseLighthouse = {
   getDescription: () => string;
   getCoordinates: () => string;
   getUrl: () => string;
-  getImage: () => UseImage;
 };
 
 const supabaseData = createClient(
@@ -23,7 +22,6 @@ interface LighthouseData {
   description: string;
   coordinates: string;
   url: string;
-  image: number;
 }
 
 export function useLighthouse(id: number) {
@@ -33,7 +31,6 @@ export function useLighthouse(id: number) {
     description: "",
     coordinates: "",
     url: "",
-    image: 0,
   });
 
   useEffect(() => {
@@ -52,7 +49,6 @@ export function useLighthouse(id: number) {
               description: request.data.description || "",
               coordinates: request.data.description || "",
               url: request.data.url || "",
-              image: request.data.id_image || 0,
             });
           }
         }
@@ -70,9 +66,6 @@ export function useLighthouse(id: number) {
     getDescription: () => lighthouseData.description,
     getCoordinates: () => lighthouseData.coordinates,
     getUrl: () => lighthouseData.url,
-    getImage: () => {
-      return useImage(lighthouseData.image);
-    },
   };
   return { lighthouseData, ...methods };
 }
