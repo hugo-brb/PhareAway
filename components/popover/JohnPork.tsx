@@ -1,8 +1,11 @@
 import React from "react";
 import Image from "next/image";
+import { useState } from "react";
+import AnswerPop from "@/components/popover/Answer";
 
 interface SmallEnigmeProps {
   handleClickPopup: (a: string) => void;
+  id: string;
   codeLock: number;
   coordX: number;
   coordY: number;
@@ -15,20 +18,40 @@ interface SmallEnigmeProps {
 
 export default function SmallEnigme({
   handleClickPopup,
+  id,
   codeLock,
-  coordX,
-  coordY,
   name,
   question,
   text1,
   answer,
   text2,
 }: SmallEnigmeProps) {
+  const [popupA, setPopupA] = useState("0");
+  const handleClickAnswer = (a: string) => {
+    setPopupA(a);
+  };
+
   return (
     <section
-      style={{ left: `44vw`, top: `23vw` }}
-      className={`absolute w-[20vw] h-[10vw] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
+      style={{ left: `44vw`, top: `20vw` }}
+      className={`absolute w-[20vw] h-[15vw] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
     >
+      {popupA === "Vrai" && (
+        <AnswerPop
+          handleClickAnswer={handleClickAnswer}
+          name={name}
+          sol={true}
+          text3={`Le chiffre à la position ${id} est : ${codeLock} \n(Ancêtres fiers)`}
+        />
+      )}
+      {popupA === "Faux" && (
+        <AnswerPop
+          handleClickAnswer={handleClickAnswer}
+          name={name}
+          sol={false}
+          text3="Dommage Bozo ! Pas de code pour toi mon grand gourmand..."
+        />
+      )}
       <div className="flex flex-col items-center justify-between h-full">
         <div className="flex flex-row justify-between w-full">
           <h1 className="font-decoration-underline">{name}</h1>
@@ -44,6 +67,13 @@ export default function SmallEnigme({
             />
           </button>
         </div>
+        <div
+          className=""
+          style={{
+            width: "100%",
+            borderBottom: "1px solid lightgrey",
+          }}
+        ></div>
         <span>{question}</span>
         <div className="flex flex-row">
           <span>{text1}</span>
@@ -60,6 +90,21 @@ export default function SmallEnigme({
           />
           <span>{text2}</span>
         </div>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={() => {
+            const input = document.querySelector("input") as HTMLInputElement;
+            if (input.value === answer) {
+              handleClickAnswer("Vrai");
+              console.log("Vrai");
+            } else {
+              handleClickAnswer("Faux");
+              console.log("Faux");
+            }
+          }}
+        >
+          Valider
+        </button>
       </div>
     </section>
   );
