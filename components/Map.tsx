@@ -54,6 +54,22 @@ const Map: React.FC<MapComponentProps> = ({
       mapInstance.current.flyTo({ center });
     }
   }, [center]); // Update map center when `center` changes
+/*
+  useEffect(() => {
+    if (mapInstance.current) {
+      const handleZoom = () => {
+        console.log(mapInstance.current?.getZoom().toString());
+      };
+  
+      mapInstance.current.on('zoom', handleZoom);
+  
+      // Cleanup on unmount
+      return () => {
+        mapInstance.current?.off('zoom', handleZoom);
+      };
+    }
+  }, [mapInstance.current]);
+*/
 /* creation des markers */
   useEffect(() => {
     if (mapInstance.current) {

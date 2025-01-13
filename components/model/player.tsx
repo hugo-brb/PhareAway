@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
+import { list } from "postcss";
 
 export type UsePlayer = {
   playerData: PlayerData;
@@ -10,7 +11,7 @@ export type UsePlayer = {
   getPseudo: () => string;
   getIsOAuth: () => boolean;
   getBeacoins: () => number;
-  getNbPhareFinished: () => number;
+  getPhareended: () => Array<number>;
   getDlcUnlocked: () => number;
   getIsAsso: () => boolean;
   getIsAdmin: () => boolean;
@@ -19,7 +20,7 @@ export type UsePlayer = {
   setMail: (mail: string) => Promise<void>;
   setPseudo: (pseudo: string) => Promise<void>;
   setBeacoins: (beacoins: number) => Promise<void>;
-  setNbPhareFinished: (nbPhareFinished: number) => Promise<void>;
+  setPhareended: (Phareended: Array<number>) => Promise<void>;
   setDlcUnlocked: (DlcUnlocked: number) => Promise<void>;
   // setPassword: (password: string) => Promise<void>;
   deletePlayer: () => Promise<void>;
@@ -47,7 +48,7 @@ interface PlayerData {
     isOAuth: boolean;
   };
   beacoins: number;
-  nbPhareFinished: number;
+  phareended: Array<number>;
   DlcUnlocked: number;
   isAsso: boolean;
   isAdmin: boolean;
@@ -63,7 +64,7 @@ export function usePlayer(email: string) {
       isOAuth: true,
     },
     beacoins: 0,
-    nbPhareFinished: 0,
+    phareended: [],
     DlcUnlocked: 0,
     isAsso: false,
     isAdmin: false,
@@ -93,7 +94,7 @@ export function usePlayer(email: string) {
                 isOAuth: requestAuth?.data?.isOAuth,
               },
               beacoins: requestData.data?.[0]?.becoins ?? 0,
-              nbPhareFinished: requestData.data?.[0]?.nbPhareFinished || 0,
+              phareended: requestData.data?.[0]?.nbPhareFinished || [],
               DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || 0,
               isAsso: requestData.data?.[0]?.isAsso,
               isAdmin: requestData.data?.[0]?.isAdmin,
@@ -116,7 +117,7 @@ export function usePlayer(email: string) {
     getPseudo: () => playerData.user.pseudo,
     getIsOAuth: () => playerData.user.isOAuth,
     getBeacoins: () => playerData.beacoins,
-    getNbPhareFinished: () => playerData.nbPhareFinished,
+    getPhareended: () => playerData.phareended,
     getDlcUnlocked: () => playerData.DlcUnlocked,
     getIsAsso: () => playerData.isAsso,
     getIsAdmin: () => playerData.isAdmin,
@@ -192,14 +193,14 @@ export function usePlayer(email: string) {
       }));
     },
 
-    setNbPhareFinished: async (nbPhareFinished: number) => {
+    setPhareended: async (phareended: Array<number>) => {
       await supabaseData
         .from("users")
-        .update({ nbPhareFinished })
+        .update({ phareended })
         .eq("id", playerData.user.id);
       setPlayerData((prev) => ({
         ...prev,
-        nbPhareFinished,
+        phareended,
       }));
     },
 
@@ -245,7 +246,7 @@ export function usePlayer(email: string) {
         // Mise à jour des champs dans la table data
         const dataUpdates = {
           beacoins: updates.beacoins,
-          nbPhareFinished: updates.nbPhareFinished,
+          nbPhareFinished: updates.phareended,
           DlcUnlocked: updates.DlcUnlocked,
           isAsso: updates.isAsso,
           isAdmin: updates.isAdmin,
