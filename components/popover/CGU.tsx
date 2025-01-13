@@ -8,8 +8,8 @@ export default function CGU({ handleClickActive }: MenuProps) {
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
       <section className="flex flex-col self-center gap-7 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
         <button
-          className={`absolute top-5 left-5 transform`}
-          onClick={() => handleClickActive("about")}
+          className={`absolute top-5 left-5 transform transition-all hover:left-4`}
+          onClick={() => handleClickActive("account")}
         >
           <Image
             src="/icones/arrow-back.svg"
@@ -18,7 +18,17 @@ export default function CGU({ handleClickActive }: MenuProps) {
             height={24}
           />
         </button>
-
+        <button
+          className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
+          onClick={() => handleClickActive("home")}
+        >
+          <Image
+            src="/icones/xmark-solid.svg"
+            alt="arrow-back"
+            width={24}
+            height={24}
+          />
+        </button>
         <div className="flex flex-col items-center gap-8 px-16">
           <h1 className="text-3xl font-extrabold">
             Conditions générales d&apos;utilisation

@@ -66,10 +66,16 @@ export default function Signup() {
           className="absolute top-2 left-2"
         />
         <section className="flex flex-col gap-7 bg-white bg-opacity-80 rounded-lg px-20 py-12 backdrop-blur-md">
-          <Link href="/Rgpd" className="-mb-8">
-            <button className="hover:text-[--primary] self-start text-3xl font-extrabold duration-300 ease-in-out">
-              &#129044;
-            </button>
+          <Link
+            href="/Rgpd"
+            className="absolute top-5 left-5 hover:scale-110 duration-300"
+          >
+            <Image
+              src="/icones/arrow-back.svg"
+              alt="arrow-back"
+              width={24}
+              height={24}
+            />
           </Link>
           <h1 className="font-ouroboros text-4xl self-center">
             Rejoignez-nous !
@@ -173,7 +179,7 @@ export default function Signup() {
               </Link>
             </div>
             <div className="flex justify-center items-center gap-2">
-              <Link href="/Login" className="text-[--primary] font-bold">
+              <Link href="/Asso" className="text-[--primary] font-bold">
                 Je suis une association
               </Link>
             </div>
