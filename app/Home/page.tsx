@@ -84,6 +84,7 @@ export default function Home() {
         popupText: item.name,
         icone: item.enigme?  "/icones/lightHouseIconEnigme.svg": "/icones/lightHouseIcon.svg",
         lien: item.url,
+        enigme: item.enigme,
       }));
 
       setMarkers(formattedMarkers);

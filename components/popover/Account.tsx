@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
-import type { UsePlayer } from "@/components/model/player";
+import { usePlayer, type UsePlayer } from "@/components/model/player";
 
 import ConfirmDelete from "@/components/popover/ConfirmDelete";
 
@@ -64,6 +64,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
     return <div>Chargement...</div>;
   }
 
+  const useP = usePlayer(player.getMail());
+  console.log(useP.getPhareended());
+  console.log(useP.getPhareended().length);
+
   return (
     <main className="absolute top-0 z-40 flex w-full h-full">
       <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
@@ -106,7 +110,9 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                   width={25}
                   height={25}
                 />
-                <span>{player.getPhareended().length} / 5</span>
+                <span>
+                  {useP.getPhareended().length} / 5{}
+                </span>
               </div>
             </div>
           </div>
