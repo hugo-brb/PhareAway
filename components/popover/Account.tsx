@@ -4,6 +4,8 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import type { UsePlayer } from "@/components/model/player";
 
+import ConfirmDelete from "@/components/popover/ConfirmDelete";
+
 interface MenuProps {
   handleClickActive: (a: string) => void;
   player: UsePlayer;
@@ -12,6 +14,7 @@ interface MenuProps {
 export default function Account({ handleClickActive, player }: MenuProps) {
   const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
+  const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
 
   const [originalValues, setOriginalValues] = useState({
     nom: player.getNom(),
@@ -94,6 +97,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
       <section className="flex flex-col self-center gap-7 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+        {isDeleteConfirmVisible && (
+          <div className="absolute top-0 left-0 w-full h-full bg-white opacity-80 z-10"></div>
+        )}
+
         <button
           className={`absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90 ${
             isModifiable ? "opacity-20" : ""
@@ -247,13 +254,21 @@ export default function Account({ handleClickActive, player }: MenuProps) {
               </button>
             </div>
             <button
-              onClick={player.deletePlayer}
+              onClick={() => setIsDeleteConfirmVisible(true)}
               className={`w-[20vw] hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic mx-auto py-2 px-2 rounded-2xl ${
                 isModifiable ? "opacity-20 pointer-events-none" : ""
               }`}
             >
               Supprimer le compte
             </button>
+
+            {/* Affichage conditionnel de ConfirmDelete */}
+            {isDeleteConfirmVisible && (
+              <ConfirmDelete
+                handleClickActive={() => setIsDeleteConfirmVisible(false)}
+                player={player}
+              />
+            )}
           </div>
           <div className="flex flex-row gap-10 absolute bottom-10">
             <button
