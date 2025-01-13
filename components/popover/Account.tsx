@@ -5,6 +5,8 @@ import Image from "next/image";
 
 import type { UsePlayer } from "@/components/model/player";
 
+import ConfirmDelete from "@/components/popover/ConfirmDelete";
+
 interface MenuProps {
   handleClickActive: (a: string) => void;
   player: UsePlayer;
@@ -13,6 +15,7 @@ interface MenuProps {
 export default function Account({ handleClickActive, player }: MenuProps) {
   const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
+  const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
 
   // Gestion des états pour les champs du formulaire
   const [formValues, setFormValues] = useState({
@@ -64,6 +67,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-full h-full">
       <section className="flex flex-col self-center gap-7 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+        {isDeleteConfirmVisible && (
+          <div className="absolute top-0 left-0 w-full h-full bg-white opacity-80 z-10"></div>
+        )}
+
         <button
           className={`absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90 ${
             isModifiable ? "opacity-20" : ""
@@ -203,13 +210,21 @@ export default function Account({ handleClickActive, player }: MenuProps) {
         <div className="flex flex-col gap-4 mt-7">
           <div className="flex flex-row w-full items-center justify-center gap-7">
             <button
-              onClick={player.deletePlayer}
-              className={`w-fit min-w-[10vw] hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-lg italic py-2 px-2 rounded-2xl ${
+              onClick={() => setIsDeleteConfirmVisible(true)}
+              className={`w-[20vw] hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic mx-auto py-2 px-2 rounded-2xl ${
                 isModifiable ? "opacity-20 pointer-events-none" : ""
               }`}
             >
               Supprimer le compte
             </button>
+
+            {/* Affichage conditionnel de ConfirmDelete */}
+            {isDeleteConfirmVisible && (
+              <ConfirmDelete
+                handleClickActive={() => setIsDeleteConfirmVisible(false)}
+                player={player}
+              />
+            )}
             <button
               className={`w-fit min-w-[10vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg font-bold py-2 px-2 rounded-2xl ${
                 isModifiable ? "opacity-20 pointer-events-none" : ""
