@@ -62,12 +62,14 @@ export function useBeacoin(id: number) {
   }, [id]);
 
   //methodes
+  const image = useImage(beacoinData.id_image);
+
   const methods = {
     getId: () => beacoinData.id,
     getName: () => beacoinData.name,
     getPrice: () => beacoinData.price,
     getNumber: () => beacoinData.number,
-    getImage: () => useImage(beacoinData.id_image),
+    getImage: () => image,
   };
 
   return { beacoinData, ...methods };

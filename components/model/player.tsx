@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
-import { list } from "postcss";
 
 export type UsePlayer = {
   playerData: PlayerData;
