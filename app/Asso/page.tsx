@@ -20,7 +20,7 @@ export default function Asso() {
     }
 
     try {
-      const response = await fetch("/api/mail", {
+      const response = await fetch("/api/mailAsso", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -33,9 +33,7 @@ export default function Asso() {
         setFormData({
           email: "",
         });
-        window.alert(
-          "Votre message a été envoyé avec succès !\nJe vous répondrai dans les plus brefs délais."
-        );
+        window.alert("Votre message a été envoyé avec succès !");
         setIsSend(true);
       } else {
         console.error("Erreur lors de l'envoi.");
