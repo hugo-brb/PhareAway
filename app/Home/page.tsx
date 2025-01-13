@@ -23,8 +23,8 @@ import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 
 interface itemProps {
-  XYcoord: string;
-  nom: string;
+  coordinates: string;
+  name: string;
   url: string;
 }
 
@@ -68,8 +68,8 @@ export default function Home() {
   useEffect(() => {
     const fetchMarkers = async () => {
       const { data, error } = await supabaseData
-        .from("pharesData")
-        .select("XYcoord, nom, url");
+        .from("Lighthouse")
+        .select("coordinates, name, url");
       if (error) {
         console.error("Erreur de chargement des données Supabase:", error);
         return;
@@ -78,9 +78,9 @@ export default function Home() {
       // Formatage des données pour Mapbox
       const formattedMarkers = data.map((item: itemProps, index: number) => ({
         id: index, // Identifiant unique
-        longitude: parseFloat(item.XYcoord.split(" ")[0]),
-        latitude: parseFloat(item.XYcoord.split(" ")[1]),
-        popupText: item.nom,
+        longitude: parseFloat(item.coordinates.split(" ")[0]),
+        latitude: parseFloat(item.coordinates.split(" ")[1]),
+        popupText: item.name,
         icone: "/icones/lightHouseIcon.svg",
         lien: item.url,
       }));
