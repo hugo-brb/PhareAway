@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import { createClient } from "@supabase/supabase-js";
 import OneBeacoin from "@/components/OneBeacoin";
@@ -16,7 +15,11 @@ interface MenuProps {
 
 export default function Coin({ handleClickActive }: MenuProps) {
   // State pour stocker les événements
-  const [extentions, setExtentions] = useState<any[]>([]);
+  interface Extention {
+    id: number;
+  }
+
+  const [extentions, setExtentions] = useState<Extention[]>([]);
 
   useEffect(() => {
     const fetchExtentions = async () => {
@@ -34,7 +37,11 @@ export default function Coin({ handleClickActive }: MenuProps) {
   }, []); // L'effet est exécuté une seule fois lorsque le composant est monté
 
   // State pour stocker les événements
-  const [beacoins, setBeacoins] = useState<any[]>([]);
+  interface Beacoin {
+    id: number;
+  }
+
+  const [beacoins, setBeacoins] = useState<Beacoin[]>([]);
 
   useEffect(() => {
     const fetchBeacoins = async () => {
@@ -54,8 +61,8 @@ export default function Coin({ handleClickActive }: MenuProps) {
   return (
     <>
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-        <section className=" flex flex-col self-center gap-12 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-        <button
+        <section className=" flex flex-col self-center mb-5 md:mb-0 gap-12 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+          <button
             className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
             onClick={() => handleClickActive("home")}
           >
@@ -66,11 +73,13 @@ export default function Coin({ handleClickActive }: MenuProps) {
               height={24}
             />
           </button>
-          <h1 className=" font-gravitas self-center text-7xl">PharAchat</h1>
+          <h1 className=" font-gravitas self-center text-4xl md:text-7xl">
+            PharAchat
+          </h1>
           <div className=" flex flex-col">
             <h2 className=" text-[--primary] text-lg px-5 py-2">Beacoins</h2>
-            <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl w-[70vw] py-5">
-              <div className=" flex ml-7 justify-around">
+            <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll">
+              <div className=" flex ml-2 md:ml-7 justify-around">
                 {beacoins.map((beacoin) => (
                   <OneBeacoin key={beacoin.id} id_beacoin={beacoin.id} />
                 ))}
@@ -80,8 +89,8 @@ export default function Coin({ handleClickActive }: MenuProps) {
 
           <div className=" flex flex-col">
             <h2 className=" text-[--primary] text-lg px-5 py-2">Extensions</h2>
-            <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl w-[70vw] py-5">
-              <div className=" flex flex-wrap ml-7 justify-center gap-24">
+            <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll">
+              <div className=" flex flex-col md:flex-row flex-wrap mx-4 md:mx-0 md:ml-7 justify-center md:gap-24">
                 {extentions.map((extention) => (
                   <OneExtention
                     key={extention.id}

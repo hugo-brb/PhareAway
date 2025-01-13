@@ -94,7 +94,7 @@ export function usePlayer(email: string) {
                 isOAuth: requestAuth?.data?.isOAuth,
               },
               beacoins: requestData.data?.[0]?.becoins ?? 0,
-              phareended: requestData.data?.[0]?.nbPhareFinished || [],
+              phareended: requestData.data?.[0]?.phareended || [],
               DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || 0,
               isAsso: requestData.data?.[0]?.isAsso,
               isAdmin: requestData.data?.[0]?.isAdmin,
@@ -117,7 +117,10 @@ export function usePlayer(email: string) {
     getPseudo: () => playerData.user.pseudo,
     getIsOAuth: () => playerData.user.isOAuth,
     getBeacoins: () => playerData.beacoins,
-    getPhareended: () => playerData.phareended,
+    getPhareended: () => {
+      console.log(playerData.phareended);
+      return playerData.phareended;
+    },
     getDlcUnlocked: () => playerData.DlcUnlocked,
     getIsAsso: () => playerData.isAsso,
     getIsAdmin: () => playerData.isAdmin,
@@ -194,14 +197,29 @@ export function usePlayer(email: string) {
     },
 
     setPhareended: async (phareended: Array<number>) => {
-      await supabaseData
-        .from("users")
-        .update({ phareended })
-        .eq("id", playerData.user.id);
-      setPlayerData((prev) => ({
-        ...prev,
-        phareended,
-      }));
+      try {
+        // Met à jour les données dans Supabase
+        const { error } = await supabaseData
+          .from("users")
+          .update({ phareended }) // Colonne à mettre à jour
+          .eq("id", playerData.user.id); // Condition pour trouver le bon utilisateur
+
+        if (error) {
+          console.error(
+            "Erreur lors de la mise à jour de Supabase:",
+            error.message
+          );
+          return;
+        }
+
+        // Met à jour l'état local
+        setPlayerData((prev) => ({
+          ...prev,
+          phareended,
+        }));
+      } catch (err) {
+        console.error("Erreur inattendue:", err);
+      }
     },
 
     setDlcUnlocked: async (DlcUnlocked: number) => {

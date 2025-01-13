@@ -56,9 +56,9 @@ export default function Contact({ handleClickActive, player }: MenuProps) {
 
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-      <section className="flex flex-col self-center gap-7 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+      <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
         <button
-          className={`absolute top-5 left-5 transform transition-all hover:left-4`}
+          className={`absolute top-5 left-5 transform transition-all hover:left-4 hover:pr-[1vw]`}
           onClick={() => handleClickActive("about")}
         >
           <Image
@@ -79,23 +79,23 @@ export default function Contact({ handleClickActive, player }: MenuProps) {
             height={24}
           />
         </button>
-        <div className="flex flex-col items-center gap-8 px-16">
+        <div className="flex flex-col items-center gap-8 md:px-16">
           <h1 className="text-3xl font-extrabold">Nous contacter</h1>
-          <h2 className="px-16">Un problème ? Un bug à signaler ?</h2>
-          <h2 className="px-16">
+          <h2 className="md:px-16">Un problème ? Un bug à signaler ?</h2>
+          <h2 className="md:px-16 text-center">
             N’hésitez pas à nous contacter pour nous en informer et nous aider à
             améliorer votre expérience !
           </h2>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-7">
-            <div className="flex gap-12">
+            <div className="flex flex-col md:flex-row gap-7 md:gap-12">
               <div className="flex flex-col gap-1">
                 <h3 className="font-bold text-xl text-slate-600">Nom</h3>
                 <input
                   type="text"
                   name="nom"
                   value={player.getNom()}
-                  className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
+                  className={`py-2 px-4 md:w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
                   disabled
                 />
               </div>
@@ -106,7 +106,7 @@ export default function Contact({ handleClickActive, player }: MenuProps) {
                   name="prenom"
                   type="text"
                   value={player.getPrenom()}
-                  className={`py-2 px-4 w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 `}
+                  className={`py-2 px-4 md:w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 `}
                   disabled
                 />
               </div>
@@ -123,7 +123,7 @@ export default function Contact({ handleClickActive, player }: MenuProps) {
                 name="pseudo"
                 type="text"
                 value={player.getPseudo()}
-                className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
+                className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
                 disabled
               />
             </div>
@@ -135,7 +135,7 @@ export default function Contact({ handleClickActive, player }: MenuProps) {
                 name="email"
                 type="email"
                 value={player.getMail()}
-                className={`py-2 px-4 w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
+                className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45`}
                 disabled
               />
             </div>
@@ -148,7 +148,7 @@ export default function Contact({ handleClickActive, player }: MenuProps) {
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
-                className={`py-3 pb-24 px-4 w-[33vw] rounded-3xl bg-white bg-opacity-45 ring-2 ring-slate-400`}
+                className={`py-3 pb-24 px-4 md:w-[33vw] rounded-3xl bg-white bg-opacity-45 ring-2 ring-slate-400`}
               />
             </div>
 
