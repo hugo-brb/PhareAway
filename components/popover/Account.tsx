@@ -106,7 +106,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                   width={25}
                   height={25}
                 />
-                <span>{player.getNbPhareFinished()} / 5</span>
+                <span>{player.getPhareended().length} / 5</span>
               </div>
             </div>
           </div>
