@@ -16,6 +16,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
+  const useP = usePlayer(player.getMail());
 
   // Gestion des états pour les champs du formulaire
   const [formValues, setFormValues] = useState({
@@ -63,9 +64,8 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   if (status === "loading") {
     return <div>Chargement...</div>;
   }
-
-  const useP = usePlayer(player.getMail());
   console.log(useP.getPhareended());
+  console.log(useP.getPhareended().length);
   console.log(useP.getPhareended().length);
 
   return (
