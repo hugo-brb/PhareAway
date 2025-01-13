@@ -60,7 +60,7 @@ export default function Enigme({
             className={`absolute ${
               activeButtons.hint ? "pointer-events-none" : ""
             }`}
-            style={{ top: "14vw", right: "5vw" }}
+            style={{ top: "12vw", right: "5vw" }}
             onClick={() => handleClickActiveButton("hint")}
           >
             <Image
@@ -84,6 +84,7 @@ export default function Enigme({
             {popup === "1" && (
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
+                id={popup}
                 codeLock={enigme1.getanswerLock()}
                 coordX={enigme1.getcoordX()}
                 coordY={enigme1.getcoordY()}
@@ -97,6 +98,7 @@ export default function Enigme({
             {popup === "2" && (
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
+                id={popup}
                 codeLock={enigme2.getanswerLock()}
                 coordX={enigme2.getcoordX()}
                 coordY={enigme2.getcoordY()}
@@ -110,6 +112,7 @@ export default function Enigme({
             {popup === "3" && (
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
+                id={popup}
                 codeLock={enigme3.getanswerLock()}
                 coordX={enigme3.getcoordX()}
                 coordY={enigme3.getcoordY()}
@@ -123,6 +126,7 @@ export default function Enigme({
             {popup === "4" && (
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
+                id={popup}
                 codeLock={enigme4.getanswerLock()}
                 coordX={enigme4.getcoordX()}
                 coordY={enigme4.getcoordY()}
@@ -136,6 +140,7 @@ export default function Enigme({
             {popup === "5" && (
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
+                id={popup}
                 codeLock={enigme5.getanswerLock()}
                 coordX={enigme5.getcoordX()}
                 coordY={enigme5.getcoordY()}
@@ -209,13 +214,23 @@ export default function Enigme({
                 width: `${enigme5.getlenghtX()}vw`,
                 height: `${enigme5.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg ${
+              className={`absolute rounded-lg group ${
                 activeButtons.hint
                   ? "cursor-pointer ring-2 ring-red-500 transform transition-all duration-300 bg-red-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
               }`}
               onClick={() => handleClickPopup("5")}
-            ></button>
+            >
+              <Image
+                className={`opacity-0 transition-opacity duration-300 ${
+                  activeButtons.hint ? "opacity-30 group-hover:opacity-60" : ""
+                }`}
+                src="icones/lock-solid.svg"
+                alt="lock"
+                width={20}
+                height={20}
+              />
+            </button>
           </div>
         </section>
       </main>
