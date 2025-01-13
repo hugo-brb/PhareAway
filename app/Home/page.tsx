@@ -118,7 +118,7 @@ export default function Home() {
         <Pictures handleClickActive={handleClickActive} player={player} />
       )}
       {active === "enigme" && (
-        <Enigme handleClickActive={handleClickActive} id={activeID} />
+        <Enigme handleClickActive={handleClickActive} id={activeID} player={player}/>
       )}
       {active === "account" && (
         <Account handleClickActive={handleClickActive} player={player} />
