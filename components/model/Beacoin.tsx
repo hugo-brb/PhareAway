@@ -2,6 +2,12 @@ import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { UseImage, useImage } from "./Image";
 
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
+
+//Définition des types des méthodes de la classe Beacoin
 export type UseLighthouse = {
   beacoinData: BeacoinData;
   getId: () => number;
@@ -11,11 +17,7 @@ export type UseLighthouse = {
   getImage: () => UseImage;
 };
 
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
-
+//Définition des attributs de la classe Beacoin
 interface BeacoinData {
   id: number;
   name: string;
@@ -24,8 +26,10 @@ interface BeacoinData {
   id_image: number;
 }
 
+//Constructeur de la classe Beacoin
 export function useBeacoin(id: number) {
   const [beacoinData, setBeacoinData] = useState<BeacoinData>({
+    //Initialisation des attributs
     id: -1,
     name: "",
     price: 0,
@@ -37,14 +41,15 @@ export function useBeacoin(id: number) {
     const fetchBeacoinData = async () => {
       try {
         if (id >= 1) {
+          //Récupération des données de la table Beacoin dans la base de données
           const request = await supabaseData
             .from("Beacoin")
             .select()
             .eq("id", id)
             .single();
 
-          console.log("Requete Image : ", request);
           if (request.data) {
+            //Initialisation des attributs avec les valeurs de la base de données si elles existent sinon on met des valeurs par défaut
             setBeacoinData({
               id: id,
               name: request.data.name || "",
@@ -61,15 +66,15 @@ export function useBeacoin(id: number) {
     fetchBeacoinData();
   }, [id]);
 
-  //methodes
-  const image = useImage(beacoinData.id_image);
-
+  //Initialisation des méthodes
   const methods = {
+    //Getters
     getId: () => beacoinData.id,
     getName: () => beacoinData.name,
     getPrice: () => beacoinData.price,
     getNumber: () => beacoinData.number,
-    getImage: () => image,
+    //Méthode qui créer un objet Image a l'aide de l'id_image de la classe Beacoin
+    getImage: () => useImage(beacoinData.id_image),
   };
 
   return { beacoinData, ...methods };
