@@ -1,7 +1,7 @@
 import { useEnigme, UseEnigme } from "@/components/model/EnigmeInterface";
 import { useLighthouse, UseLighthouse } from "@/components/model/lighthouse";
 import { useState } from "react";
-import { usePlayer, UsePlayer } from "../model/player";
+import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/JohnPork";
 import Image from "next/image";
 
@@ -23,7 +23,6 @@ export default function Enigme({
   const enigme5 = useEnigme(id, 5); //recupere les données de la cinquième enigme du phare id
   const lighthouse = useLighthouse(id); //recupere les données du phare id
   const [popup, setPopup] = useState("0");
-  const email = player?.getMail() ?? "";
 
   const handleClickPopup = (a: string) => {
     setPopup(a);
@@ -65,7 +64,16 @@ export default function Enigme({
               activeButtons.hint ? "pointer-events-none" : ""
             }`}
             style={{ top: "12vw", right: "5vw" }}
-            onClick={() => handleClickActiveButton("hint")}
+            onClick={() => {
+              if (player.getBeacoins() >= 100) {
+                player.setBeacoins(-100);
+                handleClickActiveButton("hint");
+              } else {
+                alert(
+                  "Vous n'avez pas assez de beacoins pour acheter les indices"
+                );
+              }
+            }}
           >
             <Image
               src={
@@ -89,7 +97,7 @@ export default function Enigme({
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
                 id={popup}
-                player={email}
+                player={player}
                 lh={id}
                 codeLock={enigme1.getanswerLock()}
                 coordX={enigme1.getcoordX()}
@@ -105,7 +113,7 @@ export default function Enigme({
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
                 id={popup}
-                player={email}
+                player={player}
                 lh={id}
                 codeLock={enigme2.getanswerLock()}
                 coordX={enigme2.getcoordX()}
@@ -121,7 +129,7 @@ export default function Enigme({
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
                 id={popup}
-                player={email}
+                player={player}
                 lh={id}
                 codeLock={enigme3.getanswerLock()}
                 coordX={enigme3.getcoordX()}
@@ -137,7 +145,7 @@ export default function Enigme({
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
                 id={popup}
-                player={email}
+                player={player}
                 lh={id}
                 codeLock={enigme4.getanswerLock()}
                 coordX={enigme4.getcoordX()}
@@ -153,7 +161,7 @@ export default function Enigme({
               <SmallEnigme
                 handleClickPopup={handleClickPopup}
                 id={popup}
-                player={email}
+                player={player}
                 lh={id}
                 codeLock={enigme5.getanswerLock()}
                 coordX={enigme5.getcoordX()}
