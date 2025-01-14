@@ -33,11 +33,11 @@ const Marker: React.FC<MarkerProps> = ({
             setIsImageLoaded(true); // L'image existe
           } else {
             setIsImageLoaded(false); // L'image n'existe pas
-            setImageSrc('/icones/logoSimple.png');
+            setImageSrc('/icones/logoBaniere.png');
           }
         } catch {
           setIsImageLoaded(false); // En cas d'erreur réseau ou autre
-          setImageSrc('/icones/logoSimple.png');
+          setImageSrc('/icones/logoBaniere.png');
         }
       };
   
