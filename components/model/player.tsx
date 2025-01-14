@@ -11,7 +11,7 @@ export type UsePlayer = {
   getIsOAuth: () => boolean;
   getBeacoins: () => number;
   getPhareended: () => Array<number>;
-  getDlcUnlocked: () => number;
+  getDlcUnlocked: () => Array<number>;
   getIsAsso: () => boolean;
   getIsAdmin: () => boolean;
   setPrenom: (prenom: string) => Promise<void>;
@@ -20,7 +20,7 @@ export type UsePlayer = {
   setPseudo: (pseudo: string) => Promise<void>;
   setBeacoins: (beacoins: number) => Promise<void>;
   setPhareended: (Phareended: Array<number>) => Promise<void>;
-  setDlcUnlocked: (DlcUnlocked: number) => Promise<void>;
+  setDlcUnlocked: (DlcUnlocked: Array<number>) => Promise<void>;
   // setPassword: (password: string) => Promise<void>;
   deletePlayer: () => Promise<void>;
   updatePlayerInfo: (updates: Partial<PlayerData>) => Promise<void>;
@@ -48,7 +48,7 @@ interface PlayerData {
   };
   beacoins: number;
   phareended: Array<number>;
-  DlcUnlocked: number;
+  DlcUnlocked: Array<number>;
   isAsso: boolean;
   isAdmin: boolean;
 }
@@ -64,7 +64,7 @@ export function usePlayer(email: string) {
     },
     beacoins: 0,
     phareended: [],
-    DlcUnlocked: 0,
+    DlcUnlocked: [],
     isAsso: false,
     isAdmin: false,
   });
@@ -94,7 +94,7 @@ export function usePlayer(email: string) {
               },
               beacoins: requestData.data?.[0]?.beacoin ?? 0,
               phareended: requestData.data?.[0]?.phareended || [],
-              DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || 0,
+              DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || [],
               isAsso: requestData.data?.[0]?.isAsso,
               isAdmin: requestData.data?.[0]?.isAdmin,
             });
@@ -221,16 +221,31 @@ export function usePlayer(email: string) {
       }
     },
 
-    setDlcUnlocked: async (DlcUnlocked: number) => {
-      await supabaseData
-        .from("users")
-        .update({ DlcUnlocked })
-        .eq("id", playerData.user.id);
-      setPlayerData((prev) => ({
-        ...prev,
-        DlcUnlocked,
-      }));
-    },
+    setDlcUnlocked: async (DlcUnlocked: Array<number>) => {
+        try {
+            // Met à jour les données dans Supabase
+            const { error } = await supabaseData
+              .from("users")
+              .update({ DlcUnlocked }) // Colonne à mettre à jour
+              .eq("id", playerData.user.id); // Condition pour trouver le bon utilisateur
+    
+            if (error) {
+              console.error(
+                "Erreur lors de la mise à jour de Supabase:",
+                error.message
+              );
+              return;
+            }
+    
+            // Met à jour l'état local
+            setPlayerData((prev) => ({
+              ...prev,
+              DlcUnlocked,
+            }));
+          } catch (err) {
+            console.error("Erreur inattendue:", err);
+          }
+        },
 
     // Méthodes de gestion du compte
     deletePlayer: async () => {

@@ -132,7 +132,7 @@ export default function Home() {
       {active === "addEvent" && player.getIsAsso() && (
         <AddEvent handleClickActive={handleClickActive} />
       )}
-      {active === "coin" && <Store handleClickActive={handleClickActive} />}
+      {active === "coin" && <Store handleClickActive={handleClickActive} player={player} />}
       {active === "picture" && (
         <Pictures handleClickActive={handleClickActive} player={player} />
       )}
