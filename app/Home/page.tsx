@@ -46,7 +46,7 @@ export default function Home() {
     -1.6282904, 49.6299822,
   ]); // Initial map center
   const player = usePlayer(session?.user?.email ?? "");
-  const [isLoading, setIsLoading] = useState(true); // Gère l'affichage du préloader
+  const [isLoading, setIsLoading] = useState(true); // Gère l'affichage du préloader est true si le préloader doit affiché sinon il est false
   const [isMapReady, setIsMapReady] = useState(false); // Suivi du statut de la carte
   const [markersLoaded, setMarkersLoaded] = useState(false); // Suivi des marqueurs
 

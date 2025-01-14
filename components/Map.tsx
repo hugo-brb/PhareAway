@@ -50,7 +50,6 @@ const Map: React.FC<MapComponentProps> = ({
       });
       // Événement déclenché lorsque la carte est entièrement chargée
       mapInstance.current.on("load", () => {
-        console.log("Carte chargée"); // Vérification console
         onMapLoaded(); // Appelle la fonction callback pour signaler que la carte est prête
       });
     }
