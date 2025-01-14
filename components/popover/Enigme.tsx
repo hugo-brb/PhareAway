@@ -199,6 +199,7 @@ export default function Enigme({
                 text2={enigme5.gettext2()}
               />
             )}
+            {/* Grand écran (Pc...) */}
             <button
               style={{
                 left: `${enigme1.getcoordX()}vw`,
@@ -206,7 +207,7 @@ export default function Enigme({
                 width: `${enigme1.getlenghtX()}vw`,
                 height: `${enigme1.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg ${
+              className={`absolute rounded-lg hidden md:block ${
                 activeButtons.hint
                   ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
@@ -220,7 +221,7 @@ export default function Enigme({
                 width: `${enigme2.getlenghtX()}vw`,
                 height: `${enigme2.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg ${
+              className={`absolute rounded-lg hidden md:block ${
                 activeButtons.hint
                   ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
@@ -234,7 +235,7 @@ export default function Enigme({
                 width: `${enigme3.getlenghtX()}vw`,
                 height: `${enigme3.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg ${
+              className={`absolute rounded-lg hidden md:block ${
                 activeButtons.hint
                   ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
@@ -248,7 +249,7 @@ export default function Enigme({
                 width: `${enigme4.getlenghtX()}vw`,
                 height: `${enigme4.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg ${
+              className={`absolute rounded-lg hidden md:block ${
                 activeButtons.hint
                   ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
@@ -262,7 +263,89 @@ export default function Enigme({
                 width: `${enigme5.getlenghtX()}vw`,
                 height: `${enigme5.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg group ${
+              className={`absolute rounded-lg hidden md:block group ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-red-500 transform transition-all duration-300 bg-red-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
+              onClick={() => handleClickPopup("5")}
+            >
+              <Image
+                className={`opacity-0 transition-opacity duration-300 ${
+                  activeButtons.hint ? "opacity-30 group-hover:opacity-60" : ""
+                }`}
+                src="icones/lock-solid.svg"
+                alt="lock"
+                width={20}
+                height={20}
+              />
+            </button>
+
+            {/* Petits écrans (Tél...) */}
+            <button
+              style={{
+                left: `${enigme1.getcoordX() * 2}vw`,
+                top: `${enigme1.getcoordY() * 2}vw`,
+                width: `${enigme1.getlenghtX() * 2}vw`,
+                height: `${enigme1.getlenghtY() * 2}vw`,
+              }}
+              className={`absolute rounded-lg md:hidden ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
+              onClick={() => handleClickPopup("1")}
+            ></button>
+            <button
+              style={{
+                left: `${enigme2.getcoordX() * 2}vw`,
+                top: `${enigme2.getcoordY() * 2}vw`,
+                width: `${enigme2.getlenghtX() * 2}vw`,
+                height: `${enigme2.getlenghtY() * 2}vw`,
+              }}
+              className={`absolute rounded-lg md:hidden ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
+              onClick={() => handleClickPopup("2")}
+            ></button>
+            <button
+              style={{
+                left: `${enigme3.getcoordX() * 2}vw`,
+                top: `${enigme3.getcoordY() * 2}vw`,
+                width: `${enigme3.getlenghtX() * 2}vw`,
+                height: `${enigme3.getlenghtY() * 2}vw`,
+              }}
+              className={`absolute rounded-lg md:hidden ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
+              onClick={() => handleClickPopup("3")}
+            ></button>
+            <button
+              style={{
+                left: `${enigme4.getcoordX() * 2}vw`,
+                top: `${enigme4.getcoordY() * 2}vw`,
+                width: `${enigme4.getlenghtX() * 2}vw`,
+                height: `${enigme4.getlenghtY() * 2}vw`,
+              }}
+              className={`absolute rounded-lg md:hidden ${
+                activeButtons.hint
+                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "cursor-default"
+              }`}
+              onClick={() => handleClickPopup("4")}
+            ></button>
+            <button
+              style={{
+                left: `${enigme5.getcoordX() * 2}vw`,
+                top: `${enigme5.getcoordY() * 2}vw`,
+                width: `${enigme5.getlenghtX() * 2}vw`,
+                height: `${enigme5.getlenghtY() * 2}vw`,
+              }}
+              className={`absolute rounded-lg md:hidden group ${
                 activeButtons.hint
                   ? "cursor-pointer ring-2 ring-red-500 transform transition-all duration-300 bg-red-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
