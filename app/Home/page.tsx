@@ -4,7 +4,6 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
 
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
@@ -23,17 +22,15 @@ import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 
 interface itemProps {
-    id:number;
-    coordinates: string;
-    name: string;
-    url: string;
-    enigme:boolean;
+  id: number;
+  coordinates: string;
+  name: string;
+  url: string;
+  enigme: boolean;
 }
 
 // Dynamically import the Map component without server-side rendering (SSR)
-const Map = React.memo(
-  dynamic(() => import("../../components/Map"), { ssr: false })
-);
+const Map = dynamic(() => import("../../components/Map"), { ssr: false });
 // Initialize Supabase client for data
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -48,11 +45,6 @@ export default function Home() {
     -1.6282904, 49.6299822,
   ]); // Initial map center
   const player = usePlayer(session?.user?.email ?? "");
-
-  // Redirect to login if the session is not available
-  if (!session) {
-    redirect("/Login");
-  }
 
   const handleClickActive = (a: string) => {
     setActive(a);
@@ -78,11 +70,13 @@ export default function Home() {
       }
       // Formatage des données pour Mapbox
       const formattedMarkers = data.map((item: itemProps) => ({
-        id:item.id,
+        id: item.id,
         longitude: parseFloat(item.coordinates.split(" ")[0]),
         latitude: parseFloat(item.coordinates.split(" ")[1]),
         popupText: item.name,
-        icone: item.enigme?  "/icones/lightHouseIconEnigme.svg": "/icones/lightHouseIcon.svg",
+        icone: item.enigme
+          ? "/icones/lightHouseIconEnigme.svg"
+          : "/icones/lightHouseIcon.svg",
         lien: item.url,
         enigme: item.enigme,
       }));
@@ -119,7 +113,11 @@ export default function Home() {
         <Pictures handleClickActive={handleClickActive} player={player} />
       )}
       {active === "enigme" && (
-        <Enigme handleClickActive={handleClickActive} id={activeID} player={player}/>
+        <Enigme
+          handleClickActive={handleClickActive}
+          id={activeID}
+          player={player}
+        />
       )}
       {active === "account" && (
         <Account handleClickActive={handleClickActive} player={player} />
