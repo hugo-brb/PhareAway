@@ -92,7 +92,7 @@ export function usePlayer(email: string) {
                 pseudo: requestAuth?.data?.pseudo || "",
                 isOAuth: requestAuth?.data?.isOAuth,
               },
-              beacoins: requestData.data?.[0]?.becoins ?? 0,
+              beacoins: requestData.data?.[0]?.beacoin ?? 0,
               phareended: requestData.data?.[0]?.phareended || [],
               DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || 0,
               isAsso: requestData.data?.[0]?.isAsso,

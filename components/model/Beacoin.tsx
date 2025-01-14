@@ -74,7 +74,7 @@ export function useBeacoin(id: number) {
     getPrice: () => beacoinData.price,
     getNumber: () => beacoinData.number,
     //Méthode qui créer un objet Image a l'aide de l'id_image de la classe Beacoin
-    getImage: () => useImage(beacoinData.id_image),
+    useGetImage: () => useImage(beacoinData.id_image),
   };
 
   return { beacoinData, ...methods };

@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/image";
 import { useState } from "react";
 import AnswerPop from "@/components/popover/Answer";
-import { usePlayer } from "../model/player";
+import { UsePlayer } from "@/components/model/player";
 
 interface SmallEnigmeProps {
   handleClickPopup: (a: string) => void;

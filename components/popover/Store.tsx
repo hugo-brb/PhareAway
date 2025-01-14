@@ -9,54 +9,57 @@ const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
+//Initialisation des paramêtre de la fonction Coin
 interface MenuProps {
   handleClickActive: (a: string) => void;
 }
 
 export default function Coin({ handleClickActive }: MenuProps) {
-  // State pour stocker les événements
   interface Extention {
     id: number;
   }
-
+  //Initialisation de la variable extentions contenant toutes les id des extentions
   const [extentions, setExtentions] = useState<Extention[]>([]);
 
   useEffect(() => {
     const fetchExtentions = async () => {
+      //Récuprération des id des extentions
       const { data, error } = await supabaseData.from("Extension").select("id");
 
       if (error) {
         console.error("Erreur lors de la récupération des extentions:", error);
       } else {
-        setExtentions(data); // Stocke les événements récupérés dans l'état
+        //Stockage des id des extentions dans la variable extentions
+        setExtentions(data);
       }
       console.log(" info ", data);
     };
 
-    fetchExtentions(); // Appel de la fonction pour récupérer les événements
-  }, []); // L'effet est exécuté une seule fois lorsque le composant est monté
+    fetchExtentions();
+  }, []);
 
-  // State pour stocker les événements
   interface Beacoin {
     id: number;
   }
-
+  //Initialisation de la variable beacoins contenant toutes les id des beacoins
   const [beacoins, setBeacoins] = useState<Beacoin[]>([]);
 
   useEffect(() => {
     const fetchBeacoins = async () => {
+      //Récuprération des id des beacoins
       const { data, error } = await supabaseData.from("Beacoin").select("id");
 
       if (error) {
         console.error("Erreur lors de la récupération des beacoins:", error);
       } else {
-        setBeacoins(data); // Stocke les événements récupérés dans l'état
+        //Stockage des id des beacoins dans la variable beacoins
+        setBeacoins(data);
       }
       console.log(" info ", data);
     };
 
-    fetchBeacoins(); // Appel de la fonction pour récupérer les événements
-  }, []); // L'effet est exécuté une seule fois lorsque le composant est monté
+    fetchBeacoins();
+  }, []);
 
   return (
     <>
@@ -80,6 +83,7 @@ export default function Coin({ handleClickActive }: MenuProps) {
             <h2 className=" text-[--primary] text-lg px-5 py-2">Beacoins</h2>
             <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll">
               <div className=" flex ml-2 md:ml-7 justify-around">
+                {/*Affichage de tout les Offres de Beacoin*/}
                 {beacoins.map((beacoin) => (
                   <OneBeacoin key={beacoin.id} id_beacoin={beacoin.id} />
                 ))}
@@ -91,6 +95,7 @@ export default function Coin({ handleClickActive }: MenuProps) {
             <h2 className=" text-[--primary] text-lg px-5 py-2">Extensions</h2>
             <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll">
               <div className=" flex flex-col md:flex-row flex-wrap mx-4 md:mx-0 md:ml-7 justify-center md:gap-24">
+                {/*Affichage de tout les DLC disponible*/}
                 {extentions.map((extention) => (
                   <OneExtention
                     key={extention.id}

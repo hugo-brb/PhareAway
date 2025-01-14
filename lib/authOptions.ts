@@ -70,4 +70,6 @@ export const authOptions: NextAuthOptions = {
     url: process.env.SUPABASE_URL ?? "",
     secret: process.env.SUPABASE_SERVICE_ROLE_KEY ?? "",
   }) as Adapter,
+  debug: true,
+  secret: process.env.NEXTAUTH_SECRET,
 };
