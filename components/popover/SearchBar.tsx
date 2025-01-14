@@ -1,9 +1,10 @@
 // SearchBar.js
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
+import OneEvent from "@/components/OneEvent";
 //import Image from "next/image"; // Image du bouton "loop"
 
-const supabase =createClient(
+const supabaseData =createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
   );
@@ -17,19 +18,37 @@ const SearchBar = () => {
   }
 
   const [results, setResults] = useState<Event[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
+      const currentDate = new Date().toISOString();
       if (searchTerm) {
-        const { data, error } = await supabase
+        const { data, error } = await supabaseData
           .from('Event')
-          .select('*')
+          .select('id, name')
+          .gte("date", currentDate)
+          .order("date", { ascending: true })
           .ilike('name', `%${searchTerm}%`);
         if (error) {
           console.error('Error fetching data:', error);
         } else {
           setResults(data);
         }
+        setLoading(false); // Fin du chargement
+      } else if (searchTerm === '') {
+        const { data, error } = await supabaseData
+          .from('Event')
+          .select('id, name')
+          .gte("date", currentDate)
+          .order("date", { ascending: true });
+          if (error) {
+            console.error('Error fetching data:', error);
+          } else {
+            setResults(data);
+          }
+          setLoading(false); // Fin du chargement
+
       } else {
         setResults([]);
       }
@@ -38,14 +57,18 @@ const SearchBar = () => {
     fetchData();
   }, [searchTerm]);
 
+  if (loading) {
+    return <div>Chargement des événements...</div>;
+  }
+
   return (
     <div
-     className='self-center'
+     className='flex flex-col self-center'
     >
 
-            <div
+          <div
             id="recherche"
-            className="flex mt-5 md:mt-0 items-center self-center gap-4"
+            className="flex mb-10 md:mt-0 items-center self-center gap-4"
             >
             {/*Bouton trier */}
             <button className=" flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base">
@@ -84,13 +107,16 @@ const SearchBar = () => {
             {/* Fin Search Bar */}
           </div>
 
-      <ul>
-        {
-          results.map((item) => (
-            <li key={item.id}>{item.name}</li>
-          ))
-        }
-      </ul>
+        <div
+          id="eventListe"
+          className="flex flex-col gap-6 max-w-[95vw] md:max-w-[80%] self-center align-center mb-5"
+        >
+          <ul className='flex flex-col gap-6'>
+          {results.map((event) => (
+                <OneEvent key={event.id} id_Event={event.id} />
+              ))}
+          </ul>
+        </div>
     </div>
   );
 };
