@@ -2,7 +2,7 @@ import { useEnigme } from "@/components/model/EnigmeInterface";
 import { useLighthouse } from "@/components/model/lighthouse";
 import { useState } from "react";
 import { UsePlayer } from "../model/player";
-import SmallEnigme from "@/components/popover/JohnPork";
+import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
 
 interface EnigmeProps {
@@ -42,7 +42,7 @@ export default function Enigme({
   return (
     <>
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-        <section className=" flex flex-col items-center self-center gap-7 md:gap-12 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+        <section className=" flex flex-col items-center self-center gap-7 md:gap-12 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 pt-10 pb-12 md:pt-4 overflow-y-scroll scrollbarhidden">
           <button
             className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
             onClick={() => parentHandleClickActive("home")}
