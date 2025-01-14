@@ -4,10 +4,17 @@ const Button = ({ onSortChange }) => {
   const [activeButton, setActiveButton] = useState('');
 
   const handleButtonClick = (button) => {
-    setActiveButton(button);
-    onSortChange(button); // Appel de la fonction de rappel pour mettre à jour le tri
+    // Vérifiez si le bouton cliqué est déjà actif
+    if (activeButton === button) {
+      setActiveButton('');
+      onSortChange('');
+    } else {
+      setActiveButton(button);
+      onSortChange(button);
+    }
   };
 
+  {/** TODO a mettre au propre */}
   return (
     <div>
       <button
