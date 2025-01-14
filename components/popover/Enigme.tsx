@@ -119,8 +119,8 @@ export default function Enigme({
                 player={player}
                 lh={id}
                 codeLock={enigme1.getanswerLock()}
-                coordX={enigme1.getcoordX() * 2}
-                coordY={enigme1.getcoordY() * 2}
+                coordX={enigme1.getcoordX()}
+                coordY={enigme1.getcoordY()}
                 name={enigme1.getname()}
                 question={enigme1.getquestion()}
                 text1={enigme1.gettext1()}
@@ -135,8 +135,8 @@ export default function Enigme({
                 player={player}
                 lh={id}
                 codeLock={enigme2.getanswerLock()}
-                coordX={enigme2.getcoordX() * 2}
-                coordY={enigme2.getcoordY() * 2}
+                coordX={enigme2.getcoordX()}
+                coordY={enigme2.getcoordY()}
                 name={enigme2.getname()}
                 question={enigme2.getquestion()}
                 text1={enigme2.gettext1()}
