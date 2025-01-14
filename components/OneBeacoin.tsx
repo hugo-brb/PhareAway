@@ -20,7 +20,10 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
   return (
     <>
       <Link
-        href="/Payment"
+        href={{
+          pathname: "/Payment",
+          query: { id: beacoin.getId() }, // Passage de l'id
+        }}
         className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
       >
         {/*Affichage de l'image de l'offre de beacoin si elle existe sinon affiché un place holder*/}
@@ -43,7 +46,7 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
         )}
         <div className=" flex flex-col justify-center items-center">
           <p>{beacoin.getNumber()} beacoins </p>
-          <p className=" opacity-50">{beacoin.getPrice()} €</p>
+          <p className=" opacity-50">{beacoin.getPrice()}0 €</p>
         </div>
       </Link>
     </>

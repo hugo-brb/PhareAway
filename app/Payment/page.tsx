@@ -1,8 +1,17 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import "@/lib/StyleCreditCard.css";
+import { useSearchParams } from "next/navigation";
+import { useBeacoin } from "../../components/model/Beacoin";
 
 export default function Payment() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
+  const beacoin = useBeacoin(id ? parseInt(id) : -1);
+  const image = beacoin.useGetImage();
+
   return (
     <>
       <div className=" land h-[100vh] w-[100vw] flex justify-center items-center bg-black bg-opacity-50 absolute top-0 z-40">
@@ -23,6 +32,34 @@ export default function Payment() {
 
         <div className="modal">
           <form className="form">
+            <div className="flex flex-col items-center">
+              <h1 className="pb-4 text-xl font-bold">
+                Récapitulatif de votre achat
+              </h1>
+              <div className="flex flex-col justify-center items-center gap-3 px-7 py-5 ring-2 ring-slate-300 rounded-xl">
+                {image.getUrl() !== "" ? (
+                  <Image
+                    className="self-center rounded-lg"
+                    src={image.getUrl()}
+                    width={60}
+                    height={60}
+                    alt={beacoin.getName()}
+                  />
+                ) : (
+                  <Image
+                    className="self-center rounded-lg"
+                    src="/icones/logoBaniere.png"
+                    alt="Default logo"
+                    width={60}
+                    height={60}
+                  />
+                )}
+                <div className=" flex flex-col justify-center items-center">
+                  <p>{beacoin.getNumber()} beacoins </p>
+                  <p className=" opacity-50">{beacoin.getPrice()}0 €</p>
+                </div>
+              </div>
+            </div>
             <div className="payment--options">
               <button
                 name="paypal"
@@ -216,8 +253,12 @@ export default function Payment() {
                 </div>
               </div>
             </div>
+            <div className="flex justify-between text-zinc-400 text-sm px-1">
+              <h1>Montant à payer :</h1>
+              <h1>{beacoin.getPrice()}0 euros</h1>
+            </div>
             <button className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg">
-              Payez
+              Payer
             </button>
           </form>
         </div>
