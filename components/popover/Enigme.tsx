@@ -270,15 +270,19 @@ export default function Enigme({
               }`}
               onClick={() => handleClickPopup("5")}
             >
-              <Image
-                className={`opacity-0 transition-opacity duration-300 ${
-                  activeButtons.hint ? "opacity-30 group-hover:opacity-60" : ""
-                }`}
-                src="icones/lock-solid.svg"
-                alt="lock"
-                width={20}
-                height={20}
-              />
+              <div className="flex items-center justify-center w-full h-full">
+                <Image
+                  className={`opacity-0 transition-opacity duration-300 ${
+                    activeButtons.hint
+                      ? "opacity-30 group-hover:opacity-60"
+                      : ""
+                  }`}
+                  src="icones/lock-solid.svg"
+                  alt="lock"
+                  width={20}
+                  height={20}
+                />
+              </div>
             </button>
 
             {/* Petits écrans (Tél...) */}
@@ -352,15 +356,19 @@ export default function Enigme({
               }`}
               onClick={() => handleClickPopup("5")}
             >
-              <Image
-                className={`opacity-0 transition-opacity duration-300 ${
-                  activeButtons.hint ? "opacity-30 group-hover:opacity-60" : ""
-                }`}
-                src="icones/lock-solid.svg"
-                alt="lock"
-                width={20}
-                height={20}
-              />
+              <div className="flex items-center justify-center w-full h-full">
+                <Image
+                  className={`opacity-0 transition-opacity duration-300 ${
+                    activeButtons.hint
+                      ? "opacity-30 group-hover:opacity-60"
+                      : ""
+                  }`}
+                  src="icones/lock-solid.svg"
+                  alt="lock"
+                  width={20}
+                  height={20}
+                />
+              </div>
             </button>
           </div>
         </section>
