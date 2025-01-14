@@ -12,7 +12,7 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
   const beacoin = useBeacoin(id_beacoin);
   //Récupération de l'image de associé a l'offre de beacoin
   const image = beacoin.getImage();
-  // si l'offre de
+  // si l'offre de beacoin n'a pas encore charger affiché un message de chargement
   if (!beacoin) {
     return <p>Chargement de l&apos;événement...</p>;
   }
