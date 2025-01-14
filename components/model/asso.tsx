@@ -6,7 +6,6 @@ const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
 );
 
-// Interface pour User
 interface User {
   id: number;
   mail: string;
@@ -14,23 +13,19 @@ interface User {
   password: string;
 }
 
-// Interface pour Asso
-interface AssoInterface {
+interface AssoData {
   user: User;
   url: string;
 }
 
-// Définition des props et state
-/* eslint-disable @typescript-eslint/no-empty-interface */
-interface AssoProps {}
-interface AssoState extends AssoInterface {}
-/* eslint-enable @typescript-eslint/no-empty-interface */
+// Instead of empty interfaces, we define proper types
+type AssoProps = Record<string, never>; // Type for empty props object
+type AssoState = AssoData; // State inherits from AssoData
 
 class Asso extends Component<AssoProps, AssoState> {
   constructor(props: AssoProps) {
     super(props);
 
-    // Initialisation de l'état
     this.state = {
       user: {
         id: -1,
@@ -42,56 +37,61 @@ class Asso extends Component<AssoProps, AssoState> {
     };
   }
 
-  async create(user: User, url: "") {
+  async create(user: User, url: string): Promise<void> {
     try {
       await supabaseData.from("Asso").insert({
-        user: user,
-        url: url,
+        user,
+        url,
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
-  async read(id: number) {
+  async read(id: number): Promise<AssoData | undefined> {
     try {
       const { data, error } = await supabaseData
         .from("Asso")
         .select()
         .eq("id", id);
+
       if (error) {
         throw error;
       }
-      const initAsso = {
-        user: data?.[0].user,
-        url: data?.[0].url,
+
+      if (!data?.[0]) {
+        return undefined;
+      }
+
+      return {
+        user: data[0].user,
+        url: data[0].url,
       };
-      return initAsso;
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      return undefined;
     }
   }
 
-  async update(user: User, url: "") {
+  async update(user: User, url: string): Promise<void> {
     try {
       await supabaseData.from("Asso").update({
-        user: user,
-        url: url,
+        user,
+        url,
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
-  async deleteentree(id: number) {
+  async deleteEntry(id: number): Promise<void> {
     try {
       await supabaseData.from("Asso").delete().eq("id", id);
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
-  // Méthode pour supprimer un utilisateur
   delete(): void {
     this.setState({
       user: {

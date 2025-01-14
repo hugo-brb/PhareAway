@@ -1,5 +1,5 @@
-import { useEnigme, UseEnigme } from "@/components/model/EnigmeInterface";
-import { useLighthouse, UseLighthouse } from "@/components/model/lighthouse";
+import { useEnigme } from "@/components/model/EnigmeInterface";
+import { useLighthouse } from "@/components/model/lighthouse";
 import { useState } from "react";
 import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/JohnPork";
@@ -42,7 +42,7 @@ export default function Enigme({
   return (
     <>
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-        <section className=" flex flex-col items-center self-center gap-12 w-[75vw] h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+        <section className=" flex flex-col items-center self-center gap-7 md:gap-12 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
           <button
             className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
             onClick={() => parentHandleClickActive("home")}
@@ -55,12 +55,12 @@ export default function Enigme({
             />
           </button>
 
-          <h1 className="absolute top-5 text-3xl font-bold">
+          <h1 className=" text-3xl font-bold">
             Enigmes : {lighthouse.getName() ?? "Phare inconnu"}
           </h1>
 
           <button
-            className={`absolute ${
+            className={`absolute hidden md:block ${
               activeButtons.hint ? "pointer-events-none" : ""
             }`}
             style={{ top: "12vw", right: "5vw" }}
@@ -87,8 +87,27 @@ export default function Enigme({
             />
           </button>
 
+          <button
+            className={`absolute md:hidden ${
+              activeButtons.hint ? "pointer-events-none" : ""
+            }`}
+            style={{ bottom: "0vh", right: "25vw" }}
+            onClick={() => handleClickActiveButton("hint")}
+          >
+            <Image
+              src={
+                activeButtons.hint
+                  ? "/images/hintOn.png"
+                  : "/images/hintOff.png"
+              }
+              alt="hint"
+              width={150}
+              height={150}
+            />
+          </button>
+
           <div
-            className="rounded-3xl absolute top-1/2 -translate-y-1/2 left-[10%] w-[40vw] h-[40vw] bg-cover bg-center"
+            className="rounded-3xl absolute top-1/2 -translate-y-1/2 md:left-[10%] w-[80vw] h-[80vw] bg-cover bg-center"
             style={{
               backgroundImage: `url("https://nereoll.github.io/imagesPhare/phares/${id}.png")`,
             }}
@@ -100,8 +119,8 @@ export default function Enigme({
                 player={player}
                 lh={id}
                 codeLock={enigme1.getanswerLock()}
-                coordX={enigme1.getcoordX()}
-                coordY={enigme1.getcoordY()}
+                coordX={enigme1.getcoordX() * 2}
+                coordY={enigme1.getcoordY() * 2}
                 name={enigme1.getname()}
                 question={enigme1.getquestion()}
                 text1={enigme1.gettext1()}
@@ -116,8 +135,8 @@ export default function Enigme({
                 player={player}
                 lh={id}
                 codeLock={enigme2.getanswerLock()}
-                coordX={enigme2.getcoordX()}
-                coordY={enigme2.getcoordY()}
+                coordX={enigme2.getcoordX() * 2}
+                coordY={enigme2.getcoordY() * 2}
                 name={enigme2.getname()}
                 question={enigme2.getquestion()}
                 text1={enigme2.gettext1()}
