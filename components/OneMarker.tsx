@@ -47,8 +47,7 @@ const Marker: React.FC<MarkerProps> = ({
   return (
     <div className="">
         <div className="flex flex-col gap-6 items-center">
-            <p>ID {id}</p>
-            <h3 className="text-xl">{popupText}</h3>
+            <h3 className="text-xl  text-center">{popupText}</h3>
             {isImageLoaded !== null && (
             <Image
                 src={imageSrc}
