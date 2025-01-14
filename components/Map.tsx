@@ -69,8 +69,8 @@ const Map: React.FC<MapComponentProps> = ({
         ({ id, longitude, latitude, popupText, icone, lien, enigme }) => {
           const markerElement = document.createElement("div");
           markerElement.style.backgroundImage = `url("${icone}")`;
-          markerElement.style.width = "30px";
-          markerElement.style.height = "30px";
+          markerElement.style.width = enigme? "50px": "30px";
+          markerElement.style.height = enigme? "50px": "30px";
           markerElement.style.backgroundSize = "cover";
           const container = document.createElement("div");
           container.classList.add("flex", "flex-col", "gap-6", "items-center");
