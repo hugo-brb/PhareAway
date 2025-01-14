@@ -9,10 +9,14 @@ interface OnEventProp {
 }
 
 const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
+  //créeation d'un instance de la classe event
   const event = useEvent(id_Event);
+  //Récupération de l'image de associé a l'offre de event
   const image = useImage(event.getImage());
+  //Récupération du phare de l'event
   const phare = useLighthouse(event.getLighthouse());
 
+  // si l'event n'a pas encore charger affiché un message de chargement
   if (!event) {
     return <p>Chargement de l&apos;événement...</p>;
   }
@@ -20,6 +24,7 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
   return (
     <>
       <div className=" flex flex-col gap-4 items-center justify-center bg-white ring-2 ring-[--primary] rounded-lg py-4 px-7">
+        {/*Affichage de l'image de l'event si elle existe sinon affiché un place holder */}
         {image.getUrl() !== "" ? (
           <Image
             className="self-center rounded-lg"
@@ -53,12 +58,12 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
               <p>Durée : {event.getDuration()}h</p>
             </div>
             <div className="border-l-2 h-full border-[--text] self-stretch"></div>
-              <div className="flex flex-col gap-1 justify-center items-center w-1/2 text-right md:text-left border-l-2 h-full border-[--text]">
-                <p>Lieu : {phare.getName() || "Chargement..."}</p>
-                <p>Prix : {event.getPrice()}€</p>
-              </div>
+            <div className="flex flex-col gap-1 justify-center items-center w-1/2 text-right md:text-left border-l-2 h-full border-[--text]">
+              <p>Lieu : {phare.getName() || "Chargement..."}</p>
+              <p>Prix : {event.getPrice()}€</p>
             </div>
           </div>
+        </div>
         <p className=" text-center italic text-sm">
           Lien de réservation :{" "}
           <a
