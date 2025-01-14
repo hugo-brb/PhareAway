@@ -28,7 +28,6 @@ export default function AnswerPop({
             className="transform transition-transform duration-300 hover:rotate-90"
             onClick={() => {
               handleClickAnswer("0");
-              console.log(sol);
             }} //fonction permettant de fermer la fenetre et revenir à l'état de base de l'élément parent
           >
             <Image
