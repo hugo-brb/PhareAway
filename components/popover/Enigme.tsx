@@ -112,7 +112,7 @@ export default function Enigme({
           </button>
 
           <div
-            className="rounded-3xl absolute top-1/2 -translate-y-1/2 md:left-[10%] w-[80vw] h-[80vw] md:w-[40vw] md:h-[80vh] bg-cover bg-center"
+            className="rounded-3xl absolute top-1/2 -translate-y-1/2 left-[10%] w-[80vw] h-[80vw] md:w-[40vw] md:h-[80vh] max-w-[80vw] max-h-[65vh] bg-cover bg-center"
             style={{
               backgroundImage: nuit
                 ? `url("https://nereoll.github.io/imagesPhare/phares/${id}n.png")`
