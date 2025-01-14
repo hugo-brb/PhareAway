@@ -20,6 +20,7 @@ import CGU from "@/components/popover/CGU";
 import Contact from "@/components/popover/Contact";
 import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
+import Loader from "@/components/Loader"; // Importez un composant Loader
 
 interface itemProps {
   id: number;
@@ -45,6 +46,9 @@ export default function Home() {
     -1.6282904, 49.6299822,
   ]); // Initial map center
   const player = usePlayer(session?.user?.email ?? "");
+  const [isLoading, setIsLoading] = useState(true); // Gère l'affichage du préloader
+  const [isMapReady, setIsMapReady] = useState(false); // Suivi du statut de la carte
+  const [markersLoaded, setMarkersLoaded] = useState(false); // Suivi des marqueurs
 
   const handleClickActive = (a: string) => {
     setActive(a);
@@ -61,34 +65,53 @@ export default function Home() {
   // Charger les données de Supabase
   useEffect(() => {
     const fetchMarkers = async () => {
-      const { data, error } = await supabaseData
-        .from("Lighthouse")
-        .select("coordinates, name, url, id, enigme");
-      if (error) {
-        console.error("Erreur de chargement des données Supabase:", error);
-        return;
-      }
-      // Formatage des données pour Mapbox
-      const formattedMarkers = data.map((item: itemProps) => ({
-        id: item.id,
-        longitude: parseFloat(item.coordinates.split(" ")[0]),
-        latitude: parseFloat(item.coordinates.split(" ")[1]),
-        popupText: item.name,
-        icone: item.enigme
-          ? "/icones/lightHouseIconEnigme.svg"
-          : "/icones/lightHouseIcon.svg",
-        lien: item.url,
-        enigme: item.enigme,
-      }));
+      try {
+        const { data, error } = await supabaseData
+          .from("Lighthouse")
+          .select("coordinates, name, url, id, enigme");
+        if (error) {
+          console.error("Erreur de chargement des données Supabase:", error);
+          return;
+        }
+        // Formatage des données pour Mapbox
+        const formattedMarkers = data.map((item: itemProps) => ({
+          id: item.id,
+          longitude: parseFloat(item.coordinates.split(" ")[0]),
+          latitude: parseFloat(item.coordinates.split(" ")[1]),
+          popupText: item.name,
+          icone: item.enigme
+            ? "/icones/lightHouseIconEnigme.svg"
+            : "/icones/lightHouseIcon.svg",
+          lien: item.url,
+          enigme: item.enigme,
+        }));
 
-      setMarkers(formattedMarkers);
+        setMarkers(formattedMarkers);
+        setMarkersLoaded(true); // Marqueurs chargés
+      } catch (err) {
+        console.error("Erreur lors du chargement des marqueurs:", err);
+      }
     };
 
     fetchMarkers();
   }, []);
 
+  // Callback pour signaler que la carte est chargée
+  const handleMapLoaded = () => {
+    setIsMapReady(true); // La carte est prête
+  };
+
+  // Mise à jour de l'état global lorsque tout est prêt
+  useEffect(() => {
+    if (isMapReady && markersLoaded) {
+      setIsLoading(false); // Désactiver le préloader
+    }
+  }, [isMapReady, markersLoaded]);
+
+  // Afficher le préloader tant que tout n'est pas chargé
   return (
     <>
+      {isLoading && <Loader />} {/* Affiche le préloader */}
       <Menu active={active} handleClickActive={handleClickActive} />
       {active === "home" && <TopNav onCenterChange={updateCenter} />}
       <Map
@@ -101,6 +124,7 @@ export default function Home() {
         markers={markers}
         handleClickActive={handleClickActive}
         handleClickActiveId={handleClickActiveId}
+        onMapLoaded={handleMapLoaded} // Transmet la fonction callback
       />
       {active === "calendar" && (
         <Events handleClickActive={handleClickActive} player={player} />

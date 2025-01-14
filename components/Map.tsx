@@ -19,6 +19,7 @@ type MapComponentProps = {
   }[];
   handleClickActive: (a: string) => void;
   handleClickActiveId: (id: number) => void;
+  onMapLoaded: () => void; // Callback pour signaler que la carte est prête
 };
 
 const Map: React.FC<MapComponentProps> = ({
@@ -28,6 +29,7 @@ const Map: React.FC<MapComponentProps> = ({
   markers,
   handleClickActive,
   handleClickActiveId,
+  onMapLoaded,
 }) => {
   const mapContainer = useRef<HTMLDivElement | null>(null);
   const mapInstance = useRef<mapboxgl.Map | null>(null);
@@ -45,6 +47,11 @@ const Map: React.FC<MapComponentProps> = ({
         maxBounds: bounds,
         dragRotate: false,
         pitchWithRotate: false,
+      });
+      // Événement déclenché lorsque la carte est entièrement chargée
+      mapInstance.current.on("load", () => {
+        console.log("Carte chargée"); // Vérification console
+        onMapLoaded(); // Appelle la fonction callback pour signaler que la carte est prête
       });
     }
     return () => {
@@ -69,8 +76,8 @@ const Map: React.FC<MapComponentProps> = ({
         ({ id, longitude, latitude, popupText, icone, lien, enigme }) => {
           const markerElement = document.createElement("div");
           markerElement.style.backgroundImage = `url("${icone}")`;
-          markerElement.style.width = enigme? "50px": "30px";
-          markerElement.style.height = enigme? "50px": "30px";
+          markerElement.style.width = enigme ? "50px" : "30px";
+          markerElement.style.height = enigme ? "50px" : "30px";
           markerElement.style.backgroundSize = "cover";
           const container = document.createElement("div");
           container.classList.add("flex", "flex-col", "gap-6", "items-center");
