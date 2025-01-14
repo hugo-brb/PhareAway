@@ -56,7 +56,18 @@ const SearchBar = () => {
   }, [searchTerm]);
 
   if (loading) {
-    return <div>Chargement des événements...</div>;
+    return (
+      <>
+        <div className="flex flex-row gap-2 absolute top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2">
+          <div className="animate-pulse bg-gray-300 w-[14rem] h-[14rem] rounded-lg"></div>
+          <div className="flex flex-col gap-2">
+            <div className="animate-pulse bg-gray-300 w-[28rem] h-[5rem] rounded-lg"></div>
+            <div className="animate-pulse bg-gray-300 w-[36rem] h-[3rem] rounded-lg"></div>
+            <div className="animate-pulse bg-gray-300 w-[36rem] h-[2rem] rounded-lg"></div>
+          </div>
+        </div>
+      </>
+    );
   }
 
   return (

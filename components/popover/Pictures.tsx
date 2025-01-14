@@ -130,7 +130,8 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           Importer une image
         </h1>
         <p className=" text-center">
-          Partagez une image de phare et gagnez des BeaCoins en récompense.📸✨
+          Partagez une image de phare et gagnez <b>50</b> BeaCoins en
+          récompense.📸✨
         </p>
         <div className="my-auto">
           <label
