@@ -38,8 +38,7 @@ export default function SmallEnigme({
 
   return (
     <section
-      style={{ left: `44vw`, top: `20vw` }}
-      className={`absolute w-[20vw] h-[15vw] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
+      className={`absolute left-4 top-4 md:left-[44vw] md:top-[20vw] z-50 w-[90%] h-[90%] md:w-[20vw] md:h-[15vw] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
     >
       {popupA === "Vrai" && (
         <AnswerPop
@@ -123,7 +122,7 @@ export default function SmallEnigme({
 Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
               player.setBeacoins(2000);
             } else if (lh === 104 && id === "3") {
-              const currentHour = new Date().getHours(); // Récupère l'heure actuelle (0-23)
+              const currentHour = new Date().getHours();
 
               if (
                 (currentHour >= 18 && currentHour <= 23) ||
