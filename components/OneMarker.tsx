@@ -16,6 +16,7 @@ const Marker: React.FC<MarkerProps> = ({
   id,
   popupText,
   enigme,
+  lien,
   handleClickActive,
   handleClickActiveId,
 }) =>
