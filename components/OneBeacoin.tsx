@@ -12,7 +12,7 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
   const image = beacoin.getImage();
 
   if (!beacoin) {
-    return <p>Chargement de l'événement...</p>;
+    return <p>Chargement de l&apos;événement...</p>;
   }
 
   return (
