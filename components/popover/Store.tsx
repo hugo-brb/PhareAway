@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { UsePlayer } from "@/components/model/player";
 import { createClient } from "@supabase/supabase-js";
 import OneBeacoin from "@/components/OneBeacoin";
 import OneExtention from "@/components/OneExtention";
@@ -12,9 +13,10 @@ const supabaseData = createClient(
 //Initialisation des paramêtre de la fonction Coin
 interface MenuProps {
   handleClickActive: (a: string) => void;
+  player: UsePlayer;
 }
 
-export default function Coin({ handleClickActive }: MenuProps) {
+export default function Coin({ handleClickActive,player }: MenuProps) {
   interface Extention {
     id: number;
   }
@@ -97,10 +99,11 @@ export default function Coin({ handleClickActive }: MenuProps) {
               <div className=" flex flex-col md:flex-row flex-wrap mx-4 md:mx-0 md:ml-7 justify-center md:gap-24">
                 {/*Affichage de tout les DLC disponible*/}
                 {extentions.map((extention) => (
-                  <OneExtention
-                    key={extention.id}
-                    id_extention={extention.id}
-                  />
+                        <OneExtention
+                            key={extention.id}
+                            id_extention={extention.id}
+                            player={player}
+                        />
                 ))}
               </div>
             </div>
