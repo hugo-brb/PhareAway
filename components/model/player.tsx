@@ -187,7 +187,7 @@ export function usePlayer(email: string) {
     setBeacoins: async (addbeacoins: number) => {
       await supabaseData
         .from("users")
-        .update({ becoins: playerData.beacoins + addbeacoins })
+        .update({ beacoin: playerData.beacoins + addbeacoins })
         .eq("id", playerData.user.id);
       setPlayerData((prev) => ({
         ...prev,
