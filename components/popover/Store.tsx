@@ -81,7 +81,7 @@ export default function Coin({ handleClickActive }: MenuProps) {
           </h1>
           <div className=" flex flex-col">
             <h2 className=" text-[--primary] text-lg px-5 py-2">Beacoins</h2>
-            <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll">
+            <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll scrollbarhidden">
               <div className=" flex ml-2 md:ml-7 justify-around">
                 {/*Affichage de tout les Offres de Beacoin*/}
                 {beacoins.map((beacoin) => (
@@ -93,7 +93,7 @@ export default function Coin({ handleClickActive }: MenuProps) {
 
           <div className=" flex flex-col">
             <h2 className=" text-[--primary] text-lg px-5 py-2">Extensions</h2>
-            <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll">
+            <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll scrollbarhidden">
               <div className=" flex flex-col md:flex-row flex-wrap mx-4 md:mx-0 md:ml-7 justify-center md:gap-24">
                 {/*Affichage de tout les DLC disponible*/}
                 {extentions.map((extention) => (

@@ -1,19 +1,19 @@
 // SearchBar.js
-import React, { useState, useEffect } from 'react';
-import { createClient } from '@supabase/supabase-js';
+import React, { useState, useEffect } from "react";
+import { createClient } from "@supabase/supabase-js";
 import OneEvent from "@/components/OneEvent";
 import Image from "next/image"; // Image du bouton "loop"
 import Button from "./SortButton";
 
-const supabaseData =createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-  );
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   interface Event {
     id: number;
     name: string;
@@ -29,30 +29,29 @@ const SearchBar = () => {
       const currentDate = new Date().toISOString();
       if (searchTerm) {
         const { data, error } = await supabaseData
-          .from('Event')
-          .select('id, name')
+          .from("Event")
+          .select("id, name")
           .gte("date", currentDate)
           .order("date", { ascending: true })
-          .ilike('name', `%${searchTerm}%`);
+          .ilike("name", `%${searchTerm}%`);
         if (error) {
-          console.error('Error fetching data:', error);
+          console.error("Error fetching data:", error);
         } else {
           setResults(data);
         }
         setLoading(false); // Fin du chargement
-      } else if (searchTerm === '') {
+      } else if (searchTerm === "") {
         const { data, error } = await supabaseData
-          .from('Event')
-          .select('id, name')
+          .from("Event")
+          .select("id, name")
           .gte("date", currentDate)
           .order("date", { ascending: true });
-          if (error) {
-            console.error('Error fetching data:', error);
-          } else {
-            setResults(data);
-          }
-          setLoading(false); // Fin du chargement
-
+        if (error) {
+          console.error("Error fetching data:", error);
+        } else {
+          setResults(data);
+        }
+        setLoading(false); // Fin du chargement
       } else {
         setResults([]);
       }
@@ -62,9 +61,7 @@ const SearchBar = () => {
   }, [searchTerm]);
 
   if (loading) {
-    return <div>
-      Chargement des événements...
-    </div>;
+    return <div>Chargement des événements...</div>;
   }
 
   return (
@@ -104,29 +101,28 @@ const SearchBar = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
 
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 flex justify-center items-center">
-                <Image
-                  width={24}
-                  height={24}
-                  src="../icones/loop.svg"
-                  alt="Search Icon"
-                />
-              </button>
-
-            </div>
-            {/* Fin Search Bar */}
-          </div>
-
-        <div
-          id="eventListe"
-          className="flex flex-col gap-6 max-w-[95vw] md:max-w-[80%] self-center align-center mb-5"
-        >
-          <ul className='flex flex-col gap-6'>
-          {results.map((event) => (
-                <OneEvent key={event.id} id_Event={event.id} />
-              ))}
-          </ul>
+          <button className="absolute right-2 top-1/2 transform -translate-y-1/2 flex justify-center items-center">
+            <Image
+              width={24}
+              height={24}
+              src="../icones/loop.svg"
+              alt="Search Icon"
+            />
+          </button>
         </div>
+        {/* Fin Search Bar */}
+      </div>
+
+      <div
+        id="eventListe"
+        className="flex flex-col gap-6 max-w-[95vw] md:max-w-[80%] self-center align-center mb-5"
+      >
+        <ul className="flex flex-col gap-6">
+          {results.map((event) => (
+            <OneEvent key={event.id} id_Event={event.id} />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

@@ -6,7 +6,7 @@ interface MenuProps {
 export default function Menu({ active, handleClickActive }: MenuProps) {
   return (
     <>
-      <aside className="flex md:flex-col w-full md:w-fit gap-2 justify-between bg-white bg-opacity-60 rounded-t-3xl md:rounded-3xl backdrop-blur-md px-3 py-4 md:px-6 md:py-8 absolute bottom-0 md:left-7 md:top-28 md:bottom-28 z-50">
+      <aside className="flex md:flex-col w-full h-fit md:w-fit gap-2 justify-between bg-white bg-opacity-60 rounded-t-3xl md:rounded-3xl backdrop-blur-md px-3 py-4 md:px-6 md:py-5 absolute bottom-0 md:left-7 md:top-[20%] md:bottom-28 z-50">
         <div
           className="flex flex-col justify-center items-center gap-4"
           onClick={() => handleClickActive("calendar")}
