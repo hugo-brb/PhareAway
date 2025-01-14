@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import OneEvent from "@/components/OneEvent";
-//import Image from "next/image"; // Image du bouton "loop"
+import Image from "next/image"; // Image du bouton "loop"
 
 const supabaseData =createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -58,7 +58,9 @@ const SearchBar = () => {
   }, [searchTerm]);
 
   if (loading) {
-    return <div>Chargement des événements...</div>;
+    return <div>
+      Chargement des événements...
+    </div>;
   }
 
   return (
@@ -92,16 +94,14 @@ const SearchBar = () => {
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
 
-              {/**
               <button className="absolute right-2 top-1/2 transform -translate-y-1/2 flex justify-center items-center">
                 <Image
                   width={24}
                   height={24}
-                  src="/icones/loop.svg"
+                  src="../icones/loop.svg"
                   alt="Search Icon"
                 />
               </button>
-               */}
 
             </div>
             {/* Fin Search Bar */}

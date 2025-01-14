@@ -122,6 +122,17 @@ export default function SmallEnigme({
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
               player.setBeacoins(2000);
+            } else if (lh === 104 && id === "3") {
+              const currentHour = new Date().getHours(); // Récupère l'heure actuelle (0-23)
+
+              if (
+                (currentHour >= 18 && currentHour <= 23) ||
+                (currentHour >= 0 && currentHour < 6)
+              ) {
+                handleClickAnswer("Vrai");
+              } else {
+                handleClickAnswer("Faux");
+              }
             } else {
               handleClickAnswer("Faux");
             }
