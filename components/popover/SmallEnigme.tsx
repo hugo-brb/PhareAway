@@ -123,7 +123,7 @@ export default function SmallEnigme({
 Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
               player.setBeacoins(2000);
             } else if (lh === 104 && id === "3") {
-              const currentHour = new Date().getHours(); // Récupère l'heure actuelle (0-23)
+              const currentHour = new Date().getHours();
 
               if (
                 (currentHour >= 18 && currentHour <= 23) ||

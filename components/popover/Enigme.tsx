@@ -39,6 +39,11 @@ export default function Enigme({
     }));
   };
 
+  const currentHour = new Date().getHours();
+  const nuit =
+    (currentHour >= 18 && currentHour <= 23) ||
+    (currentHour >= 0 && currentHour < 6);
+
   return (
     <>
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
@@ -109,7 +114,9 @@ export default function Enigme({
           <div
             className="rounded-3xl absolute top-1/2 -translate-y-1/2 md:left-[10%] w-[80vw] h-[80vw] md:w-[40vw] md:h-[80vh] bg-cover bg-center"
             style={{
-              backgroundImage: `url("https://nereoll.github.io/imagesPhare/phares/${id}.png")`,
+              backgroundImage: nuit
+                ? `url("https://nereoll.github.io/imagesPhare/phares/${id}n.png")`
+                : `url("https://nereoll.github.io/imagesPhare/phares/${id}.png")`,
             }}
           >
             {popup === "1" && (
