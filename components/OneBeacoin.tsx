@@ -8,9 +8,11 @@ interface OnBeacoinProp {
 }
 
 const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
+  //création d'un instance de la classe beacoin
   const beacoin = useBeacoin(id_beacoin);
+  //Récupération de l'image de associé a l'offre de beacoin
   const image = beacoin.getImage();
-
+  // si l'offre de
   if (!beacoin) {
     return <p>Chargement de l&apos;événement...</p>;
   }
@@ -21,6 +23,7 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
         href="/Payment"
         className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
       >
+        {/*Affichage de l'image de l'offre de beacoin si elle existe sinon affiché un place holder*/}
         {image.getUrl() !== "" ? (
           <Image
             className="self-center rounded-lg"
