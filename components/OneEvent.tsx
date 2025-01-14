@@ -53,12 +53,12 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
               <p>Durée : {event.getDuration()}h</p>
             </div>
             <div className="border-l-2 h-full border-[--text] self-stretch"></div>
-            <div className="flex flex-col gap-1 justify-center items-center w-1/2 text-right md:text-left">
-              <p>Lieu : {phare.getName() || "Chargement..."}</p>
-              <p>Prix : {event.getPrice()}€</p>
+              <div className="flex flex-col gap-1 justify-center items-center w-1/2 text-right md:text-left border-l-2 h-full border-[--text]">
+                <p>Lieu : {phare.getName() || "Chargement..."}</p>
+                <p>Prix : {event.getPrice()}€</p>
+              </div>
             </div>
           </div>
-        </div>
         <p className=" text-center italic text-sm">
           Lien de réservation :{" "}
           <a
