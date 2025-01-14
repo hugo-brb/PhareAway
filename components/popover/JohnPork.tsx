@@ -15,7 +15,7 @@ interface SmallEnigmeProps {
   text1: string;
   answer: string;
   text2: string;
-  player: string;
+  player: UsePlayer;
   lh: number;
 }
 
@@ -35,8 +35,6 @@ export default function SmallEnigme({
   const handleClickAnswer = (a: string) => {
     setPopupA(a);
   };
-
-  const useP = usePlayer(player);
 
   return (
     <section
@@ -103,10 +101,10 @@ export default function SmallEnigme({
             const input = document.querySelector("input") as HTMLInputElement;
             if (input.value === answer) {
               if (id === "5") {
-                const phareEnded: number[] = useP.getPhareended();
+                const phareEnded: number[] = player.getPhareended();
                 if (!phareEnded.includes(lh)) {
                   phareEnded.push(lh);
-                  useP.setPhareended(phareEnded);
+                  player.setPhareended(phareEnded);
                 }
               }
               handleClickAnswer("Vrai");
@@ -122,8 +120,8 @@ export default function SmallEnigme({
 ⠄⠄⠄⠘⠿⠿⠿⠿⠿⠿⠿⠿⠟⠢⠿⠿⠟⠣⠄⠄⠲⠿⠿⠿⠿⠟⠁⠄⠄⠄
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
-Ajout de 2000 beacoins sur le compte de ${useP.getPseudo()}`);
-              useP.setBeacoins(2000);
+Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
+              player.setBeacoins(2000);
             } else {
               handleClickAnswer("Faux");
             }
