@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import Image from "next/image";
 
@@ -20,19 +20,46 @@ const Marker: React.FC<MarkerProps> = ({
   enigme,
   handleClickActive,
   handleClickActiveId,
-}) => {
+}) =>
+    {
+    const [imageSrc, setImageSrc] = useState(`https://nereoll.github.io/imagesPhare/phares/${id}.png`);
+    const [isImageLoaded, setIsImageLoaded] = useState<boolean | null>(null); // `true` si succès, `false` si échec
+
+    useEffect(() => {
+      // Vérifie si l'image est disponible ou non
+      const checkImage = async () => {
+        try {
+          const response = await fetch(imageSrc);
+          if (response.ok) {
+            setIsImageLoaded(true); // L'image existe
+          } else {
+            setIsImageLoaded(false); // L'image n'existe pas
+            setImageSrc('/icones/logoSimple.png');
+          }
+        } catch {
+          setIsImageLoaded(false); // En cas d'erreur réseau ou autre
+          setImageSrc('/icones/logoSimple.png');
+        }
+      };
+  
+      checkImage();
+    }, [imageSrc]); // Re-vérifie chaque fois que l'URL change
+  
   return (
     <div className="">
         <div className="flex flex-col gap-6 items-center">
             <p>ID {id}</p>
             <h3 className="text-xl">{popupText}</h3>
-            //TODO: add the default image for the marker if the url returns a 404
+            {isImageLoaded !== null && (
             <Image
-                src={`https://nereoll.github.io/imagesPhare/phares/${id}.png`}
-                alt=""
+                src={imageSrc}
+                alt={`Phare ${id}`}
                 width={200}
                 height={200}
             />
+            )}
+            {isImageLoaded === false && <p>Image par défaut chargée.</p>}
+            <a href={lien} target="_blank" className="text-cyan-700">Lien vers le site du phare</a>
             {enigme && (
               <button
                 onClick={() => {
