@@ -83,7 +83,7 @@ export default function LandingPage() {
             l&apos;équipe SoupexSoftware
           </p>
           <button
-            className="flex flex-col items-center absolute right-6"
+            className="flex gap-2 items-center absolute right-6"
             onClick={handleOpenCGU}
           >
             <h1 className="text-xs">Nos conditions d&apos;utilisation</h1>

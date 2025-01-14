@@ -15,8 +15,6 @@ type MarkerProps = {
 const Marker: React.FC<MarkerProps> = ({
   id,
   popupText,
-  icone,
-  lien,
   enigme,
   handleClickActive,
   handleClickActiveId,
@@ -78,5 +76,3 @@ const Marker: React.FC<MarkerProps> = ({
   );
 };
 export default Marker;
-
-

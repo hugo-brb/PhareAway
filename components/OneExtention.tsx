@@ -1,7 +1,6 @@
 import React from "react";
 import Image from "next/image";
 import { useExtention } from "./model/extention";
-import { useImage } from "./model/Image";
 
 interface OnExtentionProp {
   id_extention: number;
@@ -11,7 +10,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention }) => {
   const extention = useExtention(id_extention);
   const image = extention.useGetImage();
   if (!extention) {
-    return <p>Chargement de l'événement...</p>;
+    return <p>Chargement de l&apos;événement...</p>;
   }
 
   return (
