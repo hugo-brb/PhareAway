@@ -20,11 +20,19 @@ export default function LandingPage() {
   return (
     <>
       <main className=" flex flex-col justify-start text-[--background] py-7 px-7 w-[100vw] h-[100vh] max-w-[100vw] max-h-[100vh] overflow-hidden land">
-        <Link href="/Login" className=" self-end">
-          <button className=" w-44 py-2 px-4 text-xl font-bold rounded-3xl hover:bg-[--primary] border-b-2 border-[--primary] duration-300 ease-in-out">
-            Se connecter
-          </button>
-        </Link>
+        <div className=" self-end flex gap-4">
+          <Link href="/Login" className=" self-end">
+            <button className=" w-44 py-2 px-4 text-xl font-bold rounded-3xl hover:bg-[--primary] border-b-2 border-[--primary] duration-300 ease-in-out">
+              Se connecter
+            </button>
+          </Link>
+          <Link href="/Rgpd" className="mt-5">
+            <button className=" w-44 py-2 px-4 text-xl font-bold rounded-3xl border-b-2 hover:bg-[--primary] border-[--primary] duration-300 ease-in-out">
+              S&apos;inscrire
+            </button>
+          </Link>
+        </div>
+
         <div className=" flex flex-col justify-center items-center w-fit h-fit">
           <h1 className="text-8xl font-ouroboros ml-12 mt-8 self-start text-[--accent]">
             Phare <br /> <span className=" ml-8">Away</span>
