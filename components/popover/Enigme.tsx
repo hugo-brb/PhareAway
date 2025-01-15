@@ -1,9 +1,12 @@
 import { useEnigme } from "@/components/model/EnigmeInterface";
 import { useLighthouse } from "@/components/model/lighthouse";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
+import Tips from "@/components/popover/Tips";
+
+import ConfirmHint from "@/components/popover/ConfirmHint"; // Import du popup personnalisé
 
 interface EnigmeProps {
   handleClickActive: (a: string) => void;
@@ -23,6 +26,7 @@ export default function Enigme({
   const enigme5 = useEnigme(id, 5); //recupere les données de la cinquième enigme du phare id
   const lighthouse = useLighthouse(id); //recupere les données du phare id
   const [popup, setPopup] = useState("0");
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleClickPopup = (a: string) => {
     setPopup(a);
@@ -39,12 +43,28 @@ export default function Enigme({
     }));
   };
 
+  const handleHintPurchase = () => {
+    if (player.getBeacoins() >= 100) {
+      player.setBeacoins(-100);
+      handleClickActiveButton("hint");
+      setShowConfirmation(false); // Fermer le popup après confirmation
+    } else {
+      alert("Vous n'avez pas assez de Beacoins pour acheter les indices.");
+      setShowConfirmation(false);
+    }
+  };
+
   const currentHour = new Date().getHours();
   const nuit =
     (currentHour >= 18 && currentHour <= 23) ||
     (currentHour >= 0 && currentHour < 6);
 
   const phareEnded: number[] = player.getPhareended();
+
+  const [tips, setTips] = useState("0");
+  const handleClickTips = (a: string) => {
+    setTips(a);
+  };
 
   return (
     <>
@@ -66,9 +86,16 @@ export default function Enigme({
             />
           </button>
 
+          <button
+            className="absolute top-5 left-5"
+            onClick={() => handleClickTips("1")}
+          >
+            <p>i</p>
+          </button>
+
           <h1 className=" text-3xl font-bold">
             Enigmes : {lighthouse.getName() ?? "Phare inconnu"}{" "}
-            {phareEnded.includes(id) ? "   (COMPLETED)" : ""}
+            {phareEnded.includes(id) ? "   (COMPLÉTÉ)" : ""}
           </h1>
 
           <button
@@ -77,13 +104,8 @@ export default function Enigme({
             }`}
             style={{ top: "12vw", right: "5vw" }}
             onClick={() => {
-              if (player.getBeacoins() >= 100) {
-                player.setBeacoins(-100);
-                handleClickActiveButton("hint");
-              } else {
-                alert(
-                  "Vous n'avez pas assez de beacoins pour acheter les indices"
-                );
+              if (!activeButtons.hint) {
+                setShowConfirmation(true); // Afficher le popup
               }
             }}
           >
@@ -98,6 +120,14 @@ export default function Enigme({
               height={150}
             />
           </button>
+
+          {/* Popup de confirmation */}
+          {showConfirmation && (
+            <ConfirmHint
+              onConfirm={handleHintPurchase} // Confirmer l'achat
+              onCancel={() => setShowConfirmation(false)} // Annuler l'achat
+            />
+          )}
 
           <button
             className={`absolute md:hidden ${
@@ -378,6 +408,70 @@ export default function Enigme({
               </div>
             </button>
           </div>
+          {/*Affichage des astuces*/}
+          {tips === "1" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Bienvenue sur une énigme de Phare !"
+              cx={2}
+              cy={2}
+              text={
+                "C'est ici que vous pourrez résoudre des énigmes, en apprendre plus sur le phare et surtout, gagner des beacoins."
+              }
+              img="/mascotte/temp.png"
+              next="2"
+            />
+          )}
+          {tips === "2" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Zones cliquables"
+              cx={11}
+              cy={20}
+              text={
+                "Des zones cliquables sont présentes sur l'image, et contiennent une petite devinette en rapport avec le lieu et le phare, essayé de les trouver !"
+              }
+              img="/mascotte/temp.png"
+              next="3"
+            />
+          )}
+          {tips === "3" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Indices"
+              cx={45}
+              cy={5}
+              text={
+                "Pour vous aidez, vous pouvez acheter des indices, qui vous reveleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins, et vous les perdez si vous quittez le phare."
+              }
+              img="/mascotte/temp.png"
+              next="4"
+            />
+          )}
+          {tips === "4" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Réponses"
+              cx={48}
+              cy={30}
+              text={
+                "Lorsque vous avez trouvé une énigme, elle apparaitra ici, et il ne vous reste qu'à répondre à la question."
+              }
+              img="/mascotte/temp.png"
+              next="5"
+            />
+          )}
+          {tips === "5" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Fin"
+              cx={20}
+              cy={17}
+              text="Chaque phare contient 5 énigmes, 4 d'entre elles vous donneront le code du cadenas, et la dernière vous permettra de le déverrouiller. Une fois déverrouillé, le phare sera considéré comme complété. Et vous recevrez une récompense de 50 Beacoins. Bonne chance !"
+              img="/mascotte/temp.png"
+              next="0"
+            />
+          )}
         </section>
       </main>
     </>
