@@ -45,7 +45,6 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               Ajouter un événement
             </button>
           )}
-
         </section>
       </main>
     </>

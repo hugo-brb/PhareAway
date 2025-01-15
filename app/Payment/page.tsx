@@ -1,12 +1,13 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import "@/lib/StyleCreditCard.css";
 import { useSearchParams } from "next/navigation";
 import { useBeacoin } from "../../components/model/Beacoin";
 
-export default function Payment() {
+function PaymentContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const beacoin = useBeacoin(id ? parseInt(id) : -1);
@@ -264,5 +265,13 @@ export default function Payment() {
         </div>
       </div>
     </>
+  );
+}
+
+export default function Payment() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PaymentContent />
+    </Suspense>
   );
 }

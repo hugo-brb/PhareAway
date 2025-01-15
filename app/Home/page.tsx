@@ -21,6 +21,7 @@ import Contact from "@/components/popover/Contact";
 import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 import Loader from "@/components/Loader"; // Importez un composant Loader
+import { redirect } from "next/navigation";
 import DlcList from "@/components/DlcList";
 
 interface itemProps {
@@ -51,6 +52,10 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true); // Gère l'affichage du préloader est true si le préloader doit affiché sinon il est false
   const [isMapReady, setIsMapReady] = useState(false); // Suivi du statut de la carte
   const [markersLoaded, setMarkersLoaded] = useState(false); // Suivi des marqueurs
+
+  if (session === null) {
+    redirect("/Login");
+  }
 
   const handleClickActive = (a: string) => {
     setActive(a);
@@ -135,7 +140,9 @@ export default function Home() {
       {active === "addEvent" && player.getIsAsso() && (
         <AddEvent handleClickActive={handleClickActive} />
       )}
-      {active === "coin" && <Store handleClickActive={handleClickActive} player={player} />}
+      {active === "coin" && (
+        <Store handleClickActive={handleClickActive} player={player} />
+      )}
       {active === "picture" && (
         <Pictures handleClickActive={handleClickActive} player={player} />
       )}
