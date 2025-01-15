@@ -54,6 +54,11 @@ export const authOptions: NextAuthOptions = {
         console.log("Password match:", passwordCorrect);
 
         if (passwordCorrect) {
+          const lastLogin = new Date();
+          await supabaseAuth
+            .from("users")
+            .update({ datelastconnect: lastLogin })
+            .eq("id", user.id);
           return {
             id: user.id,
             name: user.name,
