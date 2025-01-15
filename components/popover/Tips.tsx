@@ -28,7 +28,7 @@ export default function Tips({
         left: `${cx}vw`,
         top: `${cy}vw`,
       }}
-      className={` bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
+      className={` bg-white bg-opacity-80 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
     >
       <button
         className={

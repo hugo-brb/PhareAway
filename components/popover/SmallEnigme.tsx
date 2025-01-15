@@ -56,6 +56,22 @@ export default function SmallEnigme({
           text3="Désolé, mais c'est une mauvaise réponse..."
         />
       )}
+      {popupA === "EndFirst" && (
+        <AnswerPop
+          handleClickAnswer={handleClickAnswer}
+          name={name}
+          sol={true}
+          text3="Bravo ! 50 Beacoins ont étaient ajouté à votre compte."
+        />
+      )}
+      {popupA === "EndNot" && (
+        <AnswerPop
+          handleClickAnswer={handleClickAnswer}
+          name={name}
+          sol={true}
+          text3="Bravo ! Mais vous aviez déjà fini ce phare..."
+        />
+      )}
       <div className="flex flex-col items-center justify-between h-full">
         <div className="flex flex-row justify-between w-full">
           <h1 className="font-decoration-underline">{name}</h1>
@@ -105,9 +121,13 @@ export default function SmallEnigme({
                   phareEnded.push(lh);
                   player.setPhareended(phareEnded);
                   player.setBeacoins(50);
+                  handleClickAnswer("EndFirst");
+                } else {
+                  handleClickAnswer("EndNot");
                 }
+              } else {
+                handleClickAnswer("Vrai");
               }
-              handleClickAnswer("Vrai");
             } else if (input.value === "feur2%i") {
               alert(`⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄

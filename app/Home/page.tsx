@@ -126,7 +126,7 @@ export default function Home() {
         <Menu active={active} handleClickActive={handleClickActive} />
         {(active === "home" || active==="coin") && dlcOwned && <DlcList onBoundsChange={updateBounds} onCenterChange={updateCenter} player={player} />}
         <Map
-            zoom={6}
+            zoom={0}
             bounds={[
                 [bounds[0][0], bounds[0][1]],
                 [bounds[1][0], bounds[1][1]],

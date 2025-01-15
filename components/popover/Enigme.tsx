@@ -1,6 +1,6 @@
 import { useEnigme } from "@/components/model/EnigmeInterface";
 import { useLighthouse } from "@/components/model/lighthouse";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
@@ -412,10 +412,12 @@ export default function Enigme({
           {tips === "1" && (
             <Tips
               handleClickTips={handleClickTips}
-              title="Astuce 1"
-              cx={0}
-              cy={0}
-              text={"Dingz monumentale, c'est la première astuce !"}
+              title="Bienvenue sur une énigme de Phare !"
+              cx={2}
+              cy={2}
+              text={
+                "C'est ici que vous pourrez résoudre des énigmes, en apprendre plus sur le phare et surtout, gagner des beacoins."
+              }
               img="/mascotte/temp.png"
               next="2"
             />
@@ -423,10 +425,49 @@ export default function Enigme({
           {tips === "2" && (
             <Tips
               handleClickTips={handleClickTips}
-              title="Astuce 2%"
-              cx={0}
-              cy={0}
-              text={"C'est la deuxième astuce, youpi !"}
+              title="Zones cliquables"
+              cx={11}
+              cy={20}
+              text={
+                "Des zones cliquables sont présentes sur l'image, et contiennent une petite devinette en rapport avec le lieu et le phare, essayé de les trouver !"
+              }
+              img="/mascotte/temp.png"
+              next="3"
+            />
+          )}
+          {tips === "3" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Indices"
+              cx={45}
+              cy={5}
+              text={
+                "Pour vous aidez, vous pouvez acheter des indices, qui vous reveleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins, et vous les perdez si vous quittez le phare."
+              }
+              img="/mascotte/temp.png"
+              next="4"
+            />
+          )}
+          {tips === "4" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Réponses"
+              cx={48}
+              cy={30}
+              text={
+                "Lorsque vous avez trouvé une énigme, elle apparaitra ici, et il ne vous reste qu'à répondre à la question."
+              }
+              img="/mascotte/temp.png"
+              next="5"
+            />
+          )}
+          {tips === "5" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Fin"
+              cx={20}
+              cy={17}
+              text="Chaque phare contient 5 énigmes, 4 d'entre elles vous donneront le code du cadenas, et la dernière vous permettra de le déverrouiller. Une fois déverrouillé, le phare sera considéré comme complété. Et vous recevrez une récompense de 50 Beacoins. Bonne chance !"
               img="/mascotte/temp.png"
               next="0"
             />
