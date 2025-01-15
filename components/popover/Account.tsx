@@ -17,6 +17,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   const [isModifiable, setIsModifiable] = useState(false);
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
   const useP = usePlayer(player.getMail());
+  const [hoverLh, setHoverLh] = useState(false);
 
   // Gestion des états pour les champs du formulaire
   const [formValues, setFormValues] = useState({
@@ -64,9 +65,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   if (status === "loading") {
     return <div>Chargement...</div>;
   }
-  console.log(useP.getPhareended());
-  console.log(useP.getPhareended().length);
-  console.log(useP.getPhareended().length);
+
+  const handleHoverLh = () => {
+    setHoverLh(!hoverLh);
+  };
 
   return (
     <main className="absolute top-0 z-40 flex w-full h-full">
