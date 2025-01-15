@@ -1,6 +1,6 @@
 import { useEnigme } from "@/components/model/EnigmeInterface";
 import { useLighthouse } from "@/components/model/lighthouse";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
