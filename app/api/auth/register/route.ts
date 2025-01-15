@@ -28,6 +28,8 @@ export async function POST(request: Request) {
       pseudoFinale = pseudo;
     }
 
+    const dateCreation = new Date();
+
     // Initialize Supabase client
     const supabaseAuth = createClient(
       process.env.SUPABASE_URL!,
@@ -41,6 +43,7 @@ export async function POST(request: Request) {
       password: hashedPassword,
       pseudo: pseudoFinale,
       isOAuth: false,
+      datecreation: dateCreation,
     });
   } catch (e) {
     console.log(e);

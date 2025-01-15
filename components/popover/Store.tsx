@@ -26,7 +26,9 @@ export default function Coin({ handleClickActive,player }: MenuProps) {
   useEffect(() => {
     const fetchExtentions = async () => {
       //Récuprération des id des extentions
-      const { data, error } = await supabaseData.from("Extension").select("id");
+      const { data, error } = await supabaseData
+      .from("Extension")
+      .select("id");
 
       if (error) {
         console.error("Erreur lors de la récupération des extentions:", error);
@@ -49,7 +51,9 @@ export default function Coin({ handleClickActive,player }: MenuProps) {
   useEffect(() => {
     const fetchBeacoins = async () => {
       //Récuprération des id des beacoins
-      const { data, error } = await supabaseData.from("Beacoin").select("id");
+      const { data, error } = await supabaseData
+      .from("Beacoin")
+      .select("id");
 
       if (error) {
         console.error("Erreur lors de la récupération des beacoins:", error);
