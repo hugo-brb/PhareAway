@@ -54,6 +54,11 @@ export const authOptions: NextAuthOptions = {
         console.log("Password match:", passwordCorrect);
 
         if (passwordCorrect) {
+          const lastLogin = new Date();
+          await supabaseAuth
+            .from("users")
+            .update({ datelastconnect: lastLogin })
+            .eq("id", user.id);
           return {
             id: user.id,
             name: user.name,
@@ -71,4 +76,13 @@ export const authOptions: NextAuthOptions = {
     secret: process.env.SUPABASE_SERVICE_ROLE_KEY ?? "",
   }) as Adapter,
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Redirige l'utilisateur vers /Home après la connexion
+      if (url.startsWith(baseUrl)) {
+        return `${baseUrl}/Home`;
+      }
+      return baseUrl;
+    },
+  },
 };

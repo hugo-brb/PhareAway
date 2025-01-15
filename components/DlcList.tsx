@@ -12,16 +12,17 @@ interface DlcListProps {
     return (
       <>
         <aside className="flex md:flex-col w-full h-fit md:w-fit gap-2 justify-between bg-white bg-opacity-60 rounded-t-3xl md:rounded-3xl backdrop-blur-md px-3 py-4 md:px-6 md:py-5 absolute bottom-0 md:right-7 md:bot-[20%] md:bottom-28 z-50">
-        <div className=" flex flex-col items-center md:ml-7 justify-around">
+        <div className=" flex flex-col gap-3 items-center justify-around">
           {player.getDlcUnlocked().map((dlc, index) =>
             dlc === 1 && mapExtention[index] ? (
               <button
-              onClick={() => 
-                onCenterChange([mapExtention[index][1], mapExtention[index][2]])
-              }
+                key={index}
+                onClick={() => 
+                  onCenterChange([mapExtention[index][1], mapExtention[index][2]])
+                }
+              className="flex self-center"
               >
                 <Image
-                    className="flex align-center"
                     src={`https://nereoll.github.io/imagesPhare/extensions/${mapExtention[index][0]}.png`}
                     alt="Image dlc"
                     width={30}

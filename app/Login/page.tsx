@@ -17,7 +17,6 @@ export default function Login() {
       email: formData.get("email") as string,
       password: formData.get("password") as string,
       redirect: true,
-      callbackUrl: "/Home",
     });
   };
   return (
