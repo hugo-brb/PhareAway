@@ -24,6 +24,7 @@ interface BeacoinData {
   price: number;
   number: number;
   id_image: number;
+  bonus: number;
 }
 
 //Constructeur de la classe Beacoin
@@ -35,6 +36,7 @@ export function useBeacoin(id: number) {
     price: 0,
     number: 0,
     id_image: 0,
+    bonus: 0,
   });
 
   useEffect(() => {
@@ -42,22 +44,36 @@ export function useBeacoin(id: number) {
       try {
         if (id >= 1) {
           //Récupération des données de la table Beacoin dans la base de données
-          const request = await supabaseData
-            .from("Beacoin")
-            .select()
-            .eq("id", id)
-            .single();
-
-          if (request.data) {
-            //Initialisation des attributs avec les valeurs de la base de données si elles existent sinon on met des valeurs par défaut
-            setBeacoinData({
-              id: id,
-              name: request.data.name || "",
-              price: request.data.price || 0,
-              number: request.data.number || 0,
-              id_image: request.data.id_image || 0,
-            });
-          }
+          const { data, error } = await supabaseData
+          .from('Beacoin')
+          .select(`
+            id,
+            name,
+            price,
+            number,
+            id_image,
+            bonus
+          `)
+          .eq("id", id)
+          .single();
+        
+        if (error) {
+          console.error('Error fetching data:', error);
+          return; // Vous pouvez également gérer l'erreur d'une autre manière
+        }
+        
+        if (data) {
+          // Initialisation des attributs avec les valeurs de la base de données si elles existent sinon on met des valeurs par défaut
+          setBeacoinData({
+            id: id,
+            name: data.name || "",
+            price: data.price || 0,
+            number: data.number || 0,
+            id_image: data.id_image || 0,
+            bonus: data.bonus || 0,
+          });
+        }
+        
         }
       } catch (e) {
         console.error("Erreur lors de la récupération des données", e);
@@ -73,6 +89,7 @@ export function useBeacoin(id: number) {
     getName: () => beacoinData.name,
     getPrice: () => beacoinData.price,
     getNumber: () => beacoinData.number,
+    getBonus: () => beacoinData.bonus,
     //Méthode qui créer un objet Image a l'aide de l'id_image de la classe Beacoin
     useGetImage: () => useImage(beacoinData.id_image),
   };

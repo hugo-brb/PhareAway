@@ -8,11 +8,11 @@ interface OnBeacoinProp {
 }
 
 const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
-  //création d'un instance de la classe beacoin
+  // Création d'une instance de la classe beacoin
   const beacoin = useBeacoin(id_beacoin);
-  //Récupération de l'image de associé a l'offre de beacoin
+  // Récupération de l'image associée à l'offre de beacoin
   const image = beacoin.useGetImage();
-  // si l'offre de beacoin n'a pas encore charger affiché un message de chargement
+  // Si l'offre de beacoin n'a pas encore chargé, afficher un message de chargement
   if (!beacoin) {
     return <p>Chargement de l&apos;événement...</p>;
   }
@@ -24,9 +24,9 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
           pathname: "/Payment",
           query: { id: beacoin.getId() }, // Passage de l'id
         }}
-        className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
+        className="flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
       >
-        {/*Affichage de l'image de l'offre de beacoin si elle existe sinon affiché un place holder*/}
+        {/* Affichage de l'image de l'offre de beacoin si elle existe sinon afficher un placeholder */}
         {image.getUrl() !== "" ? (
           <Image
             className="self-center rounded-lg"
@@ -44,9 +44,17 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
             height={100}
           />
         )}
-        <div className=" flex flex-col justify-center items-center">
-          <p>{beacoin.getNumber()} beacoins </p>
-          <p className=" opacity-50">{beacoin.getPrice()}0 €</p>
+        <div className="flex flex-col justify-center items-center">
+          <p>{beacoin.getName()}</p>
+          {/* Affichage conditionnel de la balise p pour le bonus */}
+          <p className="border-2 bg-blue-500 px-2 rounded-lg bg-opacity-5 text-yellow-400 font-bold" style={{ WebkitTextStroke: '0.1px blue' }}>
+            + {beacoin.getBonus()} bonus
+          </p>
+          <div>
+            <p className="text-black opacity-50">
+              {beacoin.getPrice()}0 €
+            </p>
+          </div>
         </div>
       </Link>
     </>
