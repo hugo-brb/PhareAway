@@ -8,7 +8,7 @@ interface OnExtentionProp {
   player:UsePlayer;
 }
 
-const mapExtention: { [key: number]: string } = {1:"Corse",2:"Guadeloupe",3:"Guyane",4:"Martinique",5:"Reunion",6:"Mayotte"};
+const mapExtention: { [key: number]: string } = {1 :"Corse",2:"Guadeloupe",3:"Guyane",4:"Martinique",5:"Reunion"};
 const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
   //création d'un instance de la classe extention
   const extention = useExtention(id_extention);
@@ -25,7 +25,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
       <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
        onClick={() => {
         const dlc = player.getDlcUnlocked();
-        if (id_extention!=3){//3
+        if (id_extention!=6){//6=pack dom tom 
             if (dlc[id_extention] === 1) {
             alert("Vous avez déjà débloqué cette extension");
             }
@@ -34,7 +34,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
                     player.setBeacoins(-200);
                     dlc[id_extention] = 1;
                     player.setDlcUnlocked(dlc);
-                    alert("Vous avez débloqué l'extensions : "+mapExtention[id_extention]);
+                    alert("Vous avez débloqué l'extension : "+mapExtention[id_extention]);
                 }
                 else {
                     alert(
@@ -82,6 +82,8 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
         )}
         <div className=" flex flex-col justify-center items-center">
           <p>{extention.getName()} </p>
+          <p>{extention.getId()}</p>
+          <p>{player.getDlcUnlocked()}</p>
           <p className=" opacity-50">{extention.getPrice()} beacoins</p>
         </div>
       </div>

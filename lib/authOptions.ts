@@ -76,4 +76,13 @@ export const authOptions: NextAuthOptions = {
     secret: process.env.SUPABASE_SERVICE_ROLE_KEY ?? "",
   }) as Adapter,
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async redirect({ url, baseUrl }) {
+      // Redirige l'utilisateur vers /Home après la connexion
+      if (url.startsWith(baseUrl)) {
+        return `${baseUrl}/Home`;
+      }
+      return baseUrl;
+    },
+  },
 };
