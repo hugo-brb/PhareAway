@@ -48,7 +48,7 @@ export default function Enigme({
 
   return (
     <>
-      <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
+      <main className=" absolute top-1/2 -translate-y-1/2 md:translate-y-0 md:top-0 z-40 flex w-[100vw] h-fit md:h-[100vh]">
         <section
           className={`flex flex-col items-center self-center gap-7 md:gap-12 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 pt-10 pb-12 md:pt-4 overflow-y-scroll scrollbarhidden ${
             phareEnded.includes(id) ? "ring-8 ring-green-400 bg-green-200" : ""
