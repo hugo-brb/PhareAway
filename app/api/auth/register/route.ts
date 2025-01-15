@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { hash } from "bcrypt";
+import * as argon2 from "argon2";
 import { createClient } from "@supabase/supabase-js";
 
 export async function POST(request: Request) {
@@ -10,7 +10,7 @@ export async function POST(request: Request) {
     const completeName = `${prenom} ${nom}`;
 
     // Hash the password
-    const hashedPassword = await hash(password, 10);
+    const hashedPassword = await argon2.hash(password);
 
     // Create pseudo
     let pseudoFinale = "";

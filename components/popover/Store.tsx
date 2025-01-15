@@ -16,7 +16,7 @@ interface MenuProps {
   player: UsePlayer;
 }
 
-export default function Coin({ handleClickActive,player }: MenuProps) {
+export default function Coin({ handleClickActive, player }: MenuProps) {
   interface Extention {
     id: number;
   }
@@ -26,9 +26,7 @@ export default function Coin({ handleClickActive,player }: MenuProps) {
   useEffect(() => {
     const fetchExtentions = async () => {
       //Récuprération des id des extentions
-      const { data, error } = await supabaseData
-      .from("Extension")
-      .select("id");
+      const { data, error } = await supabaseData.from("Extension").select("id");
 
       if (error) {
         console.error("Erreur lors de la récupération des extentions:", error);
@@ -51,9 +49,7 @@ export default function Coin({ handleClickActive,player }: MenuProps) {
   useEffect(() => {
     const fetchBeacoins = async () => {
       //Récuprération des id des beacoins
-      const { data, error } = await supabaseData
-      .from("Beacoin")
-      .select("id");
+      const { data, error } = await supabaseData.from("Beacoin").select("id");
 
       if (error) {
         console.error("Erreur lors de la récupération des beacoins:", error);
@@ -100,15 +96,24 @@ export default function Coin({ handleClickActive,player }: MenuProps) {
           <div className=" flex flex-col">
             <h2 className=" text-[--primary] text-lg px-5 py-2">Extensions</h2>
             <div className=" flex flex-col ring-2 ring-[--primary] rounded-xl md:w-[70vw] py-5 overflow-x-scroll scrollbarhidden">
-              <div className=" flex flex-col md:flex-row flex-wrap mx-4 md:mx-0 md:ml-7 justify-center md:gap-24">
-                {/*Affichage de tout les DLC disponible*/}
-                {extentions.map((extention) => (
-                        <OneExtention
-                            key={extention.id}
-                            id_extention={extention.id}
-                            player={player}
-                        />
-                ))}
+              <div className="flex flex-col md:flex-row flex-wrap mx-4 md:mx-0 md:ml-7 justify-center md:gap-24">
+                {/* Affichage des extensions disponibles ou message si vide */}
+                {player.getDlcUnlocked().every((dlc) => dlc === 1) ? (
+                  <p className="text-center self-center mt-4">
+                    Toutes les extensions ont été débloquées. <br />
+                    Merci pour votre confiance et à bientôt pour de nouvelles
+                    aventures !
+                  </p>
+                ) : (
+                  (console.log(extentions),
+                  extentions.map((extention) => (
+                    <OneExtention
+                      key={extention.id}
+                      id_extention={extention.id}
+                      player={player}
+                    />
+                  )))
+                )}
               </div>
             </div>
           </div>

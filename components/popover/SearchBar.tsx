@@ -4,7 +4,6 @@ import OneEvent from "@/components/OneEvent";
 import Image from "next/image"; // Image du bouton "loop"
 import FilterButtons from "./SortButton";
 
-
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
@@ -22,46 +21,50 @@ const SearchBar = () => {
       const currentDate = new Date().toISOString();
       if (searchTerm) {
         const { data: events, error: eventError } = await supabaseData
-        .from("Event")
-        .select("id, name, id_lighthouse")
-        .gte("date", currentDate)
-        .ilike("name", `%${searchTerm}%`)
-        .order(sortBy, { ascending: true });
+          .from("Event")
+          .select("id, name, id_lighthouse")
+          .gte("date", currentDate)
+          .ilike("name", `%${searchTerm}%`)
+          .order(sortBy, { ascending: true });
 
-      if (eventError) {
-        console.error("Error requête events:", eventError);
-      }
+        if (eventError) {
+          console.error("Error requête events:", eventError);
+        }
 
-      // Récupérer les données de la table lighthouse
-      const { data: lighthouses, error: lighthouseError } = await supabaseData
-        .from('Lighthouse')
-        .select('id, name')
-        .ilike('name', `%${searchTerm}%`);
+        // Récupérer les données de la table lighthouse
+        const { data: lighthouses, error: lighthouseError } = await supabaseData
+          .from("Lighthouse")
+          .select("id, name")
+          .ilike("name", `%${searchTerm}%`);
         console.log(lighthouses);
 
-      if (lighthouseError) {
-        console.error("Error requête lighthouses:", lighthouseError);
-      }
+        if (lighthouseError) {
+          console.error("Error requête lighthouses:", lighthouseError);
+        }
 
-      // Récupérer les ids des lighthouses
-      const lighthouseIdsFromLighthouses = lighthouses?.map(lighthouse => lighthouse.id) || [];
+        // Récupérer les ids des lighthouses
+        const lighthouseIdsFromLighthouses =
+          lighthouses?.map((lighthouse) => lighthouse.id) || [];
 
-      const { data: lighthouseId, error: lighthouseIdError } = await supabaseData
-        .from('Event')
-        .select('id, name')
-        .gte("date", currentDate)
-        .in('id_lighthouse', lighthouseIdsFromLighthouses);
+        const { data: lighthouseId, error: lighthouseIdError } =
+          await supabaseData
+            .from("Event")
+            .select("id, name")
+            .gte("date", currentDate)
+            .in("id_lighthouse", lighthouseIdsFromLighthouses);
 
-      if (lighthouseIdError) {
-        console.error("Error requête lighthouseIdError:", lighthouseIdError);
-      }
+        if (lighthouseIdError) {
+          console.error("Error requête lighthouseIdError:", lighthouseIdError);
+        }
 
-      // Combiner les données
-      const combinedData = [...(events || []), ...(lighthouseId || [])];
+        // Combiner les données
+        const combinedData = [...(events || []), ...(lighthouseId || [])];
 
-      // Supprimer les doublons (par exemple, en utilisant un identifiant unique)
-      const uniqueData = Array.from(new Map(combinedData.map(item => [item.id , item])).values());
-      setResults(uniqueData);
+        // Supprimer les doublons (par exemple, en utilisant un identifiant unique)
+        const uniqueData = Array.from(
+          new Map(combinedData.map((item) => [item.id, item])).values()
+        );
+        setResults(uniqueData);
 
         setLoading(false);
       } else if (searchTerm === "") {
@@ -90,7 +93,7 @@ const SearchBar = () => {
 
   if (loading) {
     return (
-      <div className="flex flex-row gap-2 absolute top-[50%] left-[50%]transform -translate-x-1/2 -translate-y-1/2">
+      <div className="flex flex-row gap-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <div className="animate-pulse bg-gray-300 w-[14rem] h-[14rem] rounded-lg"></div>
         <div className="flex flex-col gap-2">
           <div className="animate-pulse bg-gray-300 w-[28rem] h-[5rem] rounded-lg"></div>
@@ -117,16 +120,17 @@ const SearchBar = () => {
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 320 512"
+              className="w-5 h-5"
             >
-          <Image
-            width={24}
-            height={24}
-            src="../icones/loop.svg"
-            alt="Sort Icon"
+              <Image
+                width={24}
+                height={24}
+                src="../icones/loop.svg"
+                alt="Sort Icon"
+              />
 
-            />
-
-              <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320 448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z" />
+              <path d="M137.4 41.4c12.5-12.5 32.8-12.5 45.3 0l128 128c9.2 9.2 11.9 22.9 6.9 34.9s-16.6 19.8-29.6 19.8L32 224c-12.9 0-24.6-7.8-29.6-19.8s-2.2-25.7 6.9-34.9l128-128zm0 429.3l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8l256 0c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128c-12.5 12.5-32.8 12.5-45.3 0z" />
             </svg>
             <span>Trier</span>
           </button>

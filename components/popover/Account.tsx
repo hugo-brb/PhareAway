@@ -24,6 +24,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
     prenom: player.getPrenom(),
     pseudo: player.getPseudo(),
     mail: player.getMail(),
+    password: "",
   });
 
   const [originalValues, setOriginalValues] = useState({ ...formValues });
@@ -42,6 +43,9 @@ export default function Account({ handleClickActive, player }: MenuProps) {
 
       if (!player.getIsOAuth()) {
         player.setMail(formValues.mail);
+        if (formValues.password !== "") {
+          player.setPassword(formValues.password);
+        }
       }
     } else {
       // Sauvegarder les valeurs actuelles avant modification
@@ -212,19 +216,35 @@ export default function Account({ handleClickActive, player }: MenuProps) {
             />
           </div>
           {!player.getIsOAuth() && (
-            <div className="flex flex-col gap-1">
-              <h3 className="font-bold text-xl">Email</h3>
-              <input
-                type="email"
-                name="mail"
-                value={formValues.mail}
-                onChange={handleInputChange}
-                disabled={!isModifiable}
-                className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
-                  isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
-                }`}
-              />
-            </div>
+            <>
+              <div className="flex flex-col gap-1">
+                <h3 className="font-bold text-xl">Email</h3>
+                <input
+                  type="email"
+                  name="mail"
+                  value={formValues.mail}
+                  onChange={handleInputChange}
+                  disabled={!isModifiable}
+                  className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                    isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
+                  }`}
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <h3 className="font-bold text-xl">Mot de passe</h3>
+                <input
+                  type="password"
+                  name="password"
+                  value={formValues.password}
+                  onChange={handleInputChange}
+                  //disabled={!isModifiable}
+                  disabled={true}
+                  className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                    isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
+                  }`}
+                />
+              </div>
+            </>
           )}
         </form>
         <div className="flex flex-col gap-6 mt-7">

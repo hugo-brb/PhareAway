@@ -3,7 +3,7 @@ import { SupabaseAdapter } from "@auth/supabase-adapter";
 import GoogleProviders from "next-auth/providers/google";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { Adapter } from "next-auth/adapters";
-import { compare } from "bcrypt";
+import * as argon2 from "argon2";
 import { createClient } from "@supabase/supabase-js";
 
 export const authOptions: NextAuthOptions = {
@@ -47,9 +47,9 @@ export const authOptions: NextAuthOptions = {
           throw new Error("Invalid credentials");
         }
 
-        const passwordCorrect = await compare(
-          credentials.password,
-          user.password
+        const passwordCorrect = await argon2.verify(
+          user.password,
+          credentials.password
         );
         console.log("Password match:", passwordCorrect);
 

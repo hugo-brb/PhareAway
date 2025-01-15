@@ -14,7 +14,6 @@ import Enigme from "@/components/popover/Enigme";
 import Store from "@/components/popover/Store";
 import Pictures from "@/components/popover/Pictures";
 import Account from "@/components/popover/Account";
-import TopNav from "@/components/topNav";
 import About from "@/components/popover/About";
 import CGU from "@/components/popover/CGU";
 import Contact from "@/components/popover/Contact";
@@ -41,138 +40,145 @@ const supabaseData = createClient(
 );
 
 export default function Home() {
-    const { data: session } = useSession();
-    const [active, setActive] = useState("home");
-    const [activeID, setActiveID] = useState(64);
-    const [center, setCenter] = useState<[number, number]>([
-        -1.6282904, 49.6299822,
-    ]); // Initial map center
-    const [bounds, setBounds] = useState<[[number, number],[number,number]]>([
-        [-5.127287501115138,41.77913251512358],[10.429352882451159,51.69268051974335]
-    ]); // Initial map bounds
-    const player = usePlayer(session?.user?.email ?? "");
-    const dlcOwned = player.getDlcUnlocked().length > 0 ? true : false;
+  const { data: session } = useSession();
+  const [active, setActive] = useState("home");
+  const [activeID, setActiveID] = useState(64);
+  const [center, setCenter] = useState<[number, number]>([
+    -1.6282904, 49.6299822,
+  ]); // Initial map center
+  const [bounds, setBounds] = useState<[[number, number], [number, number]]>([
+    [-5.127287501115138, 41.77913251512358],
+    [10.429352882451159, 51.69268051974335],
+  ]); // Initial map bounds
+  const player = usePlayer(session?.user?.email ?? "");
+  const dlcOwned = player.getDlcUnlocked().length > 0 ? true : false;
 
-    const [isLoading, setIsLoading] = useState(true); // Gère l'affichage du préloader est true si le préloader doit affiché sinon il est false
-    const [isMapReady, setIsMapReady] = useState(false); // Suivi du statut de la carte
-    const [markersLoaded, setMarkersLoaded] = useState(false); // Suivi des marqueurs
+  const [isLoading, setIsLoading] = useState(true); // Gère l'affichage du préloader est true si le préloader doit affiché sinon il est false
+  const [isMapReady, setIsMapReady] = useState(false); // Suivi du statut de la carte
+  const [markersLoaded, setMarkersLoaded] = useState(false); // Suivi des marqueurs
 
-    if (session === null) {
-        redirect("/Login");
-    }
+  if (session === null) {
+    redirect("/Login");
+  }
 
-    const handleClickActive = (a: string) => {
-        setActive(a);
-    };
-    const handleClickActiveId = (id: number) => {
-        setActiveID(id);
-    };
-    const updateCenter = (newCenter: [number, number]) => {
-        setCenter(newCenter);
-    };
-    const updateBounds = (newBounds: [[number, number],[number,number]]) => {
-        setBounds(newBounds);
-    };
-    const [markers, setMarkers] = useState<
-        { id: number; longitude: number; latitude: number; popupText: string }[]
-    >([]);
-    // Charger les données de Supabase
-    useEffect(() => {
-        const fetchMarkers = async () => {
-        try {
-            const { data, error } = await supabaseData
-            .from("Lighthouse")
-            .select("coordinates, name, url, id, enigme");
-            if (error) {
-            console.error("Erreur de chargement des données Supabase:", error);
-            return;
-            }
-            // Formatage des données pour Mapbox
-            const formattedMarkers = data.map((item: itemProps) => ({
-            id: item.id,
-            longitude: parseFloat(item.coordinates.split(" ")[0]),
-            latitude: parseFloat(item.coordinates.split(" ")[1]),
-            popupText: item.name,
-            icone: item.enigme
-                ? "/icones/lightHouseIconEnigme.svg"
-                : "/icones/lightHouseIcon.svg",
-            lien: item.url,
-            enigme: item.enigme,
-            }));
-
-            setMarkers(formattedMarkers);
-            setMarkersLoaded(true); // Marqueurs chargés
-        } catch (err) {
-            console.error("Erreur lors du chargement des marqueurs:", err);
+  const handleClickActive = (a: string) => {
+    setActive(a);
+  };
+  const handleClickActiveId = (id: number) => {
+    setActiveID(id);
+  };
+  const updateCenter = (newCenter: [number, number]) => {
+    setCenter(newCenter);
+  };
+  const updateBounds = (newBounds: [[number, number], [number, number]]) => {
+    setBounds(newBounds);
+  };
+  const [markers, setMarkers] = useState<
+    { id: number; longitude: number; latitude: number; popupText: string }[]
+  >([]);
+  // Charger les données de Supabase
+  useEffect(() => {
+    const fetchMarkers = async () => {
+      try {
+        const { data, error } = await supabaseData
+          .from("Lighthouse")
+          .select("coordinates, name, url, id, enigme");
+        if (error) {
+          console.error("Erreur de chargement des données Supabase:", error);
+          return;
         }
-        };
+        // Formatage des données pour Mapbox
+        const formattedMarkers = data.map((item: itemProps) => ({
+          id: item.id,
+          longitude: parseFloat(item.coordinates.split(" ")[0]),
+          latitude: parseFloat(item.coordinates.split(" ")[1]),
+          popupText: item.name,
+          icone: item.enigme
+            ? "/icones/lightHouseIconEnigme.svg"
+            : "/icones/lightHouseIcon.svg",
+          lien: item.url,
+          enigme: item.enigme,
+        }));
 
-        fetchMarkers();
-    }, []);
-    // Callback pour signaler que la carte est chargée
-    const handleMapLoaded = () => {
-        setIsMapReady(true); // La carte est prête
+        setMarkers(formattedMarkers);
+        setMarkersLoaded(true); // Marqueurs chargés
+      } catch (err) {
+        console.error("Erreur lors du chargement des marqueurs:", err);
+      }
     };
-    // Mise à jour de l'état global lorsque tout est prêt
-    useEffect(() => {
-        if (isMapReady && markersLoaded) {
-        setIsLoading(false); // Désactiver le préloader
-        }
-    }, [isMapReady, markersLoaded]);
-    // Afficher le préloader tant que tout n'est pas chargé
-    return (
-        <>
-        {isLoading && <Loader />} {/* Affiche le préloader */}
-        <Menu active={active} handleClickActive={handleClickActive} />
-        {(active === "home" || active==="coin") && dlcOwned && <DlcList onBoundsChange={updateBounds} onCenterChange={updateCenter} player={player} />}
-        <Map
-            zoom={0}
-            bounds={[
-                [bounds[0][0], bounds[0][1]],
-                [bounds[1][0], bounds[1][1]],
-            ]}
-            center={center}
-            markers={markers}
-            handleClickActive={handleClickActive}
-            handleClickActiveId={handleClickActiveId}
-            onMapLoaded={handleMapLoaded} // Transmet la fonction callback
-        />
-        {active === "calendar" && (
-            <Events handleClickActive={handleClickActive} player={player} />
-        )}
-        {active === "addEvent" && player.getIsAsso() && (
-            <AddEvent handleClickActive={handleClickActive} />
-        )}
-        {active === "coin" && (
-            <Store handleClickActive={handleClickActive} player={player} />
-        )}
-        {active === "picture" && (
-            <Pictures handleClickActive={handleClickActive} player={player} />
-        )}
-        {active === "enigme" && (
-            <Enigme
-            handleClickActive={handleClickActive}
-            id={activeID}
-            player={player}
-            />
-        )}
-        {active === "account" && (
-            <Account handleClickActive={handleClickActive} player={player} />
-        )}
-        {active === "about" && <About handleClickActive={handleClickActive} />}
-        {active === "cgu" && <CGU handleClickActive={handleClickActive} />}
-        {active === "contact" && (
-            <Contact handleClickActive={handleClickActive} player={player} />
-        )}
-        <BackHome />
-        <Coin handleClickActive={handleClickActive} player={player} />
-        <Image
-            src="/images/soupex.png"
-            width={75}
-            height={75}
-            alt="Logo Soupex"
-            className="hidden md:block absolute z-50 bottom-3 right-3 "
-        />
-        </>
-    );
+
+    fetchMarkers();
+  }, []);
+  // Callback pour signaler que la carte est chargée
+  const handleMapLoaded = () => {
+    setIsMapReady(true); // La carte est prête
+  };
+  // Mise à jour de l'état global lorsque tout est prêt
+  useEffect(() => {
+    if (isMapReady && markersLoaded) {
+      setIsLoading(false); // Désactiver le préloader
     }
+  }, [isMapReady, markersLoaded]);
+  // Afficher le préloader tant que tout n'est pas chargé
+  return (
+    <>
+      {isLoading && <Loader />} {/* Affiche le préloader */}
+      <Menu active={active} handleClickActive={handleClickActive} />
+      {(active === "home" || active === "coin") && dlcOwned && (
+        <DlcList
+          onBoundsChange={updateBounds}
+          onCenterChange={updateCenter}
+          player={player}
+        />
+      )}
+      <Map
+        zoom={0}
+        bounds={[
+          [bounds[0][0], bounds[0][1]],
+          [bounds[1][0], bounds[1][1]],
+        ]}
+        center={center}
+        markers={markers}
+        handleClickActive={handleClickActive}
+        handleClickActiveId={handleClickActiveId}
+        onMapLoaded={handleMapLoaded} // Transmet la fonction callback
+      />
+      {active === "calendar" && (
+        <Events handleClickActive={handleClickActive} player={player} />
+      )}
+      {active === "addEvent" && player.getIsAsso() && (
+        <AddEvent handleClickActive={handleClickActive} />
+      )}
+      {active === "coin" && (
+        <Store handleClickActive={handleClickActive} player={player} />
+      )}
+      {active === "picture" && (
+        <Pictures handleClickActive={handleClickActive} player={player} />
+      )}
+      {active === "enigme" && (
+        <Enigme
+          handleClickActive={handleClickActive}
+          id={activeID}
+          player={player}
+        />
+      )}
+      {active === "account" && (
+        <Account handleClickActive={handleClickActive} player={player} />
+      )}
+      {active === "about" && <About handleClickActive={handleClickActive} />}
+      {active === "cgu" && <CGU handleClickActive={handleClickActive} />}
+      {active === "contact" && (
+        <Contact handleClickActive={handleClickActive} player={player} />
+      )}
+      <BackHome />
+      <Coin handleClickActive={handleClickActive} player={player} />
+      <Image
+        src="/images/soupex.png"
+        width={75}
+        height={75}
+        alt="Logo Soupex"
+        className="hidden md:block absolute z-50 bottom-3 right-3 "
+      />
+    </>
+  );
+}

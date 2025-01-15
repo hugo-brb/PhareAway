@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
 import { useLighthouse } from "./lighthouse";
-//import { hash } from "bcrypt";
+import * as argon2 from "argon2";
 
 export type UsePlayer = {
   playerData: PlayerData;
@@ -14,7 +14,7 @@ export type UsePlayer = {
   getIsOAuth: () => boolean;
   getBeacoins: () => number;
   getPhareended: () => Array<number>;
-  getPhareendedName: (id: number) => Array<string>;
+  getPhareendedName: (id: number) => string;
   getDlcUnlocked: () => Array<number>;
   getIsAsso: () => boolean;
   getIsAdmin: () => boolean;
@@ -25,7 +25,7 @@ export type UsePlayer = {
   setBeacoins: (beacoins: number) => Promise<void>;
   setPhareended: (Phareended: Array<number>) => Promise<void>;
   setDlcUnlocked: (DlcUnlocked: Array<number>) => Promise<void>;
-  //setPassword: (password: string) => Promise<void>;
+  setPassword: (password: string) => Promise<void>;
   deletePlayer: () => Promise<void>;
   updatePlayerInfo: (updates: Partial<PlayerData>) => Promise<void>;
 };
@@ -179,17 +179,33 @@ export function usePlayer(email: string) {
       }));
     },
 
-    /*setPassword: async (password: string) => {
-      const passwordCrypted = await hash(password, 10);
-      await supabaseAuth
-        .from("users")
-        .update({ password: passwordCrypted })
-        .eq("id", playerData.user.id);
-      setPlayerData((prev) => ({
-        ...prev,
-        user: { ...prev.user, passwordCrypted },
-      }));
-    },*/
+    setPassword: async (password: string) => {
+      try {
+        const response = await fetch("/api/setPassword", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            password,
+            userId: playerData.user.id, // Utilise l'ID du joueur
+          }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Mot de passe mis à jour avec succès.");
+        } else {
+          console.error(
+            "Erreur lors de la mise à jour du mot de passe:",
+            data.error
+          );
+        }
+      } catch (error) {
+        console.error("Erreur lors de la requête:", error);
+      }
+    },
 
     // Setters pour les statistiques du joueur
     setBeacoins: async (addbeacoins: number) => {
