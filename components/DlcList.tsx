@@ -16,9 +16,10 @@ interface DlcListProps {
           {player.getDlcUnlocked().map((dlc, index) =>
             dlc === 1 && mapExtention[index] ? (
               <button
-              onClick={() => 
-                onCenterChange([mapExtention[index][1], mapExtention[index][2]])
-              }
+                key={index}
+                onClick={() => 
+                  onCenterChange([mapExtention[index][1], mapExtention[index][2]])
+                }
               className="flex self-center"
               >
                 <Image
