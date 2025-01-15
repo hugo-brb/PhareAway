@@ -30,9 +30,8 @@ export default function Signup() {
     if (!password) newErrors.push("Le mot de passe est obligatoire.");
     if (password !== passwordConfirm)
       newErrors.push("Les mots de passe ne correspondent pas.");
-    //TODO Enlever le commentaire pour activer la vérification de la longueur du mot de passe
-    /* if (password && password.length < 8)
-      newErrors.push("Le mot de passe doit contenir au moins 8 caractères."); */
+    if (password && password.length < 8)
+      newErrors.push("Le mot de passe doit contenir au moins 8 caractères.");
 
     setErrors(newErrors);
 
