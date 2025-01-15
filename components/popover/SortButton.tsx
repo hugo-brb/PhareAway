@@ -1,9 +1,13 @@
 import { useState } from "react";
 
-const Button = ({ onSortChange }) => {
+interface ButtonProps {
+  onSortChange: (sortType: string) => void;
+}
+
+const Button = ({ onSortChange }: ButtonProps) => {
   const [activeButton, setActiveButton] = useState('');
 
-  const handleButtonClick = (button) => {
+  const handleButtonClick = (button: string) => {
     // Vérifiez si le bouton cliqué est déjà actif
     if (activeButton === button) {
       setActiveButton('');
