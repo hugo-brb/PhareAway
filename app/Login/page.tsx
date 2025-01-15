@@ -1,12 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 "use client";
 
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
-import { FormEvent } from "react";
+import { FormEvent, useEffect } from "react";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function Login() {
   console.log("Login chargé");
+  const { data: session } = useSession();
+
+  useEffect(() => {
+    if (session !== null) {
+      console.log("Session existante -> Redirection en cours)");
+      redirect("/Home");
+    }
+  }, []);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     console.log("Pas de session -> Création en cours");
