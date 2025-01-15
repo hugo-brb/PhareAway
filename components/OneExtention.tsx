@@ -82,8 +82,6 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
         )}
         <div className=" flex flex-col justify-center items-center">
           <p>{extention.getName()} </p>
-          <p>{extention.getId()}</p>
-          <p>{player.getDlcUnlocked()}</p>
           <p className=" opacity-50">{extention.getPrice()} beacoins</p>
         </div>
       </div>
