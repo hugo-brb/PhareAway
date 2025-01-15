@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import { createRoot } from "react-dom/client";
@@ -36,6 +37,7 @@ const Map: React.FC<MapComponentProps> = ({
 
   // Initialisation de la carte
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_API_KEY || "";
     if (!mapInstance.current && mapContainer.current) {
       mapInstance.current = new mapboxgl.Map({
