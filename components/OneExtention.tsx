@@ -20,12 +20,12 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
   }
 
   return (
-    <>
-      <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
+    <>{
+        player.getDlcUnlocked()[id_extention]!=1 &&
+        <div className=" flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
        onClick={() => {
         const dlc = player.getDlcUnlocked();
-        if (id_extention!=4){//4=pack dom tom 
-            if (dlc[id_extention] === 1) {
+        if (dlc[id_extention] === 1) {
             alert("Vous avez déjà débloqué cette extension");
             }
             else{
@@ -33,7 +33,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
                     player.setBeacoins(-200);
                     dlc[id_extention] = 1;
                     player.setDlcUnlocked(dlc);
-                    alert("Vous avez débloqué l'extension : "+extention.getName());
+                    alert("Vous avez débloqué l'extension : "+extention.getName()+", retourner sur la carte pour y accéder");
                 }
                 else {
                     alert(
@@ -41,25 +41,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
                     );
                 }
             }}
-        else {
-            if (dlc.every((value: number) => value === 1)) {
-                alert("Vous avez déjà débloqué cette extension");
-                }
-                else{
-                    if (player.getBeacoins() >= 800) {
-                        player.setBeacoins(-800);
-                        player.setDlcUnlocked([1,1,1,1,1,1,1]);
-                        alert("Vous avez débloqué toutes les extensions");
-                    }
-                    else {
-                        alert(
-                            "Vous n'avez pas assez de beacoins pour acheter cette extension"
-                        );
-                    }
-                }}
-
             }
-        }
       >
         {/*Affichage de l'image de l'offre d'extention si elle existe sinon affiché un place holder */}
         {image.getUrl() !== "" ? (
@@ -84,6 +66,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
           <p className=" opacity-50">{extention.getPrice()} beacoins</p>
         </div>
       </div>
+    }
     </>
   );
 };
