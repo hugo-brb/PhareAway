@@ -4,6 +4,7 @@ import { useState } from "react";
 import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
+import Tips from "@/components/popover/Tips";
 
 interface EnigmeProps {
   handleClickActive: (a: string) => void;
@@ -46,6 +47,11 @@ export default function Enigme({
 
   const phareEnded: number[] = player.getPhareended();
 
+  const [tips, setTips] = useState("0");
+  const handleClickTips = (a: string) => {
+    setTips(a);
+  };
+
   return (
     <>
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
@@ -66,9 +72,16 @@ export default function Enigme({
             />
           </button>
 
+          <button
+            className="absolute top-5 left-5"
+            onClick={() => handleClickTips("1")}
+          >
+            <p>i</p>
+          </button>
+
           <h1 className=" text-3xl font-bold">
             Enigmes : {lighthouse.getName() ?? "Phare inconnu"}{" "}
-            {phareEnded.includes(id) ? "   (COMPLETED)" : ""}
+            {phareEnded.includes(id) ? "   (COMPLÉTÉ)" : ""}
           </h1>
 
           <button
@@ -378,6 +391,29 @@ export default function Enigme({
               </div>
             </button>
           </div>
+          {/*Affichage des astuces*/}
+          {tips === "1" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Astuce 1"
+              cx={0}
+              cy={0}
+              text={"Dingz monumentale, c'est la première astuce !"}
+              img="/mascotte/temp.png"
+              next="2"
+            />
+          )}
+          {tips === "2" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Astuce 2%"
+              cx={0}
+              cy={0}
+              text={"C'est la deuxième astuce, youpi !"}
+              img="/mascotte/temp.png"
+              next="0"
+            />
+          )}
         </section>
       </main>
     </>
