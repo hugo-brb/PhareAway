@@ -45,7 +45,7 @@ export default function SmallEnigme({
           handleClickAnswer={handleClickAnswer}
           name={name}
           sol={true}
-          text3={`Le chiffre à la position ${id} est : ${codeLock} \n(Ancêtres fiers)`}
+          text3={`Bravo, bonne réponse\nLe chiffre à la position ${id} est : ${codeLock}`}
         />
       )}
       {popupA === "Faux" && (
@@ -53,7 +53,23 @@ export default function SmallEnigme({
           handleClickAnswer={handleClickAnswer}
           name={name}
           sol={false}
-          text3="Dommage Bozo ! Pas de code pour toi mon grand gourmand..."
+          text3="Désolé, mais c'est une mauvaise réponse..."
+        />
+      )}
+      {popupA === "EndFirst" && (
+        <AnswerPop
+          handleClickAnswer={handleClickAnswer}
+          name={name}
+          sol={true}
+          text3="Bravo ! 50 Beacoins ont étaient ajouté à votre compte."
+        />
+      )}
+      {popupA === "EndNot" && (
+        <AnswerPop
+          handleClickAnswer={handleClickAnswer}
+          name={name}
+          sol={true}
+          text3="Bravo ! Mais vous aviez déjà fini ce phare..."
         />
       )}
       <div className="flex flex-col items-center justify-between h-full">
@@ -104,9 +120,14 @@ export default function SmallEnigme({
                 if (!phareEnded.includes(lh)) {
                   phareEnded.push(lh);
                   player.setPhareended(phareEnded);
+                  player.setBeacoins(50);
+                  handleClickAnswer("EndFirst");
+                } else {
+                  handleClickAnswer("EndNot");
                 }
+              } else {
+                handleClickAnswer("Vrai");
               }
-              handleClickAnswer("Vrai");
             } else if (input.value === "feur2%i") {
               alert(`⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄

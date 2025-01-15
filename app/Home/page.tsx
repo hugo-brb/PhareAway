@@ -48,7 +48,7 @@ export default function Home() {
         -1.6282904, 49.6299822,
     ]); // Initial map center
     const [bounds, setBounds] = useState<[[number, number],[number,number]]>([
-        [-5.1535428, 42.5314237],[7.3190333, 51.0605319]
+        [-5.127287501115138,41.77913251512358],[10.429352882451159,51.69268051974335]
     ]); // Initial map bounds
     const player = usePlayer(session?.user?.email ?? "");
     const dlcOwned = player.getDlcUnlocked().length > 0 ? true : false;
@@ -124,10 +124,9 @@ export default function Home() {
         <>
         {isLoading && <Loader />} {/* Affiche le préloader */}
         <Menu active={active} handleClickActive={handleClickActive} />
-        {dlcOwned && <DlcList onBoundsChange={updateBounds} onCenterChange={updateCenter} player={player} />}
-        {active === "home" && <TopNav onCenterChange={updateCenter} />}
+        {(active === "home" || active==="coin") && dlcOwned && <DlcList onBoundsChange={updateBounds} onCenterChange={updateCenter} player={player} />}
         <Map
-            zoom={6}
+            zoom={0}
             bounds={[
                 [bounds[0][0], bounds[0][1]],
                 [bounds[1][0], bounds[1][1]],

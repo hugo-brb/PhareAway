@@ -4,6 +4,7 @@ import OneEvent from "@/components/OneEvent";
 import Image from "next/image"; // Image du bouton "loop"
 import FilterButtons from "./SortButton";
 
+
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
   process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
@@ -20,17 +21,48 @@ const SearchBar = () => {
     const fetchData = async () => {
       const currentDate = new Date().toISOString();
       if (searchTerm) {
-        const { data, error } = await supabaseData
-          .from("Event")
-          .select("id, name")
-          .gte("date", currentDate)
-          .ilike("name", `%${searchTerm}%`)
-          .order(sortBy, { ascending: true }); // Utilisation de sortBy pour trier
-        if (error) {
-          console.error("Error fetching data:", error);
-        } else {
-          setResults(data);
-        }
+        const { data: events, error: eventError } = await supabaseData
+        .from("Event")
+        .select("id, name, id_lighthouse")
+        .gte("date", currentDate)
+        .ilike("name", `%${searchTerm}%`)
+        .order(sortBy, { ascending: true });
+
+      if (eventError) {
+        console.error("Error requête events:", eventError);
+      }
+
+      // Récupérer les données de la table lighthouse
+      const { data: lighthouses, error: lighthouseError } = await supabaseData
+        .from('Lighthouse')
+        .select('id, name')
+        .ilike('name', `%${searchTerm}%`);
+        console.log(lighthouses);
+
+      if (lighthouseError) {
+        console.error("Error requête lighthouses:", lighthouseError);
+      }
+
+      // Récupérer les ids des lighthouses
+      const lighthouseIdsFromLighthouses = lighthouses?.map(lighthouse => lighthouse.id) || [];
+
+      const { data: lighthouseId, error: lighthouseIdError } = await supabaseData
+        .from('Event')
+        .select('id, name')
+        .gte("date", currentDate)
+        .in('id_lighthouse', lighthouseIdsFromLighthouses);
+
+      if (lighthouseIdError) {
+        console.error("Error requête lighthouseIdError:", lighthouseIdError);
+      }
+
+      // Combiner les données
+      const combinedData = [...(events || []), ...(lighthouseId || [])];
+
+      // Supprimer les doublons (par exemple, en utilisant un identifiant unique)
+      const uniqueData = Array.from(new Map(combinedData.map(item => [item.id , item])).values());
+      setResults(uniqueData);
+
         setLoading(false);
       } else if (searchTerm === "") {
         const { data, error } = await supabaseData
@@ -84,10 +116,16 @@ const SearchBar = () => {
             className="flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base"
           >
             <svg
-              className="size-3 fill-[--text]"
               xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 512 512"
             >
+          <Image
+            width={24}
+            height={24}
+            src="../icones/loop.svg"
+            alt="Sort Icon"
+
+            />
+
               <path d="M3.9 54.9C10.5 40.9 24.5 32 40 32l432 0c15.5 0 29.5 8.9 36.1 22.9s4.6 30.5-5.2 42.5L320 320.9 320 448c0 12.1-6.8 23.2-17.7 28.6s-23.8 4.3-33.5-3l-64-48c-8.1-6-12.8-15.5-12.8-25.6l0-79.1L9 97.3C-.7 85.4-2.8 68.8 3.9 54.9z" />
             </svg>
             <span>Trier</span>
