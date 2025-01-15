@@ -3,7 +3,7 @@ import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
-import { usePlayer, type UsePlayer } from "@/components/model/player";
+import { UsePlayer } from "@/components/model/player";
 
 import ConfirmDelete from "@/components/popover/ConfirmDelete";
 
@@ -16,7 +16,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   const { data: session, status } = useSession();
   const [isModifiable, setIsModifiable] = useState(false);
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
-  const useP = usePlayer(player.getMail());
+  const [hoverLh, setHoverLh] = useState(false);
 
   // Gestion des états pour les champs du formulaire
   const [formValues, setFormValues] = useState({
@@ -64,9 +64,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   if (status === "loading") {
     return <div>Chargement...</div>;
   }
-  console.log(useP.getPhareended());
-  console.log(useP.getPhareended().length);
-  console.log(useP.getPhareended().length);
+
+  const handleHoverLh = () => {
+    setHoverLh(!hoverLh);
+  };
 
   return (
     <main className="absolute top-0 z-40 flex w-full h-full">
@@ -102,7 +103,11 @@ export default function Account({ handleClickActive, player }: MenuProps) {
               {formValues.nom} {formValues.prenom}
             </h1>
             <h2 className="text-lg">{formValues.mail}</h2>
-            <div className="flex justify-start items-center gap-7">
+            <div
+              onMouseEnter={handleHoverLh}
+              onMouseLeave={handleHoverLh}
+              className="flex justify-start items-center gap-7"
+            >
               <div className="flex justify-center mx-auto md:mx-0 items-center gap-2 px-4 py-2 rounded-2xl cursor-pointer duration-300 hover:ring-1 ring-[--primary]">
                 <Image
                   src="/images/lighthouse.png"
@@ -111,8 +116,27 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                   height={25}
                 />
                 <span>
-                  {useP.getPhareended().length} / 5{}
+                  {player.getPhareended().length} / 5{}
                 </span>
+              </div>
+              <div
+                className={` absolute bg-white px-3 py-3 rounded-xl left-1/2 ${
+                  hoverLh ? "visible" : "hidden"
+                }`}
+              >
+                <ul className="flex flex-col gap-2">
+                  {player.getPhareended().map((phare, index) => (
+                    <li key={index} className="flex items-center gap-2">
+                      <Image
+                        src="/images/lighthouse.png"
+                        alt="Lighthouse"
+                        width={25}
+                        height={25}
+                      />
+                      <span>{phare}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </div>

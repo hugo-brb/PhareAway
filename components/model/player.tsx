@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
+//import { hash } from "bcrypt";
 
 export type UsePlayer = {
   playerData: PlayerData;
@@ -21,7 +22,7 @@ export type UsePlayer = {
   setBeacoins: (beacoins: number) => Promise<void>;
   setPhareended: (Phareended: Array<number>) => Promise<void>;
   setDlcUnlocked: (DlcUnlocked: Array<number>) => Promise<void>;
-  // setPassword: (password: string) => Promise<void>;
+  //setPassword: (password: string) => Promise<void>;
   deletePlayer: () => Promise<void>;
   updatePlayerInfo: (updates: Partial<PlayerData>) => Promise<void>;
 };
@@ -171,7 +172,7 @@ export function usePlayer(email: string) {
       }));
     },
 
-    /* setPassword: async (password: string) => {
+    /*setPassword: async (password: string) => {
       const passwordCrypted = await hash(password, 10);
       await supabaseAuth
         .from("users")
@@ -180,7 +181,7 @@ export function usePlayer(email: string) {
       setPlayerData((prev) => ({
         ...prev,
         user: { ...prev.user, passwordCrypted },
-      })); 
+      }));
     },*/
 
     // Setters pour les statistiques du joueur
@@ -222,30 +223,30 @@ export function usePlayer(email: string) {
     },
 
     setDlcUnlocked: async (DlcUnlocked: Array<number>) => {
-        try {
-            // Met à jour les données dans Supabase
-            const { error } = await supabaseData
-              .from("users")
-              .update({ DlcUnlocked }) // Colonne à mettre à jour
-              .eq("id", playerData.user.id); // Condition pour trouver le bon utilisateur
-    
-            if (error) {
-              console.error(
-                "Erreur lors de la mise à jour de Supabase:",
-                error.message
-              );
-              return;
-            }
-    
-            // Met à jour l'état local
-            setPlayerData((prev) => ({
-              ...prev,
-              DlcUnlocked,
-            }));
-          } catch (err) {
-            console.error("Erreur inattendue:", err);
-          }
-        },
+      try {
+        // Met à jour les données dans Supabase
+        const { error } = await supabaseData
+          .from("users")
+          .update({ DlcUnlocked }) // Colonne à mettre à jour
+          .eq("id", playerData.user.id); // Condition pour trouver le bon utilisateur
+
+        if (error) {
+          console.error(
+            "Erreur lors de la mise à jour de Supabase:",
+            error.message
+          );
+          return;
+        }
+
+        // Met à jour l'état local
+        setPlayerData((prev) => ({
+          ...prev,
+          DlcUnlocked,
+        }));
+      } catch (err) {
+        console.error("Erreur inattendue:", err);
+      }
+    },
 
     // Méthodes de gestion du compte
     deletePlayer: async () => {

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
+import Tips from "@/components/popover/Tips";
 
 import ConfirmHint from "@/components/popover/ConfirmHint"; // Import du popup personnalisé
 
@@ -60,9 +61,14 @@ export default function Enigme({
 
   const phareEnded: number[] = player.getPhareended();
 
+  const [tips, setTips] = useState("0");
+  const handleClickTips = (a: string) => {
+    setTips(a);
+  };
+
   return (
     <>
-      <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
+      <main className=" absolute top-1/2 -translate-y-1/2 md:translate-y-0 md:top-0 z-40 flex w-[100vw] h-fit md:h-[100vh]">
         <section
           className={`flex flex-col items-center self-center gap-7 md:gap-12 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 pt-10 pb-12 md:pt-4 overflow-y-scroll scrollbarhidden ${
             phareEnded.includes(id) ? "ring-8 ring-green-400 bg-green-200" : ""
@@ -80,9 +86,16 @@ export default function Enigme({
             />
           </button>
 
+          <button
+            className="absolute top-5 left-5"
+            onClick={() => handleClickTips("1")}
+          >
+            <p>i</p>
+          </button>
+
           <h1 className=" text-3xl font-bold">
             Enigmes : {lighthouse.getName() ?? "Phare inconnu"}{" "}
-            {phareEnded.includes(id) ? "   (COMPLETED)" : ""}
+            {phareEnded.includes(id) ? "   (COMPLÉTÉ)" : ""}
           </h1>
 
           <button
@@ -395,6 +408,29 @@ export default function Enigme({
               </div>
             </button>
           </div>
+          {/*Affichage des astuces*/}
+          {tips === "1" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Astuce 1"
+              cx={0}
+              cy={0}
+              text={"Dingz monumentale, c'est la première astuce !"}
+              img="/mascotte/temp.png"
+              next="2"
+            />
+          )}
+          {tips === "2" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Astuce 2%"
+              cx={0}
+              cy={0}
+              text={"C'est la deuxième astuce, youpi !"}
+              img="/mascotte/temp.png"
+              next="0"
+            />
+          )}
         </section>
       </main>
     </>
