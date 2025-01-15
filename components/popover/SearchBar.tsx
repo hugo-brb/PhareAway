@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import OneEvent from "@/components/OneEvent";
 import Image from "next/image"; // Image du bouton "loop"
-import Button from "./SortButton";
+import FilterButtons from "./SortButton";
 
 const supabaseData = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -14,6 +14,7 @@ const SearchBar = () => {
   const [sortBy, setSortBy] = useState("date"); // Valeur par défaut pour le tri
   const [results, setResults] = useState<{ id: number; name: string }[]>([]);
   const [loading, setLoading] = useState(true);
+  const [trieIsActive, setTrieIsActive] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,6 +52,10 @@ const SearchBar = () => {
     fetchData();
   }, [searchTerm, sortBy]); // Ajout de sortBy comme dépendance
 
+  const handleTrie = () => {
+    setTrieIsActive(!trieIsActive);
+  };
+
   if (loading) {
     return (
       <div className="flex flex-row gap-2 absolute top-[50%] left-[50%]transform -translate-x-1/2 -translate-y-1/2">
@@ -65,11 +70,19 @@ const SearchBar = () => {
   }
 
   return (
-    <div className='flex flex-col self-center'>
-      <div id="recherche" className="flex mb-10 md:mt-0 items-center self-center gap-4">
+    <div className="flex flex-col self-center">
+      <div
+        id="recherche"
+        className={`flex md:mt-0 items-center self-center gap-4 ${
+          trieIsActive ? "mb-0" : "mb-10"
+        }`}
+      >
         {/* Bouton trier */}
         <div>
-          <button className="flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base">
+          <button
+            onClick={handleTrie}
+            className="flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base"
+          >
             <svg
               className="size-3 fill-[--text]"
               xmlns="http://www.w3.org/2000/svg"
@@ -80,9 +93,6 @@ const SearchBar = () => {
             <span>Trier</span>
           </button>
         </div>
-
-        {/* Composant Button pour le tri */}
-        <Button onSortChange={setSortBy} />
 
         {/* Fin Bouton trier */}
         {/* Search Bar */}
@@ -106,6 +116,9 @@ const SearchBar = () => {
         </div>
         {/* Fin Search Bar */}
       </div>
+
+      {/* Composant Button pour le tri */}
+      {trieIsActive && <FilterButtons onSortChange={setSortBy} />}
 
       <div
         id="eventListe"

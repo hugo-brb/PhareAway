@@ -1,37 +1,59 @@
 import { useState } from "react";
 
-const Button = ({ onSortChange }) => {
-  const [activeButton, setActiveButton] = useState('');
+interface ButtonProps {
+  onSortChange: (sortType: string) => void;
+}
 
-  const handleButtonClick = (button) => {
+interface HandleButtonClickProps {
+  button: string;
+}
+
+const Button = ({ onSortChange }: ButtonProps) => {
+  const [activeButton, setActiveButton] = useState("date");
+
+  const handleButtonClick = ({ button }: HandleButtonClickProps) => {
     // Vérifiez si le bouton cliqué est déjà actif
     if (activeButton === button) {
-      setActiveButton('');
-      onSortChange('');
+      setActiveButton("");
+      onSortChange("");
     } else {
       setActiveButton(button);
       onSortChange(button);
     }
   };
 
-  {/** TODO a mettre au propre */}
+  {
+    /** TODO a mettre au propre */
+  }
   return (
-    <div>
+    <div className=" flex gap-4 mt-7 mb-10 self-center">
       <button
-        className={`flex items-center gap-2 ${activeButton === 'name' ? 'bg-blue-500 text-white' : 'bg-white text-black'} ring-2 ring-blue-500 rounded-2xl duration-200 w-fit self-center py-2 px-3 text-base`}
-        onClick={() => handleButtonClick('name')}
+        className={`flex items-center gap-2 ${
+          activeButton === "name"
+            ? "bg-blue-500 text-white"
+            : "bg-white text-black"
+        } ring-2 ring-blue-500 rounded-2xl duration-200 w-fit self-center py-2 px-3 text-base`}
+        onClick={() => handleButtonClick({ button: "name" })}
       >
         Nom
       </button>
       <button
-        className={`flex items-center gap-2 ${activeButton === 'date' ? 'bg-blue-500 text-white' : 'bg-white text-black'} ring-2 ring-blue-500 rounded-2xl duration-200 w-fit self-center py-2 px-3 text-base`}
-        onClick={() => handleButtonClick('date')}
+        className={`flex items-center gap-2 ${
+          activeButton === "date"
+            ? "bg-blue-500 text-white"
+            : "bg-white text-black"
+        } ring-2 ring-blue-500 rounded-2xl duration-200 w-fit self-center py-2 px-3 text-base`}
+        onClick={() => handleButtonClick({ button: "date" })}
       >
         Date
       </button>
       <button
-        className={`flex items-center gap-2 ${activeButton === 'price' ? 'bg-blue-500 text-white' : 'bg-white text-black'} ring-2 ring-blue-500 rounded-2xl duration-200 w-fit self-center py-2 px-3 text-base`}
-        onClick={() => handleButtonClick('price')}
+        className={`flex items-center gap-2 ${
+          activeButton === "price"
+            ? "bg-blue-500 text-white"
+            : "bg-white text-black"
+        } ring-2 ring-blue-500 rounded-2xl duration-200 w-fit self-center py-2 px-3 text-base`}
+        onClick={() => handleButtonClick({ button: "price" })}
       >
         Prix
       </button>
