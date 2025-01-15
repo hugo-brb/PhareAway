@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
+import { useLighthouse } from "./lighthouse";
 //import { hash } from "bcrypt";
 
 export type UsePlayer = {
@@ -12,6 +14,7 @@ export type UsePlayer = {
   getIsOAuth: () => boolean;
   getBeacoins: () => number;
   getPhareended: () => Array<number>;
+  getPhareendedName: (id: number) => Array<string>;
   getDlcUnlocked: () => Array<number>;
   getIsAsso: () => boolean;
   getIsAdmin: () => boolean;
@@ -121,6 +124,10 @@ export function usePlayer(email: string) {
       console.log(playerData.phareended);
       return playerData.phareended;
     },
+    getPhareendedName: (id: number) => {
+      return useLighthouse(id).getName();
+    },
+
     getDlcUnlocked: () => playerData.DlcUnlocked,
     getIsAsso: () => playerData.isAsso,
     getIsAdmin: () => playerData.isAdmin,

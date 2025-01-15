@@ -65,8 +65,12 @@ export default function Account({ handleClickActive, player }: MenuProps) {
     return <div>Chargement...</div>;
   }
 
-  const handleHoverLh = () => {
-    setHoverLh(!hoverLh);
+  const handleHoverLhEnter = () => {
+    setHoverLh(true);
+  };
+
+  const handleHoverLhLeave = () => {
+    setHoverLh(false);
   };
 
   return (
@@ -104,9 +108,9 @@ export default function Account({ handleClickActive, player }: MenuProps) {
             </h1>
             <h2 className="text-lg">{formValues.mail}</h2>
             <div
-              onMouseEnter={handleHoverLh}
-              onMouseLeave={handleHoverLh}
-              className="flex justify-start items-center gap-7"
+              onMouseEnter={handleHoverLhEnter}
+              onMouseLeave={handleHoverLhLeave}
+              className=" flex justify-start items-center gap-7"
             >
               <div className="flex justify-center mx-auto md:mx-0 items-center gap-2 px-4 py-2 rounded-2xl cursor-pointer duration-300 hover:ring-1 ring-[--primary]">
                 <Image
@@ -120,10 +124,13 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                 </span>
               </div>
               <div
-                className={` absolute bg-white px-3 py-3 rounded-xl left-1/2 ${
+                className={` fixed bg-white px-4 py-2 rounded-xl top-[30vh] -translate-x-4 duration-0 flex flex-col justify-start items-center gap-4 ${
                   hoverLh ? "visible" : "hidden"
                 }`}
               >
+                <h3 className=" font-bold text-lg text-center uppercase">
+                  Phares complétés
+                </h3>
                 <ul className="flex flex-col gap-2">
                   {player.getPhareended().map((phare, index) => (
                     <li key={index} className="flex items-center gap-2">
@@ -133,7 +140,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                         width={25}
                         height={25}
                       />
-                      <span>{phare}</span>
+                      <span>{player.getPhareendedName(phare)}</span>
                     </li>
                   ))}
                 </ul>
