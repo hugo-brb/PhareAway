@@ -7,7 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 type MapComponentProps = {
   center: [number, number];
   zoom: number;
-  bounds: [[number, number], [number, number]];
+  //bounds: [[number, number], [number, number]];
   markers: {
     id: number;
     longitude: number;
@@ -24,7 +24,7 @@ type MapComponentProps = {
 
 const Map: React.FC<MapComponentProps> = ({
   center,
-  bounds,
+  //bounds,
   zoom,
   markers,
   handleClickActive,
@@ -44,7 +44,7 @@ const Map: React.FC<MapComponentProps> = ({
         center: center,
         zoom: zoom,
         maxZoom: 10,
-        maxBounds: bounds,
+        //maxBounds: bounds,
         dragRotate: false,
         pitchWithRotate: false,
       });
@@ -57,7 +57,6 @@ const Map: React.FC<MapComponentProps> = ({
       mapInstance.current?.remove();
       mapInstance.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // On veut que ça ne s'exécute qu'une fois au montage
 
   useEffect(() => {

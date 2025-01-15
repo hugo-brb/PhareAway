@@ -22,6 +22,7 @@ import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 import Loader from "@/components/Loader"; // Importez un composant Loader
 import { redirect } from "next/navigation";
+import DlcList from "@/components/DlcList";
 
 interface itemProps {
   id: number;
@@ -46,6 +47,7 @@ export default function Home() {
   const [center, setCenter] = useState<[number, number]>([
     -1.6282904, 49.6299822,
   ]); // Initial map center
+  //const [bounds, setBounds] = useState<[[number, number],[number,number]]>([[-5.1535428, 42.5314237],[7.3190333, 51.0605319]]); // Initial map bounds
   const player = usePlayer(session?.user?.email ?? "");
   const [isLoading, setIsLoading] = useState(true); // Gère l'affichage du préloader est true si le préloader doit affiché sinon il est false
   const [isMapReady, setIsMapReady] = useState(false); // Suivi du statut de la carte
@@ -118,13 +120,14 @@ export default function Home() {
     <>
       {isLoading && <Loader />} {/* Affiche le préloader */}
       <Menu active={active} handleClickActive={handleClickActive} />
+      <DlcList onCenterChange={updateCenter} player={player} />
       {active === "home" && <TopNav onCenterChange={updateCenter} />}
       <Map
-        zoom={2}
-        bounds={[
-          [-5.1535428, 42.5314237],
-          [7.3190333, 51.0605319],
-        ]}
+        zoom={6}
+        /*bounds={[
+          [bounds[0][0], bounds[0][1]],
+          [bounds[1][0], bounds[1][1]],
+        ]}*/
         center={center}
         markers={markers}
         handleClickActive={handleClickActive}
