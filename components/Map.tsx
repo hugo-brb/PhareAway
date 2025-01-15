@@ -8,7 +8,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 type MapComponentProps = {
   center: [number, number];
   zoom: number;
-  //bounds: [[number, number], [number, number]];
+  bounds: [[number, number], [number, number]];
   markers: {
     id: number;
     longitude: number;
@@ -25,7 +25,7 @@ type MapComponentProps = {
 
 const Map: React.FC<MapComponentProps> = ({
   center,
-  //bounds,
+  bounds,
   zoom,
   markers,
   handleClickActive,
@@ -46,7 +46,7 @@ const Map: React.FC<MapComponentProps> = ({
         center: center,
         zoom: zoom,
         maxZoom: 10,
-        //maxBounds: bounds,
+        maxBounds: bounds,
         dragRotate: false,
         pitchWithRotate: false,
       });
@@ -64,6 +64,7 @@ const Map: React.FC<MapComponentProps> = ({
   useEffect(() => {
     if (mapInstance.current) {
       mapInstance.current.flyTo({ center });
+      mapInstance.current.setMaxBounds(bounds)
     }
   }, [center]);
 

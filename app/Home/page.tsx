@@ -47,7 +47,9 @@ export default function Home() {
     const [center, setCenter] = useState<[number, number]>([
         -1.6282904, 49.6299822,
     ]); // Initial map center
-    //const [bounds, setBounds] = useState<[[number, number],[number,number]]>([[-5.1535428, 42.5314237],[7.3190333, 51.0605319]]); // Initial map bounds
+    const [bounds, setBounds] = useState<[[number, number],[number,number]]>([
+        [-5.1535428, 42.5314237],[7.3190333, 51.0605319]
+    ]); // Initial map bounds
     const player = usePlayer(session?.user?.email ?? "");
     const dlcOwned = player.getDlcUnlocked().length > 0 ? true : false;
 
@@ -67,6 +69,9 @@ export default function Home() {
     };
     const updateCenter = (newCenter: [number, number]) => {
         setCenter(newCenter);
+    };
+    const updateBounds = (newBounds: [[number, number],[number,number]]) => {
+        setBounds(newBounds);
     };
     const [markers, setMarkers] = useState<
         { id: number; longitude: number; latitude: number; popupText: string }[]
@@ -104,32 +109,29 @@ export default function Home() {
 
         fetchMarkers();
     }, []);
-
     // Callback pour signaler que la carte est chargée
     const handleMapLoaded = () => {
         setIsMapReady(true); // La carte est prête
     };
-
     // Mise à jour de l'état global lorsque tout est prêt
     useEffect(() => {
         if (isMapReady && markersLoaded) {
         setIsLoading(false); // Désactiver le préloader
         }
     }, [isMapReady, markersLoaded]);
-
     // Afficher le préloader tant que tout n'est pas chargé
     return (
         <>
         {isLoading && <Loader />} {/* Affiche le préloader */}
         <Menu active={active} handleClickActive={handleClickActive} />
-        {dlcOwned && <DlcList onCenterChange={updateCenter} player={player} />}
+        {dlcOwned && <DlcList onBoundsChange={updateBounds} onCenterChange={updateCenter} player={player} />}
         {active === "home" && <TopNav onCenterChange={updateCenter} />}
         <Map
             zoom={6}
-            /*bounds={[
-            [bounds[0][0], bounds[0][1]],
-            [bounds[1][0], bounds[1][1]],
-            ]}*/
+            bounds={[
+                [bounds[0][0], bounds[0][1]],
+                [bounds[1][0], bounds[1][1]],
+            ]}
             center={center}
             markers={markers}
             handleClickActive={handleClickActive}
