@@ -5,6 +5,8 @@ import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
 
+import ConfirmHint from "@/components/popover/ConfirmHint"; // Import du popup personnalisé
+
 interface EnigmeProps {
   handleClickActive: (a: string) => void;
   id: number;
@@ -23,6 +25,7 @@ export default function Enigme({
   const enigme5 = useEnigme(id, 5); //recupere les données de la cinquième enigme du phare id
   const lighthouse = useLighthouse(id); //recupere les données du phare id
   const [popup, setPopup] = useState("0");
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const handleClickPopup = (a: string) => {
     setPopup(a);
@@ -37,6 +40,17 @@ export default function Enigme({
       ...prev,
       [button]: !prev[button], // Alterne l'état du bouton correspondant
     }));
+  };
+
+  const handleHintPurchase = () => {
+    if (player.getBeacoins() >= 100) {
+      player.setBeacoins(-100);
+      handleClickActiveButton("hint");
+      setShowConfirmation(false); // Fermer le popup après confirmation
+    } else {
+      alert("Vous n'avez pas assez de Beacoins pour acheter les indices.");
+      setShowConfirmation(false);
+    }
   };
 
   const currentHour = new Date().getHours();
@@ -77,13 +91,8 @@ export default function Enigme({
             }`}
             style={{ top: "12vw", right: "5vw" }}
             onClick={() => {
-              if (player.getBeacoins() >= 100) {
-                player.setBeacoins(-100);
-                handleClickActiveButton("hint");
-              } else {
-                alert(
-                  "Vous n'avez pas assez de beacoins pour acheter les indices"
-                );
+              if (!activeButtons.hint) {
+                setShowConfirmation(true); // Afficher le popup
               }
             }}
           >
@@ -98,6 +107,14 @@ export default function Enigme({
               height={150}
             />
           </button>
+
+          {/* Popup de confirmation */}
+          {showConfirmation && (
+            <ConfirmHint
+              onConfirm={handleHintPurchase} // Confirmer l'achat
+              onCancel={() => setShowConfirmation(false)} // Annuler l'achat
+            />
+          )}
 
           <button
             className={`absolute md:hidden ${
