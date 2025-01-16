@@ -105,8 +105,7 @@ export function usePlayer(email: string) {
               DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || [],
               isAsso: requestData.data?.[0]?.isAsso,
               isAdmin: requestData.data?.[0]?.isAdmin,
-              lastUploadTime:
-                requestData.data?.[0]?.lastUploadTime.toString() || "",
+              lastUploadTime: requestData.data?.[0]?.lastUploadTime || "",
             });
           }
         }
