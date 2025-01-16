@@ -23,6 +23,7 @@ import Loader from "@/components/Loader"; // Importez un composant Loader
 import { redirect } from "next/navigation";
 import DlcList from "@/components/DlcList";
 import Tips from "@/components/popover/Tips";
+import AudioPlayer from "@/components/AudioPlayer";
 
 interface itemProps {
   id: number;
@@ -132,6 +133,7 @@ export default function Home() {
   return (
     <>
       {isLoading && <Loader />} {/* Affiche le préloader */}
+      <AudioPlayer />
       <Menu active={active} handleClickActive={handleClickActive} />
       {(active === "home" || active === "coin") && dlcOwned && (
         <DlcList
