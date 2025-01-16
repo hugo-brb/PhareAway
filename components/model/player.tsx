@@ -18,8 +18,6 @@ export type UsePlayer = {
   getDlcUnlocked: () => Array<number>;
   getIsAsso: () => boolean;
   getIsAdmin: () => boolean;
-  getLastUploadTime: () => string;
-  setLastUploadTime: () => Promise<void>;
   setPrenom: (prenom: string) => Promise<void>;
   setNom: (nom: string) => Promise<void>;
   setMail: (mail: string) => Promise<void>;
@@ -57,7 +55,6 @@ interface PlayerData {
   DlcUnlocked: Array<number>;
   isAsso: boolean;
   isAdmin: boolean;
-  lastUploadTime: string;
 }
 
 export function usePlayer(email: string) {
@@ -74,7 +71,6 @@ export function usePlayer(email: string) {
     DlcUnlocked: [],
     isAsso: false,
     isAdmin: false,
-    lastUploadTime: "",
   });
 
   useEffect(() => {
@@ -105,8 +101,6 @@ export function usePlayer(email: string) {
               DlcUnlocked: requestData.data?.[0]?.DlcUnlocked || [],
               isAsso: requestData.data?.[0]?.isAsso,
               isAdmin: requestData.data?.[0]?.isAdmin,
-              lastUploadTime:
-                requestData.data?.[0]?.lastUploadTime.toString() || "",
             });
           }
         }
@@ -137,18 +131,6 @@ export function usePlayer(email: string) {
     getDlcUnlocked: () => playerData.DlcUnlocked,
     getIsAsso: () => playerData.isAsso,
     getIsAdmin: () => playerData.isAdmin,
-    getLastUploadTime: () => playerData.lastUploadTime,
-
-    setLastUploadTime: async () => {
-      await supabaseData
-        .from("users")
-        .update({ lastUploadTime: Date.now() })
-        .eq("id", playerData.user.id);
-      setPlayerData((prev) => ({
-        ...prev,
-        lastUploadTime: Date.now().toString(),
-      }));
-    },
 
     // Setters pour les informations de base
     setPrenom: async (prenom: string) => {
