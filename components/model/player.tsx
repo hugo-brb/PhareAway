@@ -121,7 +121,6 @@ export function usePlayer(email: string) {
     getIsOAuth: () => playerData.user.isOAuth,
     getBeacoins: () => playerData.beacoins,
     getPhareended: () => {
-      console.log(playerData.phareended);
       return playerData.phareended;
     },
     getPhareendedName: (id: number) => {

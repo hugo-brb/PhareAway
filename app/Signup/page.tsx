@@ -6,7 +6,38 @@ import { redirect } from "next/navigation";
 import Image from "next/image";
 
 export default function Signup() {
-  const [errors, setErrors] = useState<string[]>([]);
+  const [errorNom, setErrorsNom] = useState<boolean>(false);
+  const [errorPrenom, setErrorsPrenom] = useState<boolean>(false);
+  const [errorPseudo, setErrorsPseudo] = useState<boolean>(false);
+  const [errorEmail, setErrorsEmail] = useState<boolean>(false);
+  const [errorMdp, setErrorsMdp] = useState<boolean>(false);
+  const [errorMdpCourt, setErrorsMdpCourt] = useState<boolean>(false);
+  const [errorGlobal, setErrorsGlobal] = useState<boolean>(false);
+  const [errors, setErrors] = useState<boolean>(false);
+
+  const confirmString = (t: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = t.target;
+
+    if (value.length >= 17) {
+      if (name === "nom") {
+        setErrorsNom(true);
+      } else if (name === "prenom") {
+        setErrorsPrenom(true);
+      } else if (name === "user") {
+        setErrorsPseudo(true);
+      }
+      setErrors(true);
+
+    } else {
+      if (name === "nom") {
+        setErrorsNom(false);
+      } else if (name === "prenom") {
+        setErrorsPrenom(false);
+      } else if (name === "user") {
+        setErrorsPseudo(false);
+      }
+    }
+  };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -19,23 +50,30 @@ export default function Signup() {
     const password = formData.get("mdp")?.toString();
     const passwordConfirm = formData.get("mdpVerif")?.toString();
 
-    const newErrors: string[] = [];
-
     // Validation des champs
-    if (!nom) newErrors.push("Le nom est obligatoire.");
-    if (!prenom) newErrors.push("Le prénom est obligatoire.");
-    if (!pseudo) newErrors.push("Le nom d'utilisateur est obligatoire.");
-    if (!email || !/\S+@\S+\.\S+/.test(email))
-      newErrors.push("L'adresse email n'est pas valide.");
-    if (!password) newErrors.push("Le mot de passe est obligatoire.");
-    if (password !== passwordConfirm)
-      newErrors.push("Les mots de passe ne correspondent pas.");
-    if (password && password.length < 8)
-      newErrors.push("Le mot de passe doit contenir au moins 8 caractères.");
+    if (email && !/\S+@\S+\.\S+/.test(email)) {
+      setErrorsEmail(true);
+      setErrors(true);
 
-    setErrors(newErrors);
+    } else {
+      setErrorsEmail(false);
+    }
+    if (password !== passwordConfirm) {
+      setErrorsEmail(true);
+      setErrors(true);
 
-    if (newErrors.length === 0) {
+    } else {
+      setErrorsMdp(false);
+    }
+    if (password && password.length < 8) {
+      setErrorsMdpCourt(true);
+      setErrors(true);
+
+    } else {
+      setErrorsMdp(false);
+    }
+
+    if (errors) {
       const response = await fetch(`/api/auth/register`, {
         method: "POST",
         body: JSON.stringify({
@@ -49,7 +87,7 @@ export default function Signup() {
       if (response.ok) {
         redirect("/Login");
       } else {
-        setErrors(["Une erreur est survenue lors de l'inscription."]);
+        setErrorsGlobal(true);
       }
     }
   };
@@ -83,6 +121,7 @@ export default function Signup() {
             onSubmit={handleSubmit}
             className="flex flex-col gap-3 max-h-[90vh]"
           >
+
             <div className="flex flex-col md:flex-row md:justify-between justify-center md:items-center gap-2">
               <div className="flex flex-col gap-1 ">
                 <label htmlFor="nom" className="md:ml-2 text-base font-bold">
@@ -91,10 +130,16 @@ export default function Signup() {
                 <input
                   id="nom"
                   name="nom"
+                  onChange={confirmString}
                   className=" py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                   type="text"
                   placeholder="Soleil"
+                  required
                 />
+                <p className="text-red-500">{errorNom ? "Le nom est trop long." : null}</p>
+                {/** 
+                 * <p className="text-green-500">  {!errorNom ? "Le nom est valide." : null} </p>
+                 */}
               </div>
               <div className="flex flex-col gap-1 ">
                 <label htmlFor="prenom" className="md:ml-2 text-base font-bold">
@@ -103,11 +148,18 @@ export default function Signup() {
                 <input
                   id="prenom"
                   name="prenom"
+                  onChange={confirmString}
                   className=" w-full py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                   type="text"
                   placeholder="François"
+                  required
                 />
+                <p className="text-red-500">{errorPrenom ? "Le pseudo est trop long." : null}</p>
+                {/**
+                 * <p className="text-green-500">  {!errorPrenom ? "Le pseudo est valide." : null} </p>
+                 */}
               </div>
+
             </div>
             <div className="flex flex-col gap-1 ">
               <label htmlFor="user" className="ml-2 text-base font-bold">
@@ -116,11 +168,18 @@ export default function Signup() {
               <input
                 id="user"
                 name="user"
+                onChange={confirmString}
                 className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                 type="text"
                 placeholder="Pharaon"
+                required
               />
-            </div>
+              <p className="text-red-500">{errorPseudo ? "Le pseudo est trop long." : null}</p>
+              {/**
+               * <p className="text-green-500">  {!errorPseudo ? "Le pseudo est valide." : null} </p>
+              */}
+               </div>
+
             <div className="flex flex-col gap-1 ">
               <label htmlFor="email" className="ml-2 text-base font-bold">
                 Email
@@ -131,8 +190,14 @@ export default function Signup() {
                 className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                 type="text"
                 placeholder="phareaway@lighthouse.fr"
+                required
               />
+              <p className="text-red-500">{errorEmail ? "Le mail est invalide." : null}</p>
+              {/**
+               * <p className="text-green-500">  {!errorEmail ? "Le mail est valide." : null} </p>
+               */}
             </div>
+
             <div className="flex flex-col gap-1">
               <label htmlFor="mdp" className="ml-2 text-base font-bold">
                 Mot de passe
@@ -143,8 +208,14 @@ export default function Signup() {
                 className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
                 type="password"
                 placeholder="Jaimelesphares38"
+                required
               />
+              <p className="text-red-500">  {errorMdpCourt ? "Le mot de passe doit contenir au moins 8 caractères." : errorMdp ? "Les mots de passe ne correspondent pas." : null} </p>
+              {/** 
+              * <p className="text-green-500">  {!errorMdpCourt && !errorMdp ? "Le mot de passe est valide." : null} </p>
+                */}
             </div>
+
             <div className="flex flex-col gap-1">
               <label htmlFor="mdpVerif" className="ml-2 text-base font-bold">
                 Confirmer votre mot de passe
@@ -157,15 +228,6 @@ export default function Signup() {
                 placeholder="Jaimelesphares38"
               />
             </div>
-            {errors.length > 0 && (
-              <div className="text-red-600 mb-4">
-                <ul>
-                  {errors.map((error, index) => (
-                    <li key={index}>{error}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
             <input
               type="submit"
               value="Commencer mon aventure ⛵"
@@ -183,6 +245,7 @@ export default function Signup() {
               </Link>
             </div>
           </form>
+          <p className="text-red-500">  {errorPseudo ? "Une erreur est survenue lors de l'inscription." : null} </p>
         </section>
       </main>
     </>
