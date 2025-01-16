@@ -16,8 +16,19 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
 
   // Si l'offre de beacoin n'a pas encore chargé, afficher un message de chargement
   if (!beacoin) {
-    return <p>Chargement de l&apos;événement...</p>;
+    return <p>Chargement des...</p>;
   }
+
+  <Link
+    href={{
+      pathname: "/Payment",
+      query: {
+        id: beacoin.getId(), // ID du beacoin
+        price: beacoin.getPrice(), // Prix en euros
+      },
+    }}
+    className="flex flex-col justify-center items-center gap-3 px-7 py-5 hover:ring-2 hover:ring-[--primary] rounded-xl duration-100 cursor-pointer"
+  ></Link>;
 
   return (
     <>
