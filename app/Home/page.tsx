@@ -214,6 +214,72 @@ export default function Home() {
           next="0"
         />
       )}
+      {tips === "1" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Page principale"
+          cx={30}
+          cy={20}
+          text={`Bienvenue sur la page principale, c'est depuis cet endroit que tu pourra accéder à toutes les fonctionnalités du site. Tu pourra notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et bien d'autres choses encore.`}
+          img="/mascotte/temp.png"
+          next="2"
+        />
+      )}
+      {tips === "2" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Barre de navigation"
+          cx={30}
+          cy={20}
+          text={`Vous pouvez utilisé la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
+          img="/mascotte/temp.png"
+          next="3"
+        />
+      )}
+      {tips === "3" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Phares"
+          cx={30}
+          cy={20}
+          text={`La carte est composée de plusieurs phares, ceux disposants d'une enigme sont plus gros et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant, et de suivre les instructions. Une fois l'énigme résolue, tu gagnera des Beacoins.`}
+          img="/mascotte/temp.png"
+          next="4"
+        />
+      )}
+      {tips === "4" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Beacoins"
+          cx={30}
+          cy={20}
+          text={`Les Beacoins sont la monnaie du jeu, vous en gagnez en résolvant des énigmes, en partageant des photos, ou en achetant des packs dans la boutique. Vous pouvez les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Cliquez sur votre nombre de Beacoins ouvre également la boutique)`}
+          img="/mascotte/temp.png"
+          next="5"
+        />
+      )}
+      {tips === "5" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Extensions"
+          cx={30}
+          cy={20}
+          text={`Les extensions sont des contenus additionnels que vous pouvez débloquer pour accéder à de nouveaux phares. Vous pouvez les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
+          img="/mascotte/temp.png"
+          next="6"
+        />
+      )}
+      {tips === "6" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Fin"
+          cx={30}
+          cy={20}
+          text={`Vous savez tout ! Plus qu'à dévouvrir des incroyables phares et résoudre des énigmes. N'hésitez pas à me re-demander de l'aide si vous êtes bloqué. Bonne chance !`}
+          img="/mascotte/temp.png"
+          next="0"
+        />
+      )}
     </>
   );
 }
