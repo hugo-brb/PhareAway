@@ -25,7 +25,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const lastUploadTime = player.getLastUploadTime();
+    const lastUploadTime = localStorage.getItem("lastUploadTime");
     const now = Date.now();
 
     if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 60 * 1000) {
@@ -55,7 +55,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           "Félicitation l'image a été validée avec succès ! Vous allez recevoir 50 BeaCoins !"
         );
         player.setBeacoins(50);
-        player.setLastUploadTime();
+        localStorage.setItem("lastUploadTime", now.toString());
         handleClickActive("home");
       } else {
         setError("L'image ne contient pas de phare. Veuillez réessayer.");

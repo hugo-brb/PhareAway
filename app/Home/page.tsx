@@ -127,7 +127,7 @@ export default function Home() {
     setTips(a);
   };
 
-  onload = () => handleClickTips("1");
+  onload = () => handleClickTips("start");
 
   return (
     <>
@@ -188,14 +188,26 @@ export default function Home() {
         alt="Logo Soupex"
         className="hidden md:block absolute z-50 bottom-3 right-3 "
       />
+      <button
+        className="absolute top-5 left-5 mt-[100px]"
+        onClick={() => handleClickTips("1")}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          className="w-8 h-8"
+        >
+          <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+        </svg>
+      </button>
       {/*Affichage des astuces*/}
-      {tips === "1" && (
+      {tips === "start" && (
         <Tips
           handleClickTips={handleClickTips}
           title="Bienvenue sur Phare Away !"
           cx={30}
           cy={20}
-          text={"Ici, tu peux découvrir les phares de France."}
+          text={`Salut à toi jeune moussaillon ! Je m'appelle 'nom badass de mascotte', et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourra me demandé de t'aider à progresser. Pour ça, il te suffit de cliquer sur le bouton d'information en haut à droite. Bonne chance !`}
           img="/mascotte/temp.png"
           next="0"
         />
