@@ -25,6 +25,20 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
+    const lastUploadTime = localStorage.getItem("lastUploadTime");
+    const now = Date.now();
+
+    if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 60 * 1000) {
+      const remainingTime = 30 * 60 * 1000 - (now - parseInt(lastUploadTime));
+      const minutes = Math.floor(remainingTime / (60 * 1000));
+      const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
+
+      setError(
+        `Veuillez patienter encore ${minutes} minute(s) et ${seconds} seconde(s) avant de téléverser une nouvelle image.`
+      );
+      return;
+    }
+
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -41,6 +55,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           "Félicitation l'image a été validée avec succès ! Vous allez recevoir 50 BeaCoins !"
         );
         player.setBeacoins(50);
+        localStorage.setItem("lastUploadTime", now.toString());
         handleClickActive("home");
       } else {
         setError("L'image ne contient pas de phare. Veuillez réessayer.");

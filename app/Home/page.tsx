@@ -22,6 +22,8 @@ import { usePlayer } from "@/components/model/player";
 import Loader from "@/components/Loader"; // Importez un composant Loader
 import { redirect } from "next/navigation";
 import DlcList from "@/components/DlcList";
+import Tips from "@/components/popover/Tips";
+import AudioPlayer from "@/components/AudioPlayer";
 
 interface itemProps {
   id: number;
@@ -120,9 +122,18 @@ export default function Home() {
     }
   }, [isMapReady, markersLoaded]);
   // Afficher le préloader tant que tout n'est pas chargé
+
+  const [tips, setTips] = useState("0");
+  const handleClickTips = (a: string) => {
+    setTips(a);
+  };
+
+  onload = () => handleClickTips("start");
+
   return (
     <>
       {isLoading && <Loader />} {/* Affiche le préloader */}
+      <AudioPlayer />
       <Menu active={active} handleClickActive={handleClickActive} />
       {(active === "home" || active === "coin") && dlcOwned && (
         <DlcList
@@ -179,6 +190,96 @@ export default function Home() {
         alt="Logo Soupex"
         className="hidden md:block absolute z-50 bottom-3 right-3 "
       />
+      <button
+        className="absolute top-5 left-5 mt-[100px]"
+        onClick={() => handleClickTips("1")}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 512 512"
+          className="w-8 h-8"
+        >
+          <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+        </svg>
+      </button>
+      {/*Affichage des astuces*/}
+      {tips === "start" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Bienvenue sur Phare Away !"
+          cx={30}
+          cy={20}
+          text={`Salut à toi jeune moussaillon ! Je m'appelle 'nom badass de mascotte', et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourra me demandé de t'aider à progresser. Pour ça, il te suffit de cliquer sur le bouton d'information en haut à droite. Bonne chance !`}
+          img="/mascotte/temp.png"
+          next="0"
+        />
+      )}
+      {tips === "1" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Page principale"
+          cx={30}
+          cy={20}
+          text={`Bienvenue sur la page principale, c'est depuis cet endroit que tu pourra accéder à toutes les fonctionnalités du site. Tu pourra notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et bien d'autres choses encore.`}
+          img="/mascotte/temp.png"
+          next="2"
+        />
+      )}
+      {tips === "2" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Barre de navigation"
+          cx={10}
+          cy={20}
+          text={`Vous pouvez utilisé la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
+          img="/mascotte/temp.png"
+          next="3"
+        />
+      )}
+      {tips === "3" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Phares"
+          cx={30}
+          cy={20}
+          text={`La carte est composée de plusieurs phares, ceux disposants d'une enigme sont plus gros et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant, et de suivre les instructions. Une fois l'énigme résolue, tu gagnera des Beacoins.`}
+          img="/mascotte/temp.png"
+          next="4"
+        />
+      )}
+      {tips === "4" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Beacoins"
+          cx={60}
+          cy={5}
+          text={`Les Beacoins sont la monnaie du jeu, vous en gagnez en résolvant des énigmes, en partageant des photos, ou en achetant des packs dans la boutique. Vous pouvez les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Cliquez sur votre nombre de Beacoins ouvre également la boutique)`}
+          img="/mascotte/temp.png"
+          next="5"
+        />
+      )}
+      {tips === "5" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Extensions"
+          cx={55}
+          cy={35}
+          text={`Les extensions sont des contenus additionnels que vous pouvez débloquer pour accéder à de nouveaux phares. Vous pouvez les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
+          img="/mascotte/temp.png"
+          next="6"
+        />
+      )}
+      {tips === "6" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Fin"
+          cx={30}
+          cy={20}
+          text={`Vous savez tout ! Plus qu'à dévouvrir des incroyables phares et résoudre des énigmes. N'hésitez pas à me re-demander de l'aide si vous êtes bloqué. Bonne chance !`}
+          img="/mascotte/temp.png"
+          next="0"
+        />
+      )}
     </>
   );
 }

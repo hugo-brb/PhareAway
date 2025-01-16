@@ -3,6 +3,8 @@ import Image from "next/image";
 import { useExtention } from "./model/extention";
 import { UsePlayer } from "./model/player";
 import ConfirmStore from "@/components/popover/ConfirmStore"; // Importez le popup de confirmation
+import Tips from "@/components/popover/Tips";
+
 
 interface OnExtentionProp {
   id_extention: number;
@@ -14,6 +16,10 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
   const image = extention.useGetImage(); // Récupère l'image de l'extension
   const [showConfirmation, setShowConfirmation] = useState(false); // État pour afficher le popup de confirmation
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // État pour afficher un message d'erreur
+    const [tips, setTips] = useState("0");
+    const handleClickTips = (a: string) => {
+      setTips(a);
+    };
 
   // Vérifie si l'extension est déjà débloquée
   const isUnlocked = player.getDlcUnlocked()[id_extention] === 1;
@@ -34,9 +40,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
     dlc[id_extention] = 1; // Marque l'extension comme débloquée
     player.setDlcUnlocked(dlc); // Met à jour les extensions débloquées
     setShowConfirmation(false); // Ferme le popup
-    alert(
-      `Vous avez débloqué l'extension : ${extention.getName()}, retournez sur la carte pour y accéder.`
-    );
+    setTips("1");
   };
 
   const cancelPurchase = () => {
@@ -90,7 +94,17 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
           isError={false} // pas une erreur
         />
       )}
-
+        {tips==="1" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Confirmation d'achat"
+              cx={50}
+              cy={30}
+              text={"Merci de ton achat jeune mousssaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique juste à ma droite yohoho !"}
+              img="/mascotte/temp.png"
+              next="0"
+            />
+          )}
       {/* Message d'erreur */}
       {errorMessage && (
         <ConfirmStore
