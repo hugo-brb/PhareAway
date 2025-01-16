@@ -47,13 +47,18 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin }) => {
         <div className="flex flex-col justify-center items-center">
           <p>{beacoin.getName()}</p>
           {/* Affichage conditionnel de la balise p pour le bonus */}
-          <p className="border-2 bg-blue-500 px-2 rounded-lg bg-opacity-5 text-yellow-400 font-bold" style={{ WebkitTextStroke: '0.1px blue' }}>
+
+          {/*  <p
+            className="border-2 bg-blue-500 px-2 rounded-lg bg-opacity-5 text-yellow-400 font-bold"
+            style={{ WebkitTextStroke: "0.1px blue" }}
+          > */}
+
+          <p className=" px-2 rounded-lg text-yellow-500 font-bold ">
+            {" "}
             + {beacoin.getBonus()} bonus
           </p>
           <div>
-            <p className="text-black opacity-50">
-              {beacoin.getPrice()}0 €
-            </p>
+            <p className="text-black opacity-50">{beacoin.getPrice()}0 €</p>
           </div>
         </div>
       </Link>
