@@ -229,7 +229,7 @@ export default function Home() {
         <Tips
           handleClickTips={handleClickTips}
           title="Barre de navigation"
-          cx={30}
+          cx={10}
           cy={20}
           text={`Vous pouvez utilisé la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
           img="/mascotte/temp.png"
@@ -251,8 +251,8 @@ export default function Home() {
         <Tips
           handleClickTips={handleClickTips}
           title="Beacoins"
-          cx={30}
-          cy={20}
+          cx={60}
+          cy={5}
           text={`Les Beacoins sont la monnaie du jeu, vous en gagnez en résolvant des énigmes, en partageant des photos, ou en achetant des packs dans la boutique. Vous pouvez les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Cliquez sur votre nombre de Beacoins ouvre également la boutique)`}
           img="/mascotte/temp.png"
           next="5"
@@ -262,8 +262,8 @@ export default function Home() {
         <Tips
           handleClickTips={handleClickTips}
           title="Extensions"
-          cx={30}
-          cy={20}
+          cx={55}
+          cy={35}
           text={`Les extensions sont des contenus additionnels que vous pouvez débloquer pour accéder à de nouveaux phares. Vous pouvez les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
           img="/mascotte/temp.png"
           next="6"
