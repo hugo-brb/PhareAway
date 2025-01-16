@@ -22,6 +22,7 @@ import { usePlayer } from "@/components/model/player";
 import Loader from "@/components/Loader"; // Importez un composant Loader
 import { redirect } from "next/navigation";
 import DlcList from "@/components/DlcList";
+import Tips from "@/components/popover/Tips";
 
 interface itemProps {
   id: number;
@@ -120,6 +121,14 @@ export default function Home() {
     }
   }, [isMapReady, markersLoaded]);
   // Afficher le préloader tant que tout n'est pas chargé
+
+  const [tips, setTips] = useState("0");
+  const handleClickTips = (a: string) => {
+    setTips(a);
+  };
+
+  onload = () => handleClickTips("1");
+
   return (
     <>
       {isLoading && <Loader />} {/* Affiche le préloader */}
@@ -179,6 +188,18 @@ export default function Home() {
         alt="Logo Soupex"
         className="hidden md:block absolute z-50 bottom-3 right-3 "
       />
+      {/*Affichage des astuces*/}
+      {tips === "1" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Bienvenue sur Phare Away !"
+          cx={30}
+          cy={20}
+          text={"Ici, tu peux découvrir les phares de France."}
+          img="/mascotte/temp.png"
+          next="0"
+        />
+      )}
     </>
   );
 }
