@@ -168,7 +168,7 @@ export default function Home() {
         <Store handleClickActive={handleClickActive} player={player} />
       )}
       {active === "picture" && (
-        <Pictures handleClickActive={handleClickActive} player={player} />
+        <Pictures handleClickActive={handleClickActive} player={player} handleClickTips={handleClickTips}/>
       )}
       {active === "enigme" && (
         <Enigme
