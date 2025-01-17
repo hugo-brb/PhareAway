@@ -272,8 +272,8 @@ export default function Home() {
         <Tips
           handleClickTips={handleClickTips}
           title="Extensions"
-          cx={55}
-          cy={35}
+          cx={50}
+          cy={30}
           text={`Les extensions sont des contenus additionnels que vous pouvez débloquer pour accéder à de nouveaux phares. Vous pouvez les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
           img="/mascotte/temp.png"
           next="6"
