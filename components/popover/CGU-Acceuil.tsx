@@ -56,9 +56,9 @@ export default function CGUAcceuil({ handleClickActive }: MenuProps) {
           </h1>
           <h2>
             L&apos;édition et la direction de la publication du site
-            phareaway.fun est assurée par Hugo BARBIERI, domicilié 32 rue Marcel
-            Paul. Numéro de téléphone est 0627355061 Adresse e-mail
-            hugobarbieri38@gmail.com.
+            phareaway.fun est assurée par Hugo BARBIERI, domicilié 2 Place Doyen
+            Gosse, 38000 Grenoble . Numéro de téléphone est 0476284509 Adresse
+            e-mail infos.phareaway@gmail.com.
           </h2>
           <h2>
             L&apos;hébergeur du site phareaway.fun est la société OVH, dont le
