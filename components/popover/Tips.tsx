@@ -27,8 +27,14 @@ export default function Tips({
         maxWidth: "600px",
         left: `${cx}vw`,
         top: `${cy}vw`,
+        transform: "translate(-50%, -50%)",
+        ...(window.innerWidth < 768 && {
+          left: "50%",
+          top: "50%",
+          width: "90%",
+        }),
       }}
-      className={` bg-white bg-opacity-80 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
+      className={`bg-white bg-opacity-80 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
     >
       <button
         className={
