@@ -160,7 +160,11 @@ export default function Home() {
         onMapLoaded={handleMapLoaded} // Transmet la fonction callback
       />
       {active === "calendar" && (
-        <Events handleClickActive={handleClickActive} player={player} />
+        <Events
+          handleClickActive={handleClickActive}
+          handleClickTips={handleClickTips}
+          player={player}
+        />
       )}
       {active === "addEvent" && player.getIsAsso() && (
         <AddEvent handleClickActive={handleClickActive} />
