@@ -1,4 +1,3 @@
-// components/AudioPlayer.js
 import { useEffect, useState, useRef } from "react";
 
 // Music by https://www.bensound.com
