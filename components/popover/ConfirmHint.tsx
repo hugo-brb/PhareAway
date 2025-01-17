@@ -14,13 +14,13 @@ export default function ConfirmHint({ onConfirm, onCancel }: CustomPopupProps) {
         </h1>
         <div className="flex justify-around gap-5">
           <button
-            className="w-[15vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer font-bold mx-auto py-2 px-2 rounded-2xl"
+            className=" md:w-[15vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer font-bold mx-auto py-2 px-2 rounded-2xl"
             onClick={onCancel}
           >
             Annuler
           </button>
           <button
-            className="w-[15vw] hover:bg-[#fdbc00] hover:text-[--background] border-2 border-[#fdbc00] duration-300 cursor-pointer font-bold mx-auto py-2 px-2 rounded-2xl"
+            className=" md:w-[15vw] hover:bg-[#fdbc00] hover:text-[--background] border-2 border-[#fdbc00] duration-300 cursor-pointer font-bold mx-auto py-2 px-2 rounded-2xl"
             onClick={onConfirm}
           >
             Confirmer
