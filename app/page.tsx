@@ -37,7 +37,7 @@ export default function LandingPage() {
             </button>
           </Link>
         </div>
-        <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-1/2 w-[50%] m-auto ">
+        <div className="hidden md:block absolute top-[78%] -translate-y-1/2 left-2/3 w-[50%] m-auto ">
             <InfiniteCarousel items={itemsCarousel} speed={10} />
         </div>
         <div className=" flex flex-col justify-center items-center w-[100vw] h-[70vh] md:w-fit md:h-fit">
