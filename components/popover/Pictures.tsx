@@ -2,7 +2,7 @@ import { useState } from "react";
 import Image from "next/image";
 import { UsePlayer } from "../model/player";
 import axios from "axios";
-import Tips from "./Tips";
+import Tips from "@/components/popover/Tips";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -19,12 +19,15 @@ interface VisionResponse {
   }>;
 }
 
-export default function Pictures({ handleClickActive, player,handleClickTips }: MenuProps) {
+export default function Pictures({
+  handleClickActive,
+  player,
+  handleClickTips,
+}: MenuProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null); // Nouvel état pour l'aperçu de l'image
   const [valide, setValide] = useState<boolean | null>(null);
-
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -101,6 +104,11 @@ export default function Pictures({ handleClickActive, player,handleClickTips }: 
     );
   };
 
+  const [tips, setTips] = useState("0");
+  const handleClickTips2 = (a: string) => {
+    setTips(a);
+  };
+
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
       <section className="flex flex-col items-center self-center mb-5 md:mb-0 gap-5 md:gap-12 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
@@ -114,6 +122,18 @@ export default function Pictures({ handleClickActive, player,handleClickTips }: 
             width={24}
             height={24}
           />
+        </button>
+        <button
+          className="absolute top-5 left-5"
+          onClick={() => handleClickTips2("1")}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 512 512"
+            className="w-8 h-8"
+          >
+            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+          </svg>
         </button>
         <h1 className="font-gravitas text-center self-center mt-4 text-4xl md:text-7xl">
           Importer une image
@@ -160,18 +180,59 @@ export default function Pictures({ handleClickActive, player,handleClickTips }: 
               />
             </div>
           )}
-            {valide && (
+          {valide && (
             <Tips
               handleClickTips={handleClickTips}
               title="Validation de l'image"
               cx={22}
               cy={12}
-              text={"Bravo tu viens d'uploader une image de phare, tu gagnes donc 50 beacoins 👍"}
+              text={
+                "Bravo tu viens d'uploader une image de phare, Vous avez gagné 50 Beacoins 👍"
+              }
               img="/mascotte/temp.png"
               next="0"
             />
           )}
         </div>
+        {tips === "1" && (
+          <Tips
+            handleClickTips={handleClickTips2}
+            title="Partage de photo"
+            cx={22}
+            cy={12}
+            text={
+              "Cette fonctionnalité vous permet de gagner 50 Beacoins en partageant une image de phare."
+            }
+            img="/mascotte/temp.png"
+            next="2"
+          />
+        )}
+        {tips === "2" && (
+          <Tips
+            handleClickTips={handleClickTips2}
+            title="Partage de photo"
+            cx={22}
+            cy={12}
+            text={
+              "Attention, si vous proposez une image qui ne contient pas de phare, vous ne gagnerez pas de Beacoins."
+            }
+            img="/mascotte/temp.png"
+            next="3"
+          />
+        )}
+        {tips === "3" && (
+          <Tips
+            handleClickTips={handleClickTips2}
+            title="Partage de photo"
+            cx={22}
+            cy={12}
+            text={
+              "Et vous ne pouvez pas partager plus d'une image de phare toutes les 24 heures. Bonne continuation !"
+            }
+            img="/mascotte/temp.png"
+            next="0"
+          />
+        )}
       </section>
     </main>
   );
