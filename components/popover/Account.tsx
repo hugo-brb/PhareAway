@@ -44,10 +44,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
       setErrors("");
       setFormValues((prev) => ({ ...prev, [name]: value }));
     }
-
   };
 
-  {/** 
+  {
+    /** 
   const numberLighthouse = async () => {
     const { data, error: eventError } = await supabaseData
       .from("Enigme")
@@ -71,10 +71,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
     }, []);
 
   };
-  */}
+  */
+  }
 
   const handleToggleEdit = async () => {
-
     if (isModifiable) {
       // Enregistrer les modifications dans l'objet `player`
       player.setNom(formValues.nom);
@@ -146,10 +146,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
           />
 
           <div className="flex flex-col gap-2">
-          <h1 className="font-extrabold text-5xl">
-              {formValues.nom} {formValues.prenom}
+            <h1 className="font-extrabold text-5xl">
+              {formValues.prenom} {formValues.nom}
             </h1>
-            
+
             <h2 className="text-lg">{formValues.mail}</h2>
             <div
               onMouseEnter={handleHoverLhEnter}
