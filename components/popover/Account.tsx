@@ -212,11 +212,11 @@ export default function Account({ handleClickActive, player }: MenuProps) {
         <form className="flex flex-col items-center justify-center gap-7 pl-7 mx-auto md:px-7 w-full">
           <div className="flex flex-col md:flex-row gap-7 md:gap-12">
             <div className="flex flex-col gap-1">
-              <h3 className="font-bold text-xl">Nom</h3>
+              <h3 className="font-bold text-xl">Prénom</h3>
               <input
                 type="text"
-                name="nom"
-                value={formValues.nom}
+                name="prenom"
+                value={formValues.prenom}
                 onChange={handleInputChange}
                 disabled={!isModifiable}
                 className={`py-2 px-4 md:w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
@@ -225,11 +225,11 @@ export default function Account({ handleClickActive, player }: MenuProps) {
               />
             </div>
             <div className="flex flex-col gap-1">
-              <h3 className="font-bold text-xl">Prénom</h3>
+              <h3 className="font-bold text-xl">Nom</h3>
               <input
                 type="text"
-                name="prenom"
-                value={formValues.prenom}
+                name="nom"
+                value={formValues.nom}
                 onChange={handleInputChange}
                 disabled={!isModifiable}
                 className={`py-2 px-4 md:w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
