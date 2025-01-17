@@ -92,6 +92,7 @@ export default function Signup() {
     }
   };
 
+  console.log(errorGlobal);
   return (
     <>
       <main className="land flex justify-center items-center w-[100vw] h-[100vh] max-h-[100vh]">

@@ -2,9 +2,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { UsePlayer } from "../model/player";
 import axios from "axios";
+import Tips from "./Tips";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
+  handleClickTips: (a: string) => void;
   player: UsePlayer;
 }
 
@@ -17,10 +19,12 @@ interface VisionResponse {
   }>;
 }
 
-export default function Pictures({ handleClickActive, player }: MenuProps) {
+export default function Pictures({ handleClickActive, player,handleClickTips }: MenuProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null); // Nouvel état pour l'aperçu de l'image
+  const [valide, setValide] = useState<boolean | null>(null);
+
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -51,9 +55,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
       const isLighthouse = await analyzeImageWithVisionAPI(base64Image);
 
       if (isLighthouse) {
-        alert(
-          "Félicitation l'image a été validée avec succès ! Vous allez recevoir 50 BeaCoins !"
-        );
+        setValide(true);
         player.setBeacoins(50);
         localStorage.setItem("lastUploadTime", now.toString());
         handleClickActive("home");
@@ -117,7 +119,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           Importer une image
         </h1>
         <p className="text-center">
-          Partagez une image de phare et gagnez <b>50</b> BeaCoins en
+          Partagez une image de phare et gagnez <b>50</b> Beacoins en
           récompense.📸✨
         </p>
         <div className="my-auto flex-col flex justify-center items-center gap-5">
@@ -151,12 +153,23 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           {error && <p className="text-red-500">{error}</p>}
           {imagePreview && ( // Affiche l'image téléchargée
             <div className="mt-5">
-              <img
+              <Image
                 src={imagePreview}
                 alt="Aperçu de l'image"
                 className="max-w-full h-auto rounded-lg"
               />
             </div>
+          )}
+            {valide && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Validation de l'image"
+              cx={22}
+              cy={12}
+              text={"Bravo tu viens d'uploader une image de phare, tu gagnes donc 50 beacoins 👍"}
+              img="/mascotte/temp.png"
+              next="0"
+            />
           )}
         </div>
       </section>

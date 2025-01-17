@@ -17,6 +17,8 @@ interface SmallEnigmeProps {
   text2: string;
   player: UsePlayer;
   lh: number;
+  cadenas: Array<string>;
+  setCadenas: (a: Array<string>) => void;
 }
 
 export default function SmallEnigme({
@@ -30,6 +32,8 @@ export default function SmallEnigme({
   text2,
   player,
   lh,
+  cadenas,
+  setCadenas,
 }: SmallEnigmeProps) {
   const [popupA, setPopupA] = useState("0");
   const handleClickAnswer = (a: string) => {
@@ -74,7 +78,19 @@ export default function SmallEnigme({
       )}
       <div className="flex flex-col items-center justify-between h-full">
         <div className="flex flex-row justify-between w-full">
-          <h1 className="font-decoration-underline">{name}</h1>
+          <h1 className="font-decoration-underline">
+            {name}
+            <p></p>
+            {id === "5" && (
+              <>
+                {"Code obtenu : "}
+                {cadenas[0]}
+                {cadenas[1]}
+                {cadenas[2]}
+                {cadenas[3]}
+              </>
+            )}
+          </h1>
           <button
             className="transform transition-transform duration-300 hover:rotate-90"
             onClick={() => handleClickPopup("0")} //fonction permettant de fermer la fenetre et revenir à l'état de base de l'élément parent
@@ -126,6 +142,8 @@ export default function SmallEnigme({
                   handleClickAnswer("EndNot");
                 }
               } else {
+                cadenas[parseInt(id) - 1] = codeLock.toString();
+                setCadenas(cadenas);
                 handleClickAnswer("Vrai");
               }
             } else if (input.value === "feur2%i") {

@@ -49,7 +49,7 @@ export default function Enigme({
       handleClickActiveButton("hint");
       setShowConfirmation(false); // Fermer le popup après confirmation
     } else {
-      alert("Vous n'avez pas assez de Beacoins pour acheter les indices.");
+      handleClickTips("tipsF");
       setShowConfirmation(false);
     }
   };
@@ -65,6 +65,8 @@ export default function Enigme({
   const handleClickTips = (a: string) => {
     setTips(a);
   };
+
+  const [cadenas, setCadenas] = useState(Array<string>(4).fill("▯"));
 
   return (
     <>
@@ -168,6 +170,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme1.getanswerLock()}
                 coordX={enigme1.getcoordX()}
                 coordY={enigme1.getcoordY()}
@@ -184,6 +188,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme2.getanswerLock()}
                 coordX={enigme2.getcoordX()}
                 coordY={enigme2.getcoordY()}
@@ -200,6 +206,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme3.getanswerLock()}
                 coordX={enigme3.getcoordX()}
                 coordY={enigme3.getcoordY()}
@@ -216,6 +224,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme4.getanswerLock()}
                 coordX={enigme4.getcoordX()}
                 coordY={enigme4.getcoordY()}
@@ -232,6 +242,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme5.getanswerLock()}
                 coordX={enigme5.getcoordX()}
                 coordY={enigme5.getcoordY()}
@@ -435,7 +447,7 @@ export default function Enigme({
               cx={11}
               cy={20}
               text={
-                "Des zones cliquables sont présentes sur l'image, et contiennent une petite devinette en rapport avec le lieu et le phare, essayé de les trouver !"
+                "Des zones cliquables sont présentes sur l'image et contiennent une petite devinette en rapport avec le lieu et le phare. Essayez de les trouver !"
               }
               img="/mascotte/temp.png"
               next="3"
@@ -448,7 +460,7 @@ export default function Enigme({
               cx={45}
               cy={5}
               text={
-                "Pour vous aidez, vous pouvez acheter des indices, qui vous reveleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins, et vous les perdez si vous quittez le phare."
+                "Pour vous aider, vous pouvez acheter des indices qui vous révèleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins et vous les perdez si vous quittez le phare."
               }
               img="/mascotte/temp.png"
               next="4"
@@ -474,6 +486,17 @@ export default function Enigme({
               cx={20}
               cy={17}
               text="Chaque phare contient 5 énigmes, 4 d'entre elles vous donneront le code du cadenas, et la dernière vous permettra de le déverrouiller. Une fois déverrouillé, le phare sera considéré comme complété. Et vous recevrez une récompense de 50 Beacoins. Bonne chance !"
+              img="/mascotte/temp.png"
+              next="0"
+            />
+          )}
+          {tips === "tipsF" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Pas assez de Beacoins"
+              cx={20}
+              cy={17}
+              text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
               img="/mascotte/temp.png"
               next="0"
             />

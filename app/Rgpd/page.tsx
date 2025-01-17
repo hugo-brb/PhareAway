@@ -209,8 +209,8 @@ export default function Rgpd() {
                     className=" hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer md:text-xl font-bold py-2 px-6 rounded-lg"
                   />
                   <p className=" text-[--accent] text-sm">
-                    * Toutes les conditions doivent-être validées pour pouvoir
-                    continuer l&apos;inscritption.
+                    * Toutes les conditions doivent être validées pour pouvoir
+                    continuer l&apos;inscription.
                   </p>
                 </div>
                 <div className=" flex justify-center items-center gap-2 md:text-base text-sm">
@@ -248,7 +248,16 @@ export default function Rgpd() {
                 une expérience de jeu en toute sérénité.
                 <br />
                 <br />
-                Pour plus d’informations, n’hésitez pas à consulter la liste de traitement de vos données <a href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing" target="_blank" className="text-[--primary]">ici</a>.
+                Pour plus d’informations, n’hésitez pas à consulter la liste de
+                traitement de vos données{" "}
+                <a
+                  href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing"
+                  target="_blank"
+                  className="text-[--primary]"
+                >
+                  ici
+                </a>
+                .
               </p>
               <button
                 onClick={handleFlipped}

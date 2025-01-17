@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { createClient } from "@supabase/supabase-js";
 
 import { UsePlayer } from "@/components/model/player";
+import { useLighthouse } from "../model/lighthouse";
 
 import ConfirmDelete from "@/components/popover/ConfirmDelete";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -23,6 +18,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   const [isModifiable, setIsModifiable] = useState(false);
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
   const [hoverLh, setHoverLh] = useState(false);
+  const lh = useLighthouse(1);
 
   // Gestion des états pour les champs du formulaire
   const [formValues, setFormValues] = useState({
@@ -38,7 +34,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (value.length >= 17) {
+    if (value.length >= 35) {
       setErrors(`Le ${name} est trop long.`);
     } else {
       setErrors("");
@@ -164,7 +160,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                   height={25}
                 />
                 <span>
-                  {player.getPhareended().length} / 7{}
+                  {player.getPhareended().length} / {lh.getNbPhare()}
                 </span>
               </div>
               <div

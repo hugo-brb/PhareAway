@@ -19,7 +19,7 @@ const SearchBar = () => {
   useEffect(() => {
     const fetchData = async () => {
       const currentDate = new Date().toISOString();
-      if (searchTerm) {
+      if (searchTerm && sortBy) {
         const { data: events, error: eventError } = await supabaseData
           .from("Event")
           .select("id, name, id_lighthouse")
@@ -67,12 +67,71 @@ const SearchBar = () => {
         setResults(uniqueData);
 
         setLoading(false);
-      } else if (searchTerm === "") {
+      } else if (searchTerm && !sortBy) {
+        const { data: events, error: eventError } = await supabaseData
+          .from("Event")
+          .select("id, name, id_lighthouse")
+          .gte("date", currentDate)
+          .ilike("name", `%${searchTerm}%`);
+
+        if (eventError) {
+          console.error("Error requête events:", eventError);
+        }
+
+        // Récupérer les données de la table lighthouse
+        const { data: lighthouses, error: lighthouseError } = await supabaseData
+          .from("Lighthouse")
+          .select("id, name")
+          .ilike("name", `%${searchTerm}%`);
+        console.log(lighthouses);
+
+        if (lighthouseError) {
+          console.error("Error requête lighthouses:", lighthouseError);
+        }
+
+        // Récupérer les ids des lighthouses
+        const lighthouseIdsFromLighthouses =
+          lighthouses?.map((lighthouse) => lighthouse.id) || [];
+
+        const { data: lighthouseId, error: lighthouseIdError } =
+          await supabaseData
+            .from("Event")
+            .select("id, name")
+            .gte("date", currentDate)
+            .in("id_lighthouse", lighthouseIdsFromLighthouses);
+
+        if (lighthouseIdError) {
+          console.error("Error requête lighthouseIdError:", lighthouseIdError);
+        }
+
+        // Combiner les données
+        const combinedData = [...(events || []), ...(lighthouseId || [])];
+
+        // Supprimer les doublons (par exemple, en utilisant un identifiant unique)
+        const uniqueData = Array.from(
+          new Map(combinedData.map((item) => [item.id, item])).values()
+        );
+        setResults(uniqueData);
+
+        setLoading(false);
+      } else if (searchTerm === "" && sortBy) {
         const { data, error } = await supabaseData
           .from("Event")
           .select("id, name")
           .gte("date", currentDate)
           .order(sortBy, { ascending: true }); // Utilisation de sortBy pour trier
+        if (error) {
+          console.error("Error fetching data:", error);
+        } else {
+          setResults(data);
+        }
+        setLoading(false);
+      } else if (searchTerm === "" && !sortBy) {
+        const { data, error } = await supabaseData
+          .from("Event")
+          .select("id, name")
+          .gte("date", currentDate);
+
         if (error) {
           console.error("Error fetching data:", error);
         } else {
@@ -142,7 +201,7 @@ const SearchBar = () => {
           <input
             type="text"
             className="md:w-96 h-10 px-3 ring-[--primary] ring-2 focus:ring-[--text] focus:outline-none rounded-lg"
-            placeholder="Rechercher un évènement/phare"
+            placeholder="Rechercher un évenement, un phare..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
