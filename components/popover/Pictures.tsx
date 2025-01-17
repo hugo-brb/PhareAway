@@ -207,7 +207,7 @@ export default function Pictures({
               cx={22}
               cy={12}
               text={
-                "Bravo tu viens d'uploader une image de phare, tu gagnes donc 50 beacoins 👍"
+                "Bravo vous venez d'upload une image de phare, tu gagnes donc 50 beacoins 👍"
               }
               img="/mascotte/temp.png"
               next="0"
