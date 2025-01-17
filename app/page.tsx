@@ -24,7 +24,7 @@ export default function LandingPage() {
   };
   return (
     <>
-      <main className="overflow-x-hidden flex flex-col justify-start text-[--background] md:py-7 px-2 md:px-7 w-[100vw] h-[100vh] max-w-[100vw] max-h-[100vh] overflow-hidden land">
+      <main className="flex flex-col justify-start text-[--background] md:py-7 px-2 md:px-7 w-[100vw] h-[100vh] max-w-[100vw] max-h-[100vh] overflow-hidden land">
         <div className=" self-center md:self-end flex gap-4">
           <Link href="/Login" className=" self-end">
             <button className=" w-36 md:w-44 py-2 px-4 text-lg md:text-xl font-bold rounded-3xl hover:bg-[--primary] border-b-2 border-[--primary] duration-300 ease-in-out">
@@ -37,7 +37,7 @@ export default function LandingPage() {
             </button>
           </Link>
         </div>
-        <div className="hidden md:block absolute top-[60%] left-2/3 ">
+        <div className="overflow-x-hidden hidden md:block absolute top-[60%] left-2/3 w-[33%]">
             <InfiniteCarousel items={itemsCarousel} speed={10} />
         </div>
         <div className=" flex flex-col justify-center items-center w-[100vw] h-[70vh] md:w-fit md:h-fit">
