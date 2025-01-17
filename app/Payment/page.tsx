@@ -1,19 +1,20 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { Suspense, useCallback } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   EmbeddedCheckoutProvider,
   EmbeddedCheckout,
 } from "@stripe/react-stripe-js";
 import Link from "next/link";
+import Image from "next/image";
 
 const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-export default function PaymentPage() {
+function PaymentPageContent() {
   const searchParams = useSearchParams();
   const price = searchParams.get("price"); // 🔹 Récupérer le prix
 
@@ -30,7 +31,7 @@ export default function PaymentPage() {
   const options = { fetchClientSecret };
 
   return (
-    <div id="checkout" className=" bg-white">
+    <div id="checkout" className=" bg-white scrollbarhidden">
       <Link href="/Home" className=" absolute top-0 left-0 px-7 py-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -44,6 +45,28 @@ export default function PaymentPage() {
       <EmbeddedCheckoutProvider stripe={stripePromise} options={options}>
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>
+      <Image
+        src="/icones/logoBaniere.png"
+        alt="Logo PhareAway"
+        width={350}
+        height={350}
+        className=" absolute bottom-[20vh] left-[20vw] hidden md:block"
+      />
+      <Image
+        src="/icones/logoBaniere.png"
+        alt="Logo PhareAway"
+        width={100}
+        height={100}
+        className=" absolute top-[10vh] right-[5vw] md:hidden"
+      />
     </div>
+  );
+}
+
+export default function PaymentPage() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <PaymentPageContent />
+    </Suspense>
   );
 }

@@ -31,6 +31,7 @@ interface itemProps {
   name: string;
   url: string;
   enigme: boolean;
+  description: string;
 }
 
 // Dynamically import the Map component without server-side rendering (SSR)
@@ -84,7 +85,7 @@ export default function Home() {
       try {
         const { data, error } = await supabaseData
           .from("Lighthouse")
-          .select("coordinates, name, url, id, enigme");
+          .select("coordinates, name, url, id, enigme, description");
         if (error) {
           console.error("Erreur de chargement des données Supabase:", error);
           return;
@@ -100,6 +101,7 @@ export default function Home() {
             : "/icones/lightHouseIcon.svg",
           lien: item.url,
           enigme: item.enigme,
+          descriptionTag: item.description,
         }));
 
         setMarkers(formattedMarkers);
@@ -128,7 +130,9 @@ export default function Home() {
     setTips(a);
   };
 
-  onload = () => handleClickTips("start");
+  useEffect(() => {
+    handleClickTips("start");
+  }, []);
 
   return (
     <>
@@ -164,7 +168,7 @@ export default function Home() {
         <Store handleClickActive={handleClickActive} player={player} />
       )}
       {active === "picture" && (
-        <Pictures handleClickActive={handleClickActive} player={player} />
+        <Pictures handleClickActive={handleClickActive} player={player} handleClickTips={handleClickTips}/>
       )}
       {active === "enigme" && (
         <Enigme
