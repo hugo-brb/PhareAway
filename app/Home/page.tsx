@@ -209,7 +209,7 @@ export default function Home() {
           title="Bienvenue sur Phare Away !"
           cx={30}
           cy={20}
-          text={`Salut à toi jeune moussaillon ! Je m'appelle 'nom badass de mascotte', et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourra me demandé de t'aider à progresser. Pour ça, il te suffit de cliquer sur le bouton d'information en haut à droite. Bonne chance !`}
+          text={`Salut à toi, jeune moussaillon ! Je m'appelle 'nom badass de mascotte' et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me demander de t'aider à progresser. Pour cela, il te suffit de cliquer sur le bouton d'information en haut à droite. Bonne chance !`}
           img="/mascotte/temp.png"
           next="0"
         />
@@ -220,7 +220,7 @@ export default function Home() {
           title="Page principale"
           cx={30}
           cy={20}
-          text={`Bienvenue sur la page principale, c'est depuis cet endroit que tu pourra accéder à toutes les fonctionnalités du site. Tu pourra notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et bien d'autres choses encore.`}
+          text={`Bienvenue sur la page principale, c'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
           img="/mascotte/temp.png"
           next="2"
         />
@@ -231,7 +231,7 @@ export default function Home() {
           title="Barre de navigation"
           cx={10}
           cy={20}
-          text={`Vous pouvez utilisé la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
+          text={`Vous pouvez utiliser la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
           img="/mascotte/temp.png"
           next="3"
         />
@@ -242,7 +242,7 @@ export default function Home() {
           title="Phares"
           cx={30}
           cy={20}
-          text={`La carte est composée de plusieurs phares, ceux disposants d'une enigme sont plus gros et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant, et de suivre les instructions. Une fois l'énigme résolue, tu gagnera des Beacoins.`}
+          text={`La carte est composée de plusieurs phares, ceux disposant d'une énigme sont plus gros et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des Beacoins.`}
           img="/mascotte/temp.png"
           next="4"
         />
@@ -253,7 +253,7 @@ export default function Home() {
           title="Beacoins"
           cx={60}
           cy={5}
-          text={`Les Beacoins sont la monnaie du jeu, vous en gagnez en résolvant des énigmes, en partageant des photos, ou en achetant des packs dans la boutique. Vous pouvez les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Cliquez sur votre nombre de Beacoins ouvre également la boutique)`}
+          text={`Les Beacoins sont la monnaie du jeu, vous en gagnez en résolvant des énigmes, en partageant des photos ou en achetant des packs dans la boutique. Vous pouvez les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Cliquez sur votre nombre de Beacoins ouvre également la boutique)`}
           img="/mascotte/temp.png"
           next="5"
         />
@@ -275,7 +275,7 @@ export default function Home() {
           title="Fin"
           cx={30}
           cy={20}
-          text={`Vous savez tout ! Plus qu'à dévouvrir des incroyables phares et résoudre des énigmes. N'hésitez pas à me re-demander de l'aide si vous êtes bloqué. Bonne chance !`}
+          text={`Vous savez tout ! Plus qu'à découvrir des incroyables phares et à résoudre des énigmes. N'hésitez pas à me redemander de l'aide si vous êtes bloqué. Bonne chance !`}
           img="/mascotte/temp.png"
           next="0"
         />
