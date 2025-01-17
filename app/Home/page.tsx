@@ -205,7 +205,7 @@ export default function Home() {
         className="hidden md:block absolute z-50 bottom-3 right-3 "
       />
       <button
-        className="absolute top-5 left-5 mt-[100px]"
+        className="absolute md:top-5 md:left-[70px] left-5 top-3 mt-[100px] fill-white opacity-90 bg-[--primary] rounded-full"
         onClick={() => handleClickTips("1")}
       >
         <svg

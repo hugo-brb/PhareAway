@@ -78,7 +78,7 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
               height={24}
             />
           </button>
-          <h1 className=" font-gravitas self-center text-4xl md:text-7xl">
+          <h1 className="font-ouroboros self-center text-4xl md:text-7xl">
             PharAchat
           </h1>
           <div className=" flex flex-col">
