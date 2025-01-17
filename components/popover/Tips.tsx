@@ -27,8 +27,9 @@ export default function Tips({
         maxWidth: "600px",
         left: `${cx}vw`,
         top: `${cy}vw`,
-        transform: "translate(-50%, -50%)",
+        transform: "none",
         ...(window.innerWidth < 768 && {
+          transform: "translate(-50%, -50%)",
           left: "50%",
           top: "50%",
           width: "90%",
