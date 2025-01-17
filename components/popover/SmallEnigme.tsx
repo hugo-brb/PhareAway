@@ -40,6 +40,15 @@ export default function SmallEnigme({
     setPopupA(a);
   };
 
+  const normalizeString = (str: string) => {
+    return str
+      .toLowerCase() // Convertir tout en minuscules
+      .trim() // Supprimer les espaces avant et après
+      .normalize("NFD") // Décomposer les caractères accentués (ex: é -> é)
+      .replace(/[\u0300-\u036f]/g, "") // Supprimer les accents
+      .replace(/[^a-z0-9]/gi, ""); // Supprimer tout caractère spécial (ex: tiret, virgule)
+  };
+
   return (
     <section
       className={`absolute left-4 top-4 md:left-[44vw] md:top-[20vw] z-50 w-[90%] h-[90%] md:w-[20vw] md:h-[15vw] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
@@ -130,7 +139,7 @@ export default function SmallEnigme({
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
             const input = document.querySelector("input") as HTMLInputElement;
-            if (input.value === answer) {
+            if (normalizeString(input.value) === normalizeString(answer)) {
               if (id === "5") {
                 const phareEnded: number[] = player.getPhareended();
                 if (!phareEnded.includes(lh)) {
