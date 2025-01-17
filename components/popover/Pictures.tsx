@@ -19,12 +19,15 @@ interface VisionResponse {
   }>;
 }
 
-export default function Pictures({ handleClickActive, player,handleClickTips }: MenuProps) {
+export default function Pictures({
+  handleClickActive,
+  player,
+  handleClickTips,
+}: MenuProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null); // Nouvel état pour l'aperçu de l'image
   const [valide, setValide] = useState<boolean | null>(null);
-
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -32,16 +35,33 @@ export default function Pictures({ handleClickActive, player,handleClickTips }: 
     const lastUploadTime = localStorage.getItem("lastUploadTime");
     const now = Date.now();
 
-    if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 60 * 1000) {
-      const remainingTime = 30 * 60 * 1000 - (now - parseInt(lastUploadTime));
-      const minutes = Math.floor(remainingTime / (60 * 1000));
-      const seconds = Math.floor((remainingTime % (60 * 1000)) / 1000);
+    if (
+      lastUploadTime &&
+      now - parseInt(lastUploadTime) < 24 * 60 * 60 * 1000
+    ) {
+      const remainingTime =
+        24 * 60 * 60 * 1000 - (now - parseInt(lastUploadTime));
+      const hours = Math.floor(remainingTime / (60 * 60 * 1000));
+      const minutes = Math.floor(
+        (remainingTime % (60 * 60 * 1000)) / (60 * 1000)
+      );
 
       setError(
-        `Veuillez patienter encore ${minutes} minute(s) et ${seconds} seconde(s) avant de téléverser une nouvelle image.`
+        `Vous devez attendre encore ${hours} heure(s) et ${minutes} minute(s) avant de pouvoir téléverser une nouvelle image.`
       );
       return;
     }
+
+    // Vérifie si l'utilisateur a déjà importé une image dans les 30 dernières secondes
+    /*if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 1000) {
+      const remainingTime = 30 * 1000 - (now - parseInt(lastUploadTime));
+      const seconds = Math.floor(remainingTime / 1000);
+
+      setError(
+        `Veuillez patienter encore ${seconds} seconde(s) avant de pouvoir téléverser une nouvelle image.`
+      );
+      return;
+    }*/
 
     const file = event.target.files?.[0];
     if (!file) return;
@@ -51,6 +71,7 @@ export default function Pictures({ handleClickActive, player,handleClickTips }: 
 
     try {
       const base64Image = await convertToBase64(file);
+      console.log(base64Image);
       setImagePreview(base64Image); // Met à jour l'aperçu de l'image
       const isLighthouse = await analyzeImageWithVisionAPI(base64Image);
 
@@ -157,16 +178,20 @@ export default function Pictures({ handleClickActive, player,handleClickTips }: 
                 src={imagePreview}
                 alt="Aperçu de l'image"
                 className="max-w-full h-auto rounded-lg"
+                width={700}
+                height={700}
               />
             </div>
           )}
-            {valide && (
+          {valide && (
             <Tips
               handleClickTips={handleClickTips}
               title="Validation de l'image"
               cx={22}
               cy={12}
-              text={"Bravo tu viens d'uploader une image de phare, tu gagnes donc 50 beacoins 👍"}
+              text={
+                "Bravo tu viens d'uploader une image de phare, tu gagnes donc 50 beacoins 👍"
+              }
               img="/mascotte/temp.png"
               next="0"
             />
