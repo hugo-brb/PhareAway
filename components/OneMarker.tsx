@@ -39,13 +39,15 @@ const Marker: React.FC<MarkerProps> = ({
           setIsImageLoaded(false); // L'image n'existe pas
           setImageSrc("/icones/logoBaniere.png");
         }
-      } catch {
+      } catch (err) {
+        console.error("This image hasn't been set yet:", err);
         setIsImageLoaded(false); // En cas d'erreur réseau ou autre
         setImageSrc("/icones/logoBaniere.png");
       }
     };
     checkImage();
   }, [imageSrc]); // Re-vérifie chaque fois que l'URL change
+
   useEffect(() => {
     const fetchWikiSummary = async () => {
       if (descriptionTag != "null") {
@@ -54,7 +56,8 @@ const Marker: React.FC<MarkerProps> = ({
             `https://fr.wikipedia.org/api/rest_v1/page/summary/${descriptionTag}`
           );
           if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
+            setError(`Error: ${response.statusText}`);
+            return;
           }
           const data = await response.json();
           setSummary(data.extract);
