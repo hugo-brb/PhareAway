@@ -10,6 +10,44 @@
   --accent: #fa7f46;
 }
 
+/* Carousel.css */
+.carousel-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%; /* Adjust width of the carousel */
+    position: relative;
+  }
+  
+  .carousel-content {
+    display: flex;
+    align-items: center;
+  }
+  
+  .carousel-item {
+    flex: 0 0 auto; /* Prevent shrinking or growing */
+    margin: 0 10px;
+    padding: 10px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    text-align: center;
+    min-width: 200px; /* Adjust based on item size */
+    cursor: pointer;
+  }
+  
+  .carousel-item:hover {
+    background: #e0e0e0;
+  }
+  
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-100%);
+    }
+  }
+  
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #f8f8ff;

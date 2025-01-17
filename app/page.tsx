@@ -4,10 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import CGU from "@/components/popover/CGU-Acceuil"; // Ensure this component exists and handles the display of CGU
+import InfiniteCarousel from '@/components/Carousel';
 
 export default function LandingPage() {
   const [isCGUOpen, setIsCGUOpen] = useState(false);
-
+  const itemsCarousel = [   'https://nereoll.github.io/imagesPhare/carousel/metropoleExemple.png',
+                            'https://nereoll.github.io/imagesPhare/carousel/enigmeExemple.png',
+                            'https://nereoll.github.io/imagesPhare/carousel/eventExemple.png',
+                            'https://nereoll.github.io/imagesPhare/carousel/extensionExemple.png',
+                         ];
   const handleClickActive = (action: string) => {
     if (action === "close") {
       setIsCGUOpen(false); // Ferme le modal si l'action est "close"
@@ -32,7 +37,9 @@ export default function LandingPage() {
             </button>
           </Link>
         </div>
-
+        <div className="hidden md:block absolute top-1/2 -translate-y-1/2 left-1/2 w-[50%] m-auto ">
+            <InfiniteCarousel items={itemsCarousel} speed={10} />
+        </div>
         <div className=" flex flex-col justify-center items-center w-[100vw] h-[70vh] md:w-fit md:h-fit">
           <h1 className=" text-7xl md:text-8xl font-ouroboros md:ml-12 mt-8 self-start text-[--accent]">
             Phare <br /> <span className=" ml-8">Away</span>
@@ -40,7 +47,7 @@ export default function LandingPage() {
           <p className=" max-w-[95vw] md:max-w-[30vw] md:text-center text-xl font-semibold mt-5">
             Découvrez <b> PhareAway </b>: une aventure captivante à travers de
             petits escape games qui vous plongent dans l’univers fascinant des
-            phares ! Explorez leurs mystères, relevez des défis et laissez-vous
+            phares de France ! Explorez leurs mystères, relevez des défis et laissez-vous
             émerveiller par ces gardiens de lumière. 🌟
           </p>
           <Link href="/Rgpd" className="mt-5">
