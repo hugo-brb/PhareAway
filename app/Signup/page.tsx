@@ -27,7 +27,6 @@ export default function Signup() {
         setErrorsPseudo(true);
       }
       setErrors(true);
-
     } else {
       if (name === "nom") {
         setErrorsNom(false);
@@ -54,21 +53,18 @@ export default function Signup() {
     if (email && !/\S+@\S+\.\S+/.test(email)) {
       setErrorsEmail(true);
       setErrors(true);
-
     } else {
       setErrorsEmail(false);
     }
     if (password !== passwordConfirm) {
       setErrorsEmail(true);
       setErrors(true);
-
     } else {
       setErrorsMdp(false);
     }
     if (password && password.length < 8) {
       setErrorsMdpCourt(true);
       setErrors(true);
-
     } else {
       setErrorsMdp(false);
     }
@@ -96,13 +92,14 @@ export default function Signup() {
   return (
     <>
       <main className="land flex justify-center items-center w-[100vw] h-[100vh] max-h-[100vh]">
-        <Image
-          src="/icones/logoBaniere.png"
-          alt="Logo"
-          width={150}
-          height={150}
-          className="absolute top-2 left-2"
-        />
+        <Link href="/" className=" absolute top-2 left-2">
+          <Image
+            src="/icones/logoBaniere.png"
+            alt="Logo"
+            width={150}
+            height={150}
+          />
+        </Link>
         <section className="flex flex-col max-w-[95vw] max-h-[95vh] gap-7 bg-white bg-opacity-80 rounded-lg px-10 md:px-20 py-12 backdrop-blur-md overflow-y-scroll scrollbarhidden">
           <Link
             href="/Rgpd"
@@ -122,7 +119,6 @@ export default function Signup() {
             onSubmit={handleSubmit}
             className="flex flex-col gap-3 max-h-[90vh]"
           >
-
             <div className="flex flex-col md:flex-row md:justify-between justify-center md:items-center gap-2">
               <div className="flex flex-col gap-1 ">
                 <label htmlFor="nom" className="md:ml-2 text-base font-bold">
@@ -137,8 +133,10 @@ export default function Signup() {
                   placeholder="Soleil"
                   required
                 />
-                <p className="text-red-500">{errorNom ? "Le nom est trop long." : null}</p>
-                {/** 
+                <p className="text-red-500">
+                  {errorNom ? "Le nom est trop long." : null}
+                </p>
+                {/**
                  * <p className="text-green-500">  {!errorNom ? "Le nom est valide." : null} </p>
                  */}
               </div>
@@ -155,12 +153,13 @@ export default function Signup() {
                   placeholder="François"
                   required
                 />
-                <p className="text-red-500">{errorPrenom ? "Le pseudo est trop long." : null}</p>
+                <p className="text-red-500">
+                  {errorPrenom ? "Le pseudo est trop long." : null}
+                </p>
                 {/**
                  * <p className="text-green-500">  {!errorPrenom ? "Le pseudo est valide." : null} </p>
                  */}
               </div>
-
             </div>
             <div className="flex flex-col gap-1 ">
               <label htmlFor="user" className="ml-2 text-base font-bold">
@@ -175,11 +174,13 @@ export default function Signup() {
                 placeholder="Pharaon"
                 required
               />
-              <p className="text-red-500">{errorPseudo ? "Le pseudo est trop long." : null}</p>
+              <p className="text-red-500">
+                {errorPseudo ? "Le pseudo est trop long." : null}
+              </p>
               {/**
                * <p className="text-green-500">  {!errorPseudo ? "Le pseudo est valide." : null} </p>
-              */}
-               </div>
+               */}
+            </div>
 
             <div className="flex flex-col gap-1 ">
               <label htmlFor="email" className="ml-2 text-base font-bold">
@@ -193,7 +194,9 @@ export default function Signup() {
                 placeholder="phareaway@lighthouse.fr"
                 required
               />
-              <p className="text-red-500">{errorEmail ? "Le mail est invalide." : null}</p>
+              <p className="text-red-500">
+                {errorEmail ? "Le mail est invalide." : null}
+              </p>
               {/**
                * <p className="text-green-500">  {!errorEmail ? "Le mail est valide." : null} </p>
                */}
@@ -211,10 +214,17 @@ export default function Signup() {
                 placeholder="Jaimelesphares38"
                 required
               />
-              <p className="text-red-500">  {errorMdpCourt ? "Le mot de passe doit contenir au moins 8 caractères." : errorMdp ? "Les mots de passe ne correspondent pas." : null} </p>
-              {/** 
-              * <p className="text-green-500">  {!errorMdpCourt && !errorMdp ? "Le mot de passe est valide." : null} </p>
-                */}
+              <p className="text-red-500">
+                {" "}
+                {errorMdpCourt
+                  ? "Le mot de passe doit contenir au moins 8 caractères."
+                  : errorMdp
+                  ? "Les mots de passe ne correspondent pas."
+                  : null}{" "}
+              </p>
+              {/**
+               * <p className="text-green-500">  {!errorMdpCourt && !errorMdp ? "Le mot de passe est valide." : null} </p>
+               */}
             </div>
 
             <div className="flex flex-col gap-1">
@@ -246,7 +256,12 @@ export default function Signup() {
               </Link>
             </div>
           </form>
-          <p className="text-red-500">  {errorPseudo ? "Une erreur est survenue lors de l'inscription." : null} </p>
+          <p className="text-red-500">
+            {" "}
+            {errorPseudo
+              ? "Une erreur est survenue lors de l'inscription."
+              : null}{" "}
+          </p>
         </section>
       </main>
     </>

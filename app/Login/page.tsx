@@ -46,13 +46,15 @@ export default function Login() {
   };
   return (
     <main className="land flex justify-center items-center w-[100vw] h-[100vh]">
-      <Image
-        src="/icones/logoBaniere.png"
-        alt="Logo"
-        width={150}
-        height={150}
-        className=" absolute top-2 left-2"
-      />
+      <Link href="/" className=" absolute top-2 left-2">
+        <Image
+          src="/icones/logoBaniere.png"
+          alt="Logo"
+          width={150}
+          height={150}
+        />
+      </Link>
+
       <section className="flex flex-col max-w-[95vw] max-h-[95vh] gap-7 md:gap-12 bg-white bg-opacity-80 rounded-lg px-12 md:px-20 py-12 backdrop-blur-md">
         <Link href="/" className="absolute top-5 left-5">
           <Image

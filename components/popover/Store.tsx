@@ -87,7 +87,11 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
               <div className=" flex ml-2 md:ml-7 justify-around">
                 {/*Affichage de tout les Offres de Beacoin*/}
                 {beacoins.map((beacoin) => (
-                  <OneBeacoin key={beacoin.id} id_beacoin={beacoin.id} />
+                  <OneBeacoin
+                    key={beacoin.id}
+                    id_beacoin={beacoin.id}
+                    player={player}
+                  />
                 ))}
               </div>
             </div>
