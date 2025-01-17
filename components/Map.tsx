@@ -65,7 +65,7 @@ const Map: React.FC<MapComponentProps> = ({
   useEffect(() => {
     if (mapInstance.current) {
       mapInstance.current.flyTo({ center });
-      mapInstance.current.setMaxBounds(bounds)
+      mapInstance.current.setMaxBounds(bounds);
     }
   }, [center]);
 
@@ -75,7 +75,16 @@ const Map: React.FC<MapComponentProps> = ({
       const markersOnMap: mapboxgl.Marker[] = [];
 
       markers.forEach(
-        ({ id, longitude, latitude, popupText, icone, lien, enigme, descriptionTag }) => {
+        ({
+          id,
+          longitude,
+          latitude,
+          popupText,
+          icone,
+          lien,
+          enigme,
+          descriptionTag,
+        }) => {
           const markerElement = document.createElement("div");
           markerElement.style.backgroundImage = `url("${icone}")`;
           markerElement.style.width = enigme ? "50px" : "30px";

@@ -32,11 +32,16 @@ const Marker: React.FC<MarkerProps> = ({
     // Vérifie si l'image est disponible ou non
     const checkImage = async () => {
       try {
-        const response = await fetch(imageSrc);
-        if (response.ok) {
-          setIsImageLoaded(true); // L'image existe
+        if (enigme) {
+          const response = await fetch(imageSrc);
+          if (response.ok) {
+            setIsImageLoaded(true); // L'image existe
+          } else {
+            setIsImageLoaded(false); // L'image n'existe pas
+            setImageSrc("/icones/logoBaniere.png");
+          }
         } else {
-          setIsImageLoaded(false); // L'image n'existe pas
+          setIsImageLoaded(false); // L'image existe
           setImageSrc("/icones/logoBaniere.png");
         }
       } catch (err) {
@@ -83,7 +88,6 @@ const Marker: React.FC<MarkerProps> = ({
             height={200}
           />
         )}
-        {isImageLoaded === false && <p>Image par défaut chargée.</p>}
         {error ? <p>{error}</p> : <p>{summary}</p>}
         <a href={lien} target="_blank" className="text-cyan-700">
           Lien vers le site du phare
