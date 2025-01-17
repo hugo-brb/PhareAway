@@ -1,11 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
+import { createClient } from "@supabase/supabase-js";
 
 import { UsePlayer } from "@/components/model/player";
 
 import ConfirmDelete from "@/components/popover/ConfirmDelete";
+
+const supabaseData = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -28,13 +34,47 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   });
 
   const [originalValues, setOriginalValues] = useState({ ...formValues });
+  const [errors, setErrors] = useState<string>("");
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormValues((prev) => ({ ...prev, [name]: value }));
+    if (value.length >= 17) {
+      setErrors(`Le ${name} est trop long.`);
+    } else {
+      setErrors("");
+      setFormValues((prev) => ({ ...prev, [name]: value }));
+    }
+
   };
 
+  {/** 
+  const numberLighthouse = async () => {
+    const { data, error: eventError } = await supabaseData
+      .from("Enigme")
+      .select("idEnigme")
+      .ilike("idEnigme", "5");
+       console.log("Jaja", data);
+    if (eventError) {
+      console.error("Error requête events:", eventError);
+      return null; // Retourner null ou une valeur par défaut en cas d'erreur
+    }
+    return data;
+  };
+  
+  // Utilisation de la fonction dans un contexte asynchrone
+  const getNumberLighthouse = () => {
+
+    useEffect(() => {
+      const nbLh = await numberLighthouse();
+      console.log("Jaja", nbLh);
+  
+    }, []);
+
+  };
+  */}
+
   const handleToggleEdit = async () => {
+
     if (isModifiable) {
       // Enregistrer les modifications dans l'objet `player`
       player.setNom(formValues.nom);
@@ -48,14 +88,12 @@ export default function Account({ handleClickActive, player }: MenuProps) {
         }
       }
     } else {
-      // Sauvegarder les valeurs actuelles avant modification
       setOriginalValues({ ...formValues });
     }
     setIsModifiable((prev) => !prev); // Alterne entre modification et validation
   };
 
   const handleCancel = () => {
-    // Rétablir les valeurs d'origine
     setFormValues({ ...originalValues });
     setIsModifiable(false);
   };
@@ -106,10 +144,12 @@ export default function Account({ handleClickActive, player }: MenuProps) {
             height={200}
             className="rounded-full hidden md:block"
           />
+
           <div className="flex flex-col gap-2">
-            <h1 className="font-extrabold text-5xl">
+          <h1 className="font-extrabold text-5xl">
               {formValues.nom} {formValues.prenom}
             </h1>
+            
             <h2 className="text-lg">{formValues.mail}</h2>
             <div
               onMouseEnter={handleHoverLhEnter}
@@ -124,7 +164,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                   height={25}
                 />
                 <span>
-                  {player.getPhareended().length} / 5{}
+                  {player.getPhareended().length} / 7{}
                 </span>
               </div>
               <div
@@ -247,6 +287,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
             </>
           )}
         </form>
+        {errors !== "" && <p className="text-red-600 text-center">{errors}</p>}
         <div className="flex flex-col gap-6 mt-7">
           {/* Annuler / Modifier */}
           <div className="flex justify-center gap-4">
