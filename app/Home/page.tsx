@@ -24,6 +24,7 @@ import { redirect } from "next/navigation";
 import DlcList from "@/components/DlcList";
 import Tips from "@/components/popover/Tips";
 import AudioPlayer from "@/components/AudioPlayer";
+import Legend from "@/components/Legend";
 
 interface itemProps {
   id: number;
@@ -168,7 +169,11 @@ export default function Home() {
         <Store handleClickActive={handleClickActive} player={player} />
       )}
       {active === "picture" && (
-        <Pictures handleClickActive={handleClickActive} player={player} handleClickTips={handleClickTips}/>
+        <Pictures
+          handleClickActive={handleClickActive}
+          player={player}
+          handleClickTips={handleClickTips}
+        />
       )}
       {active === "enigme" && (
         <Enigme
@@ -187,6 +192,7 @@ export default function Home() {
       )}
       <BackHome />
       <Coin handleClickActive={handleClickActive} player={player} />
+      <Legend />
       <Image
         src="/images/soupex.png"
         width={75}
