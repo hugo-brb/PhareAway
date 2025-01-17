@@ -151,7 +151,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           {error && <p className="text-red-500">{error}</p>}
           {imagePreview && ( // Affiche l'image téléchargée
             <div className="mt-5">
-              <img
+              <Image
                 src={imagePreview}
                 alt="Aperçu de l'image"
                 className="max-w-full h-auto rounded-lg"

@@ -25,7 +25,7 @@ const Marker: React.FC<MarkerProps> = ({
     `https://nereoll.github.io/imagesPhare/phares/${id}.png`
   );
   const [isImageLoaded, setIsImageLoaded] = useState<boolean | null>(null); // `true` si succès, `false` si échec
-  const [summary, setSummary] = useState('');
+  const [summary, setSummary] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -48,18 +48,21 @@ const Marker: React.FC<MarkerProps> = ({
   }, [imageSrc]); // Re-vérifie chaque fois que l'URL change
   useEffect(() => {
     const fetchWikiSummary = async () => {
-        if (descriptionTag!="null"){
-            try {
-                const response = await fetch(`https://fr.wikipedia.org/api/rest_v1/page/summary/${descriptionTag}`);
-                if (!response.ok) {
-                throw new Error(`Error: ${response.statusText}`);
-                }
-                const data = await response.json();
-                setSummary(data.extract);
-            } catch (err) {
-                setError('Ce phare ne possède pas de description sur Wikipédia.');
-            }
+      if (descriptionTag != "null") {
+        try {
+          const response = await fetch(
+            `https://fr.wikipedia.org/api/rest_v1/page/summary/${descriptionTag}`
+          );
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+          const data = await response.json();
+          setSummary(data.extract);
+        } catch (err) {
+          setError("Ce phare ne possède pas de description sur Wikipédia.");
+          console.error(err);
         }
+      }
     };
     fetchWikiSummary();
   }, [descriptionTag]);

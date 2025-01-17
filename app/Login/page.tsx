@@ -39,6 +39,7 @@ export default function Login() {
       }
     } catch (err) {
       setError("Une erreur est survenue lors de la connexion");
+      console.error(err);
     } finally {
       setLoading(false);
     }
