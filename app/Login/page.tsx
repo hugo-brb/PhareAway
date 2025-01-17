@@ -4,31 +4,44 @@
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { signIn } from "next-auth/react";
-import { FormEvent, useEffect } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import { redirect } from "next/navigation";
 
 export default function Login() {
-  console.log("Login chargé");
   const { data: session } = useSession();
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     if (session !== null) {
       console.log("Session existante -> Redirection en cours)");
       redirect("/Home");
     }
-  }, []);
+  }, [session]);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    console.log("Pas de session -> Création en cours");
     e.preventDefault();
+    setError("");
+    setLoading(true);
+
     const formData = new FormData(e.currentTarget);
-    console.log("Form data:", formData);
-    signIn("credentials", {
-      email: formData.get("email") as string,
-      password: formData.get("password") as string,
-      redirect: true,
-    });
+
+    try {
+      const result = await signIn("credentials", {
+        email: formData.get("email") as string,
+        password: formData.get("password") as string,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError("Email ou mot de passe incorrect");
+      }
+    } catch (err) {
+      setError("Une erreur est survenue lors de la connexion");
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <main className="land flex justify-center items-center w-[100vw] h-[100vh]">
@@ -49,6 +62,11 @@ export default function Login() {
           />
         </Link>
         <h1 className="font-ouroboros text-4xl self-center">Connexion</h1>
+        {error && (
+          <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+            {error}
+          </div>
+        )}
         <form
           onSubmit={handleSubmit}
           method="POST"
@@ -83,9 +101,12 @@ export default function Login() {
           <div className="w-full flex flex-col gap-1">
             <button
               type="submit"
-              className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg"
+              disabled={loading}
+              className={`hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              C&apos;est Phar&apos;ti !
+              {loading ? "Connexion..." : "C'est Phar'ti !"}
             </button>
           </div>
 
