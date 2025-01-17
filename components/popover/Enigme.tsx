@@ -447,7 +447,7 @@ export default function Enigme({
               cx={11}
               cy={20}
               text={
-                "Des zones cliquables sont présentes sur l'image, et contiennent une petite devinette en rapport avec le lieu et le phare, essayé de les trouver !"
+                "Des zones cliquables sont présentes sur l'image et contiennent une petite devinette en rapport avec le lieu et le phare. Essayez de les trouver !"
               }
               img="/mascotte/temp.png"
               next="3"
@@ -460,7 +460,7 @@ export default function Enigme({
               cx={45}
               cy={5}
               text={
-                "Pour vous aidez, vous pouvez acheter des indices, qui vous reveleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins, et vous les perdez si vous quittez le phare."
+                "Pour vous aider, vous pouvez acheter des indices qui vous révèleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins et vous les perdez si vous quittez le phare."
               }
               img="/mascotte/temp.png"
               next="4"
