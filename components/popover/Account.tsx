@@ -192,7 +192,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 512 512"
               onClick={handleSignOut}
-              className={`fill-[--text] size-7 md:size-12 ${
+              className={`fill-[--text] size-7 md:size-10 ${
                 isModifiable
                   ? "opacity-20 cursor-default"
                   : "opacity-100 cursor-pointer"

@@ -13,6 +13,7 @@
 /* Carousel.css */
 .carousel-container {
     overflow: hidden;
+    overflow-x: hidden;
     white-space: nowrap;
     width: 100%; /* Adjust width of the carousel */
     position: relative;
@@ -27,8 +28,7 @@
     flex: 0 0 auto; /* Prevent shrinking or growing */
     margin: 0 10px;
     padding: 10px;
-    background: #f0f0f0;
-    border: 1px solid #ddd;
+    background: none;
     text-align: center;
     min-width: 200px; /* Adjust based on item size */
     cursor: pointer;
