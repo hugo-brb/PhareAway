@@ -175,7 +175,7 @@ const SearchBar = () => {
         <div>
           <button
             onClick={handleTrie}
-            className="flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base"
+            className="hover:text-black hover:fill-black fill-white text-white flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-base"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
