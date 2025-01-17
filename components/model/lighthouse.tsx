@@ -14,6 +14,7 @@ export type UseLighthouse = {
   getDescription: () => string;
   getCoordinates: () => string;
   getUrl: () => string;
+  getNbPhare: () => number;
 };
 
 //Définition des attributs de la classe Lighthouse
@@ -23,6 +24,7 @@ interface LighthouseData {
   description: string;
   coordinates: string;
   url: string;
+  nbPhare: number;
 }
 
 //Constructeur de la classe Lighthouse
@@ -34,6 +36,7 @@ export function useLighthouse(id: number) {
     description: "",
     coordinates: "",
     url: "",
+    nbPhare: 0,
   });
 
   useEffect(() => {
@@ -54,8 +57,19 @@ export function useLighthouse(id: number) {
               description: request.data.description || "",
               coordinates: request.data.description || "",
               url: request.data.url || "",
+              nbPhare: 0,
             });
           }
+        }
+        const nbPhare = await supabaseData
+          .from("Lighthouse")
+          .select()
+          .eq("enigme", true);
+        if (nbPhare.data && nbPhare.data.length > 0) {
+          setLighthouseData((prevState) => ({
+            ...prevState,
+            nbPhare: nbPhare.data.length,
+          }));
         }
       } catch (e) {
         console.error("Erreur lors de la récupération des données", e);
@@ -72,6 +86,7 @@ export function useLighthouse(id: number) {
     getDescription: () => lighthouseData.description,
     getCoordinates: () => lighthouseData.coordinates,
     getUrl: () => lighthouseData.url,
+    getNbPhare: () => lighthouseData.nbPhare,
   };
   return { lighthouseData, ...methods };
 }
