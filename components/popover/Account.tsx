@@ -1,17 +1,12 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
-import { createClient } from "@supabase/supabase-js";
 
 import { UsePlayer } from "@/components/model/player";
+import { useLighthouse } from "../model/lighthouse";
 
 import ConfirmDelete from "@/components/popover/ConfirmDelete";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -23,6 +18,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   const [isModifiable, setIsModifiable] = useState(false);
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
   const [hoverLh, setHoverLh] = useState(false);
+  const lh = useLighthouse(1);
 
   // Gestion des états pour les champs du formulaire
   const [formValues, setFormValues] = useState({
@@ -44,37 +40,9 @@ export default function Account({ handleClickActive, player }: MenuProps) {
       setErrors("");
       setFormValues((prev) => ({ ...prev, [name]: value }));
     }
-
   };
-
-  {/** 
-  const numberLighthouse = async () => {
-    const { data, error: eventError } = await supabaseData
-      .from("Enigme")
-      .select("idEnigme")
-      .ilike("idEnigme", "5");
-       console.log("Jaja", data);
-    if (eventError) {
-      console.error("Error requête events:", eventError);
-      return null; // Retourner null ou une valeur par défaut en cas d'erreur
-    }
-    return data;
-  };
-  
-  // Utilisation de la fonction dans un contexte asynchrone
-  const getNumberLighthouse = () => {
-
-    useEffect(() => {
-      const nbLh = await numberLighthouse();
-      console.log("Jaja", nbLh);
-  
-    }, []);
-
-  };
-  */}
 
   const handleToggleEdit = async () => {
-
     if (isModifiable) {
       // Enregistrer les modifications dans l'objet `player`
       player.setNom(formValues.nom);
@@ -146,10 +114,10 @@ export default function Account({ handleClickActive, player }: MenuProps) {
           />
 
           <div className="flex flex-col gap-2">
-          <h1 className="font-extrabold text-5xl">
+            <h1 className="font-extrabold text-5xl">
               {formValues.nom} {formValues.prenom}
             </h1>
-            
+
             <h2 className="text-lg">{formValues.mail}</h2>
             <div
               onMouseEnter={handleHoverLhEnter}
@@ -164,7 +132,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                   height={25}
                 />
                 <span>
-                  {player.getPhareended().length} / 7{}
+                  {player.getPhareended().length} / {lh.getNbPhare()}
                 </span>
               </div>
               <div

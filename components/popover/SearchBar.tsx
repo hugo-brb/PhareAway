@@ -201,7 +201,7 @@ const SearchBar = () => {
           <input
             type="text"
             className="md:w-96 h-10 px-3 ring-[--primary] ring-2 focus:ring-[--text] focus:outline-none rounded-lg"
-            placeholder="Rechercher un évènement/phare"
+            placeholder="Rechercher un évènement, un phare..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
