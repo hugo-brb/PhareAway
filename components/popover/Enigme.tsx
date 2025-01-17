@@ -66,6 +66,8 @@ export default function Enigme({
     setTips(a);
   };
 
+  const [cadenas, setCadenas] = useState(Array<string>(4).fill("▯"));
+
   return (
     <>
       <main className=" absolute top-1/2 -translate-y-1/2 md:translate-y-0 md:top-0 z-40 flex w-[100vw] h-fit md:h-[100vh]">
@@ -168,6 +170,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme1.getanswerLock()}
                 coordX={enigme1.getcoordX()}
                 coordY={enigme1.getcoordY()}
@@ -184,6 +188,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme2.getanswerLock()}
                 coordX={enigme2.getcoordX()}
                 coordY={enigme2.getcoordY()}
@@ -200,6 +206,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme3.getanswerLock()}
                 coordX={enigme3.getcoordX()}
                 coordY={enigme3.getcoordY()}
@@ -216,6 +224,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme4.getanswerLock()}
                 coordX={enigme4.getcoordX()}
                 coordY={enigme4.getcoordY()}
@@ -232,6 +242,8 @@ export default function Enigme({
                 id={popup}
                 player={player}
                 lh={id}
+                cadenas={cadenas}
+                setCadenas={setCadenas}
                 codeLock={enigme5.getanswerLock()}
                 coordX={enigme5.getcoordX()}
                 coordY={enigme5.getcoordY()}
