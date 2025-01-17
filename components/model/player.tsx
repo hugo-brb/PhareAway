@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
 import { useLighthouse } from "./lighthouse";
-import * as argon2 from "argon2";
 
 export type UsePlayer = {
   playerData: PlayerData;

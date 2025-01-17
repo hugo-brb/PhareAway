@@ -34,7 +34,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    if (value.length >= 17) {
+    if (value.length >= 35) {
       setErrors(`Le ${name} est trop long.`);
     } else {
       setErrors("");

@@ -17,6 +17,7 @@ type MapComponentProps = {
     icone?: string;
     lien?: string;
     enigme?: boolean;
+    descriptionTag?: string;
   }[];
   handleClickActive: (a: string) => void;
   handleClickActiveId: (id: number) => void;
@@ -74,7 +75,7 @@ const Map: React.FC<MapComponentProps> = ({
       const markersOnMap: mapboxgl.Marker[] = [];
 
       markers.forEach(
-        ({ id, longitude, latitude, popupText, icone, lien, enigme }) => {
+        ({ id, longitude, latitude, popupText, icone, lien, enigme, descriptionTag }) => {
           const markerElement = document.createElement("div");
           markerElement.style.backgroundImage = `url("${icone}")`;
           markerElement.style.width = enigme ? "50px" : "30px";
@@ -91,6 +92,7 @@ const Map: React.FC<MapComponentProps> = ({
               icone={icone}
               lien={lien}
               enigme={enigme}
+              descriptionTag={descriptionTag || ""}
               handleClickActive={handleClickActive}
               handleClickActiveId={handleClickActiveId}
             />

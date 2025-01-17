@@ -7,6 +7,7 @@ type MarkerProps = {
   icone?: string;
   lien?: string;
   enigme?: boolean;
+  descriptionTag: string;
   handleClickActive: (a: string) => void;
   handleClickActiveId: (id: number) => void;
 };
@@ -16,6 +17,7 @@ const Marker: React.FC<MarkerProps> = ({
   popupText,
   enigme,
   lien,
+  descriptionTag,
   handleClickActive,
   handleClickActiveId,
 }) => {
@@ -23,6 +25,8 @@ const Marker: React.FC<MarkerProps> = ({
     `https://nereoll.github.io/imagesPhare/phares/${id}.png`
   );
   const [isImageLoaded, setIsImageLoaded] = useState<boolean | null>(null); // `true` si succès, `false` si échec
+  const [summary, setSummary] = useState("");
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     // Vérifie si l'image est disponible ou non
@@ -40,18 +44,38 @@ const Marker: React.FC<MarkerProps> = ({
         setImageSrc("/icones/logoBaniere.png");
       }
     };
-
     checkImage();
   }, [imageSrc]); // Re-vérifie chaque fois que l'URL change
+  useEffect(() => {
+    const fetchWikiSummary = async () => {
+      if (descriptionTag != "null") {
+        try {
+          const response = await fetch(
+            `https://fr.wikipedia.org/api/rest_v1/page/summary/${descriptionTag}`
+          );
+          if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+          }
+          const data = await response.json();
+          setSummary(data.extract);
+        } catch (err) {
+          setError("Ce phare ne possède pas de description sur Wikipédia.");
+          console.error(err);
+        }
+      }
+    };
+    fetchWikiSummary();
+  }, [descriptionTag]);
 
   return (
     <div className="">
       <div className="flex flex-col gap-6 items-center">
         <h3 className="text-xl  text-center">{popupText}</h3>
         {isImageLoaded !== null && (
-          <Image src={imageSrc} alt={`Phare ${id}`} width={200} height={200} />
+          <Image className="rounded-lg" src={imageSrc} alt={`Phare ${id}`} width={200} height={200} />
         )}
         {isImageLoaded === false && <p>Image par défaut chargée.</p>}
+        {error ? <p>{error}</p> : <p>{summary}</p>}
         <a href={lien} target="_blank" className="text-cyan-700">
           Lien vers le site du phare
         </a>

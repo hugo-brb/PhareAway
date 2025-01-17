@@ -1,9 +1,9 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 
-export default function ReturnPage() {
+function ReturnPageContent() {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get("session_id");
   const [status, setStatus] = useState("Vérification en cours...");
@@ -27,5 +27,13 @@ export default function ReturnPage() {
     <div className="flex flex-col items-center justify-center min-h-screen">
       <h1 className="text-2xl font-bold">{status}</h1>
     </div>
+  );
+}
+
+export default function ReturnPage() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <ReturnPageContent />
+    </Suspense>
   );
 }
