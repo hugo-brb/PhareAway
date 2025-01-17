@@ -31,13 +31,12 @@ export default function Login() {
       const result = await signIn("credentials", {
         email: formData.get("email") as string,
         password: formData.get("password") as string,
-        redirect: false, // Important: empêche la redirection automatique
+        redirect: false,
       });
 
       if (result?.error) {
         setError("Email ou mot de passe incorrect");
       }
-      // La redirection en cas de succès sera gérée par l'useEffect avec la session
     } catch (err) {
       setError("Une erreur est survenue lors de la connexion");
     } finally {
@@ -102,9 +101,12 @@ export default function Login() {
           <div className="w-full flex flex-col gap-1">
             <button
               type="submit"
-              className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg"
+              disabled={loading}
+              className={`hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-6 rounded-lg ${
+                loading ? "opacity-50 cursor-not-allowed" : ""
+              }`}
             >
-              C&apos;est Phar&apos;ti !
+              {loading ? "Connexion..." : "C'est Phar'ti !"}
             </button>
           </div>
 
