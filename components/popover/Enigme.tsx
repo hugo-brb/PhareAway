@@ -49,7 +49,7 @@ export default function Enigme({
       handleClickActiveButton("hint");
       setShowConfirmation(false); // Fermer le popup après confirmation
     } else {
-      alert("Vous n'avez pas assez de Beacoins pour acheter les indices.");
+      handleClickTips("tipsF");
       setShowConfirmation(false);
     }
   };
@@ -486,6 +486,17 @@ export default function Enigme({
               cx={20}
               cy={17}
               text="Chaque phare contient 5 énigmes, 4 d'entre elles vous donneront le code du cadenas, et la dernière vous permettra de le déverrouiller. Une fois déverrouillé, le phare sera considéré comme complété. Et vous recevrez une récompense de 50 Beacoins. Bonne chance !"
+              img="/mascotte/temp.png"
+              next="0"
+            />
+          )}
+          {tips === "tipsF" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Pas assez de Beacoins"
+              cx={20}
+              cy={17}
+              text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
               img="/mascotte/temp.png"
               next="0"
             />
