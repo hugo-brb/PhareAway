@@ -142,7 +142,11 @@ export default function Enigme({
               activeButtons.hint ? "pointer-events-none" : ""
             }`}
             style={{ bottom: "0vh", right: "25vw" }}
-            onClick={() => handleClickActiveButton("hint")}
+            onClick={() => {
+              if (!activeButtons.hint) {
+                setShowConfirmation(true); // Afficher le popup
+              }
+            }}
           >
             <Image
               src={
