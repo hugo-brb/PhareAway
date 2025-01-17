@@ -223,7 +223,7 @@ export default function Home() {
           title="Bienvenue sur Phare Away !"
           cx={30}
           cy={20}
-          text={`Salut à toi, jeune moussaillon ! Je m'appelle 'nom badass de mascotte' et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me demander de t'aider à progresser. Pour cela, il te suffit de cliquer sur le bouton d'information en haut à droite. Bonne chance !`}
+          text={`Salut à toi, jeune moussaillon ! Je m'appelle Pharah et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me demander de t'aider à progresser. Pour cela, il te suffit de cliquer sur ma tête. Bonne chance !`}
           img="/mascotte/temp.png"
           next="0"
         />
