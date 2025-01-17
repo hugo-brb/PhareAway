@@ -32,7 +32,7 @@ const Marker: React.FC<MarkerProps> = ({
     // Vérifie si l'image est disponible ou non
     const checkImage = async () => {
       try {
-        const response = await fetch(imageSrc);
+        const response = await fetch(imageSrc, { mode: "no-cors" });
         if (response.ok) {
           setIsImageLoaded(true); // L'image existe
         } else {
@@ -75,7 +75,13 @@ const Marker: React.FC<MarkerProps> = ({
       <div className="flex flex-col gap-6 items-center">
         <h3 className="text-xl  text-center">{popupText}</h3>
         {isImageLoaded !== null && (
-          <Image className="rounded-lg" src={imageSrc} alt={`Phare ${id}`} width={200} height={200} />
+          <Image
+            className="rounded-lg"
+            src={imageSrc}
+            alt={`Phare ${id}`}
+            width={200}
+            height={200}
+          />
         )}
         {isImageLoaded === false && <p>Image par défaut chargée.</p>}
         {error ? <p>{error}</p> : <p>{summary}</p>}
