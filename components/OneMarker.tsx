@@ -69,7 +69,7 @@ const Marker: React.FC<MarkerProps> = ({
       <div className="flex flex-col gap-6 items-center">
         <h3 className="text-xl  text-center">{popupText}</h3>
         {isImageLoaded !== null && (
-          <Image src={imageSrc} alt={`Phare ${id}`} width={200} height={200} />
+          <Image className="rounded-lg" src={imageSrc} alt={`Phare ${id}`} width={200} height={200} />
         )}
         {isImageLoaded === false && <p>Image par défaut chargée.</p>}
         {error ? <p>{error}</p> : <p>{summary}</p>}
