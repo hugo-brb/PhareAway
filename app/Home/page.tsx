@@ -128,7 +128,9 @@ export default function Home() {
     setTips(a);
   };
 
-  onload = () => handleClickTips("start");
+  useEffect(() => {
+    handleClickTips("start");
+  }, []);
 
   return (
     <>

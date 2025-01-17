@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { Suspense, useCallback } from "react";
 import { loadStripe } from "@stripe/stripe-js";
 import {
   EmbeddedCheckoutProvider,
@@ -14,7 +14,7 @@ const stripePromise = loadStripe(
   process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
 );
 
-export default function PaymentPage() {
+function PaymentPageContent() {
   const searchParams = useSearchParams();
   const price = searchParams.get("price"); // 🔹 Récupérer le prix
 
@@ -60,5 +60,13 @@ export default function PaymentPage() {
         className=" absolute top-[10vh] right-[5vw] md:hidden"
       />
     </div>
+  );
+}
+
+export default function PaymentPage() {
+  return (
+    <Suspense fallback={<div>Chargement...</div>}>
+      <PaymentPageContent />
+    </Suspense>
   );
 }
