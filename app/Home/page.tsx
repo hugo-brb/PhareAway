@@ -192,7 +192,7 @@ export default function Home() {
       )}
       <BackHome />
       <Coin handleClickActive={handleClickActive} player={player} />
-      <Legend />
+      {active === "home" && <Legend />}
       <Image
         src="/images/soupex.png"
         width={75}
