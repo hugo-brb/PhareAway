@@ -32,7 +32,7 @@ const Marker: React.FC<MarkerProps> = ({
     // Vérifie si l'image est disponible ou non
     const checkImage = async () => {
       try {
-        const response = await fetch(imageSrc, { mode: "no-cors" });
+        const response = await fetch(imageSrc);
         if (response.ok) {
           setIsImageLoaded(true); // L'image existe
         } else {

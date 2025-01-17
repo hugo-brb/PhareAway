@@ -34,7 +34,7 @@ export async function POST(req: Request) {
         },
       ],
       mode: "payment",
-      return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment/return?session_id={CHECKOUT_SESSION_ID}`,
+      return_url: `${process.env.NEXT_PUBLIC_SITE_URL}/payment/return?session_id={CHECKOUT_SESSION_ID}&unit_amount=${priceInCents}`,
     });
 
     console.log("✅ Session créée :", session.id);
