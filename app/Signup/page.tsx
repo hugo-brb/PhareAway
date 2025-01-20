@@ -136,9 +136,22 @@ export default function Signup() {
           >
             <div className="flex flex-col md:flex-row md:justify-between justify-center md:items-center gap-2">
               <div className="flex flex-col gap-1 ">
-                <label htmlFor="nom" className="md:ml-2 text-base font-bold">
-                  Nom*
-                </label>
+              <span className="relative">
+      <label htmlFor="nom" className="md:ml-2 text-base font-bold">
+        Nom
+      </label>
+      <label
+        htmlFor="*"
+        className="md:ml-2 text-base font-bold text-red-500"
+      >
+        *
+      </label>
+
+      <p className="absolute text-red-500 text-sm pl-2 pr-2"
+         style={{ top: '-5px', transform: 'translateY(-100%)' }}>
+        *Champ obligatoire
+      </p>
+    </span>
                 <input
                   id="nom"
                   name="nom"
@@ -153,9 +166,16 @@ export default function Signup() {
                 </p>
               </div>
               <div className="flex flex-col gap-1 ">
+                <span>
                 <label htmlFor="prenom" className="md:ml-2 text-base font-bold">
-                  Prénom*
+                  Prénom
                 </label>
+                <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500"
+  
+                >
+                  *
+                </label>
+                </span>
                 <input
                   id="prenom"
                   name="prenom"
@@ -171,9 +191,15 @@ export default function Signup() {
               </div>
             </div>
             <div className="flex flex-col gap-1 ">
+              <span>
               <label htmlFor="user" className="ml-2 text-base font-bold">
-                Nom d&apos;utilisateur*
+                Nom d&apos;utilisateur
               </label>
+              <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500"
+              >
+                  *
+                </label>
+                </span>
               <input
                 id="user"
                 name="user"
@@ -189,9 +215,15 @@ export default function Signup() {
             </div>
 
             <div className="flex flex-col gap-1 ">
-              <label htmlFor="email" className="ml-2 text-base font-bold">
-                Email*
-              </label>
+              <span>
+                <label htmlFor="email" className="ml-2 text-base font-bold">
+                Email
+                </label>
+              <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500"
+              >
+                  *
+                </label>
+                </span>
               <input
                 id="email"
                 name="email"
@@ -206,10 +238,16 @@ export default function Signup() {
             </div>
 
             <div className="flex flex-col gap-1">
-              <label htmlFor="mdp" className="ml-2 text-base font-bold">
-                Mot de passe*
-              </label>
-
+              <span>
+                <label htmlFor="mdp" className="ml-2 text-base font-bold">
+                  Mot de passe
+                </label>
+                <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500"
+  
+                >
+                  *
+                </label>
+              </span>
               <input
                 id="mdp"
                 name="mdp"
@@ -229,9 +267,14 @@ export default function Signup() {
             </div>
 
             <div className="flex flex-col gap-1">
-              <label htmlFor="mdpVerif" className="ml-2 text-base font-bold">
-                Confirme ton mot de passe*
-              </label>
+              <span>
+                <label htmlFor="mdpVerif" className="ml-2 text-base font-bold">
+                  Confirme ton mot de passe
+                </label>
+                <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500">
+                  *
+                </label>
+                </span>
               <input
                 id="mdpVerif"
                 name="mdpVerif"
