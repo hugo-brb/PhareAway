@@ -106,6 +106,7 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
                   <p className="text-center self-center mt-4">
                     Toutes les extensions ont été débloquées. <br /> Merci pour
                     ta confiance et à bientôt pour de nouvelles aventures !
+                    <br />Bientot d'autres extensions à venir :D
                   </p>
                 ) : (
                   (console.log(extentions),
