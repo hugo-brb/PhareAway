@@ -51,41 +51,21 @@ export default function SmallEnigme({
 
   return (
     <section
-      className={`absolute left-4 top-4 md:left-[44vw] md:top-[20vw] z-50 w-[90%] h-[90%] md:w-[20vw] md:h-[15vw] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
+      className={` ${
+        popupA === "Vrai"
+          ? "bg-green-500"
+          : popupA === "Faux"
+          ? "bg-red-500"
+          : "bg-white "
+      } absolute left-4 top-4 md:left-[44vw] md:top-[20vw] z-50 w-[90%] h-[90%] md:w-[20vw] md:h-[15vw] bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
     >
-      {popupA === "Vrai" && (
-        <AnswerPop
-          handleClickAnswer={handleClickAnswer}
-          name={name}
-          sol={true}
-          text3={`Bravo, bonne réponse\nLe chiffre à la position ${id} est : ${codeLock}`}
-        />
-      )}
-      {popupA === "Faux" && (
-        <AnswerPop
-          handleClickAnswer={handleClickAnswer}
-          name={name}
-          sol={false}
-          text3="Désolé, mais c'est une mauvaise réponse..."
-        />
-      )}
-      {popupA === "EndFirst" && (
-        <AnswerPop
-          handleClickAnswer={handleClickAnswer}
-          name={name}
-          sol={true}
-          text3="Bravo ! 50 Beacoins ont étaient ajouté à votre compte."
-        />
-      )}
-      {popupA === "EndNot" && (
-        <AnswerPop
-          handleClickAnswer={handleClickAnswer}
-          name={name}
-          sol={true}
-          text3="Bravo ! Mais vous aviez déjà fini ce phare..."
-        />
-      )}
-      <div className="flex flex-col items-center justify-between h-full">
+      <div
+        className={` flex flex-col items-center ${
+          popupA === "Vrai" || popupA === "EndFirst" || popupA === "EndNot"
+            ? " justify-center gap-4"
+            : " justify-between"
+        } h-full`}
+      >
         <div className="flex flex-row justify-between w-full">
           <h1 className="font-decoration-underline">
             {name}
@@ -106,7 +86,7 @@ export default function SmallEnigme({
           >
             <Image
               src="/icones/xmark-solid.svg"
-              alt="arrow-back"
+              alt="close"
               width={15}
               height={15}
             />
@@ -119,49 +99,58 @@ export default function SmallEnigme({
             borderBottom: "1px solid lightgrey",
           }}
         ></div>
-        <span>{question}</span>
-        <div className="flex flex-row">
-          <p>
-            {text1}
-            <input
-              className="mx-1"
-              type="text"
-              placeholder="______"
-              style={{ minWidth: "32px", width: "32px" }}
-              onInput={(e) => {
-                const input = e.target as HTMLInputElement;
-                const length = Math.max(input.value.length, 3);
-                input.style.width = `${(length + 1) * 8}px`;
-              }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter") {
-                  const button = document.querySelector(
-                    "button.bg-blue-500"
-                  ) as HTMLButtonElement;
-                  button?.click(); // Simule le clic sur le bouton "Valider"
-                }
-              }}
-            />
-            {text2}
-          </p>
-        </div>
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={() => {
-            const input = document.querySelector("input") as HTMLInputElement;
-            if (lh === 104 && id === "3") {
-              const currentHour = new Date().getHours();
+        {popupA !== "Vrai" ? (
+          <>
+            <span>{question}</span>
+            <div className="flex flex-row">
+              <p>
+                {text1}
+                <input
+                  className={` ${popupA === "Faux" ? "bg-red-500" : ""} mx-1`}
+                  type="text"
+                  placeholder="______"
+                  style={{ minWidth: "32px", width: "32px" }}
+                  onInput={(e) => {
+                    const input = e.target as HTMLInputElement;
+                    const length = Math.max(input.value.length, 3);
+                    input.style.width = `${(length + 1) * 8}px`;
+                  }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      const button = document.querySelector(
+                        "button.bg-blue-500"
+                      ) as HTMLButtonElement;
+                      button?.click(); // Simule le clic sur le bouton "Valider"
+                    }
+                  }}
+                />
+                {text2}
+              </p>
+            </div>
+            {popupA === "Faux" && (
+              <p className=" text-red-700 text-center py-1">
+                Désolé, mais c'est une mauvaise réponse...
+              </p>
+            )}
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+              onClick={() => {
+                const input = document.querySelector(
+                  "input"
+                ) as HTMLInputElement;
+                if (lh === 104 && id === "3") {
+                  const currentHour = new Date().getHours();
 
-              if (
-                (currentHour >= 18 && currentHour <= 23) ||
-                (currentHour >= 0 && currentHour < 6)
-              ) {
-                handleClickAnswer("Vrai");
-              } else {
-                handleClickAnswer("Faux");
-              }
-            } else if (input.value === "feur2%i") {
-              alert(`⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
+                  if (
+                    (currentHour >= 18 && currentHour <= 23) ||
+                    (currentHour >= 0 && currentHour < 6)
+                  ) {
+                    handleClickAnswer("Vrai");
+                  } else {
+                    handleClickAnswer("Faux");
+                  }
+                } else if (input.value === "feur2%i") {
+                  alert(`⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 ⠄⠄⠄⠄⣠⣶⣶⣿⣿⣶⣦⡀⠄⢠⣶⣿⣿⣷⣦⠄⠄⠄⢀⣾⣿⠟⠄⠄⠄⠄
 ⠄⠄⠄⠄⣿⣿⣿⠿⢿⣿⣿⣿⡄⣿⣿⡏⢹⣿⣿⡇⠄⣰⣿⡿⠋⠄⠄⠄⠄⠄
@@ -173,32 +162,43 @@ export default function SmallEnigme({
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
-              player.setBeacoins(2000);
-            } else if (
-              normalizeString(input.value) === normalizeString(answer)
-            ) {
-              if (id === "5") {
-                const phareEnded = player.getPhareended();
-                if (!phareEnded.includes(lh)) {
-                  phareEnded.push(lh);
-                  player.setPhareended(phareEnded);
-                  player.setBeacoins(50);
-                  handleClickAnswer("EndFirst");
+                  player.setBeacoins(2000);
+                } else if (
+                  normalizeString(input.value) === normalizeString(answer)
+                ) {
+                  if (id === "5") {
+                    const phareEnded = player.getPhareended();
+                    if (!phareEnded.includes(lh)) {
+                      phareEnded.push(lh);
+                      player.setPhareended(phareEnded);
+                      player.setBeacoins(50);
+                      handleClickAnswer("EndFirst");
+                    } else {
+                      handleClickAnswer("EndNot");
+                    }
+                  } else {
+                    cadenas[parseInt(id) - 1] = codeLock.toString();
+                    setCadenas(cadenas);
+                    handleClickAnswer("Vrai");
+                  }
                 } else {
-                  handleClickAnswer("EndNot");
+                  handleClickAnswer("Faux");
                 }
-              } else {
-                cadenas[parseInt(id) - 1] = codeLock.toString();
-                setCadenas(cadenas);
-                handleClickAnswer("Vrai");
-              }
-            } else {
-              handleClickAnswer("Faux");
-            }
-          }}
-        >
-          Valider
-        </button>
+              }}
+            >
+              Valider
+            </button>
+          </>
+        ) : popupA === "Vrai" ? (
+          <p>
+            Bravo, bonne réponse <br /> Le chiffre à la position {id} est :{" "}
+            {codeLock}
+          </p>
+        ) : popupA === "EndFirst" ? (
+          <p>Bravo ! 50 Beacoins ont étaient ajouté à votre compte.</p>
+        ) : (
+          <p>Bravo ! Mais vous aviez déjà fini ce phare...</p>
+        )}
       </div>
     </section>
   );
