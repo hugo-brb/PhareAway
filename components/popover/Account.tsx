@@ -155,7 +155,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
             >
               <div className="flex justify-center mx-auto md:mx-0 items-center gap-2 px-4 py-2 rounded-2xl cursor-pointer duration-300 hover:ring-1 ring-[--primary]">
                 <Image
-                  src="/images/lighthouse.png"
+                  src="/icones/lightHouseIconEnigme.svg"
                   alt="Lighthouse"
                   width={25}
                   height={25}
@@ -176,7 +176,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                   {player.getPhareended().map((phare, index) => (
                     <li key={index} className="flex items-center gap-2">
                       <Image
-                        src="/images/lighthouse.png"
+                        src="/icones/lightHouseIconEnigme.svg"
                         alt="Lighthouse"
                         width={25}
                         height={25}
