@@ -83,19 +83,25 @@ export default function LandingPage() {
             🕵️‍♂️
           </p>
 
-          <Link href="/Rgpd" className="mt-5">
+          <Link href="/Login" className="mt-5">
             <button className=" w-fit py-2 px-4 mr-4 md:mr-0 text-lg md:text-xl font-bold rounded-3xl border-b-2 hover:bg-[--primary] border-[--primary] duration-300 ease-in-out">
               Rejoins l’aventure dès maintenant !
             </button>
           </Link>
           <button
-            className="w-fit mt-2 text-base md:mt-7 py-2 px-4 md:text-xl font-bold rounded-3xl bg-[--primary] hover:bg-transparent border-b-2 border-[--primary] duration-300 ease-in-out"
+            className="md:hidden w-fit mt-2 text-base md:mt-7 py-2 px-4 md:text-xl font-bold rounded-3xl bg-[--primary] hover:bg-transparent border-b-2 border-[--primary] duration-300 ease-in-out"
             onClick={handleOpenCarousel}
           >
             Découvre le jeu en images ✨
           </button>
         </div>
       </main>
+      <button
+        className="hidden md:block absolute bottom-[25vh] right-[5vw] text-white w-fit mt-2 text-base md:mt-7 py-2 px-4 md:text-xl font-bold rounded-3xl bg-[--primary] hover:bg-transparent border-b-2 border-[--primary] duration-300 ease-in-out"
+        onClick={handleOpenCarousel}
+      >
+        Découvre le jeu en images ✨
+      </button>
       {/* Footer */}
       <Image
         src="/images/soupex.png"

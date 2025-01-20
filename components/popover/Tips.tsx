@@ -36,7 +36,7 @@ export default function Tips({
           width: "90%",
         }),
       }}
-      className={` bg-opacity-80 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden ring-1 ring-opacity-50 ring-black`}
+      className={` bg-opacity-80 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden ring-1 ring-opacity-50 ring-black z-50`}
     >
       <button
         className={

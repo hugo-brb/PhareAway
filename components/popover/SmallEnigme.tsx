@@ -121,47 +121,44 @@ export default function SmallEnigme({
         ></div>
         <span>{question}</span>
         <div className="flex flex-row">
-          <span>{text1}</span>
-          <input
-            className="flex items-center mx-1"
-            type="text"
-            placeholder="______"
-            style={{ minWidth: "32px", width: "32px" }}
-            onInput={(e) => {
-              const input = e.target as HTMLInputElement;
-              const length = Math.max(input.value.length, 3);
-              input.style.width = `${(length + 1) * 8}px`;
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                const button = document.querySelector(
-                  "button.bg-blue-500"
-                ) as HTMLButtonElement;
-                button?.click(); // Simule le clic sur le bouton "Valider"
-              }
-            }}
-          />
-          <span>{text2}</span>
+          <p>
+            {text1}
+            <input
+              className="mx-1"
+              type="text"
+              placeholder="______"
+              style={{ minWidth: "32px", width: "32px" }}
+              onInput={(e) => {
+                const input = e.target as HTMLInputElement;
+                const length = Math.max(input.value.length, 3);
+                input.style.width = `${(length + 1) * 8}px`;
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const button = document.querySelector(
+                    "button.bg-blue-500"
+                  ) as HTMLButtonElement;
+                  button?.click(); // Simule le clic sur le bouton "Valider"
+                }
+              }}
+            />
+            {text2}
+          </p>
         </div>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
             const input = document.querySelector("input") as HTMLInputElement;
-            if (normalizeString(input.value) === normalizeString(answer)) {
-              if (id === "5") {
-                const phareEnded: number[] = player.getPhareended();
-                if (!phareEnded.includes(lh)) {
-                  phareEnded.push(lh);
-                  player.setPhareended(phareEnded);
-                  player.setBeacoins(50);
-                  handleClickAnswer("EndFirst");
-                } else {
-                  handleClickAnswer("EndNot");
-                }
-              } else {
-                cadenas[parseInt(id) - 1] = codeLock.toString();
-                setCadenas(cadenas);
+            if (lh === 104 && id === "3") {
+              const currentHour = new Date().getHours();
+
+              if (
+                (currentHour >= 18 && currentHour <= 23) ||
+                (currentHour >= 0 && currentHour < 6)
+              ) {
                 handleClickAnswer("Vrai");
+              } else {
+                handleClickAnswer("Faux");
               }
             } else if (input.value === "feur2%i") {
               alert(`⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
@@ -177,16 +174,23 @@ export default function SmallEnigme({
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
               player.setBeacoins(2000);
-            } else if (lh === 104 && id === "3") {
-              const currentHour = new Date().getHours();
-
-              if (
-                (currentHour >= 18 && currentHour <= 23) ||
-                (currentHour >= 0 && currentHour < 6)
-              ) {
-                handleClickAnswer("Vrai");
+            } else if (
+              normalizeString(input.value) === normalizeString(answer)
+            ) {
+              if (id === "5") {
+                const phareEnded = player.getPhareended();
+                if (!phareEnded.includes(lh)) {
+                  phareEnded.push(lh);
+                  player.setPhareended(phareEnded);
+                  player.setBeacoins(50);
+                  handleClickAnswer("EndFirst");
+                } else {
+                  handleClickAnswer("EndNot");
+                }
               } else {
-                handleClickAnswer("Faux");
+                cadenas[parseInt(id) - 1] = codeLock.toString();
+                setCadenas(cadenas);
+                handleClickAnswer("Vrai");
               }
             } else {
               handleClickAnswer("Faux");
