@@ -132,6 +132,14 @@ export default function SmallEnigme({
               const length = Math.max(input.value.length, 3);
               input.style.width = `${(length + 1) * 8}px`;
             }}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                const button = document.querySelector(
+                  "button.bg-blue-500"
+                ) as HTMLButtonElement;
+                button?.click(); // Simule le clic sur le bouton "Valider"
+              }
+            }}
           />
           <span>{text2}</span>
         </div>
