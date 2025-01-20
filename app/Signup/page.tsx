@@ -127,7 +127,7 @@ export default function Signup() {
             />
           </Link>
           <h1 className="font-ouroboros text-3xl md:text-4xl self-center">
-            Rejoignez-nous !
+            Rejoins-nous !
           </h1>
           <form
             onSubmit={handleSubmit}
@@ -229,7 +229,7 @@ export default function Signup() {
 
             <div className="flex flex-col gap-1">
               <label htmlFor="mdpVerif" className="ml-2 text-base font-bold">
-                Confirmer votre mot de passe*
+                Confirme ton mot de passe*
               </label>
               <input
                 id="mdpVerif"
@@ -245,9 +245,9 @@ export default function Signup() {
               className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg md:text-xl font-bold py-2 px-6 rounded-lg"
             />
             <div className="flex justify-center items-center gap-2 text-xs md:text-base">
-              <label htmlFor="login">tu as déjà un compte ?</label>
+              <label htmlFor="login">Tu as déjà un compte ?</label>
               <Link href="/Login" className="text-[--primary] font-bold">
-                Connectes toi ♥
+                Connecte-toi ♥
               </Link>
             </div>
             <div className="flex justify-center items-center gap-2 md:mb-0 mb-4">

@@ -74,7 +74,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             cx="35vw"
             cy="30vw"
             text={
-              "C'est ici que les associations peuvent ajouter des événements. Vous pouvez en consulter les caractéristiques, comme le lieu, le prix, la date etc..."
+              "C'est ici que les associations peuvent ajouter des événements. Tu peux en consulter les caractéristiques, comme le lieu, le prix, la date..."
             }
             img="/mascotte/temp.png"
             next="2"
@@ -83,11 +83,11 @@ export default function Events({ handleClickActive, player }: MenuProps) {
         {tips === "2" && (
           <Tips
             handleClickTips={handleClickTips}
-            title="Filtres"
+            title="Recherche / Trie"
             cx="35vw"
             cy="10vw"
             text={
-              "Vous pouvez filtré les événements par nom, par date et par prix en utilisant la barre de recherche et les boutons."
+              "Tu peux trier et rechercher les événements par nom, par date et par prix en utilisant la barre de recherche et les boutons."
             }
             img="/mascotte/temp.png"
             next="0"

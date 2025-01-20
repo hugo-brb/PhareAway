@@ -159,7 +159,7 @@ export default function Pictures({
 
         <div className="flex gap-2">
           <p className="text-center">
-            Partagez une image de phare et gagnez <b>50</b> Beacoins en
+            Partage une image de phare et gagne <b>50</b> Beacoins en
             récompense.
           </p>
           <Image
@@ -187,7 +187,7 @@ export default function Pictures({
             </div>
             <div className="flex justify-center items-center">
               <span className="font-normal text-center text-base text-gray-700">
-                Cliquer pour importer une image
+                Clique pour importer une image.
               </span>
             </div>
             <input
@@ -218,7 +218,7 @@ export default function Pictures({
               cx="50%"
               cy="50%"
               text={
-                "Bravo vous venez d'upload une image de phare, vous avez donc gagné 50 beacoins 👍"
+                "Bravo, tu viens d'uploader une image de phare, tu as donc gagné 50 Beacoins 👍"
               }
               img="/mascotte/temp.png"
               next="0"
@@ -228,11 +228,11 @@ export default function Pictures({
         {tips === "1" && (
           <Tips
             handleClickTips={handleClickTips2}
-            title="Partage de photo"
+            title="Partage de photos"
             cx="50%"
             cy="50%"
             text={
-              "Cette fonctionnalité vous permet de gagner 50 Beacoins en partageant une image de phare."
+              "Cette fonctionnalité te permet de gagner 50 Beacoins en partageant une image de phare."
             }
             img="/mascotte/temp.png"
             next="2"
@@ -241,11 +241,11 @@ export default function Pictures({
         {tips === "2" && (
           <Tips
             handleClickTips={handleClickTips2}
-            title="Partage de photo"
+            title="Partage de photos"
             cx="50%"
             cy="50%"
             text={
-              "Attention, si vous proposez une image qui ne contient pas de phare, vous ne gagnerez pas de Beacoins."
+              "Attention, si tu proposes une image qui ne contient pas de phare, tu ne gagneras pas de Beacoins."
             }
             img="/mascotte/temp.png"
             next="3"
@@ -254,11 +254,11 @@ export default function Pictures({
         {tips === "3" && (
           <Tips
             handleClickTips={handleClickTips2}
-            title="Partage de photo"
+            title="Partage de photos"
             cx="50%"
             cy="50%"
             text={
-              "Et vous ne pouvez pas partager plus d'une image de phare toutes les 24 heures. Bonne continuation !"
+              "Et tu ne peux pas partager plus d'une image de phare toutes les 24 heures. Bonne continuation !"
             }
             img="/mascotte/temp.png"
             next="0"
