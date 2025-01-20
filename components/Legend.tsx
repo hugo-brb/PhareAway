@@ -3,7 +3,7 @@ import Image from "next/image";
 export default function Legend() {
   return (
     <>
-      <div className=" hidden md:flex justify-center items-center w-[16vw] gap-2 bg-white bg-opacity-60 rounded-xl backdrop-blur-md py-2 absolute top-3 right-[15vw] z-50">
+      <div className=" hidden md:flex justify-center items-center w-[16vw] gap-2 bg-white bg-opacity-60 rounded-xl backdrop-blur-md py-2 absolute top-3 right-[15vw] z-40">
         <div className=" flex items-center w-full">
           <Image
             src="/icones/lightHouseIconEnigme.svg"

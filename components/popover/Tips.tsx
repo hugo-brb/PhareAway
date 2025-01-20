@@ -28,13 +28,15 @@ export default function Tips({
         left: `${cx}`,
         top: `${cy}`,
         transform: "translate(-50%, -50%)",
+        backgroundImage: "url(/icones/bois.png)",
+        backgroundColor: "white",
         ...(window.innerWidth < 768 && {
           left: "50%",
           top: "50%",
           width: "90%",
         }),
       }}
-      className={`bg-white bg-opacity-80 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden ring-1 ring-opacity-50 ring-black`}
+      className={` bg-opacity-80 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden ring-1 ring-opacity-50 ring-black z-50`}
     >
       <button
         className={
