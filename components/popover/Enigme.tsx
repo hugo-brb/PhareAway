@@ -72,7 +72,7 @@ export default function Enigme({
     <>
       <main className=" absolute top-1/2 -translate-y-1/2 md:translate-y-0 md:top-0 z-40 flex w-[100vw] h-fit md:h-[100vh]">
         <section
-          className={`flex flex-col items-center self-center gap-7 md:gap-12 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 pt-10 pb-12 md:pt-4 overflow-y-scroll scrollbarhidden ${
+          className={`flex flex-col items-center self-center gap-7 md:gap-12 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto pl-7 pt-10 pb-12 md:pt-4 overflow-y-scroll scrollbarhidden ${
             phareEnded.includes(id) ? "ring-8 ring-green-400 bg-green-200" : ""
           }`}
         >
@@ -118,12 +118,13 @@ export default function Enigme({
               </svg>
             </a>
           </h1>
-          <h3 className="absolute top-[4vw] right-[5vw] text-center max-w-[400px] font-bold text-lg items-center">
-              Des zones cliquables sont présentes sur l'image et contiennent une petite devinette. un bon point de départ serait le feu!
-            </h3>
+          <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] font-bold text-lg items-center">
+            Des zones cliquables sont présentes sur l'image et contiennent une
+            petite devinette. un bon point de départ serait le feu!
+          </h3>
           <h3 className="absolute top-[13vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
-              Acheter un indice pour réveler les zones cliquables
-            </h3>
+            Acheter un indice pour réveler les zones cliquables
+          </h3>
           <button
             className={`absolute hidden md:block ${
               activeButtons.hint ? "pointer-events-none" : ""
@@ -135,7 +136,6 @@ export default function Enigme({
               }
             }}
           >
-
             <Image
               src={
                 activeButtons.hint
