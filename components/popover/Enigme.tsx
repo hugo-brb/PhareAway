@@ -435,8 +435,8 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Bienvenue sur une énigme de Phare !"
-              cx={2}
-              cy={2}
+              cx="50%"
+              cy="50%"
               text={
                 "C'est ici que vous pourrez résoudre des énigmes, en apprendre plus sur le phare et surtout, gagner des beacoins."
               }
@@ -448,8 +448,8 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Zones cliquables"
-              cx={11}
-              cy={20}
+              cx="40%"
+              cy="50%"
               text={
                 "Des zones cliquables sont présentes sur l'image et contiennent une petite devinette en rapport avec le lieu et le phare. Essayez de les trouver !"
               }
@@ -461,8 +461,8 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Indices"
-              cx={45}
-              cy={5}
+              cx="50%"
+              cy="35%"
               text={
                 "Pour vous aider, vous pouvez acheter des indices qui vous révèleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins et vous les perdez si vous quittez le phare."
               }
@@ -474,8 +474,8 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Réponses"
-              cx={48}
-              cy={30}
+              cx="48vw"
+              cy="30vw"
               text={
                 "Lorsque vous avez trouvé une énigme, elle apparaitra ici, et il ne vous reste qu'à répondre à la question."
               }
@@ -487,8 +487,8 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Fin"
-              cx={20}
-              cy={17}
+              cx="20vw"
+              cy="17vw"
               text="Chaque phare contient 5 énigmes, 4 d'entre elles vous donneront le code du cadenas, et la dernière vous permettra de le déverrouiller. Une fois déverrouillé, le phare sera considéré comme complété. Et vous recevrez une récompense de 50 Beacoins. Bonne chance !"
               img="/mascotte/temp.png"
               next="0"
@@ -498,8 +498,8 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Pas assez de Beacoins"
-              cx={20}
-              cy={17}
+              cx="20vw"
+              cy="17vw"
               text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
               img="/mascotte/temp.png"
               next="0"

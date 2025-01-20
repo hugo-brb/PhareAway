@@ -215,8 +215,8 @@ export default function Pictures({
             <Tips
               handleClickTips={handleClickTips}
               title="Validation de l'image"
-              cx={22}
-              cy={12}
+              cx="50%"
+              cy="50%"
               text={
                 "Bravo vous venez d'upload une image de phare, vous avez donc gagné 50 beacoins 👍"
               }
@@ -229,8 +229,8 @@ export default function Pictures({
           <Tips
             handleClickTips={handleClickTips2}
             title="Partage de photo"
-            cx={22}
-            cy={12}
+            cx="50%"
+            cy="50%"
             text={
               "Cette fonctionnalité vous permet de gagner 50 Beacoins en partageant une image de phare."
             }
@@ -242,8 +242,8 @@ export default function Pictures({
           <Tips
             handleClickTips={handleClickTips2}
             title="Partage de photo"
-            cx={22}
-            cy={12}
+            cx="50%"
+            cy="50%"
             text={
               "Attention, si vous proposez une image qui ne contient pas de phare, vous ne gagnerez pas de Beacoins."
             }
@@ -255,8 +255,8 @@ export default function Pictures({
           <Tips
             handleClickTips={handleClickTips2}
             title="Partage de photo"
-            cx={22}
-            cy={12}
+            cx="50%"
+            cy="50%"
             text={
               "Et vous ne pouvez pas partager plus d'une image de phare toutes les 24 heures. Bonne continuation !"
             }

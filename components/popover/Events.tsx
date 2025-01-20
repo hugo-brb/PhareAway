@@ -71,8 +71,8 @@ export default function Events({ handleClickActive, player }: MenuProps) {
           <Tips
             handleClickTips={handleClickTips}
             title="Bienvenue sur la page des événements"
-            cx={35}
-            cy={30}
+            cx="35vw"
+            cy="30vw"
             text={
               "C'est ici que les associations peuvent ajouter des événements. Vous pouvez en consulter les caractéristiques, comme le lieu, le prix, la date etc..."
             }
@@ -84,8 +84,8 @@ export default function Events({ handleClickActive, player }: MenuProps) {
           <Tips
             handleClickTips={handleClickTips}
             title="Filtres"
-            cx={35}
-            cy={10}
+            cx="35vw"
+            cy="10vw"
             text={
               "Vous pouvez filtré les événements par nom, par date et par prix en utilisant la barre de recherche et les boutons."
             }
