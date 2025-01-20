@@ -18,6 +18,7 @@ interface SmallEnigmeProps {
   lh: number;
   cadenas: Array<string>;
   setCadenas: (a: Array<string>) => void;
+  onResolve: (index: number) => void; // Ajout d'un callback pour signaler une résolution
 }
 
 export default function SmallEnigme({
@@ -33,6 +34,7 @@ export default function SmallEnigme({
   lh,
   cadenas,
   setCadenas,
+  onResolve,
 }: SmallEnigmeProps) {
   const [popupA, setPopupA] = useState("0");
   const handleClickAnswer = (a: string) => {
@@ -179,6 +181,7 @@ Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
                     cadenas[parseInt(id) - 1] = codeLock.toString();
                     setCadenas(cadenas);
                     handleClickAnswer("Vrai");
+                    onResolve(parseInt(id) - 1); // Appeler la fonction pour marquer l'énigme comme résolue
                   }
                 } else {
                   handleClickAnswer("Faux");
