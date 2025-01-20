@@ -43,34 +43,6 @@ export default function Account({ handleClickActive, player }: MenuProps) {
     }
   };
 
-  {
-    /** 
-  const numberLighthouse = async () => {
-    const { data, error: eventError } = await supabaseData
-      .from("Enigme")
-      .select("idEnigme")
-      .ilike("idEnigme", "5");
-       console.log("Jaja", data);
-    if (eventError) {
-      console.error("Error requête events:", eventError);
-      return null; // Retourner null ou une valeur par défaut en cas d'erreur
-    }
-    return data;
-  };
-  
-  // Utilisation de la fonction dans un contexte asynchrone
-  const getNumberLighthouse = () => {
-
-    useEffect(() => {
-      const nbLh = await numberLighthouse();
-      console.log("Jaja", nbLh);
-  
-    }, []);
-
-  };
-  */
-  }
-
   const handleToggleEdit = async () => {
     if (isModifiable) {
       // Enregistrer les modifications dans l'objet `player`
