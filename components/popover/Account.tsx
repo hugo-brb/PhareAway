@@ -19,6 +19,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
   const [hoverLh, setHoverLh] = useState(false);
   const lh = useLighthouse(1);
+  const [isModif, setIsModif] = useState<boolean | string>(false);
 
   // Gestion des états pour les champs du formulaire
   const [formValues, setFormValues] = useState({
@@ -86,12 +87,12 @@ export default function Account({ handleClickActive, player }: MenuProps) {
     } else {
       setOriginalValues({ ...formValues });
     }
-    setIsModifiable((prev) => !prev); // Alterne entre modification et validation
+    setIsModif((prev) => !prev); // Alterne entre modification et validation
   };
 
   const handleCancel = () => {
     setFormValues({ ...originalValues });
-    setIsModifiable(false);
+    setIsModif((prev) => !prev); // Alterne entre modification et validation
   };
 
   const handleSignOut = async () => {
@@ -193,16 +194,14 @@ export default function Account({ handleClickActive, player }: MenuProps) {
               viewBox="0 0 512 512"
               onClick={handleSignOut}
               className={`fill-[--text] size-7 md:size-10 ${
-                isModifiable
+                isModif
                   ? "opacity-20 cursor-default"
                   : "opacity-100 cursor-pointer"
               }`}
             >
               <path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z" />
             </svg>
-            <h1
-              className={`hidden md:block ${isModifiable ? "opacity-20" : ""}`}
-            >
+            <h1 className={`hidden md:block ${isModif ? "opacity-20" : ""}`}>
               Déconnexion
             </h1>
           </div>
@@ -213,81 +212,230 @@ export default function Account({ handleClickActive, player }: MenuProps) {
           <div className="flex flex-col md:flex-row gap-7 md:gap-12">
             <div className="flex flex-col gap-1">
               <h3 className="font-bold text-xl">Prénom</h3>
-              <input
-                type="text"
-                name="prenom"
-                value={formValues.prenom}
-                onChange={handleInputChange}
-                disabled={!isModifiable}
-                className={`py-2 px-4 md:w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
-                  isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
-                }`}
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  name="prenom"
+                  value={formValues.prenom}
+                  onChange={handleInputChange}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleToggleEdit();
+                    }
+                  }}
+                  disabled={isModif !== "prenom"}
+                  className={`py-2 px-4 md:w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                    isModif === "prenom"
+                      ? "ring-2 text-slate-900 ring-blue-500"
+                      : ""
+                  }`}
+                  ref={(input) => {
+                    if (isModif === "prenom" && input) {
+                      input.focus();
+                    }
+                  }}
+                />
+                <Image
+                  src="/icones/pen.svg"
+                  alt="pen"
+                  width={20}
+                  height={20}
+                  className={`absolute top-[11px] right-4 cursor-pointer hover:scale-110 duration-300 ${
+                    isModif === "prenom" ? "opacity-100" : "opacity-30"
+                  }`}
+                  onClick={() => {
+                    if (isModif === "prenom") {
+                      handleToggleEdit();
+                    } else {
+                      setIsModif("prenom");
+                    }
+                  }}
+                />
+              </div>
             </div>
             <div className="flex flex-col gap-1">
               <h3 className="font-bold text-xl">Nom</h3>
-              <input
-                type="text"
-                name="nom"
-                value={formValues.nom}
-                onChange={handleInputChange}
-                disabled={!isModifiable}
-                className={`py-2 px-4 md:w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
-                  isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
-                }`}
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  name="nom"
+                  value={formValues.nom}
+                  onChange={handleInputChange}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") {
+                      handleToggleEdit();
+                    }
+                  }}
+                  disabled={isModif !== "nom"}
+                  className={`py-2 px-4 md:w-[15vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                    isModif === "nom"
+                      ? "ring-2 text-slate-900 ring-blue-500"
+                      : ""
+                  }`}
+                  ref={(input) => {
+                    if (isModif === "nom" && input) {
+                      input.focus();
+                    }
+                  }}
+                />
+                <Image
+                  src="/icones/pen.svg"
+                  alt="pen"
+                  width={20}
+                  height={20}
+                  className={`absolute top-[11px] right-4 cursor-pointer hover:scale-110 duration-300 ${
+                    isModif === "nom" ? "opacity-100" : "opacity-30"
+                  }`}
+                  onClick={() => {
+                    if (isModif === "nom") {
+                      handleToggleEdit();
+                    } else {
+                      setIsModif("nom");
+                    }
+                  }}
+                />
+              </div>
             </div>
           </div>
           <div className="flex flex-col gap-1">
             <h3 className="font-bold text-xl">Pseudo</h3>
-            <input
-              type="text"
-              name="pseudo"
-              value={formValues.pseudo}
-              onChange={handleInputChange}
-              disabled={!isModifiable}
-              className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
-                isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
-              }`}
-            />
+            <div className="relative">
+              <input
+                type="text"
+                name="pseudo"
+                value={formValues.pseudo}
+                onChange={handleInputChange}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    handleToggleEdit();
+                  }
+                }}
+                disabled={isModif !== "pseudo"}
+                className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                  isModif === "pseudo"
+                    ? "ring-2 text-slate-900 ring-blue-500"
+                    : ""
+                }`}
+                ref={(input) => {
+                  if (isModif === "pseudo" && input) {
+                    input.focus();
+                  }
+                }}
+              />
+              <Image
+                src="/icones/pen.svg"
+                alt="pen"
+                width={20}
+                height={20}
+                className={`absolute top-[11px] right-4 cursor-pointer hover:scale-110 duration-300 ${
+                  isModif === "pseudo" ? "opacity-100" : "opacity-30"
+                }`}
+                onClick={() => {
+                  if (isModif === "pseudo") {
+                    handleToggleEdit();
+                  } else {
+                    setIsModif("pseudo");
+                  }
+                }}
+              />
+            </div>
           </div>
           {!player.getIsOAuth() && (
             <>
               <div className="flex flex-col gap-1">
                 <h3 className="font-bold text-xl">Email</h3>
-                <input
-                  type="email"
-                  name="mail"
-                  value={formValues.mail}
-                  onChange={handleInputChange}
-                  disabled={!isModifiable}
-                  className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
-                    isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
-                  }`}
-                />
+                <div className="relative">
+                  <input
+                    type="email"
+                    name="mail"
+                    value={formValues.mail}
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleToggleEdit();
+                      }
+                    }}
+                    disabled={isModif !== "mail"}
+                    className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                      isModif === "mail"
+                        ? "ring-2 text-slate-900 ring-blue-500"
+                        : ""
+                    }`}
+                    ref={(input) => {
+                      if (isModif === "mail" && input) {
+                        input.focus();
+                      }
+                    }}
+                  />
+                  <Image
+                    src="/icones/pen.svg"
+                    alt="pen"
+                    width={20}
+                    height={20}
+                    className={`absolute top-[11px] right-4 cursor-pointer hover:scale-110 duration-300 ${
+                      isModif === "mail" ? "opacity-100" : "opacity-30"
+                    }`}
+                    onClick={() => {
+                      if (isModif === "mail") {
+                        handleToggleEdit();
+                      } else {
+                        setIsModif("mail");
+                      }
+                    }}
+                  />
+                </div>
               </div>
               <div className="flex flex-col gap-1">
                 <h3 className="font-bold text-xl">Mot de passe</h3>
-                <input
-                  type="password"
-                  name="password"
-                  value={formValues.password}
-                  onChange={handleInputChange}
-                  //disabled={!isModifiable}
-                  disabled={true}
-                  className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
-                    isModifiable ? "ring-2 text-slate-900 ring-blue-500" : ""
-                  }`}
-                />
+                <div className="relative">
+                  <input
+                    type="password"
+                    name="password"
+                    value={formValues.password}
+                    onChange={handleInputChange}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleToggleEdit();
+                      }
+                    }}
+                    disabled={isModif !== "password"}
+                    className={`py-2 px-4 md:w-[33vw] text-slate-400 rounded-full bg-white bg-opacity-45 ${
+                      isModif === "password"
+                        ? "ring-2 text-slate-900 ring-blue-500"
+                        : ""
+                    }`}
+                    ref={(input) => {
+                      if (isModif === "password" && input) {
+                        input.focus();
+                      }
+                    }}
+                  />
+                  <Image
+                    src="/icones/pen.svg"
+                    alt="pen"
+                    width={20}
+                    height={20}
+                    className={`absolute top-[11px] right-4 cursor-pointer hover:scale-110 duration-300 ${
+                      isModif === "password" ? "opacity-100" : "opacity-30"
+                    }`}
+                    onClick={() => {
+                      if (isModif === "password") {
+                        handleToggleEdit();
+                      } else {
+                        setIsModif("password");
+                      }
+                    }}
+                  />
+                </div>
               </div>
             </>
           )}
         </form>
         {errors !== "" && <p className="text-red-600 text-center">{errors}</p>}
-        <div className="flex flex-col gap-6 mt-7">
+        <div className="flex flex-col gap-6 mt-2">
           {/* Annuler / Modifier */}
-          <div className="flex justify-center gap-4">
-            {isModifiable && (
+          {isModif && (
+            <div className="flex justify-center gap-4">
               <button
                 type="button"
                 onClick={handleCancel}
@@ -295,52 +443,58 @@ export default function Account({ handleClickActive, player }: MenuProps) {
               >
                 Annuler
               </button>
-            )}
-            <button
-              type="button"
-              onClick={handleToggleEdit}
-              className="md:w-[20vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-4 rounded-2xl"
-            >
-              {isModifiable ? "Valider" : "Modifier"}
-            </button>
-          </div>
 
-          {/* Supprimer */}
-          <div className="flex justify-center">
-            <button
-              onClick={() => setIsDeleteConfirmVisible(true)}
-              className={`md:w-[20vw] hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic py-2 px-4 rounded-2xl ${
-                isModifiable ? "opacity-20 pointer-events-none" : ""
-              }`}
-            >
-              Supprimer le compte
-            </button>
-            {isDeleteConfirmVisible && (
+              <button
+                type="button"
+                onClick={handleToggleEdit}
+                className="md:w-[20vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-xl font-bold py-2 px-4 rounded-2xl"
+              >
+                Valider
+              </button>
+            </div>
+          )}
+
+          {isDeleteConfirmVisible && (
+            <div className="absolute top-0 left-0 w-full h-full flex justify-center">
               <ConfirmDelete
                 handleClickActive={() => setIsDeleteConfirmVisible(false)}
                 player={player}
               />
-            )}
-          </div>
+            </div>
+          )}
 
-          {/* À propos / CGU */}
-          <div className="flex justify-center gap-4 md:gap-10 pt-7 md:pt-20">
-            <button
-              className={`md:w-[30vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer md:text-lg font-bold py-2 px-4 rounded-2xl ${
-                isModifiable ? "opacity-20 pointer-events-none" : ""
-              }`}
-              onClick={() => handleClickActive("about")}
-            >
-              À propos
-            </button>
-            <button
-              className={`md:w-[30vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer md:text-lg font-bold py-2 px-4 rounded-2xl ${
-                isModifiable ? "opacity-20 pointer-events-none" : ""
-              }`}
-              onClick={() => handleClickActive("cgu")}
-            >
-              Voir nos Conditions générales d’utilisation
-            </button>
+          <div className="absolute bottom-4 w-full">
+            {/* À propos / CGU */}
+            <div className="flex justify-center gap-4 md:gap-10 pt-7 md:pt-20">
+              <button
+                className={`md:w-[30vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer md:text-lg font-bold py-2 px-4 rounded-2xl ${
+                  isModif ? "opacity-20 pointer-events-none" : ""
+                }`}
+                onClick={() => handleClickActive("about")}
+              >
+                À propos
+              </button>
+              <button
+                className={`md:w-[30vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer md:text-lg font-bold py-2 px-4 rounded-2xl ${
+                  isModif ? "opacity-20 pointer-events-none" : ""
+                }`}
+                onClick={() => handleClickActive("cgu")}
+              >
+                Voir nos Conditions générales d’utilisation
+              </button>
+            </div>
+
+            {/* Supprimer */}
+            <div className="flex justify-center mt-5">
+              <button
+                onClick={() => setIsDeleteConfirmVisible(true)}
+                className={`md:w-[20vw] hover:bg-red-600 hover:text-[--background] border-2 border-red-600 duration-300 cursor-pointer text-xl italic py-2 px-4 rounded-2xl ${
+                  isModif ? "opacity-20 pointer-events-none" : ""
+                }`}
+              >
+                Supprimer le compte
+              </button>
+            </div>
           </div>
         </div>
       </section>
