@@ -47,7 +47,7 @@ const InfiniteCarousel: React.FC<CarouselProps> = ({ items, speed = 50 }) => {
                 <Image
                     src={item}
                     width={500}
-                    height={500}
+                    height={200}
                     alt=''
                 ></Image>
             </div>

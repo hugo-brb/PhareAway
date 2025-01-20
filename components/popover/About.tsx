@@ -75,6 +75,19 @@ export default function About({ handleClickActive }: MenuProps) {
           </h2>
 
           <div className="pt-14 self-start md:pl-16">
+            <h2>
+              Music by{" "}
+              <a href="https://www.bensound.com" target="_blank">
+                Bensound
+              </a>
+            </h2>
+            <h2>
+              Licensed under the Bensound License (License code:
+              A9CWKP9RGP0AHRBA)
+            </h2>
+          </div>
+
+          <div className="pt-14 self-start md:pl-16">
             <h2>© phareaway.fun 2025. Tous droits réservés. </h2>
             <h2> 2 Place Doyen Gosse, 38000 Grenoble</h2>
             <h2>04.76.28.45.09</h2>
