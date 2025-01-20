@@ -8,7 +8,6 @@ interface CarouselProps {
 }
 
 const InfiniteCarousel: React.FC<CarouselProps> = ({ items, speed = 50 }) => {
-  const [isPaused, setIsPaused] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -16,7 +15,7 @@ const InfiniteCarousel: React.FC<CarouselProps> = ({ items, speed = 50 }) => {
     if (!container) return;
 
     const scroll = () => {
-      if (!isPaused && container) {
+      if (container) {
         container.scrollLeft += 1; // Increment scroll position
         if (container.scrollLeft >= container.scrollWidth / 2) {
           container.scrollLeft = 0; // Reset to the start
@@ -27,7 +26,7 @@ const InfiniteCarousel: React.FC<CarouselProps> = ({ items, speed = 50 }) => {
     const interval = setInterval(scroll, speed);
 
     return () => clearInterval(interval); // Cleanup interval on unmount
-  }, [isPaused, speed]);
+  }, [speed]);
 
   // Duplicate the items for infinite scrolling effect
   const duplicatedItems = [...items, ...items];
@@ -36,8 +35,7 @@ const InfiniteCarousel: React.FC<CarouselProps> = ({ items, speed = 50 }) => {
     <div
       className="carousel-container"
       ref={containerRef}
-      onMouseEnter={() => setIsPaused(true)} // Pause scrolling on hover
-      onMouseLeave={() => setIsPaused(false)} // Resume scrolling on mouse leave
+
     >
       <div className="carousel-content">
         {duplicatedItems.map((item, index) => (
