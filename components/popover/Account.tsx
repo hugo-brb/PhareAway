@@ -435,9 +435,9 @@ export default function Account({ handleClickActive, player }: MenuProps) {
             </div>
           )}
 
-          <div className="absolute bottom-4 w-full">
+          <div className=" w-full">
             {/* À propos / CGU */}
-            <div className="flex justify-center gap-4 md:gap-10 pt-7 md:pt-20">
+            <div className="flex justify-center gap-4 md:gap-10 pt-7 ">
               <button
                 className={`md:w-[30vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer md:text-lg font-bold py-2 px-4 rounded-2xl ${
                   isModif ? "opacity-20 pointer-events-none" : ""

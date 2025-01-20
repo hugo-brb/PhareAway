@@ -44,11 +44,6 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               height={24}
             />
           </button>
-
-          <div>
-            <SearchBar />
-          </div>
-
           {player.getIsAsso() && (
             <button
               onClick={() => handleClickActive("addEvent")}
@@ -64,6 +59,10 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               Ajouter un événement
             </button>
           )}
+
+          <div>
+            <SearchBar />
+          </div>
         </section>
         {/*Affichage des astuces*/}
         {tips === "1" && (
