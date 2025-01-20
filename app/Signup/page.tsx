@@ -98,6 +98,7 @@ export default function Signup() {
         }
       } catch (error) {
         setFormErrors((prev) => ({ ...prev, global: true }));
+        console.error(error);
       }
     }
   };
