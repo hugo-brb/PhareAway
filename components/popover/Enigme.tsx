@@ -52,7 +52,6 @@ export default function Enigme({
       handleClickActiveButton("hint");
       setShowConfirmation(false); // Fermer le popup après confirmation
     } else {
-      handleClickTips("tipsF");
       setShowConfirmation(false);
     }
   };
@@ -139,7 +138,11 @@ export default function Enigme({
             style={{ top: "15vw", right: "5vw" }}
             onClick={() => {
               if (!activeButtons.hint) {
-                setShowConfirmation(true); // Afficher le popup
+                if (player.getBeacoins() <= 100) {
+                  handleClickTips("tipsF");
+                } else {
+                  setShowConfirmation(true); // Afficher le popup
+                }
               }
             }}
           >
@@ -572,10 +575,10 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Pas assez de Beacoins"
-              cx="20vw"
-              cy="17vw"
+              cx="50%"
+              cy="50%"
               text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
-              img="/mascotte/temp.png"
+              img="/mascotte/mad.png"
               next="0"
             />
           )}
