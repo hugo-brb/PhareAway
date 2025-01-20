@@ -35,8 +35,10 @@ export default function Tips({
           top: "50%",
           width: "90%",
         }),
+        border: "22px solid transparent",
+        borderImage: "url(/icones/rope.png) 22 round",
       }}
-      className={` bg-opacity-80 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden ring-1 ring-opacity-50 ring-black`}
+      className={` bg-opacity-50 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
     >
       <button
         className={
@@ -56,10 +58,10 @@ export default function Tips({
       <div>
         <h1 className="font-bold">{title}</h1>
         <div
-          className=""
+          className="my-2"
           style={{
             width: "100%",
-            borderBottom: "1px solid lightgrey",
+            borderBottom: "1px solid grey",
           }}
         ></div>
       </div>
@@ -77,7 +79,7 @@ export default function Tips({
         className={
           next === "0"
             ? "hidden"
-            : "absolute bottom-5 right-5 transform transition-all hover:right-4 hover:pl-[1vw]"
+            : "absolute bottom-1 right-5 transform transition-all hover:right-4 hover:pl-[1vw]"
         }
         onClick={() => {
           handleClickTips(next);
