@@ -220,7 +220,7 @@ export default function Home() {
       {tips === "start" && (
         <Tips
           handleClickTips={handleClickTips}
-          title="Bienvenue sur Phare Away !"
+          title="Comment jouer ?"
           cx={30}
           cy={20}
           text={`Salut à toi, jeune moussaillon ! Je m'appelle Pharah et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me demander de t'aider à progresser. Pour cela, il te suffit de cliquer sur ma tête. Bonne chance !`}
