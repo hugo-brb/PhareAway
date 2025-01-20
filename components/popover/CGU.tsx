@@ -7,28 +7,32 @@ export default function CGU({ handleClickActive }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
       <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-        <button
-          className={`absolute top-5 left-5 transform transition-all hover:left-4 hover:pr-[1vw]`}
-          onClick={() => handleClickActive("account")}
-        >
-          <Image
-            src="/icones/arrow-back.svg"
-            alt="arrow-back"
-            width={24}
-            height={24}
-          />
-        </button>
-        <button
-          className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
-          onClick={() => handleClickActive("home")}
-        >
-          <Image
-            src="/icones/xmark-solid.svg"
-            alt="arrow-back"
-            width={24}
-            height={24}
-          />
-        </button>
+      <div className="sticky top-0 p-4 flex justify-between items-center">
+  <button
+    className="transform transition-all hover:pr-[1vw]"
+    onClick={() => handleClickActive("account")}
+  >
+    <Image
+      src="/icones/arrow-back.svg"
+      alt="arrow-back"
+      width={24}
+      height={24}
+    />
+  </button>
+
+  <button
+    className="transform transition-transform duration-300 hover:rotate-90"
+    onClick={() => handleClickActive("home")}
+  >
+    <Image
+      src="/icones/xmark-solid.svg"
+      alt="arrow-back"
+      width={24}
+      height={24}
+    />
+  </button>
+</div>
+
         <div className="flex flex-col items-center gap-7 md:px-16">
           <h1 className="text-3xl text-center font-extrabold mt-4 md:mt-0">
             Conditions générales d&apos;utilisation

@@ -1,11 +1,13 @@
 import { UsePlayer } from "@/components/model/player";
 import Image from "next/image";
+import Link from "next/link";
 
 interface DlcListProps {
   player: UsePlayer;
   onCenterChange: (center: [number, number]) => void;
   onZoomChange: (zoom: number) => void;
   onBoundsChange: (bounds: [[number, number], [number, number]]) => void;
+  handleClickActive: (a: string) => void;
 }
 //map extension : [clé][nom,coordX,coordY,[[Southwest coordinates],[Northeast coordinates]],zoom]
 const mapExtention: {
@@ -56,6 +58,7 @@ export default function DlcList({
   onCenterChange,
   onZoomChange,
   onBoundsChange,
+  handleClickActive,
 }: DlcListProps) {
   return (
     <>
@@ -95,6 +98,12 @@ export default function DlcList({
               </button>
             ) : null
           )}
+            <button 
+                className=" w-full md:w-full text-lg md:text-l font-bold rounded-3xl border-2 hover:bg-[--primary] border-[--primary] duration-300 ease-in-out"
+                onClick={() => handleClickActive("coin")}
+            >
+                +
+            </button>
         </div>
       </aside>
     </>

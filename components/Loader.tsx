@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const Loader: React.FC = () => {
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white w-[100vw] h-[100vh] z-[1000]">
+    <div className="fixed inset-0 flex items-center justify-center bg-[#FEFEFE] w-[100vw] h-[100vh] z-[1000]">
       <div className="loader"></div>{" "}
       <div className="flex flex-col items-center justify-center">
         <Image
