@@ -225,10 +225,10 @@ export default function Home() {
           cy={20}
           text={`Salut à toi, jeune moussaillon ! Je m'appelle Pharah et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me demander de t'aider à progresser. Pour cela, il te suffit de cliquer sur ma tête. Bonne chance !`}
           img="/mascotte/temp.png"
-          next="2"
+          next="0"
         />
       )}
-      {tips === "2" && (
+      {tips === "1" && (
         <Tips
           handleClickTips={handleClickTips}
           title="Page principale"
@@ -236,10 +236,10 @@ export default function Home() {
           cy={20}
           text={`Bienvenue sur la page principale, c'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
           img="/mascotte/temp.png"
-          next="3"
+          next="2"
         />
       )}
-      {tips === "3" && (
+      {tips === "2" && (
         <Tips
           handleClickTips={handleClickTips}
           title="Barre de navigation"
@@ -247,10 +247,10 @@ export default function Home() {
           cy={20}
           text={`Vous pouvez utiliser la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
           img="/mascotte/temp.png"
-          next="4"
+          next="3"
         />
       )}
-      {tips === "4" && (
+      {tips === "3" && (
         <Tips
           handleClickTips={handleClickTips}
           title="Phares"
@@ -258,10 +258,10 @@ export default function Home() {
           cy={20}
           text={`La carte est composée de plusieurs phares, ceux disposant d'une énigme sont plus gros et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des Beacoins.`}
           img="/mascotte/temp.png"
-          next="5"
+          next="4"
         />
       )}
-      {tips === "5" && (
+      {tips === "4" && (
         <Tips
           handleClickTips={handleClickTips}
           title="Beacoins"
@@ -269,10 +269,10 @@ export default function Home() {
           cy={5}
           text={`Les Beacoins sont la monnaie du jeu, vous en gagnez en résolvant des énigmes, en partageant des photos ou en achetant des packs dans la boutique. Vous pouvez les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Cliquez sur votre nombre de Beacoins ouvre également la boutique)`}
           img="/mascotte/temp.png"
-          next="6"
+          next="5"
         />
       )}
-      {tips === "6" && (
+      {tips === "5" && (
         <Tips
           handleClickTips={handleClickTips}
           title="Extensions"
@@ -280,10 +280,10 @@ export default function Home() {
           cy={30}
           text={`Les extensions sont des contenus additionnels que vous pouvez débloquer pour accéder à de nouveaux phares. Vous pouvez les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
           img="/mascotte/temp.png"
-          next="7"
+          next="6"
         />
       )}
-      {tips === "7" && (
+      {tips === "6" && (
         <Tips
           handleClickTips={handleClickTips}
           title="Fin"
@@ -291,7 +291,7 @@ export default function Home() {
           cy={20}
           text={`Vous savez tout ! Plus qu'à découvrir des incroyables phares et à résoudre des énigmes. N'hésitez pas à me redemander de l'aide si vous êtes bloqué. Bonne chance !`}
           img="/mascotte/temp.png"
-          next="8"
+          next="0"
         />
       )}
     </>
