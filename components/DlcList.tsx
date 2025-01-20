@@ -4,53 +4,57 @@ import Image from "next/image";
 interface DlcListProps {
   player: UsePlayer;
   onCenterChange: (center: [number, number]) => void;
+  onZoomChange: (zoom: number) => void;
   onBoundsChange: (bounds: [[number, number], [number, number]]) => void;
 }
-//map extension : [clé][nom,coordX,coordY,[[Southwest coordinates],[Northeast coordinates]]]
+//map extension : [clé][nom,coordX,coordY,[[Southwest coordinates],[Northeast coordinates]],zoom]
 const mapExtention: {
-  [key: number]: [string, number, number, [[number, number], [number, number]]];
+  [key: number]: [string, number, number, [[number, number], [number, number]],number];
 } = {
   0: [
     "Metropole",
-    -1.6282904,
-    49.6299822,
+        2.451967398919588,
+        47.06938852063802,
     [
-      [-5.127287501115138, 41.77913251512358],
-      [10.429352882451159, 51.69268051974335],
+        [ -14.637792105651805,34.50915037983],
+        [13.253221239308171,54.05642397818343],
     ],
+    5.6
   ],
   1: [
     "Antilles",
-    -61.577007207411725,
-    16.246965622581968,
+        -61.30745453266859,
+        15.486884303345935,
     [
-      [-61.95578838889018, 14.46119739625245],
-      [-60.47036547887585, 16.713124325221894],
+      [ -63.12086548328959,14.230760006919878],
+      [ -58.86942425461147,16.667878090878762],
     ],
+    8.6
   ],
   2: [
     "Guyane",
     -52.68573297642384,
     4.645257364913272,
     [
-      [-54.61039631211972, 2.138987213650004],
-      [-51.495772337020114, 5.9192100034690895],
-    ],
+      [ -54.113885703426575,2.614224603239319],
+      [-49.924880009263546,6.013093760262933],
+    ],8.33
   ],
   3: [
     "Reunion",
     55.52317231258425,
     -21.11796945948837,
     [
-      [55.11667817826789, -21.412319909903132],
-      [55.92279999192905, -20.84292815265113],
-    ],
+      [ 54.313572256770016,-21.87076614161982],
+      [56.27344783098964,-20.531809244925288],
+    ],9.5
   ],
 };
 
 export default function DlcList({
   player,
   onCenterChange,
+  onZoomChange,
   onBoundsChange,
 }: DlcListProps) {
   return (
@@ -63,20 +67,21 @@ export default function DlcList({
               <button
                 key={index}
                 onClick={() => {
-                  onCenterChange([
-                    mapExtention[index][1],
-                    mapExtention[index][2],
-                  ]);
-                  onBoundsChange([
-                    [
-                      mapExtention[index][3][0][0],
-                      mapExtention[index][3][0][1],
-                    ],
-                    [
-                      mapExtention[index][3][1][0],
-                      mapExtention[index][3][1][1],
-                    ],
-                  ]);
+                    onZoomChange(mapExtention[index][4]);
+                    onCenterChange([
+                        mapExtention[index][1],
+                        mapExtention[index][2],
+                    ]);
+                    onBoundsChange([
+                        [
+                        mapExtention[index][3][0][0],
+                        mapExtention[index][3][0][1],
+                        ],
+                        [
+                        mapExtention[index][3][1][0],
+                        mapExtention[index][3][1][1],
+                        ],
+                    ]);
                 }}
                 className="flex self-center items-center gap-1"
               >

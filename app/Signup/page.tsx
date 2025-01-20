@@ -246,7 +246,7 @@ export default function Signup() {
               className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg md:text-xl font-bold py-2 px-6 rounded-lg"
             />
             <div className="flex justify-center items-center gap-2 text-xs md:text-base">
-              <label htmlFor="login">tu as déjà un compte ?</label>
+              <label htmlFor="login">j'ai déjà un compte ?</label>
               <Link href="/Login" className="text-[--primary] font-bold">
                 Connectes toi ♥
               </Link>

@@ -48,12 +48,15 @@ export default function Home() {
   const [active, setActive] = useState("home");
   const [activeID, setActiveID] = useState(64);
   const [center, setCenter] = useState<[number, number]>([
-    -1.6282904, 49.6299822,
+    2.451967398919588,47.06938852063802
   ]); // Initial map center
+  // Initial map bounds
   const [bounds, setBounds] = useState<[[number, number], [number, number]]>([
-    [-5.127287501115138, 41.77913251512358],
-    [10.429352882451159, 51.69268051974335],
+    [ -14.637792105651805,34.50915037983],
+    [13.253221239308171,54.05642397818343],
   ]); // Initial map bounds
+  const [zoom, setZoom] = useState(5); // initial map zoom
+
   const player = usePlayer(session?.user?.email ?? "");
   const dlcOwned = player.getDlcUnlocked().length > 0 ? true : false;
 
@@ -76,6 +79,9 @@ export default function Home() {
   };
   const updateBounds = (newBounds: [[number, number], [number, number]]) => {
     setBounds(newBounds);
+  };
+  const updateZoom = (newzoom: number) => {
+    setZoom(newzoom);
   };
   const [markers, setMarkers] = useState<
     { id: number; longitude: number; latitude: number; popupText: string }[]
@@ -126,6 +132,8 @@ export default function Home() {
   }, [isMapReady, markersLoaded]);
   // Afficher le préloader tant que tout n'est pas chargé
 
+  
+
   const [tips, setTips] = useState("0");
   const handleClickTips = (a: string) => {
     setTips(a);
@@ -144,11 +152,12 @@ export default function Home() {
         <DlcList
           onBoundsChange={updateBounds}
           onCenterChange={updateCenter}
+          onZoomChange={updateZoom}
           player={player}
         />
       )}
       <Map
-        zoom={0}
+        zoom={zoom}
         bounds={[
           [bounds[0][0], bounds[0][1]],
           [bounds[1][0], bounds[1][1]],

@@ -50,7 +50,7 @@ export default function LandingPage() {
             phares de France ! Explorez leurs mystères, relevez des défis et laissez-vous
             émerveiller par ces gardiens de lumière. 🌟
           </p>
-          <Link href="/Rgpd" className="mt-5">
+          <Link href="/Login" className="mt-5">
             <button className=" w-fit py-2 px-4 mr-4 md:mr-0 text-lg md:text-xl font-bold rounded-3xl border-b-2 hover:bg-[--primary] border-[--primary] duration-300 ease-in-out">
               Rejoignez l’aventure dès maintenant !
             </button>
