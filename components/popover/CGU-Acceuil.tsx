@@ -13,7 +13,7 @@ export default function CGUAcceuil({ handleClickActive }: MenuProps) {
           onClick={() => handleClickActive("account")}
         ></button>
         <button
-          className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
+          className="sticky top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
           onClick={() => handleClickActive("close")}
         >
           <Image
