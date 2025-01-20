@@ -122,7 +122,7 @@ export default function Signup() {
             <div className="flex flex-col md:flex-row md:justify-between justify-center md:items-center gap-2">
               <div className="flex flex-col gap-1 ">
                 <label htmlFor="nom" className="md:ml-2 text-base font-bold">
-                  Nom
+                  Nom*
                 </label>
                 <input
                   id="nom"
@@ -142,7 +142,7 @@ export default function Signup() {
               </div>
               <div className="flex flex-col gap-1 ">
                 <label htmlFor="prenom" className="md:ml-2 text-base font-bold">
-                  Prénom
+                  Prénom*
                 </label>
                 <input
                   id="prenom"
@@ -163,7 +163,7 @@ export default function Signup() {
             </div>
             <div className="flex flex-col gap-1 ">
               <label htmlFor="user" className="ml-2 text-base font-bold">
-                Nom d&apos;utilisateur
+                Nom d&apos;utilisateur*
               </label>
               <input
                 id="user"
@@ -184,7 +184,7 @@ export default function Signup() {
 
             <div className="flex flex-col gap-1 ">
               <label htmlFor="email" className="ml-2 text-base font-bold">
-                Email
+                Email*
               </label>
               <input
                 id="email"
@@ -204,8 +204,9 @@ export default function Signup() {
 
             <div className="flex flex-col gap-1">
               <label htmlFor="mdp" className="ml-2 text-base font-bold">
-                Mot de passe
+                Mot de passe*
               </label>
+
               <input
                 id="mdp"
                 name="mdp"
@@ -214,11 +215,11 @@ export default function Signup() {
                 placeholder="Jaimelesphares38"
                 required
               />
-              <p className="text-red-500">
-                {" "}
-                {errorMdpCourt
-                  ? "Le mot de passe doit contenir au moins 8 caractères."
-                  : errorMdp
+            <p className="text-xs md:text-base">
+            </p>
+              <p className={errorMdpCourt ? "text-red-500" : "text-black"}>
+                {"Le mot de passe doit contenir au moins 8 caractères. "}
+                {errorMdp
                   ? "Les mots de passe ne correspondent pas."
                   : null}{" "}
               </p>
@@ -229,7 +230,7 @@ export default function Signup() {
 
             <div className="flex flex-col gap-1">
               <label htmlFor="mdpVerif" className="ml-2 text-base font-bold">
-                Confirmer votre mot de passe
+                Confirmer votre mot de passe*
               </label>
               <input
                 id="mdpVerif"
@@ -245,9 +246,9 @@ export default function Signup() {
               className="hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer text-lg md:text-xl font-bold py-2 px-6 rounded-lg"
             />
             <div className="flex justify-center items-center gap-2 text-xs md:text-base">
-              <label htmlFor="login">Vous avez déjà un compte !</label>
+              <label htmlFor="login">tu as déjà un compte ?</label>
               <Link href="/Login" className="text-[--primary] font-bold">
-                Connectez-vous ♥
+                Connectes toi ♥
               </Link>
             </div>
             <div className="flex justify-center items-center gap-2 md:mb-0 mb-4">
