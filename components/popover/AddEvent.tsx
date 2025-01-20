@@ -171,7 +171,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               <input
                 type="text"
                 name="name"
-                placeholder="Giveway de phares miniatures"
+                placeholder="Donnez un nom à votre événement"
                 className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
               />
             </div>
@@ -182,7 +182,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               </label>
               <textarea
                 name="description"
-                placeholder="Il s'agit de donner à chaque participant une figurine de phare"
+                placeholder="Ajoutez une description à l'événement"
                 className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
               />
             </div>
@@ -205,7 +205,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               <input
                 name="url"
                 type="url"
-                placeholder="https://www.givewayofphare.exemple"
+                placeholder="Lien vers le site de réservation, de l'asso, du phare..."
                 className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
               />
             </div>
@@ -217,7 +217,7 @@ export default function Event({ handleClickActive }: MenuProps) {
               <input
                 name="phare"
                 type="text"
-                placeholder="(Phare du) Petit minou"
+                placeholder="Nom du phare concerné"
                 className="py-2 px-6 rounded-lg text-lg outline-none focus:ring-2 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-[--primary]"
               />
             </div>
