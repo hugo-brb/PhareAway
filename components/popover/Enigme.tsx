@@ -118,21 +118,24 @@ export default function Enigme({
               </svg>
             </a>
           </h1>
-
+          <h3 className="absolute top-[4vw] right-[5vw] text-center max-w-[400px] font-bold text-lg items-center">
+              Des zones cliquables sont présentes sur l'image et contiennent une petite devinette. un bon point de départ serait le feu!
+            </h3>
+          <h3 className="absolute top-[13vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
+              Acheter un indice pour réveler les zones cliquables
+            </h3>
           <button
             className={`absolute hidden md:block ${
               activeButtons.hint ? "pointer-events-none" : ""
             }`}
-            style={{ top: "8vw", right: "5vw" }}
+            style={{ top: "15vw", right: "5vw" }}
             onClick={() => {
               if (!activeButtons.hint) {
                 setShowConfirmation(true); // Afficher le popup
               }
             }}
           >
-            <h3 className=" text-end max-w-[300px] font-bold text-lg">
-              Acheter un indice pour réveler les zones cliquables
-            </h3>
+
             <Image
               src={
                 activeButtons.hint
