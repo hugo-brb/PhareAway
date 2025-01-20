@@ -2,39 +2,34 @@
 
 import Link from "next/link";
 import { FormEvent, useState } from "react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 export default function Signup() {
-  const [errorNom, setErrorsNom] = useState<boolean>(false);
-  const [errorPrenom, setErrorsPrenom] = useState<boolean>(false);
-  const [errorPseudo, setErrorsPseudo] = useState<boolean>(false);
-  const [errorEmail, setErrorsEmail] = useState<boolean>(false);
-  const [errorMdp, setErrorsMdp] = useState<boolean>(false);
-  const [errorMdpCourt, setErrorsMdpCourt] = useState<boolean>(false);
-  const [errorGlobal, setErrorsGlobal] = useState<boolean>(false);
-  const [errors, setErrors] = useState<boolean>(false);
+  const router = useRouter();
+  const [formErrors, setFormErrors] = useState({
+    nom: false,
+    prenom: false,
+    pseudo: false,
+    email: false,
+    mdp: false,
+    mdpCourt: false,
+    global: false,
+  });
 
   const confirmString = (t: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = t.target;
 
     if (value.length >= 17) {
-      if (name === "nom") {
-        setErrorsNom(true);
-      } else if (name === "prenom") {
-        setErrorsPrenom(true);
-      } else if (name === "user") {
-        setErrorsPseudo(true);
-      }
-      setErrors(true);
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: true,
+      }));
     } else {
-      if (name === "nom") {
-        setErrorsNom(false);
-      } else if (name === "prenom") {
-        setErrorsPrenom(false);
-      } else if (name === "user") {
-        setErrorsPseudo(false);
-      }
+      setFormErrors((prev) => ({
+        ...prev,
+        [name]: false,
+      }));
     }
   };
 
@@ -49,46 +44,65 @@ export default function Signup() {
     const password = formData.get("mdp")?.toString();
     const passwordConfirm = formData.get("mdpVerif")?.toString();
 
-    // Validation des champs
+    // Reset errors
+    let hasErrors = false;
+    const newErrors = {
+      nom: false,
+      prenom: false,
+      pseudo: false,
+      email: false,
+      mdp: false,
+      mdpCourt: false,
+      global: false,
+    };
+
+    // Validation
     if (email && !/\S+@\S+\.\S+/.test(email)) {
-      setErrorsEmail(true);
-      setErrors(true);
-    } else {
-      setErrorsEmail(false);
-    }
-    if (password !== passwordConfirm) {
-      setErrorsEmail(true);
-      setErrors(true);
-    } else {
-      setErrorsMdp(false);
-    }
-    if (password && password.length < 8) {
-      setErrorsMdpCourt(true);
-      setErrors(true);
-    } else {
-      setErrorsMdp(false);
+      newErrors.email = true;
+      hasErrors = true;
     }
 
-    if (errors) {
-      const response = await fetch(`/api/auth/register`, {
-        method: "POST",
-        body: JSON.stringify({
-          nom,
-          prenom,
-          pseudo,
-          email,
-          password,
-        }),
-      });
-      if (response.ok) {
-        redirect("/Login");
-      } else {
-        setErrorsGlobal(true);
+    if (password !== passwordConfirm) {
+      newErrors.mdp = true;
+      hasErrors = true;
+    }
+
+    if (password && password.length < 8) {
+      newErrors.mdpCourt = true;
+      hasErrors = true;
+    }
+
+    setFormErrors(newErrors);
+
+    // Only proceed if there are no errors
+    if (!hasErrors) {
+      try {
+        const response = await fetch(`/api/auth/register`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nom,
+            prenom,
+            pseudo,
+            email,
+            password,
+          }),
+        });
+
+        if (response.ok) {
+          router.push("/Login");
+        } else {
+          setFormErrors((prev) => ({ ...prev, global: true }));
+        }
+      } catch (error) {
+        setFormErrors((prev) => ({ ...prev, global: true }));
+        console.error(error);
       }
     }
   };
 
-  console.log(errorGlobal);
   return (
     <>
       <main className="land flex justify-center items-center w-[100vw] h-[100vh] max-h-[100vh]">
@@ -134,11 +148,8 @@ export default function Signup() {
                   required
                 />
                 <p className="text-red-500">
-                  {errorNom ? "Le nom est trop long." : null}
+                  {formErrors.nom ? "Le nom est trop long." : null}
                 </p>
-                {/**
-                 * <p className="text-green-500">  {!errorNom ? "Le nom est valide." : null} </p>
-                 */}
               </div>
               <div className="flex flex-col gap-1 ">
                 <label htmlFor="prenom" className="md:ml-2 text-base font-bold">
@@ -154,11 +165,8 @@ export default function Signup() {
                   required
                 />
                 <p className="text-red-500">
-                  {errorPrenom ? "Le pseudo est trop long." : null}
+                  {formErrors.prenom ? "Le pseudo est trop long." : null}
                 </p>
-                {/**
-                 * <p className="text-green-500">  {!errorPrenom ? "Le pseudo est valide." : null} </p>
-                 */}
               </div>
             </div>
             <div className="flex flex-col gap-1 ">
@@ -175,11 +183,8 @@ export default function Signup() {
                 required
               />
               <p className="text-red-500">
-                {errorPseudo ? "Le pseudo est trop long." : null}
+                {formErrors.pseudo ? "Le pseudo est trop long." : null}
               </p>
-              {/**
-               * <p className="text-green-500">  {!errorPseudo ? "Le pseudo est valide." : null} </p>
-               */}
             </div>
 
             <div className="flex flex-col gap-1 ">
@@ -195,11 +200,8 @@ export default function Signup() {
                 required
               />
               <p className="text-red-500">
-                {errorEmail ? "Le mail est invalide." : null}
+                {formErrors.email ? "Le mail est invalide." : null}
               </p>
-              {/**
-               * <p className="text-green-500">  {!errorEmail ? "Le mail est valide." : null} </p>
-               */}
             </div>
 
             <div className="flex flex-col gap-1">
@@ -215,17 +217,14 @@ export default function Signup() {
                 placeholder="Jaimelesphares38"
                 required
               />
-            <p className="text-xs md:text-base">
-            </p>
-              <p className={errorMdpCourt ? "text-red-500" : "text-black"}>
-                {"Le mot de passe doit contenir au moins 8 caractères. "}
-                {errorMdp
+              <p className="text-red-500">
+                {" "}
+                {formErrors.mdpCourt
+                  ? "Le mot de passe doit contenir au moins 8 caractères."
+                  : formErrors.mdp
                   ? "Les mots de passe ne correspondent pas."
                   : null}{" "}
               </p>
-              {/**
-               * <p className="text-green-500">  {!errorMdpCourt && !errorMdp ? "Le mot de passe est valide." : null} </p>
-               */}
             </div>
 
             <div className="flex flex-col gap-1">
@@ -259,7 +258,7 @@ export default function Signup() {
           </form>
           <p className="text-red-500">
             {" "}
-            {errorPseudo
+            {formErrors.global
               ? "Une erreur est survenue lors de l'inscription."
               : null}{" "}
           </p>
