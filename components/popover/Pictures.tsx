@@ -145,13 +145,12 @@ export default function Pictures({
           className="absolute top-5 left-5"
           onClick={() => handleClickTips2("1")}
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 512 512"
-            className="w-7 h-7"
-          >
-            <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
-          </svg>
+          <Image
+            src="/mascotte/help.png"
+            alt="Aide"
+            width={75}
+            height={75}
+          ></Image>
         </button>
         <h1 className="font-ouroboros text-center self-center mt-4 text-4xl md:text-7xl">
           Importer une image
@@ -159,7 +158,7 @@ export default function Pictures({
 
         <div className="flex gap-2">
           <p className="text-center">
-            Partagez une image de phare et gagnez <b>50</b> Beacoins en
+            Partage une image de phare et gagne <b>50</b> Beacoins en
             récompense.
           </p>
           <Image
@@ -187,7 +186,7 @@ export default function Pictures({
             </div>
             <div className="flex justify-center items-center">
               <span className="font-normal text-center text-base text-gray-700">
-                Cliquer pour importer une image
+                Clique pour importer une image.
               </span>
             </div>
             <input
@@ -218,7 +217,7 @@ export default function Pictures({
               cx="50%"
               cy="50%"
               text={
-                "Bravo vous venez d'upload une image de phare, vous avez donc gagné 50 beacoins 👍"
+                "Bravo, tu viens d'uploader une image de phare, tu as donc gagné 50 Beacoins 👍"
               }
               img="/mascotte/temp.png"
               next="0"
@@ -228,11 +227,11 @@ export default function Pictures({
         {tips === "1" && (
           <Tips
             handleClickTips={handleClickTips2}
-            title="Partage de photo"
+            title="Partage de photos"
             cx="50%"
             cy="50%"
             text={
-              "Cette fonctionnalité vous permet de gagner 50 Beacoins en partageant une image de phare."
+              "Cette fonctionnalité te permet de gagner 50 Beacoins en partageant une image de phare."
             }
             img="/mascotte/temp.png"
             next="2"
@@ -241,11 +240,11 @@ export default function Pictures({
         {tips === "2" && (
           <Tips
             handleClickTips={handleClickTips2}
-            title="Partage de photo"
+            title="Partage de photos"
             cx="50%"
             cy="50%"
             text={
-              "Attention, si vous proposez une image qui ne contient pas de phare, vous ne gagnerez pas de Beacoins."
+              "Attention, si tu proposes une image qui ne contient pas de phare, tu ne gagneras pas de Beacoins."
             }
             img="/mascotte/temp.png"
             next="3"
@@ -254,11 +253,11 @@ export default function Pictures({
         {tips === "3" && (
           <Tips
             handleClickTips={handleClickTips2}
-            title="Partage de photo"
+            title="Partage de photos"
             cx="50%"
             cy="50%"
             text={
-              "Et vous ne pouvez pas partager plus d'une image de phare toutes les 24 heures. Bonne continuation !"
+              "Et tu ne peux pas partager plus d'une image de phare toutes les 24 heures. Bonne continuation !"
             }
             img="/mascotte/temp.png"
             next="0"

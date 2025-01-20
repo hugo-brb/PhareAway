@@ -79,7 +79,7 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
             />
           </button>
           <h1 className="font-ouroboros self-center text-4xl md:text-7xl">
-            PharAchat
+            PharAchats
           </h1>
           <div className=" flex flex-col">
             <h2 className=" text-[--primary] text-lg px-5 py-2">Beacoins</h2>
@@ -104,9 +104,8 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
                 {/* Affichage des extensions disponibles ou message si vide */}
                 {player.getDlcUnlocked().every((dlc) => dlc === 1) ? (
                   <p className="text-center self-center mt-4">
-                    Toutes les extensions ont été débloquées. <br />
-                    Merci pour votre confiance et à bientôt pour de nouvelles
-                    aventures !
+                    Toutes les extensions ont été débloquées. <br /> Merci pour
+                    ta confiance et à bientôt pour de nouvelles aventures !
                   </p>
                 ) : (
                   (console.log(extentions),
@@ -122,7 +121,7 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
             </div>
           </div>
           <p className=" opacity-70">
-            *30% des bénéfices engendrés par la boutique seront reversés à des
+            *30 % des bénéfices engendrés par la boutique seront reversés à des
             associations de protection des phares.
           </p>
         </section>

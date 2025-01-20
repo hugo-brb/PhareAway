@@ -13,10 +13,14 @@ export default function Menu({
 }: MenuProps) {
   return (
     <>
-      <section className=" w-[100vw] md:w-fit flex md:flex-col items-center gap-2 absolute bottom-0 md:left-7 md:top-[15%] md:bottom-28 z-50">
+      <section
+        className={` w-[100vw] md:w-fit flex md:flex-col items-center gap-2 absolute bottom-0 md:left-7 md:bottom-28 z-50 ${
+          active === "home" ? "md:top-[12%]" : "md:top-[15%]"
+        }`}
+      >
         {/* Bouton d'affichage des tips sur moyen/grands écrans */}
         <button
-          className=" hidden md:block"
+          className={`hidden md:block`}
           onClick={() => handleClickTips("1")}
         >
           <Image
@@ -24,6 +28,7 @@ export default function Menu({
             alt="Fenêtre d'aide"
             width={75}
             height={75}
+            className={` ${active === "home" ? "block" : "hidden"}`}
           />
         </button>
         <aside className="flex md:flex-col w-full h-fit md:w-fit gap-2 justify-between bg-white bg-opacity-60 rounded-t-3xl md:rounded-3xl backdrop-blur-md px-3 py-4 md:px-6 md:py-5">
@@ -43,7 +48,7 @@ export default function Menu({
               <path d="M128 0c17.7 0 32 14.3 32 32l0 32 128 0 0-32c0-17.7 14.3-32 32-32s32 14.3 32 32l0 32 48 0c26.5 0 48 21.5 48 48l0 48L0 160l0-48C0 85.5 21.5 64 48 64l48 0 0-32c0-17.7 14.3-32 32-32zM0 192l448 0 0 272c0 26.5-21.5 48-48 48L48 512c-26.5 0-48-21.5-48-48L0 192zm64 80l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm128 0l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zM64 400l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0zm112 16l0 32c0 8.8 7.2 16 16 16l32 0c8.8 0 16-7.2 16-16l0-32c0-8.8-7.2-16-16-16l-32 0c-8.8 0-16 7.2-16 16z" />
             </svg>
             <p className="hidden md:flex justify-center text-xs select-none cursor-pointer">
-              Évenements
+              Événements
             </p>
           </div>
           <hr className=" hidden md:block" />
@@ -63,7 +68,7 @@ export default function Menu({
               <path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64l0 48-128 0 0-48zm-48 48l-64 0c-26.5 0-48 21.5-48 48L0 416c0 53 43 96 96 96l256 0c53 0 96-43 96-96l0-208c0-26.5-21.5-48-48-48l-64 0 0-48C336 50.1 285.9 0 224 0S112 50.1 112 112l0 48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z" />
             </svg>
             <p className="hidden md:flex justify-center text-xs select-none cursor-pointer">
-              PharAchat
+              PharAchats
             </p>
           </div>
           <hr className=" hidden md:block" />

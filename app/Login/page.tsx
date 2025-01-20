@@ -113,12 +113,10 @@ export default function Login() {
             </button>
           </div>
 
-          <div className="flex items-center gap-2 md:text-base text-xs">
-            <label htmlFor="signup">
-              Vous n&apos;avez toujours pas de compte ?!
-            </label>
+          <div className="flex justify-center items-center gap-2 md:text-base text-xs min-w-[25vw]">
+            <label htmlFor="signup">Toujours pas de compte ?!</label>
             <Link href="/Rgpd" className="text-[--primary] font-bold">
-              Inscrivez-vous
+              Inscris-toi
             </Link>
           </div>
         </form>

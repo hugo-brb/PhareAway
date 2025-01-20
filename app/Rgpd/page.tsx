@@ -56,7 +56,7 @@ export default function Rgpd() {
         </Link>
         <section className="flex flex-col max-w-[95vw] max-h-[95vh] gap-7 bg-white bg-opacity-80 rounded-lg px-5 md:px-20 py-12 backdrop-blur-md overflow-y-scroll scrollbarhidden">
           <h1 className=" font-ouroboros text-4xl self-center">
-            Vos données !
+            Tes données !
           </h1>
           {!flipped && (
             <>
@@ -95,8 +95,8 @@ export default function Rgpd() {
                       htmlFor="useMail"
                       className=" max-w-[65vw] md:max-w-[25vw]"
                     >
-                      Permettre l&apos;utilisation de votre adresse mail pour
-                      créer et vérifier votre compte.
+                      Permets l&apos;utilisation de ton adresse mail pour créer
+                      et vérifier ton compte.
                     </label>
                     <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-700 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-[--primary]">
                       <input
@@ -113,7 +113,7 @@ export default function Rgpd() {
                       htmlFor="useName"
                       className=" max-w-[65vw] md:max-w-[25vw]"
                     >
-                      Permettre de collecter vos nom et prénom pour créer votre
+                      Permets de collecter ton nom et prénom pour créer ton
                       compte.
                     </label>
                     <label className="relative inline-block h-8 w-14 cursor-pointer rounded-full bg-gray-700 transition [-webkit-tap-highlight-color:_transparent] has-[:checked]:bg-[--primary]">
@@ -215,12 +215,12 @@ export default function Rgpd() {
                   </p>
                 </div>
                 <div className=" flex justify-center items-center gap-2 md:text-base text-sm">
-                  <label htmlFor="login">Vous avez déjà un compte !</label>
+                  <label htmlFor="login">Tu as déjà un compte !</label>
                   <Link
                     href="/Login"
                     className=" text-[--primary] font-bold cursor-pointer"
                   >
-                    Connectez-vous ♥
+                    Connecte-toi ♥
                   </Link>
                 </div>
               </form>
@@ -229,28 +229,28 @@ export default function Rgpd() {
           {flipped && (
             <>
               <p className=" max-w-[95vw] md:max-w-[45vw] text-sm md:text-base">
-                PhareAway est une application innovante et ludique qui vous
-                invite à explorer les phares de France tout en découvrant leur
-                histoire fascinante à travers des mini escape games captivants.
+                PhareAway est une application innovante et ludique qui t'invite
+                à explorer les phares de France tout en découvrant leur histoire
+                fascinante à travers des mini escape games captivants.
                 <br />
                 <br />
-                Afin de vous offrir une expérience personnalisée, nous
-                collectons certaines de vos données nécessaires à la création et
-                à la gestion de votre compte. Soyez assuré que ces informations
-                ne seront utilisées que dans ce but précis : vous permettre de
+                Afin de t'offrir une expérience personnalisée, nous collectons
+                certaines de tes données nécessaires à la création et à la
+                gestion de ton compte. Sois assuré que ces informations ne
+                seront utilisées que dans ce but précis : te permettre de
                 profiter pleinement de PhareAway. Nous garantissons qu’aucune
                 donnée ne sera exploitée à des fins commerciales, ni pour
                 l’envoi d’offres promotionnelles non sollicitées.
                 <br />
                 <br />
-                Veuillez noter que l’accès à PhareAway est réservé aux
-                utilisateurs âgés de 15 ans et plus. Nous sommes engagés à
-                protéger vos informations et à respecter votre vie privée pour
-                une expérience de jeu en toute sérénité.
+                Note que l’accès à PhareAway est réservé aux utilisateurs âgés
+                de 15 ans et plus. Nous sommes engagés à protéger tes
+                informations et à respecter ta vie privée pour une expérience de
+                jeu en toute sérénité.
                 <br />
                 <br />
-                Pour plus d’informations, n’hésitez pas à consulter la liste de
-                traitement de vos données{" "}
+                Pour plus d’informations, n’hésite pas à consulter la liste de
+                traitement de tes données {""}
                 <a
                   href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing"
                   target="_blank"

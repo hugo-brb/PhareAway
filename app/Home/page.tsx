@@ -247,7 +247,7 @@ export default function Home() {
           title="Page principale"
           cx="50%"
           cy="50%"
-          text={`Bienvenue sur la page principale, c'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
+          text={`Bienvenue sur la page principale ! C'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
           img="/mascotte/chokbar.png"
           next="2"
         />
@@ -258,7 +258,7 @@ export default function Home() {
           title="Barre de navigation"
           cx="30%"
           cy="20vw"
-          text={`Vous pouvez utiliser la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
+          text={`Tu peux utiliser la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
           img="/mascotte/happy.png"
           next="3"
         />
@@ -269,7 +269,7 @@ export default function Home() {
           title="Phares"
           cx="50%"
           cy="50%"
-          text={`La carte est composée de plusieurs phares, ceux disposant d'une énigme sont plus gros et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des Beacoins.`}
+          text={`La carte est composée de plusieurs phares. Ceux disposant d'une énigme sont plus grands et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des Beacoins.`}
           img="/mascotte/mad.png"
           next="4"
         />
@@ -280,7 +280,7 @@ export default function Home() {
           title="Beacoins"
           cx="70%"
           cy="20%"
-          text={`Les Beacoins sont la monnaie du jeu, vous en gagnez en résolvant des énigmes, en partageant des photos ou en achetant des packs dans la boutique. Vous pouvez les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Cliquez sur votre nombre de Beacoins ouvre également la boutique)`}
+          text={`Les Beacoins sont la monnaie du jeu. Tu en gagnes en résolvant des énigmes, en partageant des photos ou en achetant des packs dans la boutique. Tu peux les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Clique sur ton nombre de Beacoins pour ouvrir également la boutique.)`}
           img="/mascotte/struggle.png"
           next="5"
         />
@@ -291,7 +291,7 @@ export default function Home() {
           title="Extensions"
           cx="70%"
           cy="70%"
-          text={`Les extensions sont des contenus additionnels que vous pouvez débloquer pour accéder à de nouveaux phares. Vous pouvez les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
+          text={`Les extensions sont des contenus additionnels que tu peux débloquer pour accéder à de nouveaux phares. Tu peux les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
           img="/mascotte/uwu.png"
           next="6"
         />
@@ -302,7 +302,7 @@ export default function Home() {
           title="Fin"
           cx="50%"
           cy="50%"
-          text={`Vous savez tout ! Plus qu'à découvrir des incroyables phares et à résoudre des énigmes. N'hésitez pas à me redemander de l'aide si vous êtes bloqué. Bonne chance !`}
+          text={`Tu sais tout ! Plus qu'à découvrir des phares incroyables et à résoudre des énigmes. N'hésite pas à me redemander de l'aide si tu es bloqué. Bonne chance !`}
           img="/mascotte/temp.png"
           next="0"
         />
