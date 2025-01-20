@@ -29,7 +29,7 @@ export default function Tips({
         top: `${cy}`,
         transform: "translate(-50%, -50%)",
         backgroundImage: "url(/icones/bois.png)",
-        backgroundColor: "white",
+        backgroundColor: "rgba(255, 228, 204, 0.9)",
         ...(window.innerWidth < 768 && {
           left: "50%",
           top: "50%",
@@ -37,8 +37,10 @@ export default function Tips({
         }),
         border: "22px solid transparent",
         borderImage: "url(/icones/rope.png) 22 round",
+        borderLeft: "solid 1px black",
+        borderRight: "solid 1px black",
       }}
-      className={` bg-opacity-50 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
+      className={`bg-opacity-50 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
     >
       <button
         className={
