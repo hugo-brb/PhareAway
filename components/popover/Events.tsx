@@ -31,7 +31,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               width={75}
               height={75}
             ></Image>
-            <span className=" text-[0.7rem]">Besoin d'aide ?</span>
+            <span className=" text-[0.7rem]">Besoin d&apos;aide ?</span>
           </button>
 
           <button

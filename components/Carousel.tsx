@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import "@/app/globals.css"; // Add your CSS here
 import Image from "next/image";
 

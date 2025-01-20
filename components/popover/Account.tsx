@@ -15,7 +15,6 @@ interface MenuProps {
 
 export default function Account({ handleClickActive, player }: MenuProps) {
   const { data: session, status } = useSession();
-  const [isModifiable, setIsModifiable] = useState(false);
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
   const [hoverLh, setHoverLh] = useState(false);
   const lh = useLighthouse(1);
@@ -44,7 +43,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   };
 
   const handleToggleEdit = async () => {
-    if (isModifiable) {
+    if (isModif) {
       // Enregistrer les modifications dans l'objet `player`
       player.setNom(formValues.nom);
       player.setPrenom(formValues.prenom);
@@ -93,7 +92,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
 
         <button
           className={`absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90 ${
-            isModifiable ? "opacity-20" : ""
+            isModif ? "opacity-20" : ""
           }`}
           onClick={() => handleClickActive("home")}
         >

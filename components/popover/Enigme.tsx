@@ -101,7 +101,7 @@ export default function Enigme({
               height={75}
             ></Image>
             <span className=" hidden md:block text-[0.7rem]">
-              Besoin d'aide ?
+              Besoin d&apos;aide ?
             </span>
           </button>
 
@@ -125,7 +125,7 @@ export default function Enigme({
           </h1>
           <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] text-lg items-center">
             Des <strong>zones cliquables</strong> sont présentes sur{" "}
-            <strong>l'image</strong> et contiennent une petite devinette. <br />
+            <strong>l&apos;image</strong> et contiennent une petite devinette. <br />
             <strong>Un bon point de départ serait le feu !</strong>
           </h3>
           <h3 className="absolute top-[13vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
