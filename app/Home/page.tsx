@@ -245,7 +245,7 @@ export default function Home() {
           title="Page principale"
           cx="50%"
           cy="50%"
-          text={`Bienvenue sur la page principale ! C'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
+          text={`Bienvenue sur la page  <strong>principale</strong> ! C'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
           img="/mascotte/chokbar.png"
           next="2"
         />

@@ -1,6 +1,5 @@
 import { UsePlayer } from "@/components/model/player";
 import Image from "next/image";
-import Link from "next/link";
 
 interface DlcListProps {
   player: UsePlayer;

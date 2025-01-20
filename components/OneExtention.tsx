@@ -98,8 +98,8 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
             <Tips
               handleClickTips={handleClickTips}
               title="Confirmation d'achat"
-              cx={50}
-              cy={30}
+              cx={"57vw"}
+              cy={"30vw"}
               text={"Merci de ton achat jeune mousssaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique juste à ma droite yohoho !"}
               img="/mascotte/temp.png"
               next="0"
