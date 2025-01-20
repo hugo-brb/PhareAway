@@ -88,10 +88,6 @@ const Marker: React.FC<MarkerProps> = ({
             height={200}
           />
         )}
-        {error ? <p>{error}</p> : <p>{summary}</p>}
-        <a href={lien} target="_blank" className="text-cyan-700">
-          Lien vers le site du phare
-        </a>
         {enigme && (
           <button
             onClick={() => {
@@ -103,6 +99,10 @@ const Marker: React.FC<MarkerProps> = ({
             C&apos;est Phar&apos;ti
           </button>
         )}
+        {error ? <p>{error}</p> : <p>{summary}</p>}
+        <a href={lien} target="_blank" className="text-cyan-700">
+          Lien vers le site du phare
+        </a>
       </div>
     </div>
   );
