@@ -49,7 +49,6 @@ export default function Enigme({
       handleClickActiveButton("hint");
       setShowConfirmation(false); // Fermer le popup après confirmation
     } else {
-      handleClickTips("tipsF");
       setShowConfirmation(false);
     }
   };
@@ -119,11 +118,12 @@ export default function Enigme({
             </a>
           </h1>
           <h3 className="absolute top-[4vw] right-[5vw] text-center max-w-[400px] font-bold text-lg items-center">
-              Des zones cliquables sont présentes sur l'image et contiennent une petite devinette. un bon point de départ serait le feu!
-            </h3>
+            Des zones cliquables sont présentes sur l'image et contiennent une
+            petite devinette. un bon point de départ serait le feu!
+          </h3>
           <h3 className="absolute top-[13vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
-              Acheter un indice pour réveler les zones cliquables
-            </h3>
+            Acheter un indice pour réveler les zones cliquables
+          </h3>
           <button
             className={`absolute hidden md:block ${
               activeButtons.hint ? "pointer-events-none" : ""
@@ -131,11 +131,14 @@ export default function Enigme({
             style={{ top: "15vw", right: "5vw" }}
             onClick={() => {
               if (!activeButtons.hint) {
-                setShowConfirmation(true); // Afficher le popup
+                if (player.getBeacoins() <= 100) {
+                  handleClickTips("tipsF");
+                } else {
+                  setShowConfirmation(true); // Afficher le popup
+                }
               }
             }}
           >
-
             <Image
               src={
                 activeButtons.hint
@@ -517,10 +520,10 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Pas assez de Beacoins"
-              cx="20vw"
-              cy="17vw"
+              cx="50%"
+              cy="50%"
               text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
-              img="/mascotte/temp.png"
+              img="/mascotte/mad.png"
               next="0"
             />
           )}

@@ -35,10 +35,9 @@ export default function Tips({
           top: "50%",
           width: "90%",
         }),
-        border: "22px solid transparent",
+        borderTop: "22px solid transparent",
+        borderBottom: "22px solid transparent",
         borderImage: "url(/icones/rope.png) 22 round",
-        borderLeft: "solid 1px black",
-        borderRight: "solid 1px black",
       }}
       className={`bg-opacity-50 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
     >
@@ -88,7 +87,7 @@ export default function Tips({
         }}
       >
         <div className="flex flex-row justify-center items-center gap-1">
-          <p className="mb-1">Astuce suivante </p>
+          <p className="mb-1 font-bold">Astuce suivante </p>
           <Image
             src={"/icones/arrow-right-solid.svg"}
             alt="arrow-back"
