@@ -89,7 +89,7 @@ export default function Enigme({
           </button>
 
           <button
-            className="absolute top-5 left-5"
+            className="absolute top-[82%] md:top-5 left-5"
             onClick={() => handleClickTips("1")}
           >
             <Image
@@ -123,7 +123,7 @@ export default function Enigme({
             className={`absolute hidden md:block ${
               activeButtons.hint ? "pointer-events-none" : ""
             }`}
-            style={{ top: "12vw", right: "5vw" }}
+            style={{ top: "8vw", right: "5vw" }}
             onClick={() => {
               if (!activeButtons.hint) {
                 setShowConfirmation(true); // Afficher le popup
