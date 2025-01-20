@@ -11,45 +11,53 @@ interface DlcListProps {
 }
 //map extension : [clé][nom,coordX,coordY,[[Southwest coordinates],[Northeast coordinates]],zoom]
 const mapExtention: {
-  [key: number]: [string, number, number, [[number, number], [number, number]],number];
+  [key: number]: [
+    string,
+    number,
+    number,
+    [[number, number], [number, number]],
+    number
+  ];
 } = {
   0: [
     "Metropole",
-        2.451967398919588,
-        47.06938852063802,
+    2.451967398919588,
+    47.06938852063802,
     [
-        [ -14.637792105651805,34.50915037983],
-        [13.253221239308171,54.05642397818343],
+      [-14.637792105651805, 34.50915037983],
+      [13.253221239308171, 54.05642397818343],
     ],
-    5.6
+    5.6,
   ],
   1: [
     "Antilles",
-        -61.30745453266859,
-        15.486884303345935,
+    -61.30745453266859,
+    15.486884303345935,
     [
-      [ -63.12086548328959,14.230760006919878],
-      [ -58.86942425461147,16.667878090878762],
+      [-63.12086548328959, 14.230760006919878],
+      [-58.86942425461147, 16.667878090878762],
     ],
-    8.6
+    8.6,
   ],
   2: [
     "Guyane",
     -52.68573297642384,
     4.645257364913272,
     [
-      [ -54.113885703426575,2.614224603239319],
-      [-49.924880009263546,6.013093760262933],
-    ],8.33
+      [-54.113885703426575, 2.614224603239319],
+      [-49.924880009263546, 6.013093760262933],
+    ],
+    8.33,
   ],
   3: [
     "Reunion",
     55.52317231258425,
     -21.11796945948837,
     [
-      [ 54.313572256770016,-21.87076614161982],
-      [56.27344783098964,-20.531809244925288],
-    ],9.5
+      [54.313572256770016, -21.87076614161982],
+      [56.27344783098964, -20.531809244925288],
+    ],
+    9.5,
   ],
 };
 
@@ -70,21 +78,21 @@ export default function DlcList({
               <button
                 key={index}
                 onClick={() => {
-                    onZoomChange(mapExtention[index][4]);
-                    onCenterChange([
-                        mapExtention[index][1],
-                        mapExtention[index][2],
-                    ]);
-                    onBoundsChange([
-                        [
-                        mapExtention[index][3][0][0],
-                        mapExtention[index][3][0][1],
-                        ],
-                        [
-                        mapExtention[index][3][1][0],
-                        mapExtention[index][3][1][1],
-                        ],
-                    ]);
+                  onZoomChange(mapExtention[index][4]);
+                  onCenterChange([
+                    mapExtention[index][1],
+                    mapExtention[index][2],
+                  ]);
+                  onBoundsChange([
+                    [
+                      mapExtention[index][3][0][0],
+                      mapExtention[index][3][0][1],
+                    ],
+                    [
+                      mapExtention[index][3][1][0],
+                      mapExtention[index][3][1][1],
+                    ],
+                  ]);
                 }}
                 className="flex self-center items-center gap-1"
               >
@@ -98,12 +106,12 @@ export default function DlcList({
               </button>
             ) : null
           )}
-            <button 
-                className=" w-full md:w-full text-lg md:text-l font-bold rounded-3xl border-2 hover:bg-[--primary] border-[--primary] duration-300 ease-in-out"
-                onClick={() => handleClickActive("coin")}
-            >
-                +
-            </button>
+          <button
+            className=" w-full md:w-full text-lg md:text-l font-bold rounded-3xl border-2 hover:bg-[--primary] border-[--primary] duration-300 ease-in-out hover:text-white"
+            onClick={() => handleClickActive("coin")}
+          >
+            +
+          </button>
         </div>
       </aside>
     </>

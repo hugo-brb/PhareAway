@@ -27,6 +27,9 @@ export default function Enigme({
   const lighthouse = useLighthouse(id); //recupere les données du phare id
   const [popup, setPopup] = useState("0");
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [resolvedEnigmes, setResolvedEnigmes] = useState<boolean[]>(
+    Array(5).fill(false) // 5 énigmes initialisées à "non résolues"
+  );
 
   const handleClickPopup = (a: string) => {
     setPopup(a);
@@ -204,6 +207,14 @@ export default function Enigme({
                 text1={enigme1.gettext1()}
                 answer={enigme1.getanswer()}
                 text2={enigme1.gettext2()}
+                onResolve={(index) => {
+                  // Mettre à jour l'état pour marquer l'énigme comme résolue
+                  setResolvedEnigmes((prev) => {
+                    const updated = [...prev];
+                    updated[index] = true;
+                    return updated;
+                  });
+                }}
               />
             )}
             {popup === "2" && (
@@ -222,6 +233,14 @@ export default function Enigme({
                 text1={enigme2.gettext1()}
                 answer={enigme2.getanswer()}
                 text2={enigme2.gettext2()}
+                onResolve={(index) => {
+                  // Mettre à jour l'état pour marquer l'énigme comme résolue
+                  setResolvedEnigmes((prev) => {
+                    const updated = [...prev];
+                    updated[index] = true;
+                    return updated;
+                  });
+                }}
               />
             )}
             {popup === "3" && (
@@ -240,6 +259,14 @@ export default function Enigme({
                 text1={enigme3.gettext1()}
                 answer={enigme3.getanswer()}
                 text2={enigme3.gettext2()}
+                onResolve={(index) => {
+                  // Mettre à jour l'état pour marquer l'énigme comme résolue
+                  setResolvedEnigmes((prev) => {
+                    const updated = [...prev];
+                    updated[index] = true;
+                    return updated;
+                  });
+                }}
               />
             )}
             {popup === "4" && (
@@ -258,6 +285,14 @@ export default function Enigme({
                 text1={enigme4.gettext1()}
                 answer={enigme4.getanswer()}
                 text2={enigme4.gettext2()}
+                onResolve={(index) => {
+                  // Mettre à jour l'état pour marquer l'énigme comme résolue
+                  setResolvedEnigmes((prev) => {
+                    const updated = [...prev];
+                    updated[index] = true;
+                    return updated;
+                  });
+                }}
               />
             )}
             {popup === "5" && (
@@ -276,6 +311,14 @@ export default function Enigme({
                 text1={enigme5.gettext1()}
                 answer={enigme5.getanswer()}
                 text2={enigme5.gettext2()}
+                onResolve={(index) => {
+                  // Mettre à jour l'état pour marquer l'énigme comme résolue
+                  setResolvedEnigmes((prev) => {
+                    const updated = [...prev];
+                    updated[index] = true;
+                    return updated;
+                  });
+                }}
               />
             )}
             {/* Grand écran (Pc...) */}
@@ -287,9 +330,9 @@ export default function Enigme({
                 height: `${enigme1.getlenghtY()}vw`,
               }}
               className={`absolute rounded-lg hidden md:block ${
-                activeButtons.hint
+                resolvedEnigmes[0] || activeButtons.hint
                   ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
-                  : "cursor-default"
+                  : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("1")}
             ></button>
@@ -301,9 +344,9 @@ export default function Enigme({
                 height: `${enigme2.getlenghtY()}vw`,
               }}
               className={`absolute rounded-lg hidden md:block ${
-                activeButtons.hint
+                resolvedEnigmes[1] || activeButtons.hint
                   ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
-                  : "cursor-default"
+                  : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("2")}
             ></button>
@@ -315,9 +358,9 @@ export default function Enigme({
                 height: `${enigme3.getlenghtY()}vw`,
               }}
               className={`absolute rounded-lg hidden md:block ${
-                activeButtons.hint
+                resolvedEnigmes[2] || activeButtons.hint
                   ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
-                  : "cursor-default"
+                  : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("3")}
             ></button>
@@ -329,9 +372,9 @@ export default function Enigme({
                 height: `${enigme4.getlenghtY()}vw`,
               }}
               className={`absolute rounded-lg hidden md:block ${
-                activeButtons.hint
+                resolvedEnigmes[3] || activeButtons.hint
                   ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
-                  : "cursor-default"
+                  : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("4")}
             ></button>
@@ -342,17 +385,25 @@ export default function Enigme({
                 width: `${enigme5.getlenghtX()}vw`,
                 height: `${enigme5.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg hidden md:block group ${
-                activeButtons.hint
+              className={`absolute rounded-lg hidden md:block ${
+                activeButtons.hint ||
+                (resolvedEnigmes[0] &&
+                  resolvedEnigmes[1] &&
+                  resolvedEnigmes[2] &&
+                  resolvedEnigmes[3])
                   ? "cursor-pointer ring-2 ring-red-500 transform transition-all duration-300 bg-red-500 bg-opacity-20 hover:bg-opacity-50"
-                  : "cursor-default"
+                  : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("5")}
             >
               <div className="flex items-center justify-center w-full h-full">
                 <Image
                   className={`opacity-0 transition-opacity duration-300 ${
-                    activeButtons.hint
+                    activeButtons.hint ||
+                    (resolvedEnigmes[0] &&
+                      resolvedEnigmes[1] &&
+                      resolvedEnigmes[2] &&
+                      resolvedEnigmes[3])
                       ? "opacity-30 group-hover:opacity-60"
                       : ""
                   }`}
