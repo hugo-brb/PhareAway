@@ -206,6 +206,7 @@ export default function Signup() {
               <label htmlFor="mdp" className="ml-2 text-base font-bold">
                 Mot de passe*
               </label>
+
               <input
                 id="mdp"
                 name="mdp"
@@ -214,11 +215,11 @@ export default function Signup() {
                 placeholder="Jaimelesphares38"
                 required
               />
-              <p className="text-red-500">
-                {" "}
-                {errorMdpCourt
-                  ? "Le mot de passe doit contenir au moins 8 caractères."
-                  : errorMdp
+            <p className="text-xs md:text-base">
+            </p>
+              <p className={errorMdpCourt ? "text-red-500" : "text-black"}>
+                {"Le mot de passe doit contenir au moins 8 caractères. "}
+                {errorMdp
                   ? "Les mots de passe ne correspondent pas."
                   : null}{" "}
               </p>
