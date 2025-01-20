@@ -7,7 +7,6 @@ export default function CGU({ handleClickActive }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
       <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-        
       <div className="sticky top-0 p-4 flex justify-between items-center">
   <button
     className="transform transition-all hover:pr-[1vw]"
