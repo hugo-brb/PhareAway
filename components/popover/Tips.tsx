@@ -68,7 +68,9 @@ export default function Tips({
         ></div>
       </div>
       <div className="flex flex-row items-center justify-between h-full">
-        <span>{text}</span>
+      <span
+            dangerouslySetInnerHTML={{ __html: text }}
+        ></span>
         <Image
           className="ml-[10px]"
           src={img}
