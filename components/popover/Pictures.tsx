@@ -142,7 +142,7 @@ export default function Pictures({
           />
         </button>
         <button
-          className="absolute top-5 left-5"
+          className="absolute top-5 left-5 flex flex-col items-center"
           onClick={() => handleClickTips2("1")}
         >
           <Image
@@ -151,6 +151,7 @@ export default function Pictures({
             width={75}
             height={75}
           ></Image>
+          <span className=" text-[0.7rem]">Besoin d&apos;aide ?</span>
         </button>
         <h1 className="font-ouroboros text-center self-center mt-4 text-4xl md:text-7xl">
           Importer une image

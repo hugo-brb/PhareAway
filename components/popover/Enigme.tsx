@@ -52,7 +52,6 @@ export default function Enigme({
       handleClickActiveButton("hint");
       setShowConfirmation(false); // Fermer le popup après confirmation
     } else {
-      handleClickTips("tipsF");
       setShowConfirmation(false);
     }
   };
@@ -92,7 +91,7 @@ export default function Enigme({
           </button>
 
           <button
-            className="absolute top-[82%] md:top-5 left-5"
+            className="absolute top-[82%] md:top-5 left-5 md:flex flex-col items-center"
             onClick={() => handleClickTips("1")}
           >
             <Image
@@ -101,6 +100,9 @@ export default function Enigme({
               width={75}
               height={75}
             ></Image>
+            <span className=" hidden md:block text-[0.7rem]">
+              Besoin d&apos;aide ?
+            </span>
           </button>
 
           <h1 className=" text-3xl font-bold hover:underline hover:text-[--primary] underline-offset-2 duration-100 group">
@@ -121,9 +123,10 @@ export default function Enigme({
               </svg>
             </a>
           </h1>
-          <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] font-bold text-lg items-center">
-            Des zones cliquables sont présentes sur l'image et contiennent une
-            petite devinette. un bon point de départ serait le feu!
+          <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] text-lg items-center">
+            Des <strong>zones cliquables</strong> sont présentes sur{" "}
+            <strong>l&apos;image</strong> et contiennent une petite devinette. <br />
+            <strong>Un bon point de départ serait le feu !</strong>
           </h3>
           <h3 className="absolute top-[13vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
             Acheter un indice pour réveler les zones cliquables
@@ -135,7 +138,11 @@ export default function Enigme({
             style={{ top: "15vw", right: "5vw" }}
             onClick={() => {
               if (!activeButtons.hint) {
-                setShowConfirmation(true); // Afficher le popup
+                if (player.getBeacoins() <= 100) {
+                  handleClickTips("tipsF");
+                } else {
+                  setShowConfirmation(true); // Afficher le popup
+                }
               }
             }}
           >
@@ -568,10 +575,10 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Pas assez de Beacoins"
-              cx="20vw"
-              cy="17vw"
+              cx="50%"
+              cy="50%"
               text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
-              img="/mascotte/temp.png"
+              img="/mascotte/mad.png"
               next="0"
             />
           )}

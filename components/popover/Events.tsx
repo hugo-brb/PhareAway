@@ -22,7 +22,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
         <section className=" flex flex-col self-center mb-5 md:mb-0 gap-12 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
           <button
-            className="absolute top-5 left-5"
+            className="absolute top-5 left-5 flex flex-col items-center"
             onClick={() => handleClickTips("1")}
           >
             <Image
@@ -31,6 +31,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               width={75}
               height={75}
             ></Image>
+            <span className=" text-[0.7rem]">Besoin d&apos;aide ?</span>
           </button>
 
           <button
@@ -44,11 +45,6 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               height={24}
             />
           </button>
-
-          <div>
-            <SearchBar />
-          </div>
-
           {player.getIsAsso() && (
             <button
               onClick={() => handleClickActive("addEvent")}
@@ -64,6 +60,10 @@ export default function Events({ handleClickActive, player }: MenuProps) {
               Ajouter un événement
             </button>
           )}
+
+          <div>
+            <SearchBar />
+          </div>
         </section>
         {/*Affichage des astuces*/}
         {tips === "1" && (

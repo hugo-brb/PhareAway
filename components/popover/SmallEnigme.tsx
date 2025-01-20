@@ -145,7 +145,7 @@ export default function SmallEnigme({
             </div>
             {popupA === "Faux" && (
               <p className="text-red-700 text-center py-1">
-                Désolé, mais c'est une mauvaise réponse...
+                Désolé, mais c&apos;est une mauvaise réponse...
               </p>
             )}
             <button

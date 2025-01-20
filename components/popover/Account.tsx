@@ -15,7 +15,6 @@ interface MenuProps {
 
 export default function Account({ handleClickActive, player }: MenuProps) {
   const { data: session, status } = useSession();
-  const [isModifiable, setIsModifiable] = useState(false);
   const [isDeleteConfirmVisible, setIsDeleteConfirmVisible] = useState(false);
   const [hoverLh, setHoverLh] = useState(false);
   const lh = useLighthouse(1);
@@ -44,7 +43,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
   };
 
   const handleToggleEdit = async () => {
-    if (isModifiable) {
+    if (isModif) {
       // Enregistrer les modifications dans l'objet `player`
       player.setNom(formValues.nom);
       player.setPrenom(formValues.prenom);
@@ -93,7 +92,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
 
         <button
           className={`absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90 ${
-            isModifiable ? "opacity-20" : ""
+            isModif ? "opacity-20" : ""
           }`}
           onClick={() => handleClickActive("home")}
         >
@@ -435,9 +434,9 @@ export default function Account({ handleClickActive, player }: MenuProps) {
             </div>
           )}
 
-          <div className="absolute bottom-4 w-full">
+          <div className=" w-full">
             {/* À propos / CGU */}
-            <div className="flex justify-center gap-4 md:gap-10 pt-7 md:pt-20">
+            <div className="flex justify-center gap-4 md:gap-10 pt-7 ">
               <button
                 className={`md:w-[30vw] hover:bg-[--primary] hover:text-[--background] border-2 border-[--primary] duration-300 cursor-pointer md:text-lg font-bold py-2 px-4 rounded-2xl ${
                   isModif ? "opacity-20 pointer-events-none" : ""

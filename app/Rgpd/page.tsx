@@ -241,14 +241,15 @@ export default function Rgpd() {
           {flipped && (
             <>
               <p className=" max-w-[95vw] md:max-w-[45vw] text-sm md:text-base">
-                PhareAway est une application innovante et ludique qui t'invite
-                à explorer les phares de France tout en découvrant leur histoire
-                fascinante à travers des mini escape games captivants.
+                PhareAway est une application innovante et ludique qui
+                t&apos;invite à explorer les phares de France tout en découvrant
+                leur histoire fascinante à travers des mini escape games
+                captivants.
                 <br />
                 <br />
-                Afin de t'offrir une expérience personnalisée, nous collectons
-                certaines de tes données nécessaires à la création et à la
-                gestion de ton compte. Sois assuré que ces informations ne
+                Afin de t&apos;offrir une expérience personnalisée, nous
+                collectons certaines de tes données nécessaires à la création et
+                à la gestion de ton compte. Sois assuré que ces informations ne
                 seront utilisées que dans ce but précis : te permettre de
                 profiter pleinement de PhareAway. Nous garantissons qu’aucune
                 donnée ne sera exploitée à des fins commerciales, ni pour
