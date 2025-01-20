@@ -141,7 +141,6 @@ export default function Signup() {
         Nom
       </label>
       <label
-        htmlFor="*"
         className="md:ml-2 text-base font-bold text-red-500"
       >
         *
@@ -170,7 +169,7 @@ export default function Signup() {
                 <label htmlFor="prenom" className="md:ml-2 text-base font-bold">
                   Prénom
                 </label>
-                <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500"
+                <label    className="md:ml-2 text-base font-bold text-red-500"
   
                 >
                   *
@@ -195,7 +194,7 @@ export default function Signup() {
               <label htmlFor="user" className="ml-2 text-base font-bold">
                 Nom d&apos;utilisateur
               </label>
-              <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500"
+              <label    className="md:ml-2 text-base font-bold text-red-500"
               >
                   *
                 </label>
@@ -219,7 +218,7 @@ export default function Signup() {
                 <label htmlFor="email" className="ml-2 text-base font-bold">
                 Email
                 </label>
-              <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500"
+              <label    className="md:ml-2 text-base font-bold text-red-500"
               >
                   *
                 </label>
@@ -242,7 +241,7 @@ export default function Signup() {
                 <label htmlFor="mdp" className="ml-2 text-base font-bold">
                   Mot de passe
                 </label>
-                <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500"
+                <label    className="md:ml-2 text-base font-bold text-red-500"
   
                 >
                   *
@@ -271,7 +270,7 @@ export default function Signup() {
                 <label htmlFor="mdpVerif" className="ml-2 text-base font-bold">
                   Confirme ton mot de passe
                 </label>
-                <label htmlFor="*" className="md:ml-2 text-base font-bold text-red-500">
+                <label    className="md:ml-2 text-base font-bold text-red-500">
                   *
                 </label>
                 </span>
