@@ -5,8 +5,8 @@ interface TipsProps {
   handleClickTips: (a: string) => void;
   title: string;
   text: string;
-  cx: number;
-  cy: number;
+  cx: string;
+  cy: string;
   img: string;
   next: string;
 }
@@ -25,11 +25,10 @@ export default function Tips({
       style={{
         position: "absolute",
         maxWidth: "600px",
-        left: `${cx}vw`,
-        top: `${cy}vw`,
-        transform: "none",
+        left: `${cx}`,
+        top: `${cy}`,
+        transform: "translate(-50%, -50%)",
         ...(window.innerWidth < 768 && {
-          transform: "translate(-50%, -50%)",
           left: "50%",
           top: "50%",
           width: "90%",
@@ -39,27 +38,21 @@ export default function Tips({
     >
       <button
         className={
-          next === "0"
-            ? "absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
-            : "absolute top-5 right-5 transform transition-all hover:right-4 hover:pl-[1vw]"
+          "absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
         }
         onClick={() => {
-          handleClickTips(next);
+          handleClickTips("0");
         }}
       >
         <Image
-          src={
-            next === "0"
-              ? "/icones/xmark-solid.svg"
-              : "/icones/arrow-right-solid.svg"
-          }
+          src={"/icones/xmark-solid.svg"}
           alt="arrow-back"
           width={15}
           height={15}
         />
       </button>
       <div>
-        <h1 className="font-decoration-underline">{title}</h1>
+        <h1 className="font-bold">{title}</h1>
         <div
           className=""
           style={{
@@ -78,6 +71,26 @@ export default function Tips({
           height={100}
         />
       </div>
+      <button
+        className={
+          next === "0"
+            ? "hidden"
+            : "absolute bottom-5 right-5 transform transition-all hover:right-4 hover:pl-[1vw]"
+        }
+        onClick={() => {
+          handleClickTips(next);
+        }}
+      >
+        <div className="flex flex-row justify-center items-center gap-1">
+          <p className="mb-1">Astuce suivante </p>
+          <Image
+            src={"/icones/arrow-right-solid.svg"}
+            alt="arrow-back"
+            width={15}
+            height={15}
+          />
+        </div>
+      </button>
     </section>
   );
 }
