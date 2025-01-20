@@ -149,9 +149,6 @@ export default function Signup() {
                 <p className="text-red-500">
                   {formErrors.nom ? "Le nom est trop long." : null}
                 </p>
-                {/**
-                 * <p className="text-green-500">  {!errorNom ? "Le nom est valide." : null} </p>
-                 */}
               </div>
               <div className="flex flex-col gap-1 ">
                 <label htmlFor="prenom" className="md:ml-2 text-base font-bold">
@@ -169,9 +166,6 @@ export default function Signup() {
                 <p className="text-red-500">
                   {formErrors.prenom ? "Le pseudo est trop long." : null}
                 </p>
-                {/**
-                 * <p className="text-green-500">  {!errorPrenom ? "Le pseudo est valide." : null} </p>
-                 */}
               </div>
             </div>
             <div className="flex flex-col gap-1 ">
@@ -190,11 +184,6 @@ export default function Signup() {
               <p className="text-red-500">
                 {formErrors.pseudo ? "Le pseudo est trop long." : null}
               </p>
-              {/**
-               * <p className="text-green-500">  {!errorPseudo ? "Le pseudo est valide." : null} </p>
-               */}
-            </div>
-               */}
             </div>
 
             <div className="flex flex-col gap-1 ">
@@ -212,9 +201,6 @@ export default function Signup() {
               <p className="text-red-500">
                 {formErrors.email ? "Le mail est invalide." : null}
               </p>
-              {/**
-               * <p className="text-green-500">  {!errorEmail ? "Le mail est valide." : null} </p>
-               */}
             </div>
 
             <div className="flex flex-col gap-1">
@@ -238,9 +224,6 @@ export default function Signup() {
                   ? "Les mots de passe ne correspondent pas."
                   : null}{" "}
               </p>
-              {/**
-               * <p className="text-green-500">  {!errorMdpCourt && !errorMdp ? "Le mot de passe est valide." : null} </p>
-               */}
             </div>
 
             <div className="flex flex-col gap-1">
