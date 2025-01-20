@@ -30,7 +30,13 @@ export default function Menu({
             height={75}
             className={` ${active === "home" ? "block" : "hidden"}`}
           />
-          <span className=" text-[0.7rem]">Besoin d'aide ?</span>
+          <span
+            className={` ${
+              active === "home" ? "block" : "hidden"
+            } text-[0.7rem]`}
+          >
+            Besoin d'aide ?
+          </span>
         </button>
         <aside className="flex md:flex-col w-full h-fit md:w-fit gap-2 justify-between bg-white bg-opacity-60 rounded-t-3xl md:rounded-3xl backdrop-blur-md px-3 py-4 md:px-6 md:py-5">
           <div

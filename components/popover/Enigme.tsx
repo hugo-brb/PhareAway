@@ -92,7 +92,7 @@ export default function Enigme({
           </button>
 
           <button
-            className="absolute top-[82%] md:top-5 left-5"
+            className="absolute top-[82%] md:top-5 left-5 md:flex flex-col items-center"
             onClick={() => handleClickTips("1")}
           >
             <Image
@@ -101,6 +101,9 @@ export default function Enigme({
               width={75}
               height={75}
             ></Image>
+            <span className=" hidden md:block text-[0.7rem]">
+              Besoin d'aide ?
+            </span>
           </button>
 
           <h1 className=" text-3xl font-bold hover:underline hover:text-[--primary] underline-offset-2 duration-100 group">
