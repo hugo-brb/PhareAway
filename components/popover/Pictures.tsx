@@ -28,6 +28,7 @@ export default function Pictures({
   const [error, setError] = useState<string | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null); // Nouvel état pour l'aperçu de l'image
   const [valide, setValide] = useState<boolean | null>(null);
+  const [isPicValide, setPicValide] = useState(false);
 
   const handleImageUpload = async (
     event: React.ChangeEvent<HTMLInputElement>
@@ -81,7 +82,7 @@ export default function Pictures({
         localStorage.setItem("lastUploadTime", now.toString());
         handleClickActive("home");
       } else {
-        setError("L'image ne contient pas de phare. Veuillez réessayer.");
+        setPicValide(true);
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : "Une erreur est survenue.");
@@ -124,6 +125,7 @@ export default function Pictures({
 
   const [tips, setTips] = useState("0");
   const handleClickTips2 = (a: string) => {
+    setPicValide(false);
     setTips(a);
   };
 
@@ -263,6 +265,22 @@ export default function Pictures({
             next="0"
           />
         )}
+
+        <div className="">
+          {isPicValide && (
+            <Tips
+              handleClickTips={handleClickTips2}
+              title="Phare non reconnu"
+              cx="50%"
+              cy="50%"
+              text={
+                "Désolé, mais je ne reconnais pas de phare sur l’image que tu as partagée. Réessaie en t’assurant que le phare est bien visible !"
+              }
+              img="/mascotte/finfrerot.png"
+              next="0"
+            />
+          )}
+        </div>
       </section>
     </main>
   );
