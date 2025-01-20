@@ -131,9 +131,6 @@ export default function Home() {
     }
   }, [isMapReady, markersLoaded]);
   // Afficher le préloader tant que tout n'est pas chargé
-
-  
-
   const [tips, setTips] = useState("0");
   const handleClickTips = (a: string) => {
     setTips(a);
@@ -155,6 +152,7 @@ export default function Home() {
       {(active === "home" || active === "coin") && dlcOwned && (
         <DlcList
           onBoundsChange={updateBounds}
+          handleClickActive={handleClickActive}
           onCenterChange={updateCenter}
           onZoomChange={updateZoom}
           player={player}
@@ -280,7 +278,7 @@ export default function Home() {
           title="Beacoins"
           cx="70%"
           cy="20%"
-          text={`Les Beacoins sont la monnaie du jeu. Tu en gagnes en résolvant des énigmes, en partageant des photos ou en achetant des packs dans la boutique. Tu peux les dépenser dans la boutique pour acheter des objets exclusifs ou des indices pour les énigmes. (Clique sur ton nombre de Beacoins pour ouvrir également la boutique.)`}
+          text={`Les Beacoins sont la monnaie du jeu. Tu en gagnes en résolvant des énigmes, en partageant des photos mais tu peux aussi en acheter. dépenses les dans la boutique pour acheter des extensions exclusifs ou des indices pour les énigmes. (Clique sur ton nombre de Beacoins pour ouvrir également la boutique.)`}
           img="/mascotte/struggle.png"
           next="5"
         />

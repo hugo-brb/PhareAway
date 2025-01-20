@@ -24,19 +24,6 @@ export default function AnswerPop({
       <div className="flex flex-col items-center justify-between h-full">
         <div className="flex flex-row justify-between w-full">
           <h1 className="font-decoration-underline">{name}</h1>
-          <button
-            className="transform transition-transform duration-300 hover:rotate-90"
-            onClick={() => {
-              handleClickAnswer("0");
-            }} //fonction permettant de fermer la fenetre et revenir à l'état de base de l'élément parent
-          >
-            <Image
-              src="/icones/xmark-solid.svg"
-              alt="arrow-back"
-              width={15}
-              height={15}
-            />
-          </button>
         </div>
         <div
           className=""

@@ -149,21 +149,16 @@ export default function SmallEnigme({
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={() => {
             const input = document.querySelector("input") as HTMLInputElement;
-            if (normalizeString(input.value) === normalizeString(answer)) {
-              if (id === "5") {
-                const phareEnded: number[] = player.getPhareended();
-                if (!phareEnded.includes(lh)) {
-                  phareEnded.push(lh);
-                  player.setPhareended(phareEnded);
-                  player.setBeacoins(50);
-                  handleClickAnswer("EndFirst");
-                } else {
-                  handleClickAnswer("EndNot");
-                }
-              } else {
-                cadenas[parseInt(id) - 1] = codeLock.toString();
-                setCadenas(cadenas);
+            if (lh === 104 && id === "3") {
+              const currentHour = new Date().getHours();
+
+              if (
+                (currentHour >= 18 && currentHour <= 23) ||
+                (currentHour >= 0 && currentHour < 6)
+              ) {
                 handleClickAnswer("Vrai");
+              } else {
+                handleClickAnswer("Faux");
               }
             } else if (input.value === "feur2%i") {
               alert(`⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
@@ -179,16 +174,23 @@ export default function SmallEnigme({
 ⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄
 Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
               player.setBeacoins(2000);
-            } else if (lh === 104 && id === "3") {
-              const currentHour = new Date().getHours();
-
-              if (
-                (currentHour >= 18 && currentHour <= 23) ||
-                (currentHour >= 0 && currentHour < 6)
-              ) {
-                handleClickAnswer("Vrai");
+            } else if (
+              normalizeString(input.value) === normalizeString(answer)
+            ) {
+              if (id === "5") {
+                const phareEnded = player.getPhareended();
+                if (!phareEnded.includes(lh)) {
+                  phareEnded.push(lh);
+                  player.setPhareended(phareEnded);
+                  player.setBeacoins(50);
+                  handleClickAnswer("EndFirst");
+                } else {
+                  handleClickAnswer("EndNot");
+                }
               } else {
-                handleClickAnswer("Faux");
+                cadenas[parseInt(id) - 1] = codeLock.toString();
+                setCadenas(cadenas);
+                handleClickAnswer("Vrai");
               }
             } else {
               handleClickAnswer("Faux");
