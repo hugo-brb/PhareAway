@@ -48,14 +48,14 @@ export default function Home() {
   const [active, setActive] = useState("home");
   const [activeID, setActiveID] = useState(64);
   const [center, setCenter] = useState<[number, number]>([
-    2.451967398919588,47.06938852063802
+    -1.1728180199474099,45.58697132405058,
   ]); // Initial map center
   // Initial map bounds
   const [bounds, setBounds] = useState<[[number, number], [number, number]]>([
     [ -14.637792105651805,34.50915037983],
     [13.253221239308171,54.05642397818343],
   ]); // Initial map bounds
-  const [zoom, setZoom] = useState(5); // initial map zoom
+  const [zoom, setZoom] = useState(10); // initial map zoom
 
   const player = usePlayer(session?.user?.email ?? "");
   const dlcOwned = player.getDlcUnlocked().length > 0 ? true : false;

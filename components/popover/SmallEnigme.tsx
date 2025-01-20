@@ -121,27 +121,29 @@ export default function SmallEnigme({
         ></div>
         <span>{question}</span>
         <div className="flex flex-row">
-          <span>{text1}</span>
-          <input
-            className="flex items-center mx-1"
-            type="text"
-            placeholder="______"
-            style={{ minWidth: "32px", width: "32px" }}
-            onInput={(e) => {
-              const input = e.target as HTMLInputElement;
-              const length = Math.max(input.value.length, 3);
-              input.style.width = `${(length + 1) * 8}px`;
-            }}
-            onKeyDown={(e) => {
-              if (e.key === "Enter") {
-                const button = document.querySelector(
-                  "button.bg-blue-500"
-                ) as HTMLButtonElement;
-                button?.click(); // Simule le clic sur le bouton "Valider"
-              }
-            }}
-          />
-          <span>{text2}</span>
+          <p>
+            {text1}
+            <input
+              className="mx-1"
+              type="text"
+              placeholder="______"
+              style={{ minWidth: "32px", width: "32px" }}
+              onInput={(e) => {
+                const input = e.target as HTMLInputElement;
+                const length = Math.max(input.value.length, 3);
+                input.style.width = `${(length + 1) * 8}px`;
+              }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  const button = document.querySelector(
+                    "button.bg-blue-500"
+                  ) as HTMLButtonElement;
+                  button?.click(); // Simule le clic sur le bouton "Valider"
+                }
+              }}
+            />
+            {text2}
+          </p>
         </div>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
