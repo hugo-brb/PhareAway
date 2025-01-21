@@ -253,19 +253,20 @@ export default function Rgpd() {
                 seront utilisées que dans ce but précis : te permettre de
                 profiter pleinement de PhareAway. Nous garantissons qu’aucune
                 donnée ne sera exploitée à des fins commerciales, ni pour
-                l’envoi d’offres promotionnelles non sollicitées.
+                l&apos;envoi d&apos;offres promotionnelles non sollicitées.
                 <br />
                 <br />
-                Note que l’accès à PhareAway est réservé aux utilisateurs âgés
-                de 15 ans et plus. Nous sommes engagés à protéger tes
+                Note que l&apos;accès à PhareAway est réservé aux utilisateurs
+                âgés de 15 ans et plus. Nous sommes engagés à protéger tes
                 informations et à respecter ta vie privée pour une expérience de
                 jeu en toute sérénité.
                 <br />
                 <br />
-                En cas de littige, vous pouvez contacter le tribunal du siège de notre société, le tribunal d'instance de Grenoble.
+                En cas de littige, vous pouvez contacter le tribunal du siège de
+                notre société, le tribunal d&apos;instance de Grenoble.
                 <br />
                 <br />
-                Pour plus d’informations, n’hésite pas à consulter la liste de
+                Pour plus d&apos;informations, n&apos;hésite pas à consulter la liste de
                 traitement de tes données {""}
                 <a
                   href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing"
