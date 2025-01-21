@@ -231,7 +231,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Salut à toi, jeune moussaillon ! Je m'appelle <strong>Pharah</strong> et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me <strong>solliciter pour de l'aide</strong> lors de ta progression. Pour cela, il te suffit de cliquer sur ma tête. Bonne chance !`}
-          img="/mascotte/temp.png"
+          img="/mascotte/happy.png"
           next="0"
         />
       )}
@@ -242,7 +242,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Bienvenue sur la page <strong>principale</strong> ! C'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
-          img="/mascotte/chokbar.png"
+          img="/mascotte/happy.png"
           next="2"
         />
       )}
@@ -253,7 +253,7 @@ export default function Home() {
           cx="30%"
           cy="20vw"
           text={`Tu peux utiliser la <strong> barre de navigation</strong> pour accéder rapidement aux fonctionnalités du site.`}
-          img="/mascotte/happy.png"
+          img="/mascotte/uwu.png"
           next="3"
         />
       )}
@@ -264,7 +264,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`La carte est composée de plusieurs phares. Ceux disposant d'une <strong>énigme</strong> sont <strong>plus grands et en couleur</strong>. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des <strong>Beacoins</strong>.`}
-          img="/mascotte/mad.png"
+          img="/mascotte/fuwa.png"
           next="4"
         />
       )}
@@ -286,7 +286,7 @@ export default function Home() {
           cx="70%"
           cy="70%"
           text={`Les extensions sont des <strong>contenus additionnels</strong> que tu peux débloquer pour accéder à de <strong>nouveaux phares</strong>. Tu peux les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
-          img="/mascotte/uwu.png"
+          img="/mascotte/fuwa.png"
           next="6"
         />
       )}
@@ -297,7 +297,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Tu sais tout ! Plus qu'à <strong>découvrir des phares incroyables</strong> et à résoudre des énigmes. N'hésite pas à me redemander de l'aide en <strong>cliquant sur ma tête en haut à gauche</strong> si tu es bloqué. <strong>Bonne chance</strong> !`}
-          img="/mascotte/temp.png"
+          img="/mascotte/yay.png"
           next="0"
         />
       )}
