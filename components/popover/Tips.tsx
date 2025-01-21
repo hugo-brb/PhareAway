@@ -34,6 +34,7 @@ export default function Tips({
           left: "50%",
           top: "50%",
           width: "90%",
+          height: "90%",
         }),
         borderTop: "22px solid transparent",
         borderBottom: "22px solid transparent",
@@ -62,6 +63,7 @@ export default function Tips({
           className="my-2"
           style={{
             width: "100%",
+            height: "100%",
             borderBottom: "1px solid grey",
           }}
         ></div>

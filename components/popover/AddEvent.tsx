@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import Image from "next/image";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -36,17 +36,6 @@ export default function Event({ handleClickActive }: MenuProps) {
       const duration = formData.get("duration")?.toString();
       const price = formData.get("price")?.toString();
 
-      // Log des données avant validation
-      console.log("Données du formulaire:", {
-        name,
-        description,
-        date,
-        url,
-        phare,
-        duration,
-        price,
-      });
-
       // Validation des champs
       if (!name) newErrors.push("Le nom de l'évenement est obligatoire.");
       if (!description) newErrors.push("La description est obligatoire.");
@@ -66,8 +55,6 @@ export default function Event({ handleClickActive }: MenuProps) {
         .select("id")
         .ilike("name", `%${phare}%`)
         .single();
-
-      console.log("Résultat recherche phare:", { lighthouse, lighthouseError });
 
       if (lighthouseError) {
         newErrors.push(
@@ -97,16 +84,12 @@ export default function Event({ handleClickActive }: MenuProps) {
         id_lh: lighthouse.id,
       };
 
-      console.log("Données à insérer:", eventData);
-
       // Insertion de l'événement
-      const { data: insertData, error: insertError } = await supabase
+      const { error: insertError } = await supabase
         .from("Event")
         .insert([eventData])
         .select()
         .single();
-
-      console.log("Résultat insertion:", { insertData, insertError });
 
       if (insertError) {
         console.error("Détails de l'erreur d'insertion:", {

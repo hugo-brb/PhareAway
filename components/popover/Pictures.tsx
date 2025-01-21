@@ -19,15 +19,10 @@ interface VisionResponse {
   }>;
 }
 
-export default function Pictures({
-  handleClickActive,
-  player,
-  handleClickTips,
-}: MenuProps) {
+export default function Pictures({ handleClickActive, player }: MenuProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null); // Nouvel état pour l'aperçu de l'image
-  const [valide, setValide] = useState<boolean | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isPicValide, setPicValide] = useState(false);
 
   const handleImageUpload = async (
@@ -53,19 +48,6 @@ export default function Pictures({
       return;
     }
 
-    // Vérifie si l'utilisateur a déjà importé une image dans les 30 dernières secondes
-    /*
-    if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 1000) {
-      const remainingTime = 30 * 1000 - (now - parseInt(lastUploadTime));
-      const seconds = Math.floor(remainingTime / 1000);
-
-      setError(
-        `Veuillez patienter encore ${seconds} seconde(s) avant de pouvoir téléverser une nouvelle image.`
-      );
-      return;
-    }
-      */
-
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -74,12 +56,10 @@ export default function Pictures({
 
     try {
       const base64Image = await convertToBase64(file);
-      console.log(base64Image);
       setImagePreview(base64Image); // Met à jour l'aperçu de l'image
       const isLighthouse = await analyzeImageWithVisionAPI(base64Image);
 
       if (isLighthouse) {
-        setValide(true);
         player.setBeacoins(50);
         handleClickTips2("valide");
         localStorage.setItem("lastUploadTime", now.toString());

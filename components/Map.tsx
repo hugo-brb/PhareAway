@@ -60,7 +60,7 @@ const Map: React.FC<MapComponentProps> = ({
       mapInstance.current = null;
     };
   }, []); // On veut que ça ne s'exécute qu'une fois au montage
-
+  /*
   useEffect(() => {
     const map = mapInstance.current;
     if (!map) return; // Vérifier si la carte est initialisée
@@ -81,6 +81,7 @@ const Map: React.FC<MapComponentProps> = ({
     };
   }, []);
 
+*/
   useEffect(() => {
     if (mapInstance.current) {
       mapInstance.current.flyTo({ center: center, zoom: zoom });

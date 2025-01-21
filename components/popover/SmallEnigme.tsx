@@ -108,7 +108,7 @@ export default function SmallEnigme({
         ></div>
         {popupA === "Vrai" ? (
           <p>
-            Bravo, bonne réponse <br /> Le chiffre à la position {id} est :{" "}
+            Bravo, bonne réponse <br /> Le code du cadenas à la position {id} est :{" "}
             {codeLock}
           </p>
         ) : popupA === "EndFirst" ? (
@@ -125,7 +125,7 @@ export default function SmallEnigme({
                   className={`${popupA === "Faux" ? "bg-red-500" : ""} mx-1`}
                   type="text"
                   placeholder="______"
-                  style={{ minWidth: "32px", width: "32px" }}
+                  style={{ minWidth: "32px", width: "32px", height: "32px" }}
                   onInput={(e) => {
                     const input = e.target as HTMLInputElement;
                     const length = Math.max(input.value.length, 3);

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { UseImage, useImage } from "./Image";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 //Définition des types des méthodes de la classe Beacoin
 export type UseLighthouse = {
