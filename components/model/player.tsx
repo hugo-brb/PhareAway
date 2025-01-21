@@ -193,7 +193,6 @@ export function usePlayer(email: string) {
         const data = await response.json();
 
         if (response.ok) {
-          console.log("Mot de passe mis à jour avec succès.");
         } else {
           console.error(
             "Erreur lors de la mise à jour du mot de passe:",

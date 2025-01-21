@@ -29,7 +29,6 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
         //Stockage des id des extentions dans la variable extentions
         setExtentions(data);
       }
-      console.log(" info ", data);
     };
 
     fetchExtentions();
@@ -52,7 +51,6 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
         //Stockage des id des beacoins dans la variable beacoins
         setBeacoins(data);
       }
-      console.log(" info ", data);
     };
 
     fetchBeacoins();
@@ -105,14 +103,13 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
                     Bientot d&apos;autres extensions à venir :D
                   </p>
                 ) : (
-                  (console.log(extentions),
                   extentions.map((extention) => (
                     <OneExtention
                       key={extention.id}
                       id_extention={extention.id}
                       player={player}
                     />
-                  )))
+                  ))
                 )}
               </div>
             </div>

@@ -60,7 +60,6 @@ export function useEnigme(idPhare: number, idEnigme: number) {
             .eq("idEnigme", idEnigme)
             .single();
           if (request.data) {
-            //console.log("Requete Enigme : ", request.data);
             setEnigmeData({
               idPhare: idPhare,
               idEnigme: idEnigme,
@@ -78,7 +77,6 @@ export function useEnigme(idPhare: number, idEnigme: number) {
           }
         }
       } catch (e) {
-        console.log("on entre dans l'erreur");
         console.error("Erreur lors de la récupération des données", e);
       }
     };

@@ -15,7 +15,6 @@ export default function Login() {
 
   useEffect(() => {
     if (session !== null) {
-      console.log("Session existante -> Redirection en cours)");
       redirect("/Home");
     }
   }, [session]);
