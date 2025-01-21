@@ -1,14 +1,9 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { UsePlayer } from "@/components/model/player";
-import { createClient } from "@supabase/supabase-js";
 import OneBeacoin from "@/components/OneBeacoin";
 import OneExtention from "@/components/OneExtention";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
+import supabase from "@/lib/SupabaseClient";
 
 //Initialisation des paramêtre de la fonction Coin
 interface MenuProps {
@@ -26,7 +21,7 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
   useEffect(() => {
     const fetchExtentions = async () => {
       //Récuprération des id des extentions
-      const { data, error } = await supabaseData.from("Extension").select("id");
+      const { data, error } = await supabase.from("Extension").select("id");
 
       if (error) {
         console.error("Erreur lors de la récupération des extentions:", error);
@@ -49,7 +44,7 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
   useEffect(() => {
     const fetchBeacoins = async () => {
       //Récuprération des id des beacoins
-      const { data, error } = await supabaseData.from("Beacoin").select("id");
+      const { data, error } = await supabase.from("Beacoin").select("id");
 
       if (error) {
         console.error("Erreur lors de la récupération des beacoins:", error);
@@ -106,7 +101,8 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
                   <p className="text-center self-center mt-4">
                     Toutes les extensions ont été débloquées. <br /> Merci pour
                     ta confiance et à bientôt pour de nouvelles aventures !
-                    <br />Bientot d&apos;autres extensions à venir :D
+                    <br />
+                    Bientot d&apos;autres extensions à venir :D
                   </p>
                 ) : (
                   (console.log(extentions),

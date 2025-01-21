@@ -1,10 +1,5 @@
 import { Component } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
+import supabase from "@/lib/SupabaseClient";
 
 interface User {
   id: number;
@@ -39,7 +34,7 @@ class Asso extends Component<AssoProps, AssoState> {
 
   async create(user: User, url: string): Promise<void> {
     try {
-      await supabaseData.from("Asso").insert({
+      await supabase.from("Asso").insert({
         user,
         url,
       });
@@ -50,7 +45,7 @@ class Asso extends Component<AssoProps, AssoState> {
 
   async read(id: number): Promise<AssoData | undefined> {
     try {
-      const { data, error } = await supabaseData
+      const { data, error } = await supabase
         .from("Asso")
         .select()
         .eq("id", id);
@@ -75,7 +70,7 @@ class Asso extends Component<AssoProps, AssoState> {
 
   async update(user: User, url: string): Promise<void> {
     try {
-      await supabaseData.from("Asso").update({
+      await supabase.from("Asso").update({
         user,
         url,
       });
@@ -86,7 +81,7 @@ class Asso extends Component<AssoProps, AssoState> {
 
   async deleteEntry(id: number): Promise<void> {
     try {
-      await supabaseData.from("Asso").delete().eq("id", id);
+      await supabase.from("Asso").delete().eq("id", id);
     } catch (e) {
       console.error(e);
     }

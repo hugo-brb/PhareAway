@@ -234,7 +234,7 @@ export default function Pictures({
             cx="50%"
             cy="50%"
             text={
-              "Cette fonctionnalité te permet de gagner 50 Beacoins en partageant une image de phare."
+              "Cette fonctionnalité te permet de gagner <strong>50 Beacoins</strong> en partageant une <strong>image de phare</strong>."
             }
             img="/mascotte/temp.png"
             next="2"
@@ -247,7 +247,7 @@ export default function Pictures({
             cx="50%"
             cy="50%"
             text={
-              "Attention, si tu proposes une image qui ne contient pas de phare, tu ne gagneras pas de Beacoins."
+              "Attention, si tu proposes une image qui ne contient pas de phare, tu ne gagneras <strong>pas de Beacoins</strong>."
             }
             img="/mascotte/temp.png"
             next="3"
@@ -260,7 +260,7 @@ export default function Pictures({
             cx="50%"
             cy="50%"
             text={
-              "Et tu ne peux pas partager plus d'une image de phare toutes les 24 heures. Bonne continuation !"
+              "Et tu ne peux pas partager plus d'une image de phare toutes les <strong>24 heures</strong>. Bonne continuation !"
             }
             img="/mascotte/temp.png"
             next="0"
@@ -275,7 +275,7 @@ export default function Pictures({
               cx="50%"
               cy="50%"
               text={
-                "Désolé, mais je ne reconnais pas de phare sur l’image que tu as partagée. Réessaie en t’assurant que le phare est bien visible !"
+                "Désolé, mais je ne reconnais pas de phare sur l’image que tu as partagée. Réessaie en t’assurant que le phare est <strong>bien visible</strong> !"
               }
               img="/mascotte/finfrerot.png"
               next="0"

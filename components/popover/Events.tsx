@@ -73,7 +73,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             cx="35vw"
             cy="30vw"
             text={
-              "C'est ici que les associations peuvent ajouter des événements. Tu peux en consulter les caractéristiques, comme le lieu, le prix, la date..."
+              "C'est ici que les associations peuvent ajouter des <strong> événements </strong>. Tu peux en consulter les caractéristiques, comme <strong>le lieu</strong>, <strong>le prix</strong>, <strong>la date</strong>..."
             }
             img="/mascotte/temp.png"
             next="2"

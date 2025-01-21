@@ -337,9 +337,9 @@ export default function Enigme({
                 width: `${enigme1.getlenghtX()}vw`,
                 height: `${enigme1.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg hidden md:block ${
+              className={`absolute rounded-lg hidden md:block cursor-default ${
                 resolvedEnigmes[0] || activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? "ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("1")}
@@ -351,9 +351,9 @@ export default function Enigme({
                 width: `${enigme2.getlenghtX()}vw`,
                 height: `${enigme2.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg hidden md:block ${
+              className={`absolute rounded-lg hidden md:block cursor-default ${
                 resolvedEnigmes[1] || activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? "ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("2")}
@@ -365,9 +365,9 @@ export default function Enigme({
                 width: `${enigme3.getlenghtX()}vw`,
                 height: `${enigme3.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg hidden md:block ${
+              className={`absolute rounded-lg hidden md:block cursor-default ${
                 resolvedEnigmes[2] || activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? "ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("3")}
@@ -379,9 +379,9 @@ export default function Enigme({
                 width: `${enigme4.getlenghtX()}vw`,
                 height: `${enigme4.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg hidden md:block ${
+              className={`absolute rounded-lg hidden md:block cursor-default ${
                 resolvedEnigmes[3] || activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? "ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("4")}
@@ -393,13 +393,13 @@ export default function Enigme({
                 width: `${enigme5.getlenghtX()}vw`,
                 height: `${enigme5.getlenghtY()}vw`,
               }}
-              className={`absolute rounded-lg hidden md:block ${
+              className={`absolute rounded-lg hidden md:block cursor-default ${
                 activeButtons.hint ||
                 (resolvedEnigmes[0] &&
                   resolvedEnigmes[1] &&
                   resolvedEnigmes[2] &&
                   resolvedEnigmes[3])
-                  ? "cursor-pointer ring-2 ring-red-500 transform transition-all duration-300 bg-red-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? " ring-2 ring-red-500 transform transition-all duration-300 bg-red-400 bg-opacity-20 hover:bg-opacity-50"
                   : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("5")}
@@ -433,7 +433,7 @@ export default function Enigme({
               }}
               className={`absolute rounded-lg md:hidden ${
                 activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? "cursor-default ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
               }`}
               onClick={() => handleClickPopup("1")}
@@ -447,7 +447,7 @@ export default function Enigme({
               }}
               className={`absolute rounded-lg md:hidden ${
                 activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? "cursor-default ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
               }`}
               onClick={() => handleClickPopup("2")}
@@ -461,7 +461,7 @@ export default function Enigme({
               }}
               className={`absolute rounded-lg md:hidden ${
                 activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? "cursor-default ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
               }`}
               onClick={() => handleClickPopup("3")}
@@ -475,7 +475,7 @@ export default function Enigme({
               }}
               className={`absolute rounded-lg md:hidden ${
                 activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
+                  ? "cursor-default ring-2 ring-green-500 transform transition-all duration-300 bg-green-500 bg-opacity-20 hover:bg-opacity-50"
                   : "cursor-default"
               }`}
               onClick={() => handleClickPopup("4")}
@@ -487,10 +487,10 @@ export default function Enigme({
                 width: `${enigme5.getlenghtX() * 2}vw`,
                 height: `${enigme5.getlenghtY() * 2}vw`,
               }}
-              className={`absolute rounded-lg md:hidden group ${
+              className={`absolute rounded-lg md:hidden group cursor-default ${
                 activeButtons.hint
-                  ? "cursor-pointer ring-2 ring-red-500 transform transition-all duration-300 bg-red-500 bg-opacity-20 hover:bg-opacity-50"
-                  : "cursor-default"
+                  ? "ring-2 ring-red-500 transform transition-all duration-300 bg-red-500 bg-opacity-20 hover:bg-opacity-50"
+                  : "hidden" // Masqué si non résolu
               }`}
               onClick={() => handleClickPopup("5")}
             >
