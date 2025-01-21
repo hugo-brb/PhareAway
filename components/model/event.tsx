@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
+import supabase from "@/lib/SupabaseClient";
 
 //Définition des types des méthodes de la classe Event
 export type UseEvent = {
@@ -53,7 +48,7 @@ export function useEvent(id: number) {
       try {
         if (id >= 1) {
           //Récupération des données de la table Event dans la base de données
-          const request = await supabaseData
+          const request = await supabase
             .from("Event")
             .select()
             .eq("id", id);
@@ -95,7 +90,7 @@ export function useEvent(id: number) {
 
     //Méthode de suppression d'un évènement dans la base de données a partir de son id
     delete: async () => {
-      await supabaseData.from("Event").delete().eq("id", eventData.id);
+      await supabase.from("Event").delete().eq("id", eventData.id);
       setEventData({
         id: -1,
         name: "",

@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
+import supabase from "@/lib/SupabaseClient";
 
 //Définition des types des méthodes de la classe Lighthouse
 export type UseLighthouse = {
@@ -44,7 +39,7 @@ export function useLighthouse(id: number) {
       try {
         if (id >= 1) {
           //Récupération des données de la table Lighthouse dans la base de données
-          const request = await supabaseData
+          const request = await supabase
             .from("Lighthouse")
             .select()
             .eq("id", id)
@@ -61,7 +56,7 @@ export function useLighthouse(id: number) {
             });
           }
         }
-        const nbPhare = await supabaseData
+        const nbPhare = await supabase
           .from("Lighthouse")
           .select()
           .eq("enigme", true);

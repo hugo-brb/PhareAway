@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
+import supabase from "@/lib/SupabaseClient";
 
 //Définition des types des méthodes de la classe Image
 export type UseImage = {
@@ -35,7 +30,7 @@ export function useImage(id: number) {
       try {
         if (id >= 1) {
           //Récupération des données de la table Image dans la base de données
-          const request = await supabaseData
+          const request = await supabase
             .from("Image")
             .select()
             .eq("id", id)

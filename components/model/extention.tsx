@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { useImage, UseImage } from "./Image";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
+import supabase from "@/lib/SupabaseClient";
 
 //Définitions des types des méthodes de la classe Extention
 export type UseExtention = {
@@ -45,7 +40,7 @@ export function useExtention(id: number) {
       try {
         if (id >= 1) {
           //Réccupération des données de la table Extention dans la base de données
-          const request = await supabaseData
+          const request = await supabase
             .from("Extension")
             .select()
             .eq("id", id)
