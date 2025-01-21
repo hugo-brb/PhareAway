@@ -75,7 +75,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             text={
               "C'est ici que les associations peuvent ajouter des <strong> événements </strong>. Tu peux en consulter les caractéristiques, comme <strong>le lieu</strong>, <strong>le prix</strong>, <strong>la date</strong>..."
             }
-            img="/mascotte/temp.png"
+            img="/mascotte/happy.png"
             next="2"
           />
         )}
@@ -88,7 +88,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             text={
               "Tu peux trier et rechercher les événements par nom, par date et par prix en utilisant la barre de recherche et les boutons."
             }
-            img="/mascotte/temp.png"
+            img="/mascotte/finfrerot.png"
             next="0"
           />
         )}

@@ -274,7 +274,7 @@ export default function Home() {
           title="Beacoins"
           cx="70%"
           cy="20%"
-          text={`Les Beacoins sont <strong>la monnaie du jeu</strong>. Tu en gagnes en <strong> résolvant des énigmes </strong>, en <strong> partageant des photos </strong> mais tu peux aussi en acheter. dépenses les dans la boutique pour acheter des <strong>extensions</strong> ou des indices pour les énigmes. (Clique sur ton nombre de Beacoins pour ouvrir également la boutique.)`}
+          text={`Les Beacoins sont <strong>la monnaie du jeu</strong>. Tu en gagnes en <strong> résolvant des énigmes </strong>, en <strong> partageant des photos </strong> mais tu peux aussi en acheter. Dépenses les dans la boutique pour acheter des <strong>extensions</strong> ou des indices pour les énigmes. (Cliquer sur ton nombre de Beacoins permet également d'ouvrir la boutique.)`}
           img="/mascotte/struggle.png"
           next="5"
         />
