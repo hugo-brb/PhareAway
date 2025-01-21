@@ -4,6 +4,8 @@ export default {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./model/**/*.{js,ts,jsx,tsx,mdx}",
+    "./popover/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -13,8 +15,8 @@ export default {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        ouroboros: ['var(--font-ouroboros)'],
-        recursive: ['var(--font-recursive)'],
+        ouroboros: ["var(--font-ouroboros)"],
+        recursive: ["var(--font-recursive)"],
       },
     },
   },

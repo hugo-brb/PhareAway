@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
-import { useLighthouse } from "./lighthouse";
+import { useLighthouse } from "./Lighthouse";
 
 export type UsePlayer = {
   playerData: PlayerData;

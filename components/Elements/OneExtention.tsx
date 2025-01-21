@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import Image from "next/image";
-import { useExtention } from "./model/extention";
-import { UsePlayer } from "./model/player";
-import ConfirmStore from "@/components/popover/ConfirmStore"; // Importez le popup de confirmation
-import Tips from "@/components/popover/Tips";
-
+import { useExtention } from "../../model/Extension";
+import { UsePlayer } from "../../model/Player";
+import ConfirmStore from "@/components/Confirm/ConfirmStore"; // Importez le popup de confirmation
+import Tips from "@/components/Tips";
 
 interface OnExtentionProp {
   id_extention: number;
@@ -16,10 +15,10 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
   const image = extention.useGetImage(); // Récupère l'image de l'extension
   const [showConfirmation, setShowConfirmation] = useState(false); // État pour afficher le popup de confirmation
   const [errorMessage, setErrorMessage] = useState<string | null>(null); // État pour afficher un message d'erreur
-    const [tips, setTips] = useState("0");
-    const handleClickTips = (a: string) => {
-      setTips(a);
-    };
+  const [tips, setTips] = useState("0");
+  const handleClickTips = (a: string) => {
+    setTips(a);
+  };
 
   // Vérifie si l'extension est déjà débloquée
   const isUnlocked = player.getDlcUnlocked()[id_extention] === 1;
@@ -71,7 +70,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
           ) : (
             <Image
               className="self-center rounded-lg"
-              src="/icones/logoBaniere.webp"
+              src="/images/logos/logoBaniere.webp"
               alt="Default logo"
               width={100}
               height={100}
@@ -94,17 +93,19 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
           isError={false} // pas une erreur
         />
       )}
-        {tips==="1" && (
-            <Tips
-              handleClickTips={handleClickTips}
-              title="Confirmation d'achat"
-              cx={"56vw"}
-              cy={"30vw"}
-              text={"<strong>Merci</strong> de ton achat jeune mousssaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique <strong>juste à ma droite yohoho</strong> !"}
-              img="/mascotte/temp.webp"
-              next="0"
-            />
-          )}
+      {tips === "1" && (
+        <Tips
+          handleClickTips={handleClickTips}
+          title="Confirmation d'achat"
+          cx={"56vw"}
+          cy={"30vw"}
+          text={
+            "<strong>Merci</strong> de ton achat jeune mousssaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique <strong>juste à ma droite yohoho</strong> !"
+          }
+          img="/images/mascotte/temp.webp"
+          next="0"
+        />
+      )}
       {/* Message d'erreur */}
       {errorMessage && (
         <ConfirmStore

@@ -6,25 +6,23 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { supabase } from "@/lib/SupabaseClient";
 
-import Menu from "@/components/Menu";
-import Coin from "@/components/Coin";
-import BackHome from "@/components/BackHome";
-import AddEvent from "@/components/popover/AddEvent";
-import Events from "@/components/popover/Events";
-import Enigme from "@/components/popover/Enigme";
-import Store from "@/components/popover/Store";
-import Pictures from "@/components/popover/Pictures";
-import Account from "@/components/popover/Account";
-import About from "@/components/popover/About";
-import CGU from "@/components/popover/CGU";
-import Contact from "@/components/popover/Contact";
-import { usePlayer } from "@/components/model/player";
-import Loader from "@/components/Loader"; // Importez un composant Loader
+import Menu from "@/components/Navigation/Menu";
+import TopNav from "@/components/Navigation/TopNav";
+import BackHome from "@/components/Navigation/BackHome";
+import AddEvent from "@/components/EventsManagement/AddEvent";
+import Events from "@/popover/Events";
+import Enigme from "@/popover/Enigme";
+import Store from "@/popover/Store";
+import Pictures from "@/popover/Pictures";
+import Account from "@/popover/Account";
+import About from "@/popover/About";
+import CGU from "@/popover/CGU/CGU";
+import Contact from "@/popover/Contact";
+import { usePlayer } from "@/model/Player";
+import Loader from "@/components/Preloader/Loader";
 import { redirect } from "next/navigation";
-import DlcList from "@/components/DlcList";
-import Tips from "@/components/popover/Tips";
-import AudioPlayer from "@/components/AudioPlayer";
-import Legend from "@/components/Legend";
+import DlcList from "@/components/Navigation/DlcList";
+import Tips from "@/components/Tips";
 
 interface itemProps {
   id: number;
@@ -36,7 +34,9 @@ interface itemProps {
 }
 
 // Dynamically import the Map component without server-side rendering (SSR)
-const Map = dynamic(() => import("../../components/Map"), { ssr: false });
+const Map = dynamic(() => import("../../components/Map"), {
+  ssr: false,
+});
 // Initialize Supabase client for data
 
 export default function Home() {
@@ -138,8 +138,16 @@ export default function Home() {
 
   return (
     <>
-      {isLoading && <Loader />} {/* Affiche le préloader */}
-      <AudioPlayer />
+      {/* Affiche le préloader */}
+      {isLoading && <Loader />}
+
+      {/* Menus */}
+      <BackHome />
+      <TopNav
+        active={active}
+        handleClickActive={handleClickActive}
+        player={player}
+      />
       <Menu
         active={active}
         handleClickActive={handleClickActive}
@@ -154,6 +162,8 @@ export default function Home() {
           player={player}
         />
       )}
+
+      {/* Affichage de la carte */}
       <Map
         zoom={zoom}
         bounds={[
@@ -164,8 +174,10 @@ export default function Home() {
         markers={markers}
         handleClickActive={handleClickActive}
         handleClickActiveId={handleClickActiveId}
-        onMapLoaded={handleMapLoaded} // Transmet la fonction callback
+        onMapLoaded={handleMapLoaded}
       />
+
+      {/* Affichage des popovers au besoin */}
       {active === "calendar" && (
         <Events
           handleClickActive={handleClickActive}
@@ -201,29 +213,21 @@ export default function Home() {
       {active === "contact" && (
         <Contact handleClickActive={handleClickActive} player={player} />
       )}
-      <BackHome />
-      <Coin handleClickActive={handleClickActive} player={player} />
-      {active === "home" && <Legend />}
-      <Image
-        src="/images/soupex.webp"
-        width={75}
-        height={75}
-        alt="Logo Soupex"
-        className="hidden md:block absolute z-50 bottom-3 right-3 "
-      />
+
       {/* Bouton d'affichage des tips sur téléphone */}
       <button
         className=" md:hidden absolute left-3 top-[10vh]"
         onClick={() => handleClickTips("1")}
       >
         <Image
-          src="/mascotte/help.webp"
+          src="/images/mascotte/help.webp"
           alt="Fenêtre d'aide"
           width={50}
           height={50}
         />
       </button>
-      {/*Affichage des astuces*/}
+
+      {/*Affichage des tips*/}
       {tips === "start" && (
         <Tips
           handleClickTips={handleClickTips}
@@ -231,7 +235,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Salut à toi, jeune moussaillon ! Je m'appelle <strong>Pharah</strong> et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me <strong>solliciter pour de l'aide</strong> lors de ta progression. Pour cela, il te suffit de cliquer sur ma tête. Bonne chance !`}
-          img="/mascotte/happy.webp"
+          img="/images/mascotte/happy.webp"
           next="0"
         />
       )}
@@ -242,7 +246,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Bienvenue sur la page <strong>principale</strong> ! C'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
-          img="/mascotte/happy.webp"
+          img="/images/mascotte/happy.webp"
           next="2"
         />
       )}
@@ -253,7 +257,7 @@ export default function Home() {
           cx="30%"
           cy="20vw"
           text={`Tu peux utiliser la <strong> barre de navigation</strong> pour accéder rapidement aux fonctionnalités du site.`}
-          img="/mascotte/uwu.webp"
+          img="/images/mascotte/uwu.webp"
           next="3"
         />
       )}
@@ -264,7 +268,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`La carte est composée de plusieurs phares. Ceux disposant d'une <strong>énigme</strong> sont <strong>plus grands et en couleur</strong>. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des <strong>Beacoins</strong>.`}
-          img="/mascotte/fuwa.webp"
+          img="/images/mascotte/fuwa.webp"
           next="4"
         />
       )}
@@ -275,7 +279,7 @@ export default function Home() {
           cx="70%"
           cy="20%"
           text={`Les Beacoins sont <strong>la monnaie du jeu</strong>. Tu en gagnes en <strong> résolvant des énigmes </strong>, en <strong> partageant des photos </strong> mais tu peux aussi en acheter. Dépenses les dans la boutique pour acheter des <strong>extensions</strong> ou des indices pour les énigmes. (Cliquer sur ton nombre de Beacoins permet également d'ouvrir la boutique.)`}
-          img="/mascotte/struggle.webp"
+          img="/images/mascotte/struggle.webp"
           next="5"
         />
       )}
@@ -286,7 +290,7 @@ export default function Home() {
           cx="70%"
           cy="70%"
           text={`Les extensions sont des <strong>contenus additionnels</strong> que tu peux débloquer pour accéder à de <strong>nouveaux phares</strong>. Tu peux les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
-          img="/mascotte/fuwa.webp"
+          img="/images/mascotte/fuwa.webp"
           next="6"
         />
       )}
@@ -297,10 +301,19 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Tu sais tout ! Plus qu'à <strong>découvrir des phares incroyables</strong> et à résoudre des énigmes. N'hésite pas à me redemander de l'aide en <strong>cliquant sur ma tête en haut à gauche</strong> si tu es bloqué. <strong>Bonne chance</strong> !`}
-          img="/mascotte/yay.webp"
+          img="/images/mascotte/yay.webp"
           next="0"
         />
       )}
+
+      {/* Logo de SoupexSoftware */}
+      <Image
+        src="/images/logos/soupex.webp"
+        width={75}
+        height={75}
+        alt="Logo Soupex"
+        className="hidden md:block absolute z-50 bottom-3 right-3 "
+      />
     </>
   );
 }

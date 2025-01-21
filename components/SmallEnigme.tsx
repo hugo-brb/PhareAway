@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
-import { UsePlayer } from "@/components/model/player";
+import { UsePlayer } from "@/model/Player";
 
 interface SmallEnigmeProps {
   handleClickPopup: (a: string) => void;
@@ -108,8 +108,8 @@ export default function SmallEnigme({
         ></div>
         {popupA === "Vrai" ? (
           <p>
-            Bravo, bonne réponse <br /> Le code du cadenas à la position {id} est :{" "}
-            {codeLock}
+            Bravo, bonne réponse <br /> Le code du cadenas à la position {id}{" "}
+            est : {codeLock}
           </p>
         ) : popupA === "EndFirst" ? (
           <p>Bravo ! 50 Beacoins ont étaient ajouté à votre compte.</p>

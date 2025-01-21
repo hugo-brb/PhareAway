@@ -7,7 +7,7 @@ const Loader: React.FC = () => {
       <div className="loader"></div>{" "}
       <div className="flex flex-col items-center justify-center">
         <Image
-          src="/icones/loadloop.webp"
+          src="/loader/loadloop.webp"
           alt="loop"
           width={300}
           height={300}

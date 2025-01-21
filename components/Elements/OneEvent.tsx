@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { useEvent } from "@/components/model/event";
-import { useLighthouse } from "./model/lighthouse";
-import { useImage } from "./model/Image";
+import { useEvent } from "../../model/Event";
+import { useLighthouse } from "../../model/Lighthouse";
+import { useImage } from "../../model/Image";
 
 interface OnEventProp {
   id_Event: number;
@@ -36,7 +36,7 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
         ) : (
           <Image
             className="self-center rounded-lg"
-            src="/icones/logoBaniere.webp"
+            src="/images/logos/logoBaniere.webp"
             alt="Default logo event"
             width={150}
             height={150}

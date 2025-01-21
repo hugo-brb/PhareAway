@@ -48,7 +48,7 @@ export default function Rgpd() {
       <main className=" land flex justify-center items-center w-[100vw] h-[100vh] font-bold">
         <Link href="/" className=" absolute top-2 left-2">
           <Image
-            src="/icones/logoBaniere.webp"
+            src="/images/logos/logoBaniere.webp"
             alt="Logo"
             width={150}
             height={150}
@@ -73,19 +73,6 @@ export default function Rgpd() {
                 method="post"
                 className=" flex flex-col gap-3 max-h-[90vh] mb-4"
               >
-                <p
-                  onClick={handleFlipped}
-                  className=" text-[--primary] cursor-pointer flex items-center gap-2 underline underline-offset-2"
-                >
-                  En savoir plus sur l&apos;utilisation de vos données
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 448 512"
-                    className=" fill-[--primary] size-4 -rotate-45"
-                  >
-                    <path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
-                  </svg>
-                </p>
                 <p
                   onClick={handleFlipped}
                   className=" text-[--primary] cursor-pointer flex items-center gap-2 underline underline-offset-2"
@@ -266,8 +253,8 @@ export default function Rgpd() {
                 notre société, le tribunal d&apos;instance de Grenoble.
                 <br />
                 <br />
-                Pour plus d&apos;informations, n&apos;hésite pas à consulter la liste de
-                traitement de tes données {""}
+                Pour plus d&apos;informations, n&apos;hésite pas à consulter la
+                liste de traitement de tes données {""}
                 <a
                   href="https://docs.google.com/spreadsheets/d/1ZIKauep4BZjLMNJDZaH3u0IWwHc94P4qpu0sP19GdE0/edit?usp=sharing"
                   target="_blank"

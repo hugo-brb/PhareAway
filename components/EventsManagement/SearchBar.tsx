@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import OneEvent from "@/components/OneEvent";
+import OneEvent from "@/components/Elements/OneEvent";
 import Image from "next/image"; // Image du bouton "loop"
 import FilterButtons from "./SortButton";
 import { supabase } from "@/lib/SupabaseClient";
@@ -176,7 +176,7 @@ const SearchBar = () => {
               <Image
                 width={24}
                 height={24}
-                src="../icones/loop.svg"
+                src="/icones/loop.svg"
                 alt="Sort Icon"
               />
 
@@ -201,7 +201,7 @@ const SearchBar = () => {
             <Image
               width={24}
               height={24}
-              src="../icones/loop.svg"
+              src="/icones/loop.svg"
               alt="Search Icon"
             />
           </button>

@@ -116,7 +116,7 @@ export default function Signup() {
       <main className="land flex justify-center items-center w-[100vw] h-[100vh] max-h-[100vh]">
         <Link href="/" className=" absolute top-2 left-2">
           <Image
-            src="/icones/logoBaniere.webp"
+            src="/images/logos/logoBaniere.webp"
             alt="Logo"
             width={150}
             height={150}

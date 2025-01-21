@@ -1,10 +1,10 @@
-import { UsePlayer } from "../model/player";
+import { UsePlayer } from "../model/Player";
 import Image from "next/image";
 
 import { useState } from "react";
 import React from "react";
-import SearchBar from "./SearchBar";
-import Tips from "@/components/popover/Tips";
+import SearchBar from "@/components/EventsManagement/SearchBar";
+import Tips from "@/components/Tips";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -26,7 +26,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             onClick={() => handleClickTips("1")}
           >
             <Image
-              src="/mascotte/help.webp"
+              src="/images/mascotte/help.webp"
               alt="Aide"
               width={75}
               height={75}
@@ -75,7 +75,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             text={
               "C'est ici que les associations peuvent ajouter des <strong> événements </strong>. Tu peux en consulter les caractéristiques, comme <strong>le lieu</strong>, <strong>le prix</strong>, <strong>la date</strong>..."
             }
-            img="/mascotte/happy.webp"
+            img="/images/mascotte/happy.webp"
             next="2"
           />
         )}
@@ -88,7 +88,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
             text={
               "Tu peux trier et rechercher les événements par nom, par date et par prix en utilisant la barre de recherche et les boutons."
             }
-            img="/mascotte/finfrerot.webp"
+            img="/images/mascotte/finfrerot.webp"
             next="0"
           />
         )}

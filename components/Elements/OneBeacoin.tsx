@@ -1,8 +1,8 @@
 import React from "react";
 import Image from "next/image";
-import { useBeacoin } from "./model/Beacoin";
+import { useBeacoin } from "../../model/Beacoin";
 import Link from "next/link";
-import { UsePlayer } from "./model/player";
+import { UsePlayer } from "../../model/Player";
 
 interface OnBeacoinProp {
   id_beacoin: number;
@@ -53,7 +53,7 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin, player }) => {
           ) : (
             <Image
               className="self-center rounded-lg"
-              src="/icones/logoBaniere.webp"
+              src="/images/logos/logoBaniere.webp"
               alt="Default logo"
               width={100}
               height={100}
@@ -92,7 +92,7 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin, player }) => {
           ) : (
             <Image
               className="self-center rounded-lg"
-              src="/icones/logoBaniere.webp"
+              src="/images/logos/logoBaniere.webp"
               alt="Default logo"
               width={100}
               height={100}

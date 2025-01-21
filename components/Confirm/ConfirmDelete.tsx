@@ -1,4 +1,4 @@
-import type { UsePlayer } from "@/components/model/player";
+import type { UsePlayer } from "@/model/Player";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;

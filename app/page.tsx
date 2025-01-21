@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import CGU from "@/components/popover/CGU-Acceuil"; // Ensure this component exists and handles the display of CGU
+import CGU from "@/popover/CGU/CGU-Accueil";
 import InfiniteCarousel from "@/components/Carousel";
 
 export default function LandingPage() {
@@ -104,7 +104,7 @@ export default function LandingPage() {
       </button>
       {/* Footer */}
       <Image
-        src="/images/soupex.webp"
+        src="/images/logos/soupex.webp"
         alt="Logo SoupexSoftware"
         width={100}
         height={100}

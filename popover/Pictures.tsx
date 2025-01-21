@@ -1,8 +1,8 @@
 import { useState } from "react";
 import Image from "next/image";
-import { UsePlayer } from "../model/player";
+import { UsePlayer } from "../model/Player";
 import axios from "axios";
-import Tips from "@/components/popover/Tips";
+import Tips from "@/components/Tips";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -130,7 +130,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           onClick={() => handleClickTips2("1")}
         >
           <Image
-            src="/mascotte/help.webp"
+            src="/images/mascotte/help.webp"
             alt="Aide"
             width={75}
             height={75}
@@ -218,7 +218,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
             text={
               "Cette fonctionnalité te permet de gagner <strong>50 Beacoins</strong> en partageant une <strong>image de phare</strong>."
             }
-            img="/mascotte/happy.webp"
+            img="/images/mascotte/happy.webp"
             next="2"
           />
         )}
@@ -231,7 +231,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
             text={
               "Attention, si tu proposes une image qui ne contient pas de phare, tu ne gagneras <strong>pas de Beacoins</strong>."
             }
-            img="/mascotte/mad.webp"
+            img="/images/mascotte/mad.webp"
             next="3"
           />
         )}
@@ -244,7 +244,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
             text={
               "Et tu ne peux pas partager plus d'une image de phare toutes les <strong>24 heures</strong>. Bonne continuation !"
             }
-            img="/mascotte/struggle.webp"
+            img="/images/mascotte/struggle.webp"
             next="0"
           />
         )}
@@ -259,7 +259,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
               text={
                 "Désolé, mais je ne reconnais pas de phare sur l’image que tu as partagée. Réessaie en t’assurant que le phare est <strong>bien visible</strong> !"
               }
-              img="/mascotte/finfrerot.webp"
+              img="/images/mascotte/finfrerot.webp"
               next="0"
             />
           )}

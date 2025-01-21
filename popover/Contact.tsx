@@ -1,5 +1,5 @@
 import Image from "next/image";
-import type { UsePlayer } from "@/components/model/player";
+import type { UsePlayer } from "@/model/Player";
 import { useState, FormEvent } from "react";
 
 interface MenuProps {

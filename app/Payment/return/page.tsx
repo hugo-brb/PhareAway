@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState, Suspense } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { usePlayer } from "@/components/model/player";
+import { usePlayer } from "@/model/Player";
 
 function ReturnPageContent() {
   const searchParams = useSearchParams();

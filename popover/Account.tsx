@@ -3,10 +3,10 @@ import { redirect } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
-import { UsePlayer } from "@/components/model/player";
-import { useLighthouse } from "../model/lighthouse";
+import { UsePlayer } from "@/model/Player";
+import { useLighthouse } from "../model/Lighthouse";
 
-import ConfirmDelete from "@/components/popover/ConfirmDelete";
+import ConfirmDelete from "@/components/Confirm/ConfirmDelete";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
@@ -136,7 +136,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
                 </span>
               </div>
               <div
-                className={` fixed bg-white px-4 py-2 rounded-xl top-[30vh] -translate-x-4 duration-0 flex flex-col justify-start items-center gap-4 ${
+                className={` fixed bg-white px-4 py-2 rounded-xl top-[30vh] z-50 -translate-x-4 duration-0 flex flex-col justify-start items-center gap-4 ${
                   hoverLh ? "visible" : "hidden"
                 }`}
               >

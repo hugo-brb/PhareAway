@@ -1,12 +1,12 @@
-import { useEnigme } from "@/components/model/EnigmeInterface";
-import { useLighthouse } from "@/components/model/lighthouse";
+import { useEnigme } from "@/model/EnigmeInterface";
+import { useLighthouse } from "@/model/Lighthouse";
 import { useState } from "react";
-import { UsePlayer } from "../model/player";
-import SmallEnigme from "@/components/popover/SmallEnigme";
+import { UsePlayer } from "../model/Player";
+import SmallEnigme from "@/components/SmallEnigme";
 import Image from "next/image";
-import Tips from "@/components/popover/Tips";
+import Tips from "@/components/Tips";
 
-import ConfirmHint from "@/components/popover/ConfirmHint"; // Import du popup personnalisé
+import ConfirmHint from "@/components/Confirm/ConfirmHint"; // Import du popup personnalisé
 
 interface EnigmeProps {
   handleClickActive: (a: string) => void;
@@ -95,7 +95,7 @@ export default function Enigme({
             onClick={() => handleClickTips("1")}
           >
             <Image
-              src="/mascotte/help.webp"
+              src="/images/mascotte/help.webp"
               alt="Aide"
               width={75}
               height={75}
@@ -523,7 +523,7 @@ export default function Enigme({
               text={
                 "C'est ici que tu pourras résoudre des <strong>énigmes</strong>, en apprendre plus sur le phare et surtout, gagner des <strong>Beacoins</strong>."
               }
-              img="/mascotte/happy.webp"
+              img="/images/mascotte/happy.webp"
               next="2"
             />
           )}
@@ -536,7 +536,7 @@ export default function Enigme({
               text={
                 "Des <strong>zones cliquables</strong> sont présentes sur l'image et contiennent une petite <strong>devinette</strong> en rapport avec le lieu et le phare. Essayez de les trouver !"
               }
-              img="/mascotte/help.webp"
+              img="/images/mascotte/help.webp"
               next="3"
             />
           )}
@@ -549,7 +549,7 @@ export default function Enigme({
               text={
                 "Pour t'aider, tu peux acheter des <strong>indices</strong> qui te révèleront les <strong>zones</strong> sur l'image, mais attention, ils coûtent 100 Beacoins et tu les <strong>perdras</strong> si tu quittes le phare."
               }
-              img="/mascotte/fuwa.webp"
+              img="/images/mascotte/fuwa.webp"
               next="4"
             />
           )}
@@ -562,7 +562,7 @@ export default function Enigme({
               text={
                 "Lorsque tu as trouvé une <strong>énigme</strong>, elle apparaitra ici, et il ne te reste qu'à répondre à la question."
               }
-              img="/mascotte/uwu.webp"
+              img="/images/mascotte/uwu.webp"
               next="5"
             />
           )}
@@ -573,7 +573,7 @@ export default function Enigme({
               cx="50%"
               cy="50%"
               text="Chaque phare contient <strong>5</strong> énigmes, <strong>4</strong> d'entre elles te donneront le code du cadenas, et la dernière te permettras de le <strong>déverrouiller</strong>. Une fois déverrouillé, le phare sera considéré comme <strong>complété</strong>. Et tu recevras une récompense de <strong>50 Beacoins</strong>. Bonne chance !"
-              img="/mascotte/happy.webp"
+              img="/images/mascotte/happy.webp"
               next="0"
             />
           )}
@@ -584,7 +584,7 @@ export default function Enigme({
               cx="50%"
               cy="50%"
               text="Désolé, mais tu n'as pas assez de <strong>Beacoins</strong> pour acheter les indices."
-              img="/mascotte/mad.webp"
+              img="/images/mascotte/mad.webp"
               next="0"
             />
           )}
@@ -595,7 +595,7 @@ export default function Enigme({
               cx="50%"
               cy="50%"
               text="Tu as resolu toutes les enigmes de ce phare, tu as gagné 50 Beacoins !"
-              img="/mascotte/yay.webp"
+              img="/images/mascotte/yay.webp"
               next="0"
             />
           )}

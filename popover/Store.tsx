@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { UsePlayer } from "@/components/model/player";
-import OneBeacoin from "@/components/OneBeacoin";
-import OneExtention from "@/components/OneExtention";
+import { UsePlayer } from "@/model/Player";
+import OneBeacoin from "@/components/Elements/OneBeacoin";
+import OneExtention from "@/components/Elements/OneExtention";
 import { supabase } from "@/lib/SupabaseClient";
 
 //Initialisation des paramêtre de la fonction Coin

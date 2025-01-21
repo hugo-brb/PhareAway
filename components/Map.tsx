@@ -2,7 +2,7 @@
 import React, { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import { createRoot } from "react-dom/client";
-import Marker from "@/components/OneMarker";
+import Marker from "@/components/Elements/OneMarker";
 import "mapbox-gl/dist/mapbox-gl.css";
 
 type MapComponentProps = {
