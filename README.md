@@ -121,55 +121,88 @@ Phare Away is built with **React**, **Next.js**, and **Tailwind CSS** to ensure 
     │       ├── Gravitas.woff2
     │       ├── Ouroboros.woff2
     │       ├── Recursive-Bold.ttf
-    │       ├── Recursive.woff2
+    │       └── Recursive.woff2
     ├── components/
-    │   ├── BackHome.tsx
-    │   ├── Coin.tsx
-    │   ├── DlcList.tsx
-    │   ├── Loader.tsx
+    │   ├── Carousel.tsx
     │   ├── Map.tsx
-    │   ├── Menu.tsx
-    │   ├── OneBeacoin.tsx
-    │   ├── OneEvent.tsx
-    │   ├── OneExtention.tsx
-    │   ├── OneMarker.tsx
-    │   ├── topNav.tsx
-    │   ├── model/
-    │   │   ├── Beacoin.tsx
-    │   │   ├── EnigmeInterface.tsx
-    │   │   ├── Image.tsx
-    │   │   ├── asso.tsx
-    │   │   ├── event.tsx
-    │   │   ├── extention.tsx
-    │   │   ├── lighthouse.tsx
-    │   │   └── player.tsx
-    │   └── popover/
-    │       ├── About.tsx
-    │       ├── Account.tsx
-    │       ├── AddEvent.tsx
-    │       ├── Answer.tsx
-    │       ├── CGU-Acceuil.tsx
-    │       ├── CGU.tsx
-    │       ├── ConfirmDelete.tsx
-    │       ├── ConfirmHint.tsx
-    │       ├── ConfirmStore.tsx
-    │       ├── Contact.tsx
-    │       ├── Enigme.tsx
-    │       ├── Events.tsx
-    │       ├── Pictures.tsx
-    │       ├── SearchBar.tsx
-    │       ├── SmallEnigme.tsx
-    │       ├── SortButton.tsx
-    │       ├── Store.tsx
-    │       └── Tips.tsx
+    │   ├── SmallEnigme.tsx
+    │   ├── Tips.tsx
+    │   ├── Confirm/
+    │   │   ├── ConfirmDelete.tsx
+    │   │   ├── ConfirmHint.tsx
+    │   │   └── ConfirmStore.tsx
+    │   ├── Elements/
+    │   │   ├── OneBeacoin.tsx
+    │   │   ├── OneEvent.tsx
+    │   │   ├── OneExtention.tsx
+    │   │   └── OneMarker.tsx
+    │   ├── EventsManagement/
+    │   │   ├── AddEvent.tsx
+    │   │   ├── SearchBar.tsx
+    │   │   └── SortButton.tsx
+    │   ├── Navigation/
+    │   │   ├── BackHome.tsx
+    │   │   ├── DlcList.tsx
+    │   │   ├── Menu.tsx
+    │   │   └── TopNav.tsx
+    │   └── Preloader/
+    │       └── Loader.tsx
     ├── lib/
     │   ├── SessionWrapper.tsx
     │   ├── StyleCreditCard.css
-    │   └── authOptions.ts
+    │   ├── SupabaseClient.ts
+    │   ├── authOptions.ts
+    │   └── userService.ts
+    ├── model/
+    │   ├── Asso.tsx
+    │   ├── Beacoin.tsx
+    │   ├── EnigmeInterface.tsx
+    │   ├── Event.tsx
+    │   ├── Extension.tsx
+    │   ├── Image.tsx
+    │   ├── Lighthouse.tsx
+    │   └── Player.tsx
+    ├── popover/
+    │   ├── About.tsx
+    │   ├── Account.tsx
+    │   ├── Contact.tsx
+    │   ├── Enigme.tsx
+    │   ├── Events.tsx
+    │   ├── Pictures.tsx
+    │   ├── Store.tsx
+    │   └── CGU/
+    │       ├── CGU-Accueil.tsx
+    │       └── CGU.tsx
     └── public/
+        ├── audio/
         ├── icones/
         ├── images/
-        └── mascotte/
+        │   ├── BeaCoin.webp
+        │   ├── hintOff.webp
+        │   ├── hintOn.webp
+        │   ├── landscape.webp
+        │   ├── profile.webp
+        │   ├── logos/
+        │   │   ├── logoBaniere.webp
+        │   │   ├── logoSimple.webp
+        │   │   └── soupex.webp
+        │   └── mascotte/
+        │       ├── chokbar.webp
+        │       ├── finfrerot.webp
+        │       ├── fuwa.webp
+        │       ├── happy.webp
+        │       ├── help.webp
+        │       ├── ican.webp
+        │       ├── mad.webp
+        │       ├── struggle.webp
+        │       ├── temp.webp
+        │       ├── uwu.webp
+        │       └── yay.webp
+        ├── loader/
+        │   └── loadloop.webp
+        └── textures/
+            ├── bois.webp
+            └── rope.webp
 ```
 
 ---
