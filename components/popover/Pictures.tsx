@@ -36,6 +36,7 @@ export default function Pictures({
     const lastUploadTime = localStorage.getItem("lastUploadTime");
     const now = Date.now();
 
+    /*
     if (
       lastUploadTime &&
       now - parseInt(lastUploadTime) < 24 * 60 * 60 * 1000
@@ -52,9 +53,10 @@ export default function Pictures({
       );
       return;
     }
+      */
 
     // Vérifie si l'utilisateur a déjà importé une image dans les 30 dernières secondes
-    /*if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 1000) {
+    if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 1000) {
       const remainingTime = 30 * 1000 - (now - parseInt(lastUploadTime));
       const seconds = Math.floor(remainingTime / 1000);
 
@@ -62,7 +64,7 @@ export default function Pictures({
         `Veuillez patienter encore ${seconds} seconde(s) avant de pouvoir téléverser une nouvelle image.`
       );
       return;
-    }*/
+    }
 
     const file = event.target.files?.[0];
     if (!file) return;
@@ -79,8 +81,8 @@ export default function Pictures({
       if (isLighthouse) {
         setValide(true);
         player.setBeacoins(50);
+        handleClickTips2("valide");
         localStorage.setItem("lastUploadTime", now.toString());
-        handleClickActive("home");
       } else {
         setPicValide(true);
       }
@@ -213,20 +215,20 @@ export default function Pictures({
               />
             </div>
           )}
-          {valide && (
-            <Tips
-              handleClickTips={handleClickTips}
-              title="Validation de l'image"
-              cx="50%"
-              cy="50%"
-              text={
-                "Bravo, tu viens d'uploader une image de phare, tu as donc gagné 50 Beacoins 👍"
-              }
-              img="/mascotte/temp.png"
-              next="0"
-            />
-          )}
         </div>
+        {tips === "valide" && (
+          <Tips
+            handleClickTips={handleClickTips2}
+            title="Validation de l'image"
+            cx="50%"
+            cy="50%"
+            text={
+              "Bravo, tu viens d'uploader une image de phare, tu as donc gagné 50 Beacoins 👍"
+            }
+            img="/mascotte/yay.png"
+            next="0"
+          />
+        )}
         {tips === "1" && (
           <Tips
             handleClickTips={handleClickTips2}
@@ -236,7 +238,7 @@ export default function Pictures({
             text={
               "Cette fonctionnalité te permet de gagner <strong>50 Beacoins</strong> en partageant une <strong>image de phare</strong>."
             }
-            img="/mascotte/temp.png"
+            img="/mascotte/happy.png"
             next="2"
           />
         )}
@@ -249,7 +251,7 @@ export default function Pictures({
             text={
               "Attention, si tu proposes une image qui ne contient pas de phare, tu ne gagneras <strong>pas de Beacoins</strong>."
             }
-            img="/mascotte/temp.png"
+            img="/mascotte/mad.png"
             next="3"
           />
         )}
@@ -262,7 +264,7 @@ export default function Pictures({
             text={
               "Et tu ne peux pas partager plus d'une image de phare toutes les <strong>24 heures</strong>. Bonne continuation !"
             }
-            img="/mascotte/temp.png"
+            img="/mascotte/struggle.png"
             next="0"
           />
         )}
