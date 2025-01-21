@@ -183,6 +183,7 @@ Ajout de 2000 beacoins sur le compte de ${player.getPrenom()}`);
                 ) {
                   if (id === "5") {
                     const phareEnded = player.getPhareended();
+                    onResolve(parseInt(id) - 1);
                     if (!phareEnded.includes(lh)) {
                       phareEnded.push(lh);
                       player.setPhareended(phareEnded);

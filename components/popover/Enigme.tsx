@@ -1,6 +1,6 @@
 import { useEnigme } from "@/components/model/EnigmeInterface";
 import { useLighthouse } from "@/components/model/lighthouse";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
@@ -125,7 +125,8 @@ export default function Enigme({
           </h1>
           <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] text-lg items-center">
             Des <strong>zones cliquables</strong> sont présentes sur{" "}
-            <strong>l&apos;image</strong> et contiennent une petite devinette. <br />
+            <strong>l&apos;image</strong> et contiennent une petite devinette.{" "}
+            <br />
             <strong>Un bon point de départ serait le feu !</strong>
           </h3>
           <h3 className="absolute top-[13vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
@@ -318,7 +319,8 @@ export default function Enigme({
                 answer={enigme5.getanswer()}
                 text2={enigme5.gettext2()}
                 onResolve={(index) => {
-                  // Mettre à jour l'état pour marquer l'énigme comme résolue
+                  // Mettre à jour l'état pour marquer l'énigme comme résolue*
+                  handleClickTips("resolv");
                   setResolvedEnigmes((prev) => {
                     const updated = [...prev];
                     updated[index] = true;
@@ -579,6 +581,17 @@ export default function Enigme({
               cy="50%"
               text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
               img="/mascotte/mad.png"
+              next="0"
+            />
+          )}
+          {tips === "resolv" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Bravo !"
+              cx="50%"
+              cy="50%"
+              text="Tu as resolu toutes les enigmes de ce phare, tu as gagné 50 Beacoins !"
+              img="/mascotte/yay.png"
               next="0"
             />
           )}
