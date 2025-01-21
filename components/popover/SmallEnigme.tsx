@@ -108,7 +108,7 @@ export default function SmallEnigme({
         ></div>
         {popupA === "Vrai" ? (
           <p>
-            Bravo, bonne réponse <br /> Le chiffre à la position {id} est :{" "}
+            Bravo, bonne réponse <br /> Le code du cadenas à la position {id} est :{" "}
             {codeLock}
           </p>
         ) : popupA === "EndFirst" ? (

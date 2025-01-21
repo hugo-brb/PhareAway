@@ -126,17 +126,17 @@ export default function Enigme({
           <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] text-lg items-center">
             Des <strong>zones cliquables</strong> sont présentes sur{" "}
             <strong>l&apos;image</strong> et contiennent une petite devinette.{" "}
-            <br />
+            <br />ton objectif est de découvrir le <strong>code du cadenas</strong> se situant sur la <strong>porte du phare</strong><br /><br />
             <strong>Un bon point de départ serait le feu !</strong>
           </h3>
-          <h3 className="absolute top-[13vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
+          <h3 className="absolute top-[16vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
             Acheter un indice pour réveler les zones cliquables
           </h3>
           <button
             className={`absolute hidden md:block ${
               activeButtons.hint ? "pointer-events-none" : ""
             }`}
-            style={{ top: "15vw", right: "5vw" }}
+            style={{ top: "17vw", right: "5vw" }}
             onClick={() => {
               if (!activeButtons.hint) {
                 if (player.getBeacoins() <= 100) {
