@@ -43,7 +43,7 @@ const Map: React.FC<MapComponentProps> = ({
     if (!mapInstance.current && mapContainer.current) {
       mapInstance.current = new mapboxgl.Map({
         container: mapContainer.current,
-        style: "mapbox://styles/barbiehu/cm5nzmenf00d401pk6xlhb7di",
+        style: "mapbox://styles/barbiehu/cm66jvuv400ew01sggg9eaigb",
         center: center,
         zoom: zoom,
         maxBounds: bounds,
@@ -66,7 +66,12 @@ const Map: React.FC<MapComponentProps> = ({
     if (!map) return; // Vérifier si la carte est initialisée
     const handleZoom = () => {
       const zoomLevel = map.getZoom();
-      console.log("Niveau de zoom actuel :", zoomLevel, " niveau de zoom param : ",zoom);
+      console.log(
+        "Niveau de zoom actuel :",
+        zoomLevel,
+        " niveau de zoom param : ",
+        zoom
+      );
     };
     // Ajouter l'écouteur d'événement pour "zoom"
     map.on("zoom", handleZoom);
@@ -76,10 +81,9 @@ const Map: React.FC<MapComponentProps> = ({
     };
   }, []);
 
-
   useEffect(() => {
     if (mapInstance.current) {
-      mapInstance.current.flyTo({center: center, zoom: zoom});
+      mapInstance.current.flyTo({ center: center, zoom: zoom });
       mapInstance.current.setMaxBounds(bounds);
     }
   }, [center]);
