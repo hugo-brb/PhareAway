@@ -13,6 +13,7 @@ const Loader: React.FC = () => {
           height={300}
           className="mx-auto"
           unoptimized
+          priority
         />
         <p className="text-black-500 mt-4 text-2xl">
           Chargement de la carte
