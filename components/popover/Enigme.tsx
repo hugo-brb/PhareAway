@@ -126,7 +126,11 @@ export default function Enigme({
           <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] text-lg items-center">
             Des <strong>zones cliquables</strong> sont présentes sur{" "}
             <strong>l&apos;image</strong> et contiennent une petite devinette.{" "}
-            <br />ton objectif est de découvrir le <strong>code du cadenas</strong> se situant sur la <strong>porte du phare</strong><br /><br />
+            <br />
+            ton objectif est de découvrir le <strong>code du cadenas</strong> se
+            situant sur la <strong>porte du phare</strong>
+            <br />
+            <br />
             <strong>Un bon point de départ serait le feu !</strong>
           </h3>
           <h3 className="absolute top-[16vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
@@ -566,8 +570,8 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Fin"
-              cx="20vw"
-              cy="17vw"
+              cx="50%"
+              cy="50%"
               text="Chaque phare contient <strong>5</strong> énigmes, <strong>4</strong> d'entre elles te donneront le code du cadenas, et la dernière te permettras de le <strong>déverrouiller</strong>. Une fois déverrouillé, le phare sera considéré comme <strong>complété</strong>. Et tu recevras une récompense de <strong>50 Beacoins</strong>. Bonne chance !"
               img="/mascotte/happy.webp"
               next="0"
