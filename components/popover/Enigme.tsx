@@ -519,7 +519,7 @@ export default function Enigme({
               text={
                 "C'est ici que vous pourrez résoudre des énigmes, en apprendre plus sur le phare et surtout, gagner des beacoins."
               }
-              img="/mascotte/temp.png"
+              img="/mascotte/happy.png"
               next="2"
             />
           )}
@@ -532,7 +532,7 @@ export default function Enigme({
               text={
                 "Des zones cliquables sont présentes sur l'image et contiennent une petite devinette en rapport avec le lieu et le phare. Essayez de les trouver !"
               }
-              img="/mascotte/temp.png"
+              img="/mascotte/help.png"
               next="3"
             />
           )}
@@ -545,7 +545,7 @@ export default function Enigme({
               text={
                 "Pour vous aider, vous pouvez acheter des indices qui vous révèleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins et vous les perdez si vous quittez le phare."
               }
-              img="/mascotte/temp.png"
+              img="/mascotte/fuwa.png"
               next="4"
             />
           )}
@@ -558,7 +558,7 @@ export default function Enigme({
               text={
                 "Lorsque vous avez trouvé une énigme, elle apparaitra ici, et il ne vous reste qu'à répondre à la question."
               }
-              img="/mascotte/temp.png"
+              img="/mascotte/uwu.png"
               next="5"
             />
           )}
@@ -569,7 +569,7 @@ export default function Enigme({
               cx="20vw"
               cy="17vw"
               text="Chaque phare contient 5 énigmes, 4 d'entre elles vous donneront le code du cadenas, et la dernière vous permettra de le déverrouiller. Une fois déverrouillé, le phare sera considéré comme complété. Et vous recevrez une récompense de 50 Beacoins. Bonne chance !"
-              img="/mascotte/temp.png"
+              img="/mascotte/happy.png"
               next="0"
             />
           )}

@@ -36,7 +36,6 @@ export default function Pictures({
     const lastUploadTime = localStorage.getItem("lastUploadTime");
     const now = Date.now();
 
-    /*
     if (
       lastUploadTime &&
       now - parseInt(lastUploadTime) < 24 * 60 * 60 * 1000
@@ -53,9 +52,9 @@ export default function Pictures({
       );
       return;
     }
-      */
 
     // Vérifie si l'utilisateur a déjà importé une image dans les 30 dernières secondes
+    /*
     if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 1000) {
       const remainingTime = 30 * 1000 - (now - parseInt(lastUploadTime));
       const seconds = Math.floor(remainingTime / 1000);
@@ -65,6 +64,7 @@ export default function Pictures({
       );
       return;
     }
+      */
 
     const file = event.target.files?.[0];
     if (!file) return;
