@@ -48,12 +48,12 @@ export default function Home() {
   const [active, setActive] = useState("home");
   const [activeID, setActiveID] = useState(64);
   const [center, setCenter] = useState<[number, number]>([
-    -1.1728180199474099,45.58697132405058,
+    -1.1728180199474099, 45.58697132405058,
   ]); // Initial map center
   // Initial map bounds
   const [bounds, setBounds] = useState<[[number, number], [number, number]]>([
-    [ -14.637792105651805,34.50915037983],
-    [13.253221239308171,54.05642397818343],
+    [-14.637792105651805, 34.50915037983],
+    [13.253221239308171, 54.05642397818343],
   ]); // Initial map bounds
   const [zoom, setZoom] = useState(10); // initial map zoom
 
@@ -235,7 +235,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Salut à toi, jeune moussaillon ! Je m'appelle Pharah et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me demander de t'aider à progresser. Pour cela, il te suffit de cliquer sur ma tête. Bonne chance !`}
-          img="/mascotte/temp.png"
+          img="/mascotte/happy.png"
           next="0"
         />
       )}
@@ -246,7 +246,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Bienvenue sur la page  <strong>principale</strong> ! C'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
-          img="/mascotte/chokbar.png"
+          img="/mascotte/happy.png"
           next="2"
         />
       )}
@@ -257,7 +257,7 @@ export default function Home() {
           cx="30%"
           cy="20vw"
           text={`Tu peux utiliser la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
-          img="/mascotte/happy.png"
+          img="/mascotte/uwu.png"
           next="3"
         />
       )}
@@ -268,7 +268,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`La carte est composée de plusieurs phares. Ceux disposant d'une énigme sont plus grands et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des Beacoins.`}
-          img="/mascotte/mad.png"
+          img="/mascotte/fuwa.png"
           next="4"
         />
       )}
@@ -278,8 +278,8 @@ export default function Home() {
           title="Beacoins"
           cx="70%"
           cy="20%"
-          text={`Les Beacoins sont la monnaie du jeu. Tu en gagnes en résolvant des énigmes, en partageant des photos mais tu peux aussi en acheter. dépenses les dans la boutique pour acheter des extensions exclusifs ou des indices pour les énigmes. (Clique sur ton nombre de Beacoins pour ouvrir également la boutique.)`}
-          img="/mascotte/struggle.png"
+          text={`Les Beacoins sont la monnaie du jeu. Tu en gagnes en résolvant des énigmes, en partageant des photos mais tu peux aussi en acheter. dépenses les dans la boutique pour acheter des extensions exclusives ou des indices pour les énigmes. (Clique sur ton nombre de Beacoins pour ouvrir également la boutique.)`}
+          img="/mascotte/uwu.png"
           next="5"
         />
       )}
@@ -290,7 +290,7 @@ export default function Home() {
           cx="70%"
           cy="70%"
           text={`Les extensions sont des contenus additionnels que tu peux débloquer pour accéder à de nouveaux phares. Tu peux les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
-          img="/mascotte/uwu.png"
+          img="/mascotte/fuwa.png"
           next="6"
         />
       )}
@@ -301,7 +301,7 @@ export default function Home() {
           cx="50%"
           cy="50%"
           text={`Tu sais tout ! Plus qu'à découvrir des phares incroyables et à résoudre des énigmes. N'hésite pas à me redemander de l'aide si tu es bloqué. Bonne chance !`}
-          img="/mascotte/temp.png"
+          img="/mascotte/yay.png"
           next="0"
         />
       )}
