@@ -31,7 +31,6 @@ const SearchBar = () => {
           .from("Lighthouse")
           .select("id, name")
           .ilike("name", `%${searchTerm}%`);
-        console.log(lighthouses);
 
         if (lighthouseError) {
           console.error("Error requête lighthouses:", lighthouseError);
@@ -41,12 +40,11 @@ const SearchBar = () => {
         const lighthouseIdsFromLighthouses =
           lighthouses?.map((lighthouse) => lighthouse.id) || [];
 
-        const { data: lighthouseId, error: lighthouseIdError } =
-          await supabase
-            .from("Event")
-            .select("id, name")
-            .gte("date", currentDate)
-            .in("id_lighthouse", lighthouseIdsFromLighthouses);
+        const { data: lighthouseId, error: lighthouseIdError } = await supabase
+          .from("Event")
+          .select("id, name")
+          .gte("date", currentDate)
+          .in("id_lighthouse", lighthouseIdsFromLighthouses);
 
         if (lighthouseIdError) {
           console.error("Error requête lighthouseIdError:", lighthouseIdError);
@@ -78,7 +76,6 @@ const SearchBar = () => {
           .from("Lighthouse")
           .select("id, name")
           .ilike("name", `%${searchTerm}%`);
-        console.log(lighthouses);
 
         if (lighthouseError) {
           console.error("Error requête lighthouses:", lighthouseError);
@@ -88,12 +85,11 @@ const SearchBar = () => {
         const lighthouseIdsFromLighthouses =
           lighthouses?.map((lighthouse) => lighthouse.id) || [];
 
-        const { data: lighthouseId, error: lighthouseIdError } =
-          await supabase
-            .from("Event")
-            .select("id, name")
-            .gte("date", currentDate)
-            .in("id_lighthouse", lighthouseIdsFromLighthouses);
+        const { data: lighthouseId, error: lighthouseIdError } = await supabase
+          .from("Event")
+          .select("id, name")
+          .gte("date", currentDate)
+          .in("id_lighthouse", lighthouseIdsFromLighthouses);
 
         if (lighthouseIdError) {
           console.error("Error requête lighthouseIdError:", lighthouseIdError);

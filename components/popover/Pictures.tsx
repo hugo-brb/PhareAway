@@ -61,7 +61,6 @@ export default function Pictures({
 
     try {
       const base64Image = await convertToBase64(file);
-      console.log(base64Image);
       setImagePreview(base64Image); // Met à jour l'aperçu de l'image
       const isLighthouse = await analyzeImageWithVisionAPI(base64Image);
 
