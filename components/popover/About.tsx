@@ -31,7 +31,7 @@ export default function About({ handleClickActive }: MenuProps) {
         </button>
         <div className="flex flex-col items-center">
           <Image
-            src="/images/soupex.png"
+            src="/images/soupex.webp"
             alt="arrow-back"
             width={150}
             height={150}

@@ -12,36 +12,35 @@
 
 /* Carousel.css */
 .carousel-container {
-    overflow: hidden;
-    overflow-x: hidden;
-    white-space: nowrap;
-    width: 100%; /* Adjust width of the carousel */
-    position: relative;
+  overflow: hidden;
+  overflow-x: hidden;
+  white-space: nowrap;
+  width: 100%; /* Adjust width of the carousel */
+  position: relative;
+}
+
+.carousel-content {
+  display: flex;
+  align-items: center;
+}
+
+.carousel-item {
+  flex: 0 0 auto; /* Prevent shrinking or growing */
+  margin: 0 10px;
+  padding: 10px;
+  background: none;
+  text-align: center;
+  min-width: 200px; /* Adjust based on item size */
+  cursor: pointer;
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
   }
-  
-  .carousel-content {
-    display: flex;
-    align-items: center;
+  to {
+    transform: translateX(-100%);
   }
-  
-  .carousel-item {
-    flex: 0 0 auto; /* Prevent shrinking or growing */
-    margin: 0 10px;
-    padding: 10px;
-    background: none;
-    text-align: center;
-    min-width: 200px; /* Adjust based on item size */
-    cursor: pointer;
-  }
-  @keyframes scroll {
-    from {
-      transform: translateX(0);
-    }
-    to {
-      transform: translateX(-100%);
-    }
-  }
-  
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -79,7 +78,7 @@ body {
 }
 
 .land {
-  background-image: url("/images/landscape.png");
+  background-image: url("/images/landscape.webp");
   background-repeat: no-repeat;
   background-size: cover;
   background-clip: border-box;

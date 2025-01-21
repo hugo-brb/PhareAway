@@ -36,7 +36,7 @@ const OneEvent: React.FC<OnEventProp> = ({ id_Event }) => {
         ) : (
           <Image
             className="self-center rounded-lg"
-            src="/icones/logoBaniere.png"
+            src="/icones/logoBaniere.webp"
             alt="Default logo event"
             width={150}
             height={150}

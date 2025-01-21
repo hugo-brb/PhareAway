@@ -71,7 +71,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
           ) : (
             <Image
               className="self-center rounded-lg"
-              src="/icones/logoBaniere.png"
+              src="/icones/logoBaniere.webp"
               alt="Default logo"
               width={100}
               height={100}
@@ -101,7 +101,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
               cx={"56vw"}
               cy={"30vw"}
               text={"<strong>Merci</strong> de ton achat jeune mousssaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique <strong>juste à ma droite yohoho</strong> !"}
-              img="/mascotte/temp.png"
+              img="/mascotte/temp.webp"
               next="0"
             />
           )}

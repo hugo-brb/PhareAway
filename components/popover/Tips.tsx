@@ -28,7 +28,7 @@ export default function Tips({
         left: `${cx}`,
         top: `${cy}`,
         transform: "translate(-50%, -50%)",
-        backgroundImage: "url(/icones/bois.png)",
+        backgroundImage: "url(/icones/bois.webp)",
         backgroundColor: "rgba(255, 228, 204, 0.9)",
         ...(window.innerWidth < 768 && {
           left: "50%",
@@ -38,7 +38,7 @@ export default function Tips({
         }),
         borderTop: "22px solid transparent",
         borderBottom: "22px solid transparent",
-        borderImage: "url(/icones/rope.png) 22 round",
+        borderImage: "url(/icones/rope.webp) 22 round",
       }}
       className={`bg-opacity-50 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
     >

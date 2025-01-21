@@ -95,7 +95,7 @@ export default function Enigme({
             onClick={() => handleClickTips("1")}
           >
             <Image
-              src="/mascotte/help.png"
+              src="/mascotte/help.webp"
               alt="Aide"
               width={75}
               height={75}
@@ -150,8 +150,8 @@ export default function Enigme({
             <Image
               src={
                 activeButtons.hint
-                  ? "/images/hintOn.png"
-                  : "/images/hintOff.png"
+                  ? "/images/hintOn.webp"
+                  : "/images/hintOff.webp"
               }
               alt="hint"
               width={300}
@@ -181,8 +181,8 @@ export default function Enigme({
             <Image
               src={
                 activeButtons.hint
-                  ? "/images/hintOn.png"
-                  : "/images/hintOff.png"
+                  ? "/images/hintOn.webp"
+                  : "/images/hintOff.webp"
               }
               alt="hint"
               width={150}
@@ -519,7 +519,7 @@ export default function Enigme({
               text={
                 "C'est ici que tu pourras résoudre des <strong>énigmes</strong>, en apprendre plus sur le phare et surtout, gagner des <strong>Beacoins</strong>."
               }
-              img="/mascotte/happy.png"
+              img="/mascotte/happy.webp"
               next="2"
             />
           )}
@@ -532,7 +532,7 @@ export default function Enigme({
               text={
                 "Des <strong>zones cliquables</strong> sont présentes sur l'image et contiennent une petite <strong>devinette</strong> en rapport avec le lieu et le phare. Essayez de les trouver !"
               }
-              img="/mascotte/help.png"
+              img="/mascotte/help.webp"
               next="3"
             />
           )}
@@ -545,7 +545,7 @@ export default function Enigme({
               text={
                 "Pour t'aider, tu peux acheter des <strong>indices</strong> qui te révèleront les <strong>zones</strong> sur l'image, mais attention, ils coûtent 100 Beacoins et tu les <strong>perdras</strong> si tu quittes le phare."
               }
-              img="/mascotte/fuwa.png"
+              img="/mascotte/fuwa.webp"
               next="4"
             />
           )}
@@ -558,7 +558,7 @@ export default function Enigme({
               text={
                 "Lorsque tu as trouvé une <strong>énigme</strong>, elle apparaitra ici, et il ne te reste qu'à répondre à la question."
               }
-              img="/mascotte/uwu.png"
+              img="/mascotte/uwu.webp"
               next="5"
             />
           )}
@@ -569,7 +569,7 @@ export default function Enigme({
               cx="20vw"
               cy="17vw"
               text="Chaque phare contient <strong>5</strong> énigmes, <strong>4</strong> d'entre elles te donneront le code du cadenas, et la dernière te permettras de le <strong>déverrouiller</strong>. Une fois déverrouillé, le phare sera considéré comme <strong>complété</strong>. Et tu recevras une récompense de <strong>50 Beacoins</strong>. Bonne chance !"
-              img="/mascotte/happy.png"
+              img="/mascotte/happy.webp"
               next="0"
             />
           )}
@@ -580,7 +580,7 @@ export default function Enigme({
               cx="50%"
               cy="50%"
               text="Désolé, mais tu n'as pas assez de <strong>Beacoins</strong> pour acheter les indices."
-              img="/mascotte/mad.png"
+              img="/mascotte/mad.webp"
               next="0"
             />
           )}
@@ -591,7 +591,7 @@ export default function Enigme({
               cx="50%"
               cy="50%"
               text="Tu as resolu toutes les enigmes de ce phare, tu as gagné 50 Beacoins !"
-              img="/mascotte/yay.png"
+              img="/mascotte/yay.webp"
               next="0"
             />
           )}

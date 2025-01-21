@@ -48,7 +48,7 @@ export default function Rgpd() {
       <main className=" land flex justify-center items-center w-[100vw] h-[100vh] font-bold">
         <Link href="/" className=" absolute top-2 left-2">
           <Image
-            src="/icones/logoBaniere.png"
+            src="/icones/logoBaniere.webp"
             alt="Logo"
             width={150}
             height={150}

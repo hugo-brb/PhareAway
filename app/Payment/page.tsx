@@ -46,14 +46,14 @@ function PaymentPageContent() {
         <EmbeddedCheckout />
       </EmbeddedCheckoutProvider>
       <Image
-        src="/icones/logoBaniere.png"
+        src="/icones/logoBaniere.webp"
         alt="Logo PhareAway"
         width={350}
         height={350}
         className=" absolute bottom-[20vh] left-[20vw] hidden md:block"
       />
       <Image
-        src="/icones/logoBaniere.png"
+        src="/icones/logoBaniere.webp"
         alt="Logo PhareAway"
         width={100}
         height={100}

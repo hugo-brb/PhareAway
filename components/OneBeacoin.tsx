@@ -53,7 +53,7 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin, player }) => {
           ) : (
             <Image
               className="self-center rounded-lg"
-              src="/icones/logoBaniere.png"
+              src="/icones/logoBaniere.webp"
               alt="Default logo"
               width={100}
               height={100}
@@ -92,7 +92,7 @@ const OneEvent: React.FC<OnBeacoinProp> = ({ id_beacoin, player }) => {
           ) : (
             <Image
               className="self-center rounded-lg"
-              src="/icones/logoBaniere.png"
+              src="/icones/logoBaniere.webp"
               alt="Default logo"
               width={100}
               height={100}

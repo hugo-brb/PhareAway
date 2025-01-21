@@ -24,7 +24,7 @@ export default function Menu({
           onClick={() => handleClickTips("1")}
         >
           <Image
-            src="/mascotte/help.png"
+            src="/mascotte/help.webp"
             alt="Fenêtre d'aide"
             width={75}
             height={75}

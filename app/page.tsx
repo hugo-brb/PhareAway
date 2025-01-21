@@ -104,7 +104,7 @@ export default function LandingPage() {
       </button>
       {/* Footer */}
       <Image
-        src="/images/soupex.png"
+        src="/images/soupex.webp"
         alt="Logo SoupexSoftware"
         width={100}
         height={100}

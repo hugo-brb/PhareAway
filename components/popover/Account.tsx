@@ -106,7 +106,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
 
         <div className="flex justify-center items-center gap-2 md:gap-32">
           <Image
-            src={session?.user?.image ?? "/images/profile.png"}
+            src={session?.user?.image ?? "/images/profile.webp"}
             alt="Profile picture"
             width={200}
             height={200}

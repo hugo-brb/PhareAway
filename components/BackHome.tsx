@@ -13,14 +13,14 @@ export default function Coin() {
       onMouseLeave={() => setIsHovered(false)} // Lorsque la souris quitte le lien
     >
       <Image
-        src="/icones/logoSimple.png"
+        src="/icones/logoSimple.webp"
         width={70}
         height={70}
         alt="Logo PhareAway"
         className="hidden md:block"
       />
       <Image
-        src="/icones/logoSimple.png"
+        src="/icones/logoSimple.webp"
         width={50}
         height={50}
         alt="Logo PhareAway"

@@ -38,16 +38,16 @@ const Marker: React.FC<MarkerProps> = ({
             setIsImageLoaded(true); // L'image existe
           } else {
             setIsImageLoaded(false); // L'image n'existe pas
-            setImageSrc("/icones/logoBaniere.png");
+            setImageSrc("/icones/logoBaniere.webp");
           }
         } else {
           setIsImageLoaded(false); // L'image existe
-          setImageSrc("/icones/logoBaniere.png");
+          setImageSrc("/icones/logoBaniere.webp");
         }
       } catch (err) {
         console.error("This image hasn't been set yet:", err);
         setIsImageLoaded(false); // En cas d'erreur réseau ou autre
-        setImageSrc("/icones/logoBaniere.png");
+        setImageSrc("/icones/logoBaniere.webp");
       }
     };
     checkImage();
