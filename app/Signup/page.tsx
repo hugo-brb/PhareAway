@@ -5,6 +5,7 @@ import { signIn } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Login from "../Login/page";
 
 export default function Signup() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function Signup() {
     email: false,
     mdp: false,
     mdpCourt: false,
+    mdpdiff: false,
     global: false,
   });
 
@@ -54,12 +56,18 @@ export default function Signup() {
       email: false,
       mdp: false,
       mdpCourt: false,
+      mdpdiff: false,
       global: false,
     };
 
     // Validation
     if (email && !/\S+@\S+\.\S+/.test(email)) {
       newErrors.email = true;
+      hasErrors = true;
+    }
+
+    if (password === pseudo || password === email) {
+      newErrors.mdpdiff = true;
       hasErrors = true;
     }
 
@@ -136,21 +144,21 @@ export default function Signup() {
           >
             <div className="flex flex-col md:flex-row md:justify-between justify-center md:items-center gap-2">
               <div className="flex flex-col gap-1 ">
-              <span className="relative">
-      <label htmlFor="nom" className="md:ml-2 text-base font-bold">
-        Nom
-      </label>
-      <label
-        className="md:ml-2 text-base font-bold text-red-500"
-      >
-        *
-      </label>
+                <span className="relative">
+                  <label htmlFor="nom" className="md:ml-2 text-base font-bold">
+                    Nom
+                  </label>
+                  <label className="md:ml-2 text-base font-bold text-red-500">
+                    *
+                  </label>
 
-      <p className="absolute text-red-500 text-sm pl-2 pr-2"
-         style={{ top: '-5px', transform: 'translateY(-100%)' }}>
-        *Champ obligatoire
-      </p>
-    </span>
+                  <p
+                    className="absolute text-red-500 text-sm pl-2 pr-2"
+                    style={{ top: "-5px", transform: "translateY(-100%)" }}
+                  >
+                    *Champ obligatoire
+                  </p>
+                </span>
                 <input
                   id="nom"
                   name="nom"
@@ -166,14 +174,15 @@ export default function Signup() {
               </div>
               <div className="flex flex-col gap-1 ">
                 <span>
-                <label htmlFor="prenom" className="md:ml-2 text-base font-bold">
-                  Prénom
-                </label>
-                <label    className="md:ml-2 text-base font-bold text-red-500"
-  
-                >
-                  *
-                </label>
+                  <label
+                    htmlFor="prenom"
+                    className="md:ml-2 text-base font-bold"
+                  >
+                    Prénom
+                  </label>
+                  <label className="md:ml-2 text-base font-bold text-red-500">
+                    *
+                  </label>
                 </span>
                 <input
                   id="prenom"
@@ -191,14 +200,13 @@ export default function Signup() {
             </div>
             <div className="flex flex-col gap-1 ">
               <span>
-              <label htmlFor="user" className="ml-2 text-base font-bold">
-                Nom d&apos;utilisateur
-              </label>
-              <label    className="md:ml-2 text-base font-bold text-red-500"
-              >
+                <label htmlFor="user" className="ml-2 text-base font-bold">
+                  Nom d&apos;utilisateur
+                </label>
+                <label className="md:ml-2 text-base font-bold text-red-500">
                   *
                 </label>
-                </span>
+              </span>
               <input
                 id="user"
                 name="user"
@@ -216,13 +224,12 @@ export default function Signup() {
             <div className="flex flex-col gap-1 ">
               <span>
                 <label htmlFor="email" className="ml-2 text-base font-bold">
-                Email
+                  Email
                 </label>
-              <label    className="md:ml-2 text-base font-bold text-red-500"
-              >
+                <label className="md:ml-2 text-base font-bold text-red-500">
                   *
                 </label>
-                </span>
+              </span>
               <input
                 id="email"
                 name="email"
@@ -241,9 +248,7 @@ export default function Signup() {
                 <label htmlFor="mdp" className="ml-2 text-base font-bold">
                   Mot de passe
                 </label>
-                <label    className="md:ml-2 text-base font-bold text-red-500"
-  
-                >
+                <label className="md:ml-2 text-base font-bold text-red-500">
                   *
                 </label>
               </span>
@@ -262,6 +267,8 @@ export default function Signup() {
                   : formErrors.mdp
                   ? "Les mots de passe ne correspondent pas."
                   : null}{" "}
+                {formErrors.mdpdiff &&
+                  "Le mot de passe doit etre différent de l'email et du pseudo"}
               </p>
             </div>
 
@@ -270,10 +277,10 @@ export default function Signup() {
                 <label htmlFor="mdpVerif" className="ml-2 text-base font-bold">
                   Confirme ton mot de passe
                 </label>
-                <label    className="md:ml-2 text-base font-bold text-red-500">
+                <label className="md:ml-2 text-base font-bold text-red-500">
                   *
                 </label>
-                </span>
+              </span>
               <input
                 id="mdpVerif"
                 name="mdpVerif"
