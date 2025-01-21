@@ -1,6 +1,6 @@
 import { useEnigme } from "@/components/model/EnigmeInterface";
 import { useLighthouse } from "@/components/model/lighthouse";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { UsePlayer } from "../model/player";
 import SmallEnigme from "@/components/popover/SmallEnigme";
 import Image from "next/image";
@@ -319,7 +319,8 @@ export default function Enigme({
                 answer={enigme5.getanswer()}
                 text2={enigme5.gettext2()}
                 onResolve={(index) => {
-                  // Mettre à jour l'état pour marquer l'énigme comme résolue
+                  // Mettre à jour l'état pour marquer l'énigme comme résolue*
+                  handleClickTips("resolv");
                   setResolvedEnigmes((prev) => {
                     const updated = [...prev];
                     updated[index] = true;
@@ -580,6 +581,17 @@ export default function Enigme({
               cy="50%"
               text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
               img="/mascotte/mad.png"
+              next="0"
+            />
+          )}
+          {tips === "resolv" && (
+            <Tips
+              handleClickTips={handleClickTips}
+              title="Bravo !"
+              cx="50%"
+              cy="50%"
+              text="Tu as resolu toutes les enigmes de ce phare, tu as gagné 50 Beacoins !"
+              img="/mascotte/yay.png"
               next="0"
             />
           )}
