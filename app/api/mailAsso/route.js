@@ -39,6 +39,7 @@ export async function POST(req) {
     const mailOptions = {
       from: validatedSenderEmail,
       to: "infos.phareaway@gmail.com",
+      bcc: "hugobarbieri38@gmail.com, amstagu@icloud.com, pimboliwell.fr@gmail.com",
       subject: `Demande de vérification d'association`,
       text: `
         Email: ${email}

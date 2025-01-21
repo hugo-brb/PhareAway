@@ -1,5 +1,5 @@
 import { Component } from "react";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 interface User {
   id: number;
@@ -45,10 +45,7 @@ class Asso extends Component<AssoProps, AssoState> {
 
   async read(id: number): Promise<AssoData | undefined> {
     try {
-      const { data, error } = await supabase
-        .from("Asso")
-        .select()
-        .eq("id", id);
+      const { data, error } = await supabase.from("Asso").select().eq("id", id);
 
       if (error) {
         throw error;

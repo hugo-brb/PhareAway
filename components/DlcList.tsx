@@ -69,7 +69,7 @@ export default function DlcList({
 }: DlcListProps) {
   return (
     <>
-      <aside className="flex text-center md:flex-col w-fit h-fit md:w-[170px] gap-2 justify-between bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-2 py-2 md:px-6 md:py-5 absolute right-1/2 bottom-24 translate-x-1/2 md:translate-x-0 md:right-2 md:bottom-28 z-50">
+      <aside className="flex text-center md:flex-col w-fit h-fit md:w-[180px] gap-2 justify-between bg-white bg-opacity-60 rounded-3xl backdrop-blur-md px-2 py-2 md:px-6 md:py-5 absolute right-1/2 bottom-24 translate-x-1/2 md:translate-x-0 md:right-2 md:bottom-28 z-50">
         <div className=" flex md:flex-col gap-5 md:gap-3 items-center justify-around">
           <h1 className=" hidden md:block">Zones géographiques : </h1>
           {player.getDlcUnlocked().map((dlc, index) =>
