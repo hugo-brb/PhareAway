@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useImage, UseImage } from "./Image";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 //Définitions des types des méthodes de la classe Extention
 export type UseExtention = {

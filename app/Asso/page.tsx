@@ -29,7 +29,6 @@ export default function Asso() {
       });
 
       if (response.ok) {
-        console.log("Message envoyé !");
         setFormData({
           email: "",
         });

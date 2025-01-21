@@ -35,7 +35,6 @@ export default function Contact({ handleClickActive, player }: MenuProps) {
       });
 
       if (response.ok) {
-        console.log("Message envoyé !");
         setFormData({
           nom: "",
           prenom: "",

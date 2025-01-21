@@ -32,18 +32,14 @@ export const authOptions: NextAuthOptions = {
           .select("id, password, name, email")
           .eq("email", credentials?.email);
 
-        console.log("Supabase response:", response);
-
         if (response.error) {
           console.error("Error fetching user from Supabase:", response.error);
           throw new Error("Invalid credentials");
         }
 
         const user = response.data?.[0];
-        console.log("Fetched user:", user);
 
         if (!credentials?.password || !user?.password) {
-          console.error("Missing or invalid password");
           throw new Error("Invalid credentials");
         }
 
@@ -51,7 +47,6 @@ export const authOptions: NextAuthOptions = {
           user.password,
           credentials.password
         );
-        console.log("Password match:", passwordCorrect);
 
         if (passwordCorrect) {
           const lastLogin = new Date();
@@ -65,8 +60,6 @@ export const authOptions: NextAuthOptions = {
             email: user.email,
           };
         }
-
-        console.error("Authentication failed: Password mismatch");
         return null;
       },
     }),

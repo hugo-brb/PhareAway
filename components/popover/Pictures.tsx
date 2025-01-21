@@ -53,19 +53,6 @@ export default function Pictures({
       return;
     }
 
-    // Vérifie si l'utilisateur a déjà importé une image dans les 30 dernières secondes
-    /*
-    if (lastUploadTime && now - parseInt(lastUploadTime) < 30 * 1000) {
-      const remainingTime = 30 * 1000 - (now - parseInt(lastUploadTime));
-      const seconds = Math.floor(remainingTime / 1000);
-
-      setError(
-        `Veuillez patienter encore ${seconds} seconde(s) avant de pouvoir téléverser une nouvelle image.`
-      );
-      return;
-    }
-      */
-
     const file = event.target.files?.[0];
     if (!file) return;
 
@@ -74,7 +61,6 @@ export default function Pictures({
 
     try {
       const base64Image = await convertToBase64(file);
-      console.log(base64Image);
       setImagePreview(base64Image); // Met à jour l'aperçu de l'image
       const isLighthouse = await analyzeImageWithVisionAPI(base64Image);
 
