@@ -1,15 +1,10 @@
 import { FormEvent, useState } from "react";
 import Image from "next/image";
-import { createClient } from "@supabase/supabase-js";
+import supabase from "@/lib/SupabaseClient";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;
 }
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
 
 // Fonction utilitaire pour convertir HH:mm en minutes
 const convertTimeToMinutes = (time: string): number => {
@@ -66,7 +61,7 @@ export default function Event({ handleClickActive }: MenuProps) {
       }
 
       // Recherche du phare
-      const { data: lighthouse, error: lighthouseError } = await supabaseData
+      const { data: lighthouse, error: lighthouseError } = await supabase
         .from("Lighthouse")
         .select("id")
         .ilike("name", `%${phare}%`)
@@ -105,7 +100,7 @@ export default function Event({ handleClickActive }: MenuProps) {
       console.log("Données à insérer:", eventData);
 
       // Insertion de l'événement
-      const { data: insertData, error: insertError } = await supabaseData
+      const { data: insertData, error: insertError } = await supabase
         .from("Event")
         .insert([eventData])
         .select()

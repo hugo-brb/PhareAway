@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
+import supabase from "@/lib/SupabaseClient";
 
 export type UseEnigme = {
   EnigmeData: EnigmeData;
@@ -17,11 +17,6 @@ export type UseEnigme = {
   getanswer: () => string;
   gettext2: () => string;
 };
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
 
 interface EnigmeData {
   idPhare: number;
@@ -58,7 +53,7 @@ export function useEnigme(idPhare: number, idEnigme: number) {
     const fetchEnigmeData = async () => {
       try {
         if (idPhare >= 1) {
-          const request = await supabaseData
+          const request = await supabase
             .from("Enigme")
             .select()
             .eq("idPhare", idPhare)

@@ -1,11 +1,6 @@
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { UseImage, useImage } from "./Image";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
+import supabase from "@/lib/SupabaseClient";
 
 //Définition des types des méthodes de la classe Beacoin
 export type UseLighthouse = {
@@ -44,7 +39,7 @@ export function useBeacoin(id: number) {
       try {
         if (id >= 1) {
           //Récupération des données de la table Beacoin dans la base de données
-          const { data, error } = await supabaseData
+          const { data, error } = await supabase
           .from('Beacoin')
           .select(`
             id,

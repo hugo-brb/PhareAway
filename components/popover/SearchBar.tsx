@@ -1,13 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
 import OneEvent from "@/components/OneEvent";
 import Image from "next/image"; // Image du bouton "loop"
 import FilterButtons from "./SortButton";
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
+import supabase from "@/lib/SupabaseClient";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -20,7 +15,7 @@ const SearchBar = () => {
     const fetchData = async () => {
       const currentDate = new Date().toISOString();
       if (searchTerm && sortBy) {
-        const { data: events, error: eventError } = await supabaseData
+        const { data: events, error: eventError } = await supabase
           .from("Event")
           .select("id, name, id_lighthouse")
           .gte("date", currentDate)
@@ -32,7 +27,7 @@ const SearchBar = () => {
         }
 
         // Récupérer les données de la table lighthouse
-        const { data: lighthouses, error: lighthouseError } = await supabaseData
+        const { data: lighthouses, error: lighthouseError } = await supabase
           .from("Lighthouse")
           .select("id, name")
           .ilike("name", `%${searchTerm}%`);
@@ -47,7 +42,7 @@ const SearchBar = () => {
           lighthouses?.map((lighthouse) => lighthouse.id) || [];
 
         const { data: lighthouseId, error: lighthouseIdError } =
-          await supabaseData
+          await supabase
             .from("Event")
             .select("id, name")
             .gte("date", currentDate)
@@ -68,7 +63,7 @@ const SearchBar = () => {
 
         setLoading(false);
       } else if (searchTerm && !sortBy) {
-        const { data: events, error: eventError } = await supabaseData
+        const { data: events, error: eventError } = await supabase
           .from("Event")
           .select("id, name, id_lighthouse")
           .gte("date", currentDate)
@@ -79,7 +74,7 @@ const SearchBar = () => {
         }
 
         // Récupérer les données de la table lighthouse
-        const { data: lighthouses, error: lighthouseError } = await supabaseData
+        const { data: lighthouses, error: lighthouseError } = await supabase
           .from("Lighthouse")
           .select("id, name")
           .ilike("name", `%${searchTerm}%`);
@@ -94,7 +89,7 @@ const SearchBar = () => {
           lighthouses?.map((lighthouse) => lighthouse.id) || [];
 
         const { data: lighthouseId, error: lighthouseIdError } =
-          await supabaseData
+          await supabase
             .from("Event")
             .select("id, name")
             .gte("date", currentDate)
@@ -115,7 +110,7 @@ const SearchBar = () => {
 
         setLoading(false);
       } else if (searchTerm === "" && sortBy) {
-        const { data, error } = await supabaseData
+        const { data, error } = await supabase
           .from("Event")
           .select("id, name")
           .gte("date", currentDate)
@@ -127,7 +122,7 @@ const SearchBar = () => {
         }
         setLoading(false);
       } else if (searchTerm === "" && !sortBy) {
-        const { data, error } = await supabaseData
+        const { data, error } = await supabase
           .from("Event")
           .select("id, name")
           .gte("date", currentDate);

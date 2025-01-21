@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import supabase from "@/lib/SupabaseClient";
 
 import Menu from "@/components/Menu";
 import Coin from "@/components/Coin";
@@ -17,7 +18,6 @@ import Account from "@/components/popover/Account";
 import About from "@/components/popover/About";
 import CGU from "@/components/popover/CGU";
 import Contact from "@/components/popover/Contact";
-import { createClient } from "@supabase/supabase-js";
 import { usePlayer } from "@/components/model/player";
 import Loader from "@/components/Loader"; // Importez un composant Loader
 import { redirect } from "next/navigation";
@@ -38,22 +38,18 @@ interface itemProps {
 // Dynamically import the Map component without server-side rendering (SSR)
 const Map = dynamic(() => import("../../components/Map"), { ssr: false });
 // Initialize Supabase client for data
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
 
 export default function Home() {
   const { data: session } = useSession();
   const [active, setActive] = useState("home");
   const [activeID, setActiveID] = useState(64);
   const [center, setCenter] = useState<[number, number]>([
-    -1.1728180199474099,45.58697132405058,
+    -1.1728180199474099, 45.58697132405058,
   ]); // Initial map center
   // Initial map bounds
   const [bounds, setBounds] = useState<[[number, number], [number, number]]>([
-    [ -14.637792105651805,34.50915037983],
-    [13.253221239308171,54.05642397818343],
+    [-14.637792105651805, 34.50915037983],
+    [13.253221239308171, 54.05642397818343],
   ]); // Initial map bounds
   const [zoom, setZoom] = useState(10); // initial map zoom
 
@@ -90,7 +86,7 @@ export default function Home() {
   useEffect(() => {
     const fetchMarkers = async () => {
       try {
-        const { data, error } = await supabaseData
+        const { data, error } = await supabase
           .from("Lighthouse")
           .select("coordinates, name, url, id, enigme, description");
         if (error) {
