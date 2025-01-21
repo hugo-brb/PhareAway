@@ -78,7 +78,7 @@ export default function LandingPage() {
             qui veillent sur les côtes. 🌊
             <br />
             <span className="text-lg text-[--primary]">
-              Saura-tu percer tous leurs secrets ?
+              Sauras-tu percer tous leurs secrets ?
             </span>
             🕵️‍♂️
           </p>

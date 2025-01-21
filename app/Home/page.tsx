@@ -230,7 +230,7 @@ export default function Home() {
           title="Comment jouer ?"
           cx="50%"
           cy="50%"
-          text={`Salut à toi, jeune moussaillon ! Je m'appelle Pharah et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me demander de t'aider à progresser. Pour cela, il te suffit de cliquer sur ma tête. Bonne chance !`}
+          text={`Salut à toi, jeune moussaillon ! Je m'appelle <strong>Pharah</strong> et je vais t'accompagner dans ton aventure. Sur toutes les pages de ce site, tu pourras me <strong>solliciter pour de l'aide</strong> lors de ta progression. Pour cela, il te suffit de cliquer sur ma tête. Bonne chance !`}
           img="/mascotte/temp.png"
           next="0"
         />
@@ -241,7 +241,7 @@ export default function Home() {
           title="Page principale"
           cx="50%"
           cy="50%"
-          text={`Bienvenue sur la page  <strong>principale</strong> ! C'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
+          text={`Bienvenue sur la page <strong>principale</strong> ! C'est depuis cet endroit que tu pourras accéder à toutes les fonctionnalités du site. Tu pourras notamment accéder à la carte, aux énigmes, aux événements, à la boutique, aux photos, à ton compte, et à bien d'autres choses encore.`}
           img="/mascotte/chokbar.png"
           next="2"
         />
@@ -252,7 +252,7 @@ export default function Home() {
           title="Barre de navigation"
           cx="30%"
           cy="20vw"
-          text={`Tu peux utiliser la barre de navigation pour accéder rapidement à certaines fonctionnalités du site.`}
+          text={`Tu peux utiliser la <strong> barre de navigation</strong> pour accéder rapidement aux fonctionnalités du site.`}
           img="/mascotte/happy.png"
           next="3"
         />
@@ -263,7 +263,7 @@ export default function Home() {
           title="Phares"
           cx="50%"
           cy="50%"
-          text={`La carte est composée de plusieurs phares. Ceux disposant d'une énigme sont plus grands et en couleur. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des Beacoins.`}
+          text={`La carte est composée de plusieurs phares. Ceux disposant d'une <strong>énigme</strong> sont <strong>plus grands et en couleur</strong>. Pour résoudre une énigme, il te suffit de cliquer sur le phare correspondant et de suivre les instructions. Une fois l'énigme résolue, tu gagneras des <strong>Beacoins</strong>.`}
           img="/mascotte/mad.png"
           next="4"
         />
@@ -274,7 +274,7 @@ export default function Home() {
           title="Beacoins"
           cx="70%"
           cy="20%"
-          text={`Les Beacoins sont la monnaie du jeu. Tu en gagnes en résolvant des énigmes, en partageant des photos mais tu peux aussi en acheter. dépenses les dans la boutique pour acheter des extensions exclusifs ou des indices pour les énigmes. (Clique sur ton nombre de Beacoins pour ouvrir également la boutique.)`}
+          text={`Les Beacoins sont <strong>la monnaie du jeu</strong>. Tu en gagnes en <strong> résolvant des énigmes </strong>, en <strong> partageant des photos </strong> mais tu peux aussi en acheter. dépenses les dans la boutique pour acheter des <strong>extensions</strong> ou des indices pour les énigmes. (Clique sur ton nombre de Beacoins pour ouvrir également la boutique.)`}
           img="/mascotte/struggle.png"
           next="5"
         />
@@ -285,7 +285,7 @@ export default function Home() {
           title="Extensions"
           cx="70%"
           cy="70%"
-          text={`Les extensions sont des contenus additionnels que tu peux débloquer pour accéder à de nouveaux phares. Tu peux les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
+          text={`Les extensions sont des <strong>contenus additionnels</strong> que tu peux débloquer pour accéder à de <strong>nouveaux phares</strong>. Tu peux les acheter dans la boutique en échange de Beacoins, et elles apparaîtront sur la carte une fois débloquées.`}
           img="/mascotte/uwu.png"
           next="6"
         />
@@ -296,7 +296,7 @@ export default function Home() {
           title="Fin"
           cx="50%"
           cy="50%"
-          text={`Tu sais tout ! Plus qu'à découvrir des phares incroyables et à résoudre des énigmes. N'hésite pas à me redemander de l'aide si tu es bloqué. Bonne chance !`}
+          text={`Tu sais tout ! Plus qu'à <strong>découvrir des phares incroyables</strong> et à résoudre des énigmes. N'hésite pas à me redemander de l'aide en <strong>cliquant sur ma tête en haut à gauche</strong> si tu es bloqué. <strong>Bonne chance</strong> !`}
           img="/mascotte/temp.png"
           next="0"
         />
