@@ -517,7 +517,7 @@ export default function Enigme({
               cx="50%"
               cy="50%"
               text={
-                "C'est ici que vous pourrez résoudre des énigmes, en apprendre plus sur le phare et surtout, gagner des beacoins."
+                "C'est ici que tu pourras résoudre des <strong>énigmes</strong>, en apprendre plus sur le phare et surtout, gagner des <strong>Beacoins</strong>."
               }
               img="/mascotte/happy.png"
               next="2"
@@ -530,7 +530,7 @@ export default function Enigme({
               cx="40%"
               cy="50%"
               text={
-                "Des zones cliquables sont présentes sur l'image et contiennent une petite devinette en rapport avec le lieu et le phare. Essayez de les trouver !"
+                "Des <strong>zones cliquables</strong> sont présentes sur l'image et contiennent une petite <strong>devinette</strong> en rapport avec le lieu et le phare. Essayez de les trouver !"
               }
               img="/mascotte/help.png"
               next="3"
@@ -543,7 +543,7 @@ export default function Enigme({
               cx="50%"
               cy="35%"
               text={
-                "Pour vous aider, vous pouvez acheter des indices qui vous révèleront les zones sur l'image, mais attention, ils coûtent 100 Beacoins et vous les perdez si vous quittez le phare."
+                "Pour t'aider, tu peux acheter des <strong>indices</strong> qui te révèleront les <strong>zones</strong> sur l'image, mais attention, ils coûtent 100 Beacoins et tu les <strong>perdras</strong> si tu quittes le phare."
               }
               img="/mascotte/fuwa.png"
               next="4"
@@ -556,7 +556,7 @@ export default function Enigme({
               cx="48vw"
               cy="30vw"
               text={
-                "Lorsque vous avez trouvé une énigme, elle apparaitra ici, et il ne vous reste qu'à répondre à la question."
+                "Lorsque tu as trouvé une <strong>énigme</strong>, elle apparaitra ici, et il ne te reste qu'à répondre à la question."
               }
               img="/mascotte/uwu.png"
               next="5"
@@ -568,7 +568,7 @@ export default function Enigme({
               title="Fin"
               cx="20vw"
               cy="17vw"
-              text="Chaque phare contient 5 énigmes, 4 d'entre elles vous donneront le code du cadenas, et la dernière vous permettra de le déverrouiller. Une fois déverrouillé, le phare sera considéré comme complété. Et vous recevrez une récompense de 50 Beacoins. Bonne chance !"
+              text="Chaque phare contient <strong>5</strong> énigmes, <strong>4</strong> d'entre elles te donneront le code du cadenas, et la dernière te permettras de le <strong>déverrouiller</strong>. Une fois déverrouillé, le phare sera considéré comme <strong>complété</strong>. Et tu recevras une récompense de <strong>50 Beacoins</strong>. Bonne chance !"
               img="/mascotte/happy.png"
               next="0"
             />
@@ -579,7 +579,7 @@ export default function Enigme({
               title="Pas assez de Beacoins"
               cx="50%"
               cy="50%"
-              text="Désolé, mais vous n'avez pas assez de Beacoins pour acheter les indices."
+              text="Désolé, mais tu n'as pas assez de <strong>Beacoins</strong> pour acheter les indices."
               img="/mascotte/mad.png"
               next="0"
             />
