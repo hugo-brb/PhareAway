@@ -262,6 +262,9 @@ export default function Rgpd() {
                 jeu en toute sérénité.
                 <br />
                 <br />
+                En cas de littige, vous pouvez contacter le tribunal du siège de notre société, le tribunal d'instance de Grenoble.
+                <br />
+                <br />
                 Pour plus d’informations, n’hésite pas à consulter la liste de
                 traitement de tes données {""}
                 <a
