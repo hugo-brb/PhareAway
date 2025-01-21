@@ -85,7 +85,7 @@ export default function Event({ handleClickActive }: MenuProps) {
       };
 
       // Insertion de l'événement
-      const { data: insertData, error: insertError } = await supabase
+      const { error: insertError } = await supabase
         .from("Event")
         .insert([eventData])
         .select()

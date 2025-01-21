@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { UsePlayer } from "@/components/model/player";
 import OneBeacoin from "@/components/OneBeacoin";
 import OneExtention from "@/components/OneExtention";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 //Initialisation des paramêtre de la fonction Coin
 interface MenuProps {

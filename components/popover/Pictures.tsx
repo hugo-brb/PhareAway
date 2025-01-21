@@ -19,15 +19,10 @@ interface VisionResponse {
   }>;
 }
 
-export default function Pictures({
-  handleClickActive,
-  player,
-  handleClickTips,
-}: MenuProps) {
+export default function Pictures({ handleClickActive, player }: MenuProps) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [imagePreview, setImagePreview] = useState<string | null>(null); // Nouvel état pour l'aperçu de l'image
-  const [valide, setValide] = useState<boolean | null>(null);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [isPicValide, setPicValide] = useState(false);
 
   const handleImageUpload = async (
@@ -65,7 +60,6 @@ export default function Pictures({
       const isLighthouse = await analyzeImageWithVisionAPI(base64Image);
 
       if (isLighthouse) {
-        setValide(true);
         player.setBeacoins(50);
         handleClickTips2("valide");
         localStorage.setItem("lastUploadTime", now.toString());

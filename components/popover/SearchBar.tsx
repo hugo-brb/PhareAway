@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import OneEvent from "@/components/OneEvent";
 import Image from "next/image"; // Image du bouton "loop"
 import FilterButtons from "./SortButton";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
