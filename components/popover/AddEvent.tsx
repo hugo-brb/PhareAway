@@ -1,6 +1,6 @@
 import { FormEvent, useState } from "react";
 import Image from "next/image";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 interface MenuProps {
   handleClickActive: (a: string) => void;

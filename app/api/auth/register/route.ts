@@ -1,53 +1,26 @@
 import { NextResponse } from "next/server";
-import * as argon2 from "argon2";
-import { createClient } from "@supabase/supabase-js";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/lib/authOptions";
+import { registerUser } from "@/lib/userService";
 
 export async function POST(request: Request) {
-  try {
-    const { nom, prenom, pseudo, email, password } = await request.json();
+  const session = await getServerSession(authOptions);
 
-    //Create complete name
-    const completeName = `${prenom} ${nom}`;
-
-    // Hash the password
-    const hashedPassword = await argon2.hash(password);
-
-    // Create pseudo
-    let pseudoFinale = "";
-    if (pseudo === "") {
-      const firstChar = prenom.charAt(0).toLowerCase();
-      const lastName = nom;
-      const sizeNom = lastName.length;
-
-      if (sizeNom <= 6) {
-        pseudoFinale = firstChar + lastName.toLowerCase();
-      } else {
-        pseudoFinale = firstChar + lastName.slice(0, 6).toLowerCase();
-      }
-    } else {
-      pseudoFinale = pseudo;
-    }
-
-    const dateCreation = new Date();
-
-    // Initialize Supabase client
-    const supabaseAuth = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      { db: { schema: "next_auth" } }
+  // Vérifier si l'utilisateur n'est pas déjà connecté
+  if (session) {
+    return NextResponse.json(
+      { error: "Vous êtes déjà connecté" },
+      { status: 400 }
     );
-
-    await supabaseAuth.from("users").insert({
-      name: completeName,
-      email: email,
-      password: hashedPassword,
-      pseudo: pseudoFinale,
-      isOAuth: false,
-      datecreation: dateCreation,
-    });
-  } catch (e) {
-    console.log(e);
   }
 
-  return NextResponse.json({ message: "success" });
+  try {
+    const { nom, prenom, pseudo, email, password } = await request.json();
+    await registerUser(nom, prenom, pseudo, email, password);
+
+    return NextResponse.json({ message: "success" });
+  } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : "An unknown error occurred";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
+  }
 }

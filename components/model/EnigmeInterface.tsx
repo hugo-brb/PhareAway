@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 export type UseEnigme = {
   EnigmeData: EnigmeData;

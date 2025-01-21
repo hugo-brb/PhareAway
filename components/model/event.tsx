@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import supabase from "@/lib/SupabaseClient";
+import { supabase } from "@/lib/SupabaseClient";
 
 //Définition des types des méthodes de la classe Event
 export type UseEvent = {
