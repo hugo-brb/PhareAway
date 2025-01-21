@@ -15,7 +15,6 @@ export default {
       fontFamily: {
         ouroboros: ['var(--font-ouroboros)'],
         recursive: ['var(--font-recursive)'],
-        gravitas: ['var(--font-gravitas)'],
       },
     },
   },

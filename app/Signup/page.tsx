@@ -5,7 +5,6 @@ import { signIn } from "next-auth/react";
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import Login from "../Login/page";
 
 export default function Signup() {
   const router = useRouter();

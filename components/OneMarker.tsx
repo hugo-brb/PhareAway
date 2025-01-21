@@ -51,7 +51,7 @@ const Marker: React.FC<MarkerProps> = ({
       }
     };
     checkImage();
-  }, [imageSrc]); // Re-vérifie chaque fois que l'URL change
+  }, [imageSrc, enigme]); // Re-vérifie chaque fois que l'URL change
 
   useEffect(() => {
     const fetchWikiSummary = async () => {
