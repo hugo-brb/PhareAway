@@ -125,7 +125,7 @@ export default function SmallEnigme({
                   className={`${popupA === "Faux" ? "bg-red-500" : ""} mx-1`}
                   type="text"
                   placeholder="______"
-                  style={{ minWidth: "32px", width: "32px" }}
+                  style={{ minWidth: "32px", width: "32px", height: "32px" }}
                   onInput={(e) => {
                     const input = e.target as HTMLInputElement;
                     const length = Math.max(input.value.length, 3);

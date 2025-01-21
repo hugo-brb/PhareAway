@@ -40,7 +40,7 @@ const InfiniteCarousel: React.FC<CarouselProps> = ({ items, speed = 50 }) => {
       <div className="carousel-content">
         {duplicatedItems.map((item, index) => (
           <div className="carousel-item" key={index}>
-            <Image src={item} width={800} height={400} alt=""></Image>
+            <Image src={item} width={800} height={400} alt="image carousel"></Image>
           </div>
         ))}
       </div>
