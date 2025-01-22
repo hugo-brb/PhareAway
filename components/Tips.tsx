@@ -21,28 +21,33 @@ export default function Tips({
   next,
 }: TipsProps) {
   return (
-    <section className="rounded-3xl">
+    <section
+      style={{
+        position: "absolute",
+        maxWidth: "600px",
+        left: `${cx}`,
+        top: `${cy}`,
+        transform: "translate(-50%, -50%)",
+        borderRadius: "1.5rem",
+        overflow: "hidden",
+        ...(window.innerWidth < 768 && {
+          left: "50%",
+          top: "50%",
+          width: "90%",
+          height: "fit-content",
+        }),
+      }}
+      className={`rounded-3xl scrollbarhidden`}
+    >
       <div
+        className={`w-full h-full bg-opacity-50 backdrop-blur-md px-7 py-7 scrollbarhidden`}
         style={{
-          position: "absolute",
-          maxWidth: "600px",
-          left: `${cx}`,
-          top: `${cy}`,
-          transform: "translate(-50%, -50%)",
-          backgroundImage: "url(/textures/bois.webp)",
-          backgroundColor: "rgba(255, 228, 204, 0.9)",
-          ...(window.innerWidth < 768 && {
-            left: "50%",
-            top: "50%",
-            width: "90%",
-            height: "fit-content",
-          }),
           borderTop: "22px solid transparent",
           borderBottom: "22px solid transparent",
           borderImage: "url(/textures/rope.webp) 22 round",
-          borderRadius: "1.5rem",
+          backgroundImage: "url(/textures/bois.webp)",
+          backgroundColor: "rgba(255, 228, 204, 0.9)",
         }}
-        className={`bg-opacity-50 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
       >
         <button
           className={
