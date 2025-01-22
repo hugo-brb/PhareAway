@@ -99,7 +99,7 @@ const Marker: React.FC<MarkerProps> = ({
             C&apos;est Phar&apos;ti
           </button>
         )}
-        {error ? <p>{error}</p> : <p>{summary}</p>}
+        {error ? <p>{error}</p> : <p className="hidden md:block">{summary}</p>}
         <a href={lien} target="_blank" className="text-cyan-700">
           Lien vers le site du phare
         </a>
