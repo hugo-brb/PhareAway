@@ -3,8 +3,13 @@ import OneEvent from "@/components/Elements/OneEvent";
 import Image from "next/image"; // Image du bouton "loop"
 import FilterButtons from "./SortButton";
 import { supabase } from "@/lib/SupabaseClient";
+import { UsePlayer } from "@/model/Player";
 
-const SearchBar = () => {
+interface MenuProps {
+  player: UsePlayer;
+}
+
+const SearchBar = ({ player }: MenuProps) => {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("date"); // Valeur par défaut pour le tri
   const [results, setResults] = useState<{ id: number; name: string }[]>([]);
@@ -155,7 +160,11 @@ const SearchBar = () => {
   }
 
   return (
-    <div className="flex flex-col self-center pt-6 md:pt-0">
+    <div
+      className={`flex flex-col self-center ${
+        player.getIsAsso() ? "pt-0" : "pt-6"
+      } md:pt-0`}
+    >
       <div
         id="recherche"
         className={`flex md:mt-0 items-center self-center gap-4 ${

@@ -58,7 +58,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
           {player.getIsAsso() && (
             <button
               onClick={() => handleClickActive("addEvent")}
-              className=" flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-lg font-bold"
+              className=" flex items-center gap-2 bg-[--primary] ring-2 ring-[--primary] rounded-2xl duration-500 hover:bg-transparent w-fit self-center py-2 px-3 text-lg font-bold mt-7 md:mt-0"
             >
               <svg
                 className=" size-5 fill-[--text]"
@@ -72,7 +72,7 @@ export default function Events({ handleClickActive, player }: MenuProps) {
           )}
 
           <div>
-            <SearchBar />
+            <SearchBar player={player} />
           </div>
         </section>
         {/*Affichage des astuces*/}

@@ -60,28 +60,7 @@ const Map: React.FC<MapComponentProps> = ({
       mapInstance.current = null;
     };
   }, []); // On veut que ça ne s'exécute qu'une fois au montage
-  /*
-  useEffect(() => {
-    const map = mapInstance.current;
-    if (!map) return; // Vérifier si la carte est initialisée
-    const handleZoom = () => {
-      const zoomLevel = map.getZoom();
-      console.log(
-        "Niveau de zoom actuel :",
-        zoomLevel,
-        " niveau de zoom param : ",
-        zoom
-      );
-    };
-    // Ajouter l'écouteur d'événement pour "zoom"
-    map.on("zoom", handleZoom);
-    // Nettoyer l'écouteur lors du démontage du composant
-    return () => {
-      map.off("zoom", handleZoom);
-    };
-  }, []);
 
-*/
   useEffect(() => {
     if (mapInstance.current) {
       mapInstance.current.flyTo({ center: center, zoom: zoom });
