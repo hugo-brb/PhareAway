@@ -30,6 +30,7 @@ export default function Enigme({
   const [resolvedEnigmes, setResolvedEnigmes] = useState<boolean[]>(
     Array(5).fill(false) // 5 énigmes initialisées à "non résolues"
   );
+  const [isInfoActive, SetInfoActive] = useState(false);
 
   const handleClickPopup = (a: string) => {
     setPopup(a);
@@ -105,13 +106,12 @@ export default function Enigme({
             </span>
           </button>
 
-          <h1 className=" text-3xl font-bold hover:underline hover:text-[--primary] underline-offset-2 duration-100 group">
+          <h1 className="text-base md:text-3xl font-bold hover:underline hover:text-[--primary] underline-offset-2 duration-100 group">
             <a
               href={lighthouse.getUrl()}
               target="_blank"
               className=" flex items-center"
             >
-              {" "}
               Enigmes : {lighthouse.getName() ?? "Phare inconnu"}{" "}
               {phareEnded.includes(id) ? "   (COMPLÉTÉ)" : ""}
               <svg
@@ -123,19 +123,74 @@ export default function Enigme({
               </svg>
             </a>
           </h1>
-          <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] text-lg items-center">
-            Des <strong>zones cliquables</strong> sont présentes sur{" "}
-            <strong>l&apos;image</strong> et contiennent une petite devinette.{" "}
-            <br />
-            ton objectif est de découvrir le <strong>code du cadenas</strong> se
-            situant sur la <strong>porte du phare</strong>
-            <br />
-            <br />
-            <strong>Un bon point de départ serait le feu !</strong>
-          </h3>
-          <h3 className="absolute top-[16vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
-            Acheter un indice pour réveler les zones cliquables
-          </h3>
+
+          {window.innerWidth < 800 ? (
+            <div
+              className="absolute bottom-9 right-10 w-5 h-5 cursor-pointer"
+              onClick={() => SetInfoActive(!isInfoActive)}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 512 512"
+                className="w-full h-full"
+              >
+                <path
+                  d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"
+                  fill="black"
+                />
+              </svg>
+            </div>
+          ) : (
+            <div>
+              <h3 className="absolute top-[4vw] right-3 text-center max-w-[400px] text-lg items-center">
+                Des <strong>zones cliquables</strong> sont présentes sur{" "}
+                <strong>l&apos;image</strong> et contiennent une petite
+                devinette. <br />
+                ton objectif est de découvrir le{" "}
+                <strong>code du cadenas</strong> se situant sur la{" "}
+                <strong>porte du phare</strong>
+                <br />
+                <br />
+                <strong>Un bon point de départ serait le feu !</strong>
+              </h3>
+              <h3 className="absolute top-[16vw] right-[5vw] text-end max-w-[300px] text-lg items-center">
+                Acheter un indice pour réveler les zones cliquables
+              </h3>
+            </div>
+          )}
+
+          {isInfoActive && (
+            <div className="flex items-center justify-center z-50 ">
+              <div className="bg-white p-5 rounded-2xl shadow-lg w-3/4 bg-opacity-80 relative">
+                <button
+                  className="absolute top-3 right-3 transform transition-transform duration-300 hover:rotate-90"
+                  onClick={() => SetInfoActive(!isInfoActive)}
+                >
+                  <Image
+                    src="/icones/xmark-solid.svg"
+                    alt="arrow-back"
+                    width={12}
+                    height={12}
+                  />
+                </button>
+                <h3 className="text-sm items-center text-center">
+                  Des <strong>zones cliquables</strong> sont présentes sur{" "}
+                  <strong>l&apos;image</strong> et contiennent une petite
+                  devinette. <br />
+                  ton objectif est de découvrir le{" "}
+                  <strong>code du cadenas</strong> se situant sur la{" "}
+                  <strong>porte du phare</strong>
+                  <br />
+                  <br />
+                  <strong>Un bon point de départ serait le feu !</strong>
+                </h3>
+                <h3 className="mt-5 text-sm items-center">
+                  Acheter un indice pour révéler les zones cliquables
+                </h3>
+              </div>
+            </div>
+          )}
+
           <button
             className={`absolute hidden md:block ${
               activeButtons.hint ? "pointer-events-none" : ""
