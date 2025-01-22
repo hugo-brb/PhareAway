@@ -39,6 +39,7 @@ export default function Tips({
         borderTop: "22px solid transparent",
         borderBottom: "22px solid transparent",
         borderImage: "url(/textures/rope.webp) 22 round",
+        borderRadius: "1.5rem",
       }}
       className={`bg-opacity-50 rounded-3xl backdrop-blur-md px-7 py-7 scrollbarhidden`}
     >
