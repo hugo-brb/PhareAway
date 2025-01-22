@@ -57,6 +57,7 @@ body {
   background: var(--background);
   font-family: var(--recursive);
   font-weight: 600;
+  max-height: 100vh;
 }
 
 .scrollbarhidden::-webkit-scrollbar {

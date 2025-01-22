@@ -113,7 +113,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
 
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-      <section className="flex flex-col items-center self-center mb-5 md:mb-0 gap-5 md:gap-12 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+      <section className="flex flex-col items-center self-center mb-5 md:mb-0 gap-5 md:gap-12 w-[95vw] h-[65vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
         <button
           className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
           onClick={() => handleClickActive("home")}
@@ -126,7 +126,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
           />
         </button>
         <button
-          className="absolute top-5 left-5 flex flex-col items-center"
+          className="absolute top-2 left-2 md:top-5 md:left-5 flex flex-col items-center"
           onClick={() => handleClickTips2("1")}
         >
           <Image
@@ -134,8 +134,18 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
             alt="Aide"
             width={75}
             height={75}
+            className=" hidden md:block"
           ></Image>
-          <span className=" text-[0.7rem]">Besoin d&apos;aide ?</span>
+          <Image
+            src="/images/mascotte/help.webp"
+            alt="Aide"
+            width={45}
+            height={45}
+            className="md:hidden"
+          ></Image>
+          <span className=" text-[0.6rem] md:text-[0.7rem]">
+            Besoin d&apos;aide ?
+          </span>
         </button>
         <h1 className="font-ouroboros text-center self-center mt-4 text-4xl md:text-7xl">
           Importer une image
