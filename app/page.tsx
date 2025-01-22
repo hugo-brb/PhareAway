@@ -94,6 +94,13 @@ export default function LandingPage() {
           >
             Découvre le jeu en images ✨
           </button>
+          <Image
+            src="/images/mascotte/pharah.png"
+            alt="Pharah"
+            width={300}
+            height={300}
+            className="hidden md:block"
+          ></Image>
         </div>
       </main>
       <button
