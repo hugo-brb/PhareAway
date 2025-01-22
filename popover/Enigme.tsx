@@ -106,7 +106,7 @@ export default function Enigme({
             </span>
           </button>
 
-          <h1 className="text-base md:text-3xl font-bold hover:underline hover:text-[--primary] underline-offset-2 duration-100 group">
+          <h1 className="text-base md:text-3xl font-bold hover:underline hover:text-[--primary] underline-offset-2 duration-100 group mt-2 md:mt-0">
             <a
               href={lighthouse.getUrl()}
               target="_blank"

@@ -64,10 +64,10 @@ export default function LandingPage() {
           <InfiniteCarousel items={itemsCarousel} speed={10} />
         </div>
         <div className=" flex flex-col justify-center items-center w-[100vw] h-[70vh] md:w-fit md:h-fit">
-          <h1 className=" text-7xl md:text-8xl font-ouroboros md:ml-12 mt-8 self-start text-[--accent]">
+          <h1 className=" text-6xl md:text-8xl font-ouroboros md:ml-12 mt-8 self-start text-[--accent]">
             Phare <br /> <span className=" ml-8">Away</span>
           </h1>
-          <p className="max-w-[95vw] md:max-w-[30vw] md:text-center text-xl font-semibold mt-5">
+          <p className="max-w-[95vw] md:max-w-[30vw] md:text-center text-lg md:text-xl font-semibold mt-5">
             Découvre <strong className="text-[--primary]">PhareAway</strong>
             🌊🔦: une aventure captivante à travers de
             <strong> petits escape games</strong> qui te plongent dans l’univers
