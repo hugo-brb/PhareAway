@@ -7,12 +7,8 @@ interface MenuProps {
 export default function CGUAcceuil({ handleClickActive }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
-      <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-        <button
-          className={`absolute top-5 left-5 transform transition-all hover:left-4`}
-          onClick={() => handleClickActive("close")}
-        ></button>
-         <div className="sticky top-0 p-4 flex justify-between items-center">
+      <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[65vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+        <div className="absolute top-0 p-4 flex justify-between items-center">
           <button
             className="transform transition-transform duration-300 hover:rotate-90"
             onClick={() => handleClickActive("close")}
