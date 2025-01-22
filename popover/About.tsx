@@ -7,7 +7,7 @@ export default function About({ handleClickActive }: MenuProps) {
   return (
     <main className="absolute top-0 z-40 flex w-[100vw] h-[100vh]">
       <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[65vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-        <div className="sticky top-0 p-4 flex justify-between items-center z-50">
+        <div className="absolute w-[80vw] md:w-full md:sticky top-0 p-4 flex justify-between items-center z-50">
           <button
             className={`absolute top-5 left-5 transform transition-all hover:left-4 hover:pr-[1vw]`}
             onClick={() => handleClickActive("account")}
