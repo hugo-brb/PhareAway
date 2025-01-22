@@ -108,7 +108,8 @@ export default function LandingPage() {
         alt="Pharah"
         width={300}
         height={300}
-        className="hidden md:block absolute bottom-0 right-0 z-50"
+        className="hidden md:block absolute bottom-0 right-0 z-50 cursor-pointer"
+        onClick={handleOpenCarousel}
       ></Image>
 
       {/* Footer */}
