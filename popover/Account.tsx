@@ -89,20 +89,21 @@ export default function Account({ handleClickActive, player }: MenuProps) {
         {isDeleteConfirmVisible && (
           <div className="absolute top-0 left-0 w-full h-full bg-white opacity-80 z-10"></div>
         )}
-
-        <button
-          className={`absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90 ${
-            isModif ? "opacity-20" : ""
-          }`}
-          onClick={() => handleClickActive("home")}
-        >
-          <Image
-            src="/icones/xmark-solid.svg"
-            alt="Close"
-            width={24}
-            height={24}
-          />
-        </button>
+        <div className="sticky top-0 p-4 flex justify-between items-center z-40">
+          <button
+            className={`absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90 ${
+              isModif ? "opacity-20" : ""
+            }`}
+            onClick={() => handleClickActive("home")}
+          >
+            <Image
+              src="/icones/xmark-solid.svg"
+              alt="Close"
+              width={24}
+              height={24}
+            />
+          </button>
+        </div>
 
         <div className="flex justify-center items-center gap-2 md:gap-32">
           <Image

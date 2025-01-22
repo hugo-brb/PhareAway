@@ -60,17 +60,19 @@ export default function Coin({ handleClickActive, player }: MenuProps) {
     <>
       <main className=" absolute top-0 z-40 flex w-[100vw] h-[100vh]">
         <section className=" flex flex-col self-center mb-5 md:mb-0 gap-12 w-[95vw] h-[65vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
-          <button
-            className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
-            onClick={() => handleClickActive("home")}
-          >
-            <Image
-              src="/icones/xmark-solid.svg"
-              alt="arrow-back"
-              width={24}
-              height={24}
-            />
-          </button>
+          <div className="sticky top-0 p-4 flex justify-between items-center z-50">
+            <button
+              className="absolute top-5 right-5 transform transition-transform duration-300 hover:rotate-90"
+              onClick={() => handleClickActive("home")}
+            >
+              <Image
+                src="/icones/xmark-solid.svg"
+                alt="arrow-back"
+                width={24}
+                height={24}
+              />
+            </button>
+          </div>
           <h1 className="font-ouroboros self-center text-4xl md:text-7xl">
             PharAchats
           </h1>
