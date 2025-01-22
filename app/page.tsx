@@ -63,7 +63,7 @@ export default function LandingPage() {
           </button>
           <InfiniteCarousel items={itemsCarousel} speed={10} />
         </div>
-        <div className=" flex flex-col justify-center items-center w-[100vw] h-[70vh] md:w-fit md:h-fit">
+        <div className=" flex flex-col justify-center items-center w-[100vw] h-[70vh] md:w-fit md:h-fit md:max-h-[100vh]">
           <h1 className=" text-6xl md:text-8xl font-ouroboros md:ml-12 self-start text-[--accent]">
             Phare <br /> <span className=" ml-8">Away</span>
           </h1>
@@ -94,21 +94,23 @@ export default function LandingPage() {
           >
             Découvre le jeu en images ✨
           </button>
-          <Image
-            src="/images/mascotte/pharah.png"
-            alt="Pharah"
-            width={300}
-            height={300}
-            className="hidden md:block"
-          ></Image>
         </div>
       </main>
-      <button
+      {/* <button
         className="hidden md:block absolute bottom-[25vh] right-[5vw] text-white w-fit mt-2 text-base md:mt-7 py-2 px-4 md:text-xl font-bold rounded-3xl bg-[--primary] hover:bg-transparent border-b-2 border-[--primary] duration-300 ease-in-out"
         onClick={handleOpenCarousel}
       >
         Découvre le jeu en images ✨
-      </button>
+      </button> */}
+
+      <Image
+        src="/images/mascotte/pharah.avif"
+        alt="Pharah"
+        width={300}
+        height={300}
+        className="hidden md:block absolute bottom-0 right-0 z-50"
+      ></Image>
+
       {/* Footer */}
       <Image
         src="/images/logos/soupex.webp"
@@ -123,7 +125,7 @@ export default function LandingPage() {
           l&apos;équipe SoupexSoftware
         </p>
         <button
-          className="flex gap-2 items-center absolute right-2 md:right-6"
+          className="flex gap-2 items-center absolute right-2 md:left-12"
           onClick={handleOpenCGU}
         >
           <h1 className="text-xs hidden md:block">

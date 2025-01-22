@@ -29,6 +29,6 @@
     ".next/types/**/*.ts",
     "components/Stripe.jsx",
     "app/Home/page.tsx"
-  ],
+, "app/api/supabase/route.js"  ],
   "exclude": ["node_modules"]
 }

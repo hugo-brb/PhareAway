@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import { useLighthouse } from "./Lighthouse";
-import { supabase, supabaseAdmin } from "@/lib/SupabaseClient";
+import { createClient } from "@supabase/supabase-js";
+import { supabaseAdmin } from "@/lib/SupabaseClient";
 
 export type UsePlayer = {
   playerData: PlayerData;
@@ -28,6 +29,11 @@ export type UsePlayer = {
   deletePlayer: () => Promise<void>;
   updatePlayerInfo: (updates: Partial<PlayerData>) => Promise<void>;
 };
+
+export const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
+);
 
 interface PlayerData {
   user: {
