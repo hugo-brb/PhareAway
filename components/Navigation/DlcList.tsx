@@ -106,7 +106,7 @@ export default function DlcList({
             ) : null
           )}
           <button
-            className=" w-full md:w-full text-lg md:text-l font-bold rounded-3xl border-2 hover:bg-[--primary] border-[--primary] duration-300 ease-in-out hover:text-white"
+            className="w-8 md:w-full text-lg md:text-l font-bold rounded-3xl border-2 hover:bg-[--primary] border-[--primary] duration-300 ease-in-out hover:text-white"
             onClick={() => handleClickActive("coin")}
           >
             +
