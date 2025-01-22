@@ -160,6 +160,8 @@ export default function SmallEnigme({
                     (currentHour >= 18 && currentHour <= 23) ||
                     (currentHour >= 0 && currentHour < 6)
                   ) {
+                    cadenas[parseInt(id) - 1] = codeLock.toString();
+                    setCadenas(cadenas);
                     handleClickAnswer("Vrai");
                   } else {
                     handleClickAnswer("Faux");
