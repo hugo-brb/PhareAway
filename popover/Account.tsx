@@ -85,7 +85,7 @@ export default function Account({ handleClickActive, player }: MenuProps) {
 
   return (
     <main className="absolute top-0 z-40 flex w-full h-full">
-      <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[75vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
+      <section className="flex flex-col self-center gap-7 mb-5 md:mb-0 w-[95vw] h-[65vh] md:w-[75vw] md:h-[95vh] bg-white bg-opacity-60 rounded-3xl backdrop-blur-md mx-auto px-7 py-12 overflow-y-scroll scrollbarhidden">
         {isDeleteConfirmVisible && (
           <div className="absolute top-0 left-0 w-full h-full bg-white opacity-80 z-10"></div>
         )}

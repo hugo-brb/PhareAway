@@ -34,7 +34,7 @@ export default function Tips({
           left: "50%",
           top: "50%",
           width: "90%",
-          height: "90%",
+          height: "fit-content",
         }),
         borderTop: "22px solid transparent",
         borderBottom: "22px solid transparent",
@@ -60,7 +60,7 @@ export default function Tips({
       <div>
         <h1 className="font-bold">{title}</h1>
         <div
-          className="my-2"
+          className=" my-2"
           style={{
             width: "100%",
             height: "100%",
@@ -68,10 +68,20 @@ export default function Tips({
           }}
         ></div>
       </div>
-      <div className="flex flex-row items-center justify-between h-full">
-        <span dangerouslySetInnerHTML={{ __html: text }}></span>
+      <div className="flex flex-row md:items-center md:justify-between md:h-full">
+        <span
+          dangerouslySetInnerHTML={{ __html: text }}
+          className=" text-sm md:text-base"
+        ></span>
         <Image
-          className="ml-[10px]"
+          className="ml-[10px] hidden md:block"
+          src={img}
+          alt="mascotte"
+          width={100}
+          height={100}
+        />
+        <Image
+          className="ml-[10px] md:hidden max-h-[15vh]"
           src={img}
           alt="mascotte"
           width={100}

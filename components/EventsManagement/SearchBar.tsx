@@ -144,18 +144,18 @@ const SearchBar = () => {
   if (loading) {
     return (
       <div className="flex flex-row gap-2 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <div className="animate-pulse bg-gray-300 w-[14rem] h-[14rem] rounded-lg"></div>
+        <div className="animate-pulse bg-gray-300 w-[8rem] h-[12rem] md:w-[14rem] md:h-[14rem] rounded-lg"></div>
         <div className="flex flex-col gap-2">
-          <div className="animate-pulse bg-gray-300 w-[28rem] h-[5rem] rounded-lg"></div>
-          <div className="animate-pulse bg-gray-300 w-[36rem] h-[3rem] rounded-lg"></div>
-          <div className="animate-pulse bg-gray-300 w-[36rem] h-[2rem] rounded-lg"></div>
+          <div className="animate-pulse bg-gray-300 w-[8rem] md:w-[28rem] h-[5rem] rounded-lg"></div>
+          <div className="animate-pulse bg-gray-300 w-[12rem] md:w-[36rem] h-[3rem] rounded-lg"></div>
+          <div className="animate-pulse bg-gray-300 w-[12rem] md:w-[36rem] h-[2rem] rounded-lg"></div>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col self-center">
+    <div className="flex flex-col self-center pt-6 md:pt-0">
       <div
         id="recherche"
         className={`flex md:mt-0 items-center self-center gap-4 ${
@@ -203,6 +203,7 @@ const SearchBar = () => {
               height={24}
               src="/icones/loop.svg"
               alt="Search Icon"
+              className=" hidden md:block"
             />
           </button>
         </div>

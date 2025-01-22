@@ -215,17 +215,19 @@ export default function Home() {
       )}
 
       {/* Bouton d'affichage des tips sur téléphone */}
-      <button
-        className=" md:hidden absolute left-3 top-[10vh]"
-        onClick={() => handleClickTips("1")}
-      >
-        <Image
-          src="/images/mascotte/help.webp"
-          alt="Fenêtre d'aide"
-          width={50}
-          height={50}
-        />
-      </button>
+      {active === "home" && (
+        <button
+          className=" md:hidden absolute left-3 top-[10vh]"
+          onClick={() => handleClickTips("1")}
+        >
+          <Image
+            src="/images/mascotte/help.webp"
+            alt="Fenêtre d'aide"
+            width={50}
+            height={50}
+          />
+        </button>
+      )}
 
       {/*Affichage des tips*/}
       {tips === "start" && (
