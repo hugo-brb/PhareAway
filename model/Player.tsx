@@ -1,8 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useState, useEffect } from "react";
-import { createClient } from "@supabase/supabase-js";
 import { signOut } from "next-auth/react";
 import { useLighthouse } from "./Lighthouse";
+import { supabase, supabaseAdmin } from "@/lib/SupabaseClient";
 
 export type UsePlayer = {
   playerData: PlayerData;
@@ -28,18 +28,6 @@ export type UsePlayer = {
   deletePlayer: () => Promise<void>;
   updatePlayerInfo: (updates: Partial<PlayerData>) => Promise<void>;
 };
-
-// Configuration Supabase
-const supabaseAuth = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!,
-  { db: { schema: "next_auth" } }
-);
-
-const supabaseData = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_SERVICE_ROLE_KEY!
-);
 
 interface PlayerData {
   user: {
@@ -76,14 +64,14 @@ export function usePlayer(email: string) {
     const fetchPlayerData = async () => {
       try {
         if (email) {
-          const requestAuth = await supabaseAuth
+          const requestAuth = await supabaseAdmin
             .from("users")
             .select()
             .eq("email", email)
             .single();
           if (requestAuth.data) {
             const userId = requestAuth.data.id;
-            const requestData = await supabaseData
+            const requestData = await supabase
               .from("users")
               .select()
               .eq("id", userId);
@@ -133,7 +121,7 @@ export function usePlayer(email: string) {
     // Setters pour les informations de base
     setPrenom: async (prenom: string) => {
       const newName = `${prenom} ${playerData.user.name.split(" ")[1]}`;
-      await supabaseAuth
+      await supabaseAdmin
         .from("users")
         .update({ name: newName })
         .eq("id", playerData.user.id);
@@ -145,7 +133,7 @@ export function usePlayer(email: string) {
 
     setNom: async (nom: string) => {
       const newName = `${playerData.user.name.split(" ")[0]} ${nom}`;
-      await supabaseAuth
+      await supabaseAdmin
         .from("users")
         .update({ name: newName })
         .eq("id", playerData.user.id);
@@ -156,7 +144,7 @@ export function usePlayer(email: string) {
     },
 
     setMail: async (mail: string) => {
-      await supabaseAuth
+      await supabaseAdmin
         .from("users")
         .update({ email: mail })
         .eq("id", playerData.user.id);
@@ -167,7 +155,7 @@ export function usePlayer(email: string) {
     },
 
     setPseudo: async (pseudo: string) => {
-      await supabaseAuth
+      await supabaseAdmin
         .from("users")
         .update({ pseudo })
         .eq("id", playerData.user.id);
@@ -206,7 +194,7 @@ export function usePlayer(email: string) {
 
     // Setters pour les statistiques du joueur
     setBeacoins: async (addbeacoins: number) => {
-      await supabaseData
+      await supabase
         .from("users")
         .update({ beacoin: playerData.beacoins + addbeacoins })
         .eq("id", playerData.user.id);
@@ -219,7 +207,7 @@ export function usePlayer(email: string) {
     setPhareended: async (phareended: Array<number>) => {
       try {
         // Met à jour les données dans Supabase
-        const { error } = await supabaseData
+        const { error } = await supabase
           .from("users")
           .update({ phareended }) // Colonne à mettre à jour
           .eq("id", playerData.user.id); // Condition pour trouver le bon utilisateur
@@ -245,7 +233,7 @@ export function usePlayer(email: string) {
     setDlcUnlocked: async (DlcUnlocked: Array<number>) => {
       try {
         // Met à jour les données dans Supabase
-        const { error } = await supabaseData
+        const { error } = await supabase
           .from("users")
           .update({ DlcUnlocked }) // Colonne à mettre à jour
           .eq("id", playerData.user.id); // Condition pour trouver le bon utilisateur
@@ -271,7 +259,7 @@ export function usePlayer(email: string) {
     // Méthodes de gestion du compte
     deletePlayer: async () => {
       try {
-        await supabaseAuth.from("users").delete().eq("id", playerData.user.id);
+        await supabaseAdmin.from("users").delete().eq("id", playerData.user.id);
         await signOut({
           redirect: false,
         });
@@ -286,7 +274,7 @@ export function usePlayer(email: string) {
       try {
         // Mise à jour des champs dans la table auth
         if (updates.user) {
-          await supabaseAuth
+          await supabaseAdmin
             .from("users")
             .update({
               name: updates.user.name,
@@ -305,7 +293,7 @@ export function usePlayer(email: string) {
           isAdmin: updates.isAdmin,
         };
 
-        await supabaseData
+        await supabase
           .from("users")
           .update(dataUpdates)
           .eq("id", playerData.user.id);
