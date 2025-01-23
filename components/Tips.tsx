@@ -34,7 +34,6 @@ export default function Tips({
           left: "50%",
           top: "50%",
           width: "90%",
-          height: "fit-content",
         }),
       }}
       className={`rounded-3xl scrollbarhidden`}
