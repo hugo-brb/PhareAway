@@ -102,15 +102,27 @@ export default function LandingPage() {
       >
         Découvre le jeu en images ✨
       </button> */}
-
-      <Image
-        src="/images/mascotte/pharah.avif"
-        alt="Pharah"
-        width={300}
-        height={300}
+      <div
         className="hidden md:block absolute bottom-0 right-0 z-50 cursor-pointer"
         onClick={handleOpenCarousel}
-      ></Image>
+      >
+        <Image
+          className="mr-2"
+          src="/images/bulle.webp"
+          alt="Pharah"
+          width={300}
+          height={300}
+        ></Image>
+
+        <div className="ml-12">
+          <Image
+            src="/images/mascotte/pharah.avif"
+            alt="Pharah"
+            width={300}
+            height={300}
+          ></Image>
+        </div>
+      </div>
 
       {/* Footer */}
       <Image
