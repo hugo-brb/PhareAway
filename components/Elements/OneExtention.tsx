@@ -97,12 +97,12 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
         <Tips
           handleClickTips={handleClickTips}
           title="Confirmation d'achat"
-          cx={"56vw"}
-          cy={"30vw"}
+          cx={"60%"}
+          cy={"70%"}
           text={
-            "<strong>Merci</strong> de ton achat jeune mousssaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique <strong>juste à ma droite yohoho</strong> !"
+            "<strong>Merci</strong> de ton achat jeune moussaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique <strong>juste à droite</strong>, lets go !"
           }
-          img="/images/mascotte/temp.webp"
+          img="/images/mascotte/yay.webp"
           next="0"
         />
       )}
