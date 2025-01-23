@@ -51,7 +51,7 @@ export default function LandingPage() {
               : "hidden"
           } `}
         >
-          <button className="absolute top-[3vh] left-[2vw] transform transition-transform duration-300 hover:rotate-90">
+          <button className="absolute top-[3vh] right-[2vw] transform transition-transform duration-300 hover:rotate-90">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 384 512"
