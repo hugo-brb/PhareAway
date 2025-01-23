@@ -237,7 +237,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
             handleClickTips={handleClickTips2}
             title="Partage de photos"
             cx="50%"
-            cy="50%"
+            cy="40%"
             text={
               "Attention, si tu proposes une image qui ne contient pas de phare, tu ne gagneras <strong>pas de Beacoins</strong>."
             }
@@ -250,7 +250,7 @@ export default function Pictures({ handleClickActive, player }: MenuProps) {
             handleClickTips={handleClickTips2}
             title="Partage de photos"
             cx="50%"
-            cy="50%"
+            cy="30%"
             text={
               "Et tu ne peux pas partager plus d'une image de phare toutes les <strong>24 heures</strong>. Bonne continuation !"
             }

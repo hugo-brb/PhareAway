@@ -612,8 +612,8 @@ export default function Enigme({
             <Tips
               handleClickTips={handleClickTips}
               title="Réponses"
-              cx="48vw"
-              cy="30vw"
+              cx="60%"
+              cy="60%"
               text={
                 "Lorsque tu as trouvé une <strong>énigme</strong>, elle apparaitra ici, et il ne te reste qu'à répondre à la question."
               }

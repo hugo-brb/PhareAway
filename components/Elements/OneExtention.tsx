@@ -100,7 +100,7 @@ const OneEvent: React.FC<OnExtentionProp> = ({ id_extention, player }) => {
           cx={"60%"}
           cy={"70%"}
           text={
-            "<strong>Merci</strong> de ton achat jeune moussaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique <strong>juste à droite</strong>, lets go !"
+            "<strong>Merci</strong> de ton achat jeune moussaillon, pars à l'aventure de ces phares lointains en choisissant leur zone géographique <strong>juste à coté</strong>, lets go !"
           }
           img="/images/mascotte/yay.webp"
           next="0"
