@@ -58,7 +58,7 @@ export default function SmallEnigme({
           : popupA === "Faux"
           ? "bg-red-500"
           : "bg-white"
-      } absolute left-4 top-4 md:left-[44vw] md:top-[20vw] mt-12 z-50 h-fit w-[90%] max-h-[90%] md:w-[20vw] md:max-h-[18vw] bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
+      } absolute left-4 top-4 md:left-[44vw] md:top-[20vw] mt-12 z-50 w-[90%] max-h-[90%] md:w-[20vw] md:max-h-[18vw] bg-opacity-60 rounded-3xl backdrop-blur-md px-7 py-7 overflow-y-scroll scrollbarhidden`}
     >
       <div
         className={`flex flex-col items-center ${
