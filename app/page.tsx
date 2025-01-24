@@ -110,16 +110,16 @@ export default function LandingPage() {
           className="mr-2"
           src="/images/bulle.webp"
           alt="Pharah"
-          width={300}
-          height={300}
+          width={200}
+          height={200}
         ></Image>
 
         <div className="ml-12">
           <Image
             src="/images/mascotte/pharah.avif"
             alt="Pharah"
-            width={300}
-            height={300}
+            width={200}
+            height={200}
           ></Image>
         </div>
       </div>
